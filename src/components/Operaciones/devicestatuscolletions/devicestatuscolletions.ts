@@ -1,0 +1,218 @@
+import Vue from 'vue';
+import { Component } from 'vue-property-decorator';
+import * as services from '@/services';
+import swal from 'sweetalert2';
+import moment from 'moment';
+import * as popup from '@/popup';
+import helpers from '@/helper';
+
+@Component
+export default class AdmdevicestatuscolletionsComponent extends Vue {
+	private headers: any[] = [
+		{ text: 'ID', align: 'left', sortable: true, value: 'id', width: '15%' },
+		{ text: 'createtimestamp', align: 'left', sortable: false, value: 'createtimestamp', width: '15%' },
+		{ text: 'updatetimestamp', align: 'left', sortable: false, value: 'updatetimestamp', width: '15%' },
+		{ text: 'deviceidentification', align: 'left', sortable: false, value: 'deviceidentification', width: '15%' },
+		{ text: 'locationidentification', align: 'left', sortable: false, value: 'locationidentification', width: '15%' },
+		{ text: 'servicename', align: 'left', sortable: false, value: 'servicename', width: '15%' },
+		{ text: 'operationname', align: 'left', sortable: false, value: 'operationname', width: '15%' },
+		{ text: 'sequencenumber', align: 'left', sortable: false, value: 'sequencenumber', width: '15%' },
+		{ text: 'transporttimestamp', align: 'left', sortable: false, value: 'transporttimestamp', width: '15%' },
+		{ text: 'provideridentification', align: 'left', sortable: false, value: 'provideridentification', width: '15%' },
+		{ text: 'providertransactionid', align: 'left', sortable: false, value: 'providertransactionid', width: '15%' },
+		{ text: 'devicetransactionid', align: 'left', sortable: false, value: 'devicetransactionid', width: '15%' },
+		{ text: 'status', align: 'left', sortable: false, value: 'status', width: '15%' },
+		{ text: 'batchnumber', align: 'left', sortable: false, value: 'batchnumber', width: '15%' },
+		{ text: 'transactionid', align: 'left', sortable: false, value: 'transactionid', width: '15%' },
+		{ text: 'alarm', align: 'left', sortable: false, value: 'alarm', width: '15%' },
+		{ text: 'devicestatus', align: 'left', sortable: false, value: 'devicestatus', width: '15%' },
+		{ text: 'operatingmode', align: 'left', sortable: false, value: 'operatingmode', width: '15%' },
+		{ text: 'alarmid', align: 'left', sortable: false, value: 'alarmid', width: '15%' },
+		{ text: 'aceptordetail', align: 'left', sortable: false, value: 'aceptordetail', width: '15%' },
+		{ text: 'changerdetail', align: 'left', sortable: false, value: 'changerdetail', width: '15%' },
+		{ text: 'returndetail', align: 'left', sortable: false, value: 'returndetail', width: '15%' },
+		{ text: 'operativeday', align: 'left', sortable: false, value: 'operativeday', width: '15%' },
+		{ text: 'totaltx', align: 'left', sortable: false, value: 'totaltx', width: '15%' },
+		{ text: 'totalamount', align: 'left', sortable: false, value: 'totalamount', width: '15%' },
+		{ text: 'totalaccepted', align: 'left', sortable: false, value: 'totalaccepted', width: '15%' },
+		{ text: 'totalreturned', align: 'left', sortable: false, value: 'totalreturned', width: '15%' },
+		{ text: 'totalavailable', align: 'left', sortable: false, value: 'totalavailable', width: '15%' },
+		{ text: 'totalgivenamount', align: 'left', sortable: false, value: 'totalgivenamount', width: '15%' },
+		{ text: 'totaldebtamount', align: 'left', sortable: false, value: 'totaldebtamount', width: '15%' },
+		{ text: 'totalrefilloperations', align: 'left', sortable: false, value: 'totalrefilloperations', width: '15%' },
+		{ text: 'totalrefillamount', align: 'left', sortable: false, value: 'totalrefillamount', width: '15%' },
+		{ text: 'totalcollectoperations', align: 'left', sortable: false, value: 'totalcollectoperations', width: '15%' },
+		{ text: 'totalcollectamount', align: 'left', sortable: false, value: 'totalcollectamount', width: '15%' },
+		{ text: 'totallocks', align: 'left', sortable: false, value: 'totallocks', width: '15%' },
+		{ text: 'opentime', align: 'left', sortable: false, value: 'opentime', width: '15%' },
+		{ text: 'closetime', align: 'left', sortable: false, value: 'closetime', width: '15%' },
+		{ text: 'vdmstatus', align: 'left', sortable: false, value: 'vdmstatus', width: '15%' },
+		{ text: 'powerstatus', align: 'left', sortable: false, value: 'powerstatus', width: '15%' },
+		{ text: 'scannerstatus', align: 'left', sortable: false, value: 'scannerstatus', width: '15%' },
+		{ text: 'motionsensorstatus', align: 'left', sortable: false, value: 'motionsensorstatus', width: '15%' },
+		{ text: 'printerstatus', align: 'left', sortable: false, value: 'printerstatus', width: '15%' },
+		{ text: 'cashacceptorstatus', align: 'left', sortable: false, value: 'cashacceptorstatus', width: '15%' },
+		{ text: 'cashchangerstatus', align: 'left', sortable: false, value: 'cashchangerstatus', width: '15%' },
+		{ text: 'coinacceptorstatus', align: 'left', sortable: false, value: 'coinacceptorstatus', width: '15%' },
+		{ text: 'coinchangerstatus', align: 'left', sortable: false, value: 'coinchangerstatus', width: '15%' },
+		{ text: 'devicestatusdetail', align: 'left', sortable: false, value: 'devicestatusdetail', width: '15%' },
+		{ text: 'totalcardsdelivered', align: 'left', sortable: false, value: 'totalcardsdelivered', width: '15%' },
+		{ text: 'totalcardrefilloperations', align: 'left', sortable: false, value: 'totalcardrefilloperations', width: '15%' },
+		{ text: 'totalcardrefillamount', align: 'left', sortable: false, value: 'totalcardrefillamount', width: '15%' },
+		{ text: 'totalcardcollectoperations', align: 'left', sortable: false, value: 'totalcardcollectoperations', width: '15%' },
+		{ text: 'totalcardcollectamount', align: 'left', sortable: false, value: 'totalcardcollectamount', width: '15%' },
+		{ text: 'carddispenserstatus', align: 'left', sortable: false, value: 'carddispenserstatus', width: '15%' },
+		{ text: 'cardreaderstatus', align: 'left', sortable: false, value: 'cardreaderstatus', width: '15%' },
+		{ text: 'carddispensercount', align: 'left', sortable: false, value: 'carddispensercount', width: '15%' },
+		{ text: 'Operaciones', align: 'center', sortable: false, value: 'action', width: '20%' },
+	];
+	// tslint:disable-next-line: variable-name
+	private menu_createtimestamp: boolean = false;
+	// tslint:disable-next-line: variable-name
+	private menu_updatetimestamp: boolean = false;
+	// tslint:disable-next-line: variable-name
+	private menu_transporttimestamp: boolean = false;
+	private WebApi = new services.Endpoints();
+
+	private devicestatuscolletions = new services.clase_devicestatuscolletions();
+	private lstdevicestatuscolletions: services.clase_devicestatuscolletions[] = [];
+	private buscardevicestatuscolletions = '';
+	private dialog = false;
+	private operacion = '';
+	private helper: helpers = new helpers();
+	private popup = new popup.Swal();
+	private FormatDate(data: any) {
+		return moment(data).format('YYYY-MM-DD');
+	}
+	private FormatBoolean(data: any) {
+		if (data) {
+			return 'SI';
+		} else {
+			return 'NO';
+		}
+	}
+	private updateText(Value: string) {
+		if (Value !== null) {
+			return Value.toUpperCase();
+		} else {
+			return Value;
+		}
+	}
+	private mounted() {
+		this.cargar_data();
+	}
+	private cargar_data() {
+		if (this.$store.state.auth !== true) {​​​​
+			this.$router.push({​​​​ path: '/Login' }​​​​);​​​​
+		}
+		new services.Operaciones().Consultar(this.WebApi.ws_devicestatuscolletions_Consultar)
+			.then((resdevicestatuscolletions) => {
+				if (resdevicestatuscolletions.data._error.error === 0) {
+					this.lstdevicestatuscolletions = resdevicestatuscolletions.data._data;
+					this.dialog = false;
+				} else {
+					this.popup.error('Consultar', resdevicestatuscolletions.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+	}
+	private Insertar(): void {
+		this.devicestatuscolletions = new services.clase_devicestatuscolletions();
+		this.devicestatuscolletions.createtimestamp = this.FormatDate(Date.now());
+		this.devicestatuscolletions.updatetimestamp = this.FormatDate(Date.now());
+		this.devicestatuscolletions.transporttimestamp = this.FormatDate(Date.now());
+		this.operacion = 'Insert';
+		this.dialog = true;
+	}
+	private Grabar() {
+		if (this.operacion === 'Update') {
+			new services.Operaciones().Actualizar(this.WebApi.ws_devicestatuscolletions_Actualizar, this.devicestatuscolletions)
+			.then((result) => {
+				if (result.data.error === 0) {
+					this.popup.success('Actualizar', result.data.descripcion);
+				this.cargar_data();
+				this.dialog = false;
+			} else {
+			this.popup.error('Actualizar', result.data.descripcion);
+			}
+		})
+		.catch((error) => {
+			this.popup.error('Actualizar', 'Error Inesperado: ' + error);
+			});
+	} else {
+		new services.Operaciones().Insertar(this.WebApi.ws_devicestatuscolletions_Insertar, this.devicestatuscolletions)
+		.then((result) => {
+			if (result.data.error === 0) {
+			this.popup.success('Insertar', result.data.descripcion);
+			this.cargar_data();
+			this.dialog = false;
+			} else {
+			this.popup.error('Insertar', result.data.descripcion);
+			}
+		})
+		.catch((error) => {
+			this.popup.error('Insertar', 'Error Inesperado: ' + error);
+			});
+		}
+	}
+	private Cancelar() {
+		this.cargar_data();
+		this.dialog = false;
+	}
+	private Actualizar(data: services.clase_devicestatuscolletions): void {
+		this.devicestatuscolletions = data;
+		this.devicestatuscolletions.createtimestamp = this.FormatDate(Date.now());
+		this.devicestatuscolletions.updatetimestamp = this.FormatDate(Date.now());
+		this.devicestatuscolletions.transporttimestamp = this.FormatDate(Date.now());
+		this.operacion = 'Update';
+		this.dialog = true;
+	}
+	private select_fecha(fecha: string) {
+		return fecha.substr(0, 10);
+	}
+	private Eliminar(data: services.clase_devicestatuscolletions): void {
+		swal.fire({
+			title: 'Esta seguro de esta operacion?',
+			text: 'Eliminacion de Registro' + data.id,
+			type: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: 'green',
+			cancelButtonColor: 'red',
+			cancelButtonText: 'Cancelar',
+			confirmButtonText: 'Eliminar!',
+		}).then((resultOfQuestion) => {
+			if (resultOfQuestion.value) {
+			new services.Operaciones().Eliminar(this.WebApi.ws_devicestatuscolletions_Eliminar, data)
+				.then((result) => {
+				if (result.data.error === 0) {
+					swal.fire({
+					type: 'success',
+					title: 'Eliminar',
+					text: result.data.descripcion,
+					showConfirmButton: false,
+					timer: 2000,
+				});
+				this.cargar_data();
+				} else {
+					swal.fire({
+						type: 'error',
+						title: 'Eliminar',
+						text: result.data.descripcion,
+						showConfirmButton: false,
+						timer: 2000,
+					});
+				}
+			}).catch((error) => {
+				swal.fire({
+					type: 'error',
+					title: 'Eliminar',
+					text: 'Error Inesperado',
+					showConfirmButton: false,
+					timer: 2000,
+				});
+			});
+		}
+		});
+	}
+}
