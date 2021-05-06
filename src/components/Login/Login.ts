@@ -69,11 +69,12 @@ export default class LoginComponent extends Vue {
             }
             new services.Operaciones().Login(this.WebApiAuth, this.cryptedLogin)
             .then((res) => {
+                debugger
                 if (res.data.error === -3) {
                     this.popup.error('Error en la Autenticación', 'Sin conexión al Dominio');
                     return;
                 }
-                if (res.data._error.error === 0) {
+                if (res.data.error === 0) {
                     if (res.data.length !== 0
                         && this.login.usuario.trim() !== '' && this.login.password.trim() !== '') {
                         this.loginResponse = res.data;
