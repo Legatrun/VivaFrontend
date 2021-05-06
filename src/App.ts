@@ -5,6 +5,7 @@ import { Component } from 'vue-property-decorator';
 import Axios from 'axios';
 import * as popup from '@/popup';
 import crypto from '@/encrypt';
+import swal from 'sweetalert2';
 
 @Component({
   components: {
@@ -27,12 +28,35 @@ export default class AppComponent extends Vue {
     this.drawer = !this.drawer;
   }
   public Logout() {
-    this.dialog.warning(
-      'Aplicacion',
-      'Está seguro que desea salir de la Aplicacion?',
-      'Salir!',
-      this.loggingOut(),
-    );
+    // this.dialog.warning(
+    //   'Aplicacion',
+    //   'Está seguro que desea salir de la Aplicacion?',
+    //   'Salir!',
+    //   this.loggingOut(),
+    // );
+    swal.fire({
+			title: 'Consulta de Aplicación',
+			text: 'Está seguro que desea salir de la Aplicacion?',
+			type: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: 'green',
+			cancelButtonColor: 'red',
+			cancelButtonText: 'Cancelar',
+			confirmButtonText: 'Salir!',
+		}).then((resultOfQuestion) => {
+			if (resultOfQuestion.value) {
+        this.loggingOut();
+      }
+			}).catch((error) => {
+				swal.fire({
+					type: 'error',
+					title: 'Cerrar Sesión',
+					text: 'Error Inesperado',
+					showConfirmButton: false,
+					timer: 2000,
+				});
+			});
+
   }
   private loggingOut() {
     this.$store.commit('logout');
