@@ -84,7 +84,12 @@ export default class LoginComponent extends Vue {
                         this.popup.error('Error en la Autenticación', 'Datos Incorrectos, Intente de nuevo por favor');
                         this.$store.commit('logout', true);
                     }
-                } else {
+                } else if(res.data._error.error === 0) {
+                    this.loginResponse = res.data;
+                    this.$store.commit('login', true);
+                    this.$router.push({ path: '/Principal' });
+                }
+                else{
                     this.popup.error('Error en la Autenticación', res.data._error.descripcion);
                 }
             })
