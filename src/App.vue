@@ -10,7 +10,7 @@
             <v-toolbar-items class="hidden-sm-and-down">
                 <v-btn text @click="Login()">
                     <v-icon style="padding-left:20px; padding-bottom:10px">mdi-login</v-icon>
-                    <h3>Iniciar Sesión</h3>
+                    <h3>Entrar</h3>
                 </v-btn>
             </v-toolbar-items>
         </v-app-bar>
@@ -19,9 +19,10 @@
             <Menu></Menu>
         </v-navigation-drawer>
         <v-app-bar class="primary header-session-app" v-if="$store.state.auth" dark fixed clipped-left app>
-             <img rounded src="/images/logo.png"/>
+             <img rounded width="70px" height="70px" src="/images/logo.png"/>
              <v-toolbar-title class="v-toolbar-title-app">
-                <h1>[Nom Proyecto]</h1>
+                <h2>Bill Payment</h2>
+                <h4>Administration Portal</h4>
             </v-toolbar-title>
             <v-spacer></v-spacer>
             <v-toolbar-items class="hidden-sm-and-down">

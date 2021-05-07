@@ -54,6 +54,8 @@ export default class LoginComponent extends Vue {
         (this.$refs.form as Vue & { reset: () => boolean }).reset();
     }
     public ingresar(): void {
+        this.$store.commit('login', true); //borrar
+        this.$router.push({ path: '/Principal' }); //borrar
         if (this.login.usuario === '' || this.login.password === '') {
             this.popup.error('Campos Incompletos', 'Llene ambos campos por favor');
         } else {
@@ -67,7 +69,6 @@ export default class LoginComponent extends Vue {
             }
             new services.Operaciones().Login(this.WebApiAuth, this.cryptedLogin)
             .then((res) => {
-                debugger
                 if (res.data.error === -3) {
                     this.popup.error('Error en la Autenticación', 'Sin conexión al Dominio');
                     return;

@@ -63,7 +63,6 @@ export default class AppComponent extends Vue {
     this.$router.push({ path: '/' });
   }
   private created() {
-    this.dialog.success('Bienvenido', 'Proyecto Generado');
     Axios.get('static/params.json').then((Response: any) => {
       this.objcryptServer = new crypto();
       this.encryptServer = this.objcryptServer.EncryptAES(Response.data.urlService);
