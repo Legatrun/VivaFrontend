@@ -16,11 +16,19 @@ class MenuItem {
 
 export default class MenuComponent extends Vue {
     public menuItems: MenuItem[] = [
-        new MenuItem ('Inicio', 'home', '/Principal'),
+        new MenuItem('Transacciones', 'mdi-cash-multiple', '/transactions'), 
+        new MenuItem('Lotes', 'mdi-archive', '/batches'), 
+        new MenuItem('Terminales', 'mdi-laptop', '/devices'), 
+        new MenuItem('Sucursales', 'mdi-bank', '/locations'), 
+        new MenuItem('Tipos de Sucursales', 'mdi-bank-transfer', '/locationstype'), 
+        new MenuItem('Estados', 'mdi-chart-bar-stacked', '/devices'), 
+        new MenuItem('Reportes', 'mdi-chart-arc', '/events'), 
+        new MenuItem('Calendarios', 'mdi-calendar', '/calendar'), 
+        new MenuItem('Usuarios', 'mdi-human-capacity-increase', '/tb_usuarios'), 
     ];
 
     public menuParametros: MenuItem[] = [
-        new MenuItem ('Menú', 'exit_to_app', ''),
+        new MenuItem ('Otros', 'mdi-more', ''),
     ];
     public menuListaParametros: MenuItem[] = [
         new MenuItem('applicationdefinition', 'exit_to_app', '/applicationdefinition'), 

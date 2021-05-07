@@ -1,6 +1,6 @@
 <template>
   <div >
-  <v-card>
+  <v-card color="headerform">
     <v-list class="menubarbuttons" dense nav>
       <v-list-item v-for="item in menuItems" :key="item.title" :to="item.path" no-action>
         <v-list-item-icon>
