@@ -22,6 +22,8 @@ export default new Vuetify({
         textcolor: '#1A237E',
         headerpage: '#0196BF',
         headerform: '#50BA46',
+        bodyform: '#9dbeb9',
+        // bodyform: '#8fd9a8',
         // headerform: '#50BA46',
         footer:'#508146',
         // Buttons

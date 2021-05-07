@@ -3,13 +3,13 @@
         <v-content>
             <v-container fluid fill-height>
                 <v-layout align-center justify-center>
-                    <v-flex xs12 sm8 md4>
-                        <v-card>
+                    <v-flex xs12 sm8 md8>
+                        <v-card color="bodyform">
                             <v-toolbar dark color="headerform">
                                 <v-flex xs1>
-                                    <v-icon>people</v-icon>
+                                    <v-icon>shield</v-icon>
                                 </v-flex>
-                                <v-toolbar-title class="header-form-login">Ingreso de Usuario</v-toolbar-title>
+                                <v-toolbar-title class="header-form-login">Entrar</v-toolbar-title>
                             </v-toolbar>
                             <v-card-text>
                                 <v-form ref="form" v-model="valid" lazy-validation>
@@ -19,7 +19,7 @@
                                         color="textcolor"
                                         prepend-icon="person" 
                                         name="login" 
-                                        placeholder="Nombre de Usuario"
+                                        placeholder="Usuario"
                                         type="text"
                                         clear-icon="mdi-close-circle"
                                         clearable
@@ -49,9 +49,15 @@
                                 </v-form>
                             </v-card-text>
                             <v-card-actions style="justify-content: center">
-                                <v-btn color="success" style="width: 32.5%" @click="ingresar">Ingresar</v-btn>
-                                <v-btn color="error" style="width: 32.5%" @click="cancelar">Cancelar</v-btn>
-                                <v-btn color="accent" style="width: 32.5%" @click="reset">Limpiar</v-btn>
+                                <v-flex md12>
+                                    <v-btn color="success" @click="ingresar">Ingresar</v-btn>
+                                </v-flex>
+                                <v-flex md12>
+                                    <v-btn color="accent" @click="reset">Limpiar</v-btn>
+                                </v-flex>
+                                <v-flex md6>
+                                    <v-btn color="error" @click="cancelar">Cancelar</v-btn>
+                                </v-flex>
                             </v-card-actions>
                         </v-card>
                     </v-flex>
@@ -64,10 +70,10 @@
 <script src="./Login.ts"></script>
 <style scoped>
 .header-form-login {
-    padding-left:50px;
-    font-size: 1.6em;
+    padding-left:35%;
+    font-size: 2.3em;
 }
 .input-small{
-  font-size: 1.8em; /* tamaño de letra */
+  font-size: 1.5em; /* tamaño de letra */
 }
 </style>

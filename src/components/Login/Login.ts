@@ -33,8 +33,6 @@ export default class LoginComponent extends Vue {
             this.$router.push({ path: '/usuarios-select' });
         }
         this.requiredRule = [(v: any) => !!v || 'Campo requerido'];
-        this.login.usuario = '';
-        this.login.password = '';
     }
 
     public cancelar(): void {
