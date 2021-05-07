@@ -21,10 +21,8 @@ export default new Vuetify({
         menubarbuttons: '#9dbeb9',
         textcolor: '#1A237E',
         headerpage: '#0196BF',
-        headerform: '#50BA46',
-        bodyform: '#9dbeb9',
-        // bodyform: '#8fd9a8',
-        // headerform: '#50BA46',
+        headerform: '#959FA9',
+        bodyform: '#cfe0de',
         footer:'#508146',
         // Buttons
         buttonadd: '#81b214',

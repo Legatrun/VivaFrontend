@@ -70,10 +70,12 @@
 <script src="./Login.ts"></script>
 <style scoped>
 .header-form-login {
-    padding-left:35%;
+    padding-left:33%;
     font-size: 2.3em;
+    color:#cfe0de;
+    font-weight: 700;
 }
 .input-small{
-  font-size: 1.5em; /* tamaño de letra */
+  font-size: 1.7em; /* tamaño de letra */
 }
 </style>
