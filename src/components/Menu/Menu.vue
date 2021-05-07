@@ -7,7 +7,7 @@
           <v-icon>{{ item.icon }}</v-icon>
         </v-list-item-icon>
         <v-list-item-content>
-          <v-list-item-title style="font-size:1.2em; color:#c6ffc1">{{ item.title }}</v-list-item-title>
+          <v-list-item-title style="font-size:1.2em; color:white">{{ item.title }}</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
       <v-list-group v-for="item in menuParametros" :key="item.title" :prepend-icon="item.icon" no-action>
@@ -27,7 +27,7 @@
           <v-icon>{{ item.icon }}</v-icon>
         </v-list-item-icon>            
         <v-list-item-content>
-          <v-list-item-title style="font-size:1.2em; color:#c6ffc1">{{ item.title }}</v-list-item-title>
+          <v-list-item-title style="font-size:1.2em; color:grey">{{ item.title }}</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
     </v-list>
