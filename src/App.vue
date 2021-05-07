@@ -1,15 +1,13 @@
 <template>
   <v-app id="inspire" class='app-login'>
         <v-app-bar v-if="!$store.state.auth" class="primary header-app" dark fixed clipped-left app>
-          <img rounded src="/images/logo.png"/>
+          <img rounded width="70px" height="70px" src="/images/logo.png"/>
             <v-toolbar-title class="v-toolbar-title-app">
-                <h1>[Nom Proyecto]</h1>
+                <h2>Bill Payment</h2>
+                <h4>Administration Portal</h4>
             </v-toolbar-title>
             <v-spacer></v-spacer>
             <v-toolbar-items class="hidden-sm-and-down">
-                <v-btn text><h3>Quienes Somos</h3></v-btn>
-                <v-btn text><h3>Nuestros Servicios</h3></v-btn>
-                <v-btn text><h3>Nuestros Clientes</h3></v-btn>
                 <v-btn text @click="Login()">
                     <v-icon style="padding-left:20px; padding-bottom:10px">mdi-login</v-icon>
                     <h3>Iniciar Sesión</h3>
@@ -45,9 +43,9 @@
             </v-content>
         </main>
         <v-footer class="footer" app fixed>
-            <span class="white--text">Alpha Systems &copy; {{ new Date().getFullYear()}}</span>
-            <v-spacer/>
-            <span class="white--text">v{{version}}</span>
+            <span class="white--text">&copy; {{ new Date().getFullYear()}} PORTAL|</span>
+            <!-- <v-spacer/> -->
+            <span class="white--text"> v{{version}}</span>
         </v-footer>
     </v-app>
 </template>
@@ -56,7 +54,8 @@
 /************ APP ***************/
 .body-background {
   /* The image used */
-  background-image: url("/images/background3.jpg");
+  /* background-image: url("/images/background3.jpg"); */
+  background-color: #508146;
   /* Full height */
   height: 100%;
   /* Center and scale the image nicely */

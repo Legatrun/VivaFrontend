@@ -46,16 +46,6 @@
                                         @keyup.native.enter="Aux"
                                         ></v-text-field>
                                     <v-spacer></v-spacer>
-                                    <v-layout row wrap>
-                                        <v-flex xs8>
-                                            <v-switch
-                                                v-model="dominio"
-                                                inset
-                                                label="Dominio"
-                                                color="switch"
-                                            ></v-switch>
-                                        </v-flex>
-                                    </v-layout>
                                 </v-form>
                             </v-card-text>
                             <v-card-actions style="justify-content: center">

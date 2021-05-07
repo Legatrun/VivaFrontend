@@ -13,6 +13,6 @@ export default class InicioComponent extends Vue {
   public lstitems: interface_carusel[] = [
     { src: '/images/slide01.jpg' },
     { src: '/images/slide02.jpg' },
-    { src: '/images/slide03.jpg' },
+    // { src: '/images/slide03.jpg' },
     ];
 }

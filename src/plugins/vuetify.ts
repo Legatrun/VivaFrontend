@@ -21,9 +21,9 @@ export default new Vuetify({
         menubarbuttons: '#1687a7',
         textcolor: '#1A237E',
         headerpage: '#0196BF',
-        headerform: '#03506f',
-        footer:'#03506f',
-        // footer:'#289672',
+        headerform: '#50BA46',
+        // headerform: '#50BA46',
+        footer:'#508146',
         // Buttons
         buttonadd: '#81b214',
         buttonedit: '#ffcc29',
