@@ -3,7 +3,7 @@
         <v-content>
             <v-container fluid fill-height>
                 <v-layout align-center justify-center>
-                    <v-flex xs12 sm8 md8>
+                    <v-flex xs12 sm8 md7>
                         <v-card color="bodyform">
                             <v-toolbar dark color="headerform">
                                 <v-flex xs1>
