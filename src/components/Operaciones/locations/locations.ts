@@ -9,10 +9,11 @@ import helpers from '@/helper';
 @Component
 export default class AdmlocationsComponent extends Vue {
 	private headers: any[] = [
-		{ text: 'IDENTIFICATION', align: 'left', sortable: true, value: 'identification', width: '15%' },
-		{ text: 'description', align: 'left', sortable: false, value: 'description', width: '15%' },
-		{ text: 'type', align: 'left', sortable: false, value: 'type', width: '15%' },
-		{ text: 'enabled', align: 'left', sortable: false, value: 'enabled', width: '15%' },
+		{ text: 'Identificacion', align: 'left', sortable: true, value: 'identification', width: '15%' },
+		{ text: 'Descripcion', align: 'left', sortable: false, value: 'description', width: '30%' },
+		//{ text: 'type', align: 'left', sortable: false, value: 'type', width: '15%' },
+		{ text: 'Habilitada', align: 'left', sortable: false, value: 'enabled', width: '15%' },
+		/*
 		{ text: 'createtimestamp', align: 'left', sortable: false, value: 'createtimestamp', width: '15%' },
 		{ text: 'updatetimestamp', align: 'left', sortable: false, value: 'updatetimestamp', width: '15%' },
 		{ text: 'createuser', align: 'left', sortable: false, value: 'createuser', width: '15%' },
@@ -31,7 +32,9 @@ export default class AdmlocationsComponent extends Vue {
 		{ text: 'replanishmentemail', align: 'left', sortable: false, value: 'replanishmentemail', width: '15%' },
 		{ text: 'calendarid', align: 'left', sortable: false, value: 'calendarid', width: '15%' },
 		{ text: 'locationtypeid', align: 'left', sortable: false, value: 'locationtypeid', width: '15%' },
+			*/
 		{ text: 'Operaciones', align: 'center', sortable: false, value: 'action', width: '20%' },
+	
 	];
 	// tslint:disable-next-line: variable-name
 	private menu_createtimestamp: boolean = false;
@@ -41,15 +44,42 @@ export default class AdmlocationsComponent extends Vue {
 
 	private locations = new services.clase_locations();
 	private lstlocations: services.clase_locations[] = [];
+	private locationsType = new services.clase_locationstype();
+	private lstlocationsType: services.clase_locationstype[] = [];
+	private calendarios = new services.clase_calendar();
+	private lstcalendarios: services.clase_calendar[] = [];
 	private buscarlocations = '';
 	private dialog = false;
 	private operacion = '';
 	private helper: helpers = new helpers();
 	private popup = new popup.Swal();
+	private activa = false;
+	private listahbil: any[] = [
+		{habilitado: 'SI',value:1},{habilitado:'NO',value:0}
+	];
+	validacion = [
+		(v: any) => !!v || 'El campo es requerido',
+		(v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
+	];
+	RulLetras = [
+		(v: any) => !!v || 'El campo es requerido',
+		(v: any) => !(!/^[a-z A-Z]*$/.test(v)) || "No se permite vacio o espacios en blanco",
+	];
+	RulEmpEmai = [
+		(v:any) => !!v || "El campo es requiredo",
+		(v:any) => ( /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v)) || "Email no es valido"
+	];
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');
 	}
-	private FormatBoolean(data: any) {
+	private Formathabilitado(data: any){
+		if (data == 1){
+			return 'SI';
+		}else{
+			return 'NO';
+		}
+     }	
+    private FormatBoolean(data: any) {
 		if (data) {
 			return 'SI';
 		} else {
@@ -81,6 +111,35 @@ export default class AdmlocationsComponent extends Vue {
 			}).catch((error) => {
 					this.popup.error('Consultar', 'Error Inesperado: ' + error);
 			});
+		this.cargarTypeLocation();
+		this.cargarCalendario();
+	}
+
+	private cargarTypeLocation(){
+		new services.Operaciones().Consultar(this.WebApi.ws_locationstype_Consultar)
+			.then((restepyloca) => {
+				if (restepyloca.data._error.error === 0) {
+					this.lstlocationsType = restepyloca.data._data;
+					this.dialog = false;
+				} else {
+					this.popup.error('Consultar', restepyloca.data._error.descripcion);
+				}
+			}).catch((error) => {
+			this.popup.error('Consultar', 'Error Inesperado: ' + error);
+		});
+	}
+	private cargarCalendario(){
+		new services.Operaciones().Consultar(this.WebApi.ws_calendar_Consultar)
+			.then((rescalendar) => {
+				if (rescalendar.data._error.error === 0) {
+					this.lstcalendarios = rescalendar.data._data;
+					this.dialog = false;
+				} else {
+					this.popup.error('Consultar', rescalendar.data._error.Descripcion);
+				}
+			}).catch((error) => {
+			this.popup.error('Consultar', 'Error Inesperado: ' + error);
+		});
 	}
 	private Insertar(): void {
 		this.locations = new services.clase_locations();
