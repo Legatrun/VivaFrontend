@@ -1,7 +1,7 @@
 <template>
 	<v-card>
 		<v-toolbar color="primary" style="color:white">
-			<v-toolbar-title class="font-large-color">Datos de transactions</v-toolbar-title>
+			<v-toolbar-title class="font-large-color">Transacciones</v-toolbar-title>
 			<v-divider></v-divider>
 			<v-text-field class="input-small"
 					v-model="buscartransactions"
@@ -83,9 +83,9 @@
 			<template v-slot:top>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn class="btn-small-color" color="buttonadd" v-on="on" @click="Insertar()">REGISTRAR transactions</v-btn>
+						<v-btn class="btn-small-color" color="cyan" v-on="on" @click="Insertar()"><v-icon left>mdi-plus</v-icon>Agregar</v-btn>
 					</template>
-					<span>Adicionar nuevo registro de transactions</span>
+					<span>Adicionar nuevo registro de Transacción</span>
 				</v-tooltip>
 			</template>
 			<template v-slot:no-data>
@@ -94,40 +94,51 @@
 				</v-alert>
 			</template>
 		</v-data-table>
-		<v-dialog v-model="dialog" persistent max-width="50%">
+		<v-dialog v-model="dialog" persistent max-width="65%">
 			<v-card>
 				<v-toolbar style="padding:10px" dark class="primary">
-					<v-toolbar-title class="font-medium-color" >Formulario de transactions</v-toolbar-title>
+					<v-toolbar-title class="font-medium-color" >Transacciones</v-toolbar-title>
+					<v-spacer></v-spacer>
+					<v-btn color="error" fab dark small @click="Cancelar()">X</v-btn>
 				</v-toolbar>
 				<v-divider></v-divider>
 				<v-form ref="form" style="padding:10px">
 					<v-card-text>
 						<v-layout wrap>
 							<template v-if="operacion == 'Insert'">
-								<v-flex sm12 style="padding: 5px">
-									<v-text-field class="input-small" 
-												v-model="transactions.id"
-												label="ID"
-												hint="Ingrese ID"
-												placeholder="ID"
-												clearable
-												persistent-hint
-												required
-												@input="transactions.id = updateText(transactions.id)">
-									</v-text-field>
-								</v-flex>
 							</template>
 							<template v-else>
-								<v-flex sm12 style="padding: 5px">
-									<v-text-field class="input-small" 
-												v-model="transactions.id"
-												label="ID"
-												placeholder="ID"
-												readonly
-												persistent-hint>
-									</v-text-field>
-								</v-flex>
 							</template>
+							<v-flex sm4 style="padding: 5px">
+								<v-autocomplete class="input-small" 
+											v-model="transactions.deviceidentification"
+											label="Terminal"
+											clearable
+											persistent-hint
+											required
+											>
+								</v-autocomplete>
+							</v-flex>
+							<v-flex sm4 style="padding: 5px">
+								<v-autocomplete class="input-small" 
+											v-model="transactions.locationidentification"
+											label="Sucursal"
+											clearable
+											persistent-hint
+											required
+											>
+								</v-autocomplete>
+							</v-flex>
+							<v-flex sm4 style="padding: 5px">
+								<v-text-field class="input-small" 
+											v-model="transactions.operationname"
+											label="Tipo de Transacción"
+											clearable
+											persistent-hint
+											required
+											@input="transactions.operationname = updateText(transactions.operationname)">
+								</v-text-field>
+							</v-flex>
 							<v-flex sm4 class="hidden-xs-only" style="padding: 5px">
 								<v-menu
 									ref="menu_createtimestamp"
@@ -141,8 +152,7 @@
 									<template v-slot:activator="{ on }">
 										<v-text-field class="date-small" 
 											v-model="transactions.createtimestamp"
-											hint="Ingrese createtimestamp"
-											placeholder="CREATETIMESTAMP"
+											label="Fecha"
 											persistent-hint
 											prepend-icon="event"
 											v-on="on">
@@ -151,78 +161,130 @@
 									<v-date-picker v-model="transactions.createtimestamp" no-title @input="menu_createtimestamp = false"></v-date-picker>
 								</v-menu>
 							</v-flex>
-							<v-flex sm4 class="hidden-xs-only" style="padding: 5px">
-								<v-menu
-									ref="menu_updatetimestamp"
-										v-model="menu_updatetimestamp"
-										:close-on-content-click="false"
-										transition="scale-transition"
-										offset-y
-										full-width
-										max-width="290px"
-										min-width="290px">
-									<template v-slot:activator="{ on }">
-										<v-text-field class="date-small" 
-											v-model="transactions.updatetimestamp"
-											hint="Ingrese updatetimestamp"
-											placeholder="UPDATETIMESTAMP"
-											persistent-hint
-											prepend-icon="event"
-											v-on="on">
-										</v-text-field>
-									</template>
-									<v-date-picker v-model="transactions.updatetimestamp" no-title @input="menu_updatetimestamp = false"></v-date-picker>
-								</v-menu>
-							</v-flex>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm4 style="padding: 5px">
 								<v-text-field class="input-small" 
-											v-model="transactions.deviceidentification"
-											hint="Ingrese DEVICEIDENTIFICATION"
-											placeholder="DEVICEIDENTIFICATION"
+											v-model="transactions.resultcode"
+											label="Código de Resultado"
 											clearable
 											persistent-hint
 											required
-											@input="transactions.deviceidentification = updateText(transactions.deviceidentification)">
+											@input="transactions.resultcode = updateText(transactions.resultcode)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm4 style="padding: 5px">
 								<v-text-field class="input-small" 
-											v-model="transactions.locationidentification"
-											hint="Ingrese LOCATIONIDENTIFICATION"
-											placeholder="LOCATIONIDENTIFICATION"
+											v-model="transactions.resultmessage"
+											label="Mensaje"
 											clearable
 											persistent-hint
 											required
-											@input="transactions.locationidentification = updateText(transactions.locationidentification)">
+											@input="transactions.resultmessage = updateText(transactions.resultmessage)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm4 style="padding: 5px">
+								<v-text-field class="input-small" 
+											v-model="transactions.transactionidentification"
+											label="Recibo #"
+											clearable
+											persistent-hint
+											required
+											type="number"
+											@input="transactions.transactionidentification = updateText(transactions.transactionidentification)">
+								</v-text-field>
+							</v-flex>
+							<v-flex sm4 style="padding: 5px">
+								<v-text-field class="input-small" 
+											v-model="transactions.providerresultcode"
+											label="Código de Resultado Proveedor"
+											clearable
+											persistent-hint
+											required
+											@input="transactions.providerresultcode = updateText(transactions.providerresultcode)">
+								</v-text-field>
+							</v-flex>
+							<v-flex sm4 style="padding: 5px">
+								<v-text-field class="input-small" 
+											v-model="transactions.providerresultmessage"
+											label="Mensaje de Proveedor"
+											clearable
+											persistent-hint
+											required
+											@input="transactions.providerresultmessage = updateText(transactions.providerresultmessage)">
+								</v-text-field>
+							</v-flex>
+							<v-flex sm6 style="padding: 5px">
+								<v-text-field class="input-small" 
+											v-model="transactions.customernumber"
+											label="Número de Cliente"
+											clearable
+											persistent-hint
+											required
+											@input="transactions.customernumber = updateText(transactions.customernumber)">
+								</v-text-field>
+							</v-flex>
+								<v-flex sm6 style="padding: 5px">
+								<v-text-field class="input-small" 
+											v-model="transactions.customercode"
+											label="Código de Cliente"
+											clearable
+											persistent-hint
+											required
+											@input="transactions.customercode = updateText(transactions.customercode)">
+								</v-text-field>
+							</v-flex>
+							<v-flex sm4 style="padding: 5px">
+								<v-text-field class="input-small" 
+											v-model="transactions.amount"
+											hint="Ingrese AMOUNT"
+											label="AMOUNT"
+											clearable
+											persistent-hint
+											required
+											type="number"
+											@input="transactions.amount = updateText(transactions.amount)">
+								</v-text-field>
+							</v-flex>
+							<v-flex sm4 style="padding: 5px">
+								<v-text-field class="input-small" 
+											v-model="transactions.amountentered"
+											label="Monto Pagado"
+											clearable
+											persistent-hint
+											required
+											type="number"
+											@input="transactions.amountentered = updateText(transactions.amountentered)">
+								</v-text-field>
+							</v-flex>
+							<v-flex sm4 style="padding: 5px">
+								<v-text-field class="input-small" 
+											v-model="transactions.amountentereddetail"
+											placeholder="Detalle de Monto Recibido"
+											clearable
+											persistent-hint
+											required
+											@input="transactions.amountentereddetail = updateText(transactions.amountentereddetail)">
+								</v-text-field>
+							</v-flex>
+
+							<!-- AQUI -->
+
+							<v-flex sm4 style="padding: 5px">
 								<v-text-field class="input-small" 
 											v-model="transactions.servicename"
 											hint="Ingrese SERVICENAME"
-											placeholder="SERVICENAME"
+											label="SERVICENAME"
 											clearable
 											persistent-hint
 											required
 											@input="transactions.servicename = updateText(transactions.servicename)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
-								<v-text-field class="input-small" 
-											v-model="transactions.operationname"
-											hint="Ingrese OPERATIONNAME"
-											placeholder="OPERATIONNAME"
-											clearable
-											persistent-hint
-											required
-											@input="transactions.operationname = updateText(transactions.operationname)">
-								</v-text-field>
-							</v-flex>
+							
 							<v-flex sm12 style="padding: 5px">
 								<v-text-field class="input-small" 
 											v-model="transactions.sequencenumber"
 											hint="Ingrese SEQUENCENUMBER"
-											placeholder="SEQUENCENUMBER"
+											label="SEQUENCENUMBER"
 											clearable
 											persistent-hint
 											required
@@ -244,7 +306,7 @@
 										<v-text-field class="date-small" 
 											v-model="transactions.transporttimestamp"
 											hint="Ingrese transporttimestamp"
-											placeholder="TRANSPORTTIMESTAMP"
+											label="TRANSPORTTIMESTAMP"
 											persistent-hint
 											prepend-icon="event"
 											v-on="on">
@@ -257,7 +319,7 @@
 								<v-text-field class="input-small" 
 											v-model="transactions.payloadrequest"
 											hint="Ingrese PAYLOADREQUEST"
-											placeholder="PAYLOADREQUEST"
+											label="PAYLOADREQUEST"
 											clearable
 											persistent-hint
 											required
@@ -268,41 +330,20 @@
 								<v-text-field class="input-small" 
 											v-model="transactions.payloadanswer"
 											hint="Ingrese PAYLOADANSWER"
-											placeholder="PAYLOADANSWER"
+											label="PAYLOADANSWER"
 											clearable
 											persistent-hint
 											required
 											@input="transactions.payloadanswer = updateText(transactions.payloadanswer)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
-								<v-text-field class="input-small" 
-											v-model="transactions.resultcode"
-											hint="Ingrese RESULTCODE"
-											placeholder="RESULTCODE"
-											clearable
-											persistent-hint
-											required
-											type="number"
-											@input="transactions.resultcode = updateText(transactions.resultcode)">
-								</v-text-field>
-							</v-flex>
-							<v-flex sm12 style="padding: 5px">
-								<v-text-field class="input-small" 
-											v-model="transactions.resultmessage"
-											hint="Ingrese RESULTMESSAGE"
-											placeholder="RESULTMESSAGE"
-											clearable
-											persistent-hint
-											required
-											@input="transactions.resultmessage = updateText(transactions.resultmessage)">
-								</v-text-field>
-							</v-flex>
+							
+							
 							<v-flex sm12 style="padding: 5px">
 								<v-text-field class="input-small" 
 											v-model="transactions.provideridentification"
 											hint="Ingrese PROVIDERIDENTIFICATION"
-											placeholder="PROVIDERIDENTIFICATION"
+											label="PROVIDERIDENTIFICATION"
 											clearable
 											persistent-hint
 											required
@@ -313,7 +354,7 @@
 								<v-text-field class="input-small" 
 											v-model="transactions.providertransactionid"
 											hint="Ingrese PROVIDERTRANSACTIONID"
-											placeholder="PROVIDERTRANSACTIONID"
+											label="PROVIDERTRANSACTIONID"
 											clearable
 											persistent-hint
 											required
@@ -324,40 +365,20 @@
 								<v-text-field class="input-small" 
 											v-model="transactions.devicetransactionid"
 											hint="Ingrese DEVICETRANSACTIONID"
-											placeholder="DEVICETRANSACTIONID"
+											label="DEVICETRANSACTIONID"
 											clearable
 											persistent-hint
 											required
 											@input="transactions.devicetransactionid = updateText(transactions.devicetransactionid)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
-								<v-text-field class="input-small" 
-											v-model="transactions.providerresultcode"
-											hint="Ingrese PROVIDERRESULTCODE"
-											placeholder="PROVIDERRESULTCODE"
-											clearable
-											persistent-hint
-											required
-											@input="transactions.providerresultcode = updateText(transactions.providerresultcode)">
-								</v-text-field>
-							</v-flex>
-							<v-flex sm12 style="padding: 5px">
-								<v-text-field class="input-small" 
-											v-model="transactions.providerresultmessage"
-											hint="Ingrese PROVIDERRESULTMESSAGE"
-											placeholder="PROVIDERRESULTMESSAGE"
-											clearable
-											persistent-hint
-											required
-											@input="transactions.providerresultmessage = updateText(transactions.providerresultmessage)">
-								</v-text-field>
-							</v-flex>
+							
+							
 							<v-flex sm12 style="padding: 5px">
 								<v-text-field class="input-small" 
 											v-model="transactions.batchnumber"
 											hint="Ingrese BATCHNUMBER"
-											placeholder="BATCHNUMBER"
+											label="BATCHNUMBER"
 											clearable
 											persistent-hint
 											required
@@ -369,7 +390,7 @@
 								<v-text-field class="input-small" 
 											v-model="transactions.syncstatus"
 											hint="Ingrese SYNCSTATUS"
-											placeholder="SYNCSTATUS"
+											label="SYNCSTATUS"
 											clearable
 											persistent-hint
 											required
@@ -391,7 +412,7 @@
 										<v-text-field class="date-small" 
 											v-model="transactions.synctimestamp"
 											hint="Ingrese synctimestamp"
-											placeholder="SYNCTIMESTAMP"
+											label="SYNCTIMESTAMP"
 											persistent-hint
 											prepend-icon="event"
 											v-on="on">
@@ -404,7 +425,7 @@
 								<v-text-field class="input-small" 
 											v-model="transactions.deviceidentificationprovider"
 											hint="Ingrese DEVICEIDENTIFICATIONPROVIDER"
-											placeholder="DEVICEIDENTIFICATIONPROVIDER"
+											label="DEVICEIDENTIFICATIONPROVIDER"
 											clearable
 											persistent-hint
 											required
@@ -415,53 +436,21 @@
 								<v-text-field class="input-small" 
 											v-model="transactions.locationidentificationprovider"
 											hint="Ingrese LOCATIONIDENTIFICATIONPROVIDER"
-											placeholder="LOCATIONIDENTIFICATIONPROVIDER"
+											label="LOCATIONIDENTIFICATIONPROVIDER"
 											clearable
 											persistent-hint
 											required
 											@input="transactions.locationidentificationprovider = updateText(transactions.locationidentificationprovider)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
-								<v-text-field class="input-small" 
-											v-model="transactions.customernumber"
-											hint="Ingrese CUSTOMERNUMBER"
-											placeholder="CUSTOMERNUMBER"
-											clearable
-											persistent-hint
-											required
-											@input="transactions.customernumber = updateText(transactions.customernumber)">
-								</v-text-field>
-							</v-flex>
-							<v-flex sm12 style="padding: 5px">
-								<v-text-field class="input-small" 
-											v-model="transactions.amount"
-											hint="Ingrese AMOUNT"
-											placeholder="AMOUNT"
-											clearable
-											persistent-hint
-											required
-											type="number"
-											@input="transactions.amount = updateText(transactions.amount)">
-								</v-text-field>
-							</v-flex>
-							<v-flex sm12 style="padding: 5px">
-								<v-text-field class="input-small" 
-											v-model="transactions.amountentered"
-											hint="Ingrese AMOUNTENTERED"
-											placeholder="AMOUNTENTERED"
-											clearable
-											persistent-hint
-											required
-											type="number"
-											@input="transactions.amountentered = updateText(transactions.amountentered)">
-								</v-text-field>
-							</v-flex>
+							
+							
+							
 							<v-flex sm12 style="padding: 5px">
 								<v-text-field class="input-small" 
 											v-model="transactions.amountreturned"
 											hint="Ingrese AMOUNTRETURNED"
-											placeholder="AMOUNTRETURNED"
+											label="AMOUNTRETURNED"
 											clearable
 											persistent-hint
 											required
@@ -473,7 +462,7 @@
 								<v-text-field class="input-small" 
 											v-model="transactions.amountticketundelivered"
 											hint="Ingrese AMOUNTTICKETUNDELIVERED"
-											placeholder="AMOUNTTICKETUNDELIVERED"
+											label="AMOUNTTICKETUNDELIVERED"
 											clearable
 											persistent-hint
 											required
@@ -493,17 +482,7 @@
 											@input="transactions.operationstatus = updateText(transactions.operationstatus)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
-								<v-text-field class="input-small" 
-											v-model="transactions.amountentereddetail"
-											hint="Ingrese AMOUNTENTEREDDETAIL"
-											placeholder="AMOUNTENTEREDDETAIL"
-											clearable
-											persistent-hint
-											required
-											@input="transactions.amountentereddetail = updateText(transactions.amountentereddetail)">
-								</v-text-field>
-							</v-flex>
+							
 							<v-flex sm12 style="padding: 5px">
 								<v-text-field class="input-small" 
 											v-model="transactions.amountreturneddetail"
@@ -526,28 +505,8 @@
 											@input="transactions.amountticketundelivereddetail = updateText(transactions.amountticketundelivereddetail)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
-								<v-text-field class="input-small" 
-											v-model="transactions.transactionidentification"
-											hint="Ingrese TRANSACTIONIDENTIFICATION"
-											placeholder="TRANSACTIONIDENTIFICATION"
-											clearable
-											persistent-hint
-											required
-											@input="transactions.transactionidentification = updateText(transactions.transactionidentification)">
-								</v-text-field>
-							</v-flex>
-							<v-flex sm12 style="padding: 5px">
-								<v-text-field class="input-small" 
-											v-model="transactions.customercode"
-											hint="Ingrese CUSTOMERCODE"
-											placeholder="CUSTOMERCODE"
-											clearable
-											persistent-hint
-											required
-											@input="transactions.customercode = updateText(transactions.customercode)">
-								</v-text-field>
-							</v-flex>
+							
+						
 							<v-flex sm12 style="padding: 5px">
 								<v-text-field class="input-small" 
 											v-model="transactions.canceled"
