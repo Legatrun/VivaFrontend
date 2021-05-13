@@ -141,7 +141,7 @@
 											item-value="value"
 											outlined
 											autocomplete="off"
-											:rules="validacion"
+											:rules="habilitado"
 											no-data-text="No se encontro ningun tema"
 											>
 								</v-autocomplete>
@@ -217,7 +217,7 @@
 											dense
 											clearable
 											required
-											:rules="RulLetras"
+											:rules="Rules"
 											@input="locations.city = updateText(locations.city)">
 								</v-text-field>
 							</v-flex>
@@ -230,7 +230,7 @@
 											clearable
 											persistent-hint
 											required
-											:rules="RulLetras"
+											:rules="Rules"
 											@input="locations.identificationprovider = updateText(locations.identificationprovider)">
 								</v-text-field>
 							</v-flex>
@@ -243,7 +243,7 @@
 											dense
 											clearable
 											required
-											:rules="RulLetras"
+											:rules="Rules"
 											@input="locations.country = updateText(locations.country)">
 								</v-text-field>
 							</v-flex>

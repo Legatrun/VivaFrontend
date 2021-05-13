@@ -9,10 +9,11 @@ import helpers from '@/helper';
 @Component
 export default class AdmdevicesComponent extends Vue {
 	private headers: any[] = [
-		{ text: 'IDENTIFICATION', align: 'left', sortable: true, value: 'identification', width: '15%' },
-		{ text: 'description', align: 'left', sortable: false, value: 'description', width: '15%' },
-		{ text: 'devicetypeidentification', align: 'left', sortable: false, value: 'devicetypeidentification', width: '15%' },
-		{ text: 'enabled', align: 'left', sortable: false, value: 'enabled', width: '15%' },
+		{ text: 'Terminal', align: 'left', sortable: true, value: 'identification', width: '20%' },
+		{ text: 'Descripcion', align: 'left', sortable: false, value: 'description', width: '30%' },
+		{ text: 'Tipo', align: 'left', sortable: false, value: 'devicetypeidentification', width: '20%' },
+		{ text: 'Habilitada', align: 'left', sortable: false, value: 'enabled', width: '15%' },
+		/*
 		{ text: 'createtimestamp', align: 'left', sortable: false, value: 'createtimestamp', width: '15%' },
 		{ text: 'updatetimestamp', align: 'left', sortable: false, value: 'updatetimestamp', width: '15%' },
 		{ text: 'createuser', align: 'left', sortable: false, value: 'createuser', width: '15%' },
@@ -63,6 +64,7 @@ export default class AdmdevicesComponent extends Vue {
 		{ text: 'laststatusreported', align: 'left', sortable: false, value: 'laststatusreported', width: '15%' },
 		{ text: 'serviceuser', align: 'left', sortable: false, value: 'serviceuser', width: '15%' },
 		{ text: 'operatorcode', align: 'left', sortable: false, value: 'operatorcode', width: '15%' },
+		*/
 		{ text: 'Operaciones', align: 'center', sortable: false, value: 'action', width: '20%' },
 	];
 	// tslint:disable-next-line: variable-name
@@ -72,16 +74,42 @@ export default class AdmdevicesComponent extends Vue {
 	// tslint:disable-next-line: variable-name
 	private menu_lastreporttimestamp: boolean = false;
 	private WebApi = new services.Endpoints();
-
 	private devices = new services.clase_devices();
 	private lstdevices: services.clase_devices[] = [];
 	private buscardevices = '';
+	private locations= new services.clase_devices();
+	private lstlocations: services.clase_devices[] = [];
+	private divtype = new services.clase_devicetypes();
+	private lstdivtype: services.clase_devicetypes[] = [];
 	private dialog = false;
 	private operacion = '';
 	private helper: helpers = new helpers();
 	private popup = new popup.Swal();
+	private activa = false;
+	private listahbil: any[] = [
+		{habilitado: 'SI',value:1},{habilitado:'NO',value:0}
+	];
+	validacion = [
+		(v: any) => !!v || 'El campo es requerido',
+		(v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
+	];
+	habilitado = [
+		(v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
+
+	];
+	Rules = [
+		(v: any) => !!v || 'El campo es requerido',
+		(v: any) => !(!/^[a-z A-Z]*$/.test(v)) || "No se permiten numeros o caracteres especiales",
+	];
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');
+	}
+	private FormatHabil(data: any){
+		if(data == 1){
+			return 'SI';
+		}else{
+			return 'NO';
+		}
 	}
 	private FormatBoolean(data: any) {
 		if (data) {
@@ -107,6 +135,7 @@ export default class AdmdevicesComponent extends Vue {
 		new services.Operaciones().Consultar(this.WebApi.ws_devices_Consultar)
 			.then((resdevices) => {
 				if (resdevices.data._error.error === 0) {
+					
 					this.lstdevices = resdevices.data._data;
 					this.dialog = false;
 				} else {
@@ -115,6 +144,39 @@ export default class AdmdevicesComponent extends Vue {
 			}).catch((error) => {
 					this.popup.error('Consultar', 'Error Inesperado: ' + error);
 			});
+			this.cargarLocation();
+			this.cargarDivType();
+	}
+	private cargarLocation(){
+		new services.Operaciones().Consultar(this.WebApi.ws_locations_Consultar)
+			.then((resloca) => {
+				if (resloca.data._error.error === 0) {
+					
+					this.lstlocations = resloca.data._data;
+					this.dialog = false;
+				} else {
+					this.popup.error('Consultar', resloca.data._error.identification);
+				}
+			}).catch((error) => {
+			this.popup.error('Consultar', 'Error Inesperado: ' + error);
+		});
+	}
+	getItem(data : any){
+		return ` ${data.description} ${data.address} ( ${data.city_code} )`;
+	}
+	private cargarDivType(){
+		new services.Operaciones().Consultar(this.WebApi.ws_devicetypes_Consultar)
+			.then((resditype) => {
+				if (resditype.data._error.error === 0) {
+					
+					this.lstdivtype = resditype.data._data;
+					this.dialog = false;
+				} else {
+					this.popup.error('Consultar', resditype.data._error.identification);
+				}
+			}).catch((error) => {
+			this.popup.error('Consultar', 'Error Inesperado: ' + error);
+		});
 	}
 	private Insertar(): void {
 		this.devices = new services.clase_devices();

@@ -1,7 +1,7 @@
 <template>
 	<v-card>
 		<v-toolbar color="primary" style="color:white">
-			<v-toolbar-title class="font-large-color">Datos de devices</v-toolbar-title>
+			<v-toolbar-title class="font-large-color">Terminales</v-toolbar-title>
 			<v-divider></v-divider>
 			<v-text-field class="input-small"
 					v-model="buscardevices"
@@ -29,7 +29,8 @@
 					<td class="datatable-items-small">{{ props.item.identification }}</td>
 					<td class="datatable-items-small">{{ props.item.description }}</td>
 					<td class="datatable-items-small">{{ props.item.devicetypeidentification }}</td>
-					<td class="datatable-items-small">{{ props.item.enabled }}</td>
+					<td class="datatable-items-small">{{FormatBoolean(props.item.enabled)  }}</td>
+					<!--
 					<td class="datatable-items-small">{{ FormatDate(props.item.createtimestamp) }}</td>
 					<td class="datatable-items-small">{{ FormatDate(props.item.updatetimestamp) }}</td>
 					<td class="datatable-items-small">{{ props.item.createuser }}</td>
@@ -80,18 +81,19 @@
 					<td class="datatable-items-small">{{ props.item.laststatusreported }}</td>
 					<td class="datatable-items-small">{{ props.item.serviceuser }}</td>
 					<td class="datatable-items-small">{{ props.item.operatorcode }}</td>
+					-->
 					<td>
 						<v-tooltip bottom>
 							<template v-slot:activator="{ on }">
 								<v-btn color="btnedit" v-on="on" fab small dark  @click="Actualizar(props.item)"><v-icon>edit</v-icon></v-btn>
 							</template>
-							<span>Modificar datos de devices</span>
+							<span>Modificar datos de Terminal</span>
 						</v-tooltip>
 						<v-tooltip style="padding-left:10px" bottom>
 							<template v-slot:activator="{ on }" >
 								<v-btn color="btndelete" v-on="on" fab small dark  @click="Eliminar(props.item)"><v-icon>delete</v-icon></v-btn>
 							</template>
-							<span>Eliminar devices </span>
+							<span>Eliminar Terminal </span>
 						</v-tooltip>
 					</td>
 				</tr>
@@ -99,9 +101,9 @@
 			<template v-slot:top>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn class="btn-small-color" color="buttonadd" v-on="on" @click="Insertar()">REGISTRAR devices</v-btn>
+						<v-btn class="btn-small-color" color="cyan" v-on="on" @click="Insertar()"><v-icon left>mdi-plus</v-icon>Agregar</v-btn>
 					</template>
-					<span>Adicionar nuevo registro de devices</span>
+					<span>Adicionar nuevo registro de Terminal</span>
 				</v-tooltip>
 			</template>
 			<template v-slot:no-data>
@@ -113,172 +115,97 @@
 		<v-dialog v-model="dialog" persistent max-width="50%">
 			<v-card>
 				<v-toolbar style="padding:10px" dark class="primary">
-					<v-toolbar-title class="font-medium-color" >Formulario de devices</v-toolbar-title>
+					<v-toolbar-title class="font-medium-color" >Terminales</v-toolbar-title>
 				</v-toolbar>
 				<v-divider></v-divider>
-				<v-form ref="form" style="padding:10px">
+				<v-form ref="form" style="padding:10px" v-model="activa">
 					<v-card-text>
 						<v-layout wrap>
 							<template v-if="operacion == 'Insert'">
-								<v-flex sm12 style="padding: 5px">
+								<v-flex sm6 style="padding: 5px">
 									<v-text-field class="input-small" 
 												v-model="devices.identification"
-												label="IDENTIFICATION"
-												hint="Ingrese IDENTIFICATION"
-												placeholder="IDENTIFICATION"
+												label="Terminal"
+												outlined
+												dense
 												clearable
 												persistent-hint
-												required
+												:rules="Rules"
 												@input="devices.identification = updateText(devices.identification)">
 									</v-text-field>
 								</v-flex>
 							</template>
 							<template v-else>
-								<v-flex sm12 style="padding: 5px">
+								<v-flex sm6 style="padding: 5px">
 									<v-text-field class="input-small" 
 												v-model="devices.identification"
-												label="IDENTIFICATION"
-												placeholder="IDENTIFICATION"
+												label="Terminal"
+												outlined
 												readonly
 												persistent-hint>
 									</v-text-field>
+									<!-- por parte de billpaymente ncr   -->
 								</v-flex>
 							</template>
-							<v-flex sm12 style="padding: 5px">
-								<v-text-field class="input-small" 
+							<v-flex sm6 style="padding: 5px">
+								<v-textarea class="input-small" 
 											v-model="devices.description"
-											hint="Ingrese DESCRIPTION"
-											placeholder="DESCRIPTION"
+											label=" Descripcion"
+											outlined
+											dense
 											clearable
 											persistent-hint
 											required
+											:rules="Rules"
 											@input="devices.description = updateText(devices.description)">
-								</v-text-field>
+								</v-textarea>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
-								<v-text-field class="input-small" 
-											v-model="devices.devicetypeidentification"
-											hint="Ingrese DEVICETYPEIDENTIFICATION"
-											placeholder="DEVICETYPEIDENTIFICATION"
-											clearable
-											persistent-hint
-											required
-											@input="devices.devicetypeidentification = updateText(devices.devicetypeidentification)">
-								</v-text-field>
-							</v-flex>
-							<v-flex sm12 style="padding: 5px">
-								<v-text-field class="input-small" 
+								<v-flex sm6 style="padding: 5px">
+								<v-autocomplete class="input-small" 
 											v-model="devices.enabled"
-											hint="Ingrese ENABLED"
-											placeholder="ENABLED"
-											clearable
-											persistent-hint
-											required
-											type="number"
-											@input="devices.enabled = updateText(devices.enabled)">
-								</v-text-field>
+											label="Habilitada"
+											:items="listahbil"
+											item-text="habilitado"
+											item-value="value"
+											outlined
+											dense
+											autocomplete="off"
+											:rules="habilitado"
+											no-data-text="No se encontro ningun tema"
+											>
+								</v-autocomplete>
 							</v-flex>
-							<v-flex sm4 class="hidden-xs-only" style="padding: 5px">
-								<v-menu
-									ref="menu_createtimestamp"
-										v-model="menu_createtimestamp"
-										:close-on-content-click="false"
-										transition="scale-transition"
-										offset-y
-										full-width
-										max-width="290px"
-										min-width="290px">
-									<template v-slot:activator="{ on }">
-										<v-text-field class="date-small" 
-											v-model="devices.createtimestamp"
-											hint="Ingrese createtimestamp"
-											placeholder="CREATETIMESTAMP"
-											persistent-hint
-											prepend-icon="event"
-											v-on="on">
-										</v-text-field>
-									</template>
-									<v-date-picker v-model="devices.createtimestamp" no-title @input="menu_createtimestamp = false"></v-date-picker>
-								</v-menu>
-							</v-flex>
-							<v-flex sm4 class="hidden-xs-only" style="padding: 5px">
-								<v-menu
-									ref="menu_updatetimestamp"
-										v-model="menu_updatetimestamp"
-										:close-on-content-click="false"
-										transition="scale-transition"
-										offset-y
-										full-width
-										max-width="290px"
-										min-width="290px">
-									<template v-slot:activator="{ on }">
-										<v-text-field class="date-small" 
-											v-model="devices.updatetimestamp"
-											hint="Ingrese updatetimestamp"
-											placeholder="UPDATETIMESTAMP"
-											persistent-hint
-											prepend-icon="event"
-											v-on="on">
-										</v-text-field>
-									</template>
-									<v-date-picker v-model="devices.updatetimestamp" no-title @input="menu_updatetimestamp = false"></v-date-picker>
-								</v-menu>
+							<v-flex sm6 style="padding: 5px">
+								<v-autocomplete class="input-small" 
+											v-model="devices.devicetypeidentification"
+											label="Tipo"
+											:items="lstdivtype"
+											item-text="identification"
+											item-value="identification"
+											outlined
+											dense
+											autocomplete="off"
+											:rules="validacion"
+											no-data-text="No se encontro ningun tema"
+											>
+								</v-autocomplete>
 							</v-flex>
 							<v-flex sm12 style="padding: 5px">
-								<v-text-field class="input-small" 
-											v-model="devices.createuser"
-											hint="Ingrese CREATEUSER"
-											placeholder="CREATEUSER"
-											clearable
-											persistent-hint
-											required
-											@input="devices.createuser = updateText(devices.createuser)">
-								</v-text-field>
-							</v-flex>
-							<v-flex sm12 style="padding: 5px">
-								<v-text-field class="input-small" 
-											v-model="devices.updateuser"
-											hint="Ingrese UPDATEUSER"
-											placeholder="UPDATEUSER"
-											clearable
-											persistent-hint
-											required
-											@input="devices.updateuser = updateText(devices.updateuser)">
-								</v-text-field>
-							</v-flex>
-							<v-flex sm12 style="padding: 5px">
-								<v-text-field class="input-small" 
-											v-model="devices.configuration"
-											hint="Ingrese CONFIGURATION"
-											placeholder="CONFIGURATION"
-											clearable
-											persistent-hint
-											required
-											@input="devices.configuration = updateText(devices.configuration)">
-								</v-text-field>
-							</v-flex>
-							<v-flex sm12 style="padding: 5px">
-								<v-text-field class="input-small" 
-											v-model="devices.identificationprovider"
-											hint="Ingrese IDENTIFICATIONPROVIDER"
-											placeholder="IDENTIFICATIONPROVIDER"
-											clearable
-											persistent-hint
-											required
-											@input="devices.identificationprovider = updateText(devices.identificationprovider)">
-								</v-text-field>
-							</v-flex>
-							<v-flex sm12 style="padding: 5px">
-								<v-text-field class="input-small" 
+								<v-autocomplete class="input-small" 
 											v-model="devices.locationidentification"
-											hint="Ingrese LOCATIONIDENTIFICATION"
-											placeholder="LOCATIONIDENTIFICATION"
-											clearable
-											persistent-hint
-											required
-											@input="devices.locationidentification = updateText(devices.locationidentification)">
-								</v-text-field>
+											label="Sucursal"
+											:items="lstlocations"
+											:item-text="getItem"
+											item-value="description"
+											autocomplete="off"
+											:rules="validacion"
+											no-data-text="No se encontro ningun tema"
+											outlined
+											
+											>
+								</v-autocomplete>
 							</v-flex>
+							<!--
 							<v-flex sm12 style="padding: 5px">
 								<v-text-field class="input-small" 
 											v-model="devices.coinacceptordenoms"
@@ -356,6 +283,7 @@
 											@input="devices.video_insert_cash = updateText(devices.video_insert_cash)">
 								</v-text-field>
 							</v-flex>
+
 							<v-flex sm12 style="padding: 5px">
 								<v-text-field class="input-small" 
 											v-model="devices.video_take_cash"
@@ -764,12 +692,13 @@
 											@input="devices.operatorcode = updateText(devices.operatorcode)">
 								</v-text-field>
 							</v-flex>
+							-->
 						</v-layout>
 					</v-card-text>
 				</v-form>
 				<v-divider></v-divider>
 				<v-card-actions style="justify-content: center;padding:10px">
-					<v-btn color="success" dark style="width: 50%" @click="Grabar()">Grabar</v-btn>
+					<v-btn color="success" dark style="width: 50%" :disabled="!activa" @click="Grabar()">Grabar</v-btn>
 					<v-btn color="error" dark style="width: 50%" @click="Cancelar()">Cancelar</v-btn>
 				</v-card-actions>
 			</v-card>

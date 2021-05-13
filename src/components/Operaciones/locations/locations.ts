@@ -65,6 +65,15 @@ export default class AdmlocationsComponent extends Vue {
 		(v: any) => !!v || 'El campo es requerido',
 		(v: any) => !(!/^[a-z A-Z]*$/.test(v)) || "No se permite vacio o espacios en blanco",
 	];
+	Rules = [
+		(v: any) => !!v || 'El campo es requerido',
+		(v: any) => !(!/^[a-z A-Z]*$/.test(v)) || "No se permiten numeros o caracteres especiales",
+	];
+	habilitado = [
+		
+		(v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
+
+	];
 	RulEmpEmai = [
 		(v:any) => !!v || "El campo es requiredo",
 		(v:any) => ( /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v)) || "Email no es valido"
