@@ -153,6 +153,11 @@ export class Endpoints {
 	public ws_deviceinstalationtransactionpr_Insertar: string = $store.state.server + 'Api/deviceinstalationtransactionpr/Insertar';
 	public ws_deviceinstalationtransactionpr_Actualizar: string = $store.state.server + 'Api/deviceinstalationtransactionpr/Actualizar';
 	public ws_deviceinstalationtransactionpr_Eliminar: string = $store.state.server + 'Api/deviceinstalationtransactionpr/Eliminar';
+	public ws_reports_Consultar: string = $store.state.server + 'Api/reports/Consultar';
+	public ws_reports_Buscar: string = $store.state.server + 'Api/reports/Buscar';
+	public ws_reports_Insertar: string = $store.state.server + 'Api/reports/Insertar';
+	public ws_reports_Actualizar: string = $store.state.server + 'Api/reports/Actualizar';
+	public ws_reports_Eliminar: string = $store.state.server + 'Api/reports/Eliminar';
 }
 
 
@@ -781,6 +786,15 @@ export class clase_transactions {
 	public providersequencenumber!: number;
 	public cardsdispensed!: number;
 }
+
+// tslint:disable-next-line: max-classes-per-file class-name
+export class clase_reports {
+	public id!: number;
+	public reportname!: string;
+	public description!: string;
+	public url!: string;
+}
+
 // tslint:disable-next-line: max-classes-per-file class-name
 export class Operaciones {
 	public Login(url: string, objeto: any) {
