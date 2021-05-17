@@ -146,6 +146,8 @@
 			<v-card>
 				<v-toolbar style="padding:10px" dark class="primary">
 					<v-toolbar-title class="font-medium-color" >Lotes</v-toolbar-title>
+						<v-spacer></v-spacer>
+					<v-btn color="error" fab dark small @click="Cancelar()">X</v-btn>
 				</v-toolbar>
 				<v-divider></v-divider>
 				<v-form ref="form" style="padding:10px">

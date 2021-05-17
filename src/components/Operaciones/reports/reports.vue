@@ -2,6 +2,7 @@
 	<v-card>
 		<v-toolbar color="primary" style="color:white">
 			<v-toolbar-title class="font-large-color">Datos de reports</v-toolbar-title>
+			
 			<v-divider></v-divider>
 			<v-text-field class="input-small"
 					v-model="buscarreports"
@@ -64,6 +65,9 @@
 			<v-card>
 				<v-toolbar style="padding:10px" dark class="primary">
 					<v-toolbar-title class="font-medium-color" >Formulario de reports</v-toolbar-title>
+
+					<v-spacer></v-spacer>
+					<v-btn color="error" fab dark small @click="Cancelar()">X</v-btn>
 				</v-toolbar>
 				<v-divider></v-divider>
 				<v-form ref="form" style="padding:10px">

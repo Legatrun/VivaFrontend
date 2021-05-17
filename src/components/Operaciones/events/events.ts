@@ -51,6 +51,7 @@ export default class AdmeventsComponent extends Vue {
 	}
 	private mounted() {
 		this.cargar_data();
+	
 	}
 	private cargar_data() {
 		if (this.$store.state.auth !== true) {​​​​

@@ -11,8 +11,8 @@ export default class AdmlocationstypeComponent extends Vue {
 	private headers: any[] = [
 		//{ text: 'ID', align: 'left', sortable: true, value: 'id', width: '15%' },
 		{ text: 'Identificacion', align: 'left', sortable: false, value: 'identification', width: '15%' },
-		{ text: 'Descripcion', align: 'left', sortable: false, value: 'description', width: '15%' },
-		{ text: 'Calendario', align: 'left', sortable: false, value: 'calendarid', width: '15%' },
+		{ text: 'Descripcion', align: 'left', sortable: false, value: 'description', width: '30%' },
+		{ text: 'Calendario', align: 'left', sortable: false, value: 'calendarid', width: '30%' },
 		/*
 		{ text: 'createtimestamp', align: 'left', sortable: false, value: 'createtimestamp', width: '15%' },
 		{ text: 'updatetimestamp', align: 'left', sortable: false, value: 'updatetimestamp', width: '15%' },
