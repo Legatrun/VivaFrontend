@@ -21,6 +21,7 @@ export default class AdmtransactionsComponent extends Vue {
 		{ text: 'Vuelto no Entregado', align: 'left', sortable: true, value: 'amountticketundelivered', width: '7%' },
 		{ text: 'Detalle Recibo', align: 'left', sortable: true, value: 'amountentereddetail', width: '7%' },
 		{ text: 'Detalle Vuelto', align: 'left', sortable: true, value: 'amountticketundelivereddetail', width: '7%' },
+		{ text: 'Opciones', align: 'left', sortable: true, value: 'opciones', width: '5%' },
 	];
 	// tslint:disable-next-line: variable-name
 	private menu_createtimestamp: boolean = false;
