@@ -80,11 +80,6 @@ export default class AdmtransactionsComponent extends Vue {
 	}
 	private Insertar(): void {
 		this.transactions = new services.clase_transactions();
-		this.transactions.createtimestamp = this.FormatDate(Date.now());
-		this.transactions.updatetimestamp = this.FormatDate(Date.now());
-		this.transactions.transporttimestamp = this.FormatDate(Date.now());
-		this.transactions.synctimestamp = this.FormatDate(Date.now());
-		this.transactions.canceledtimestamp = this.FormatDate(Date.now());
 		this.operacion = 'Insert';
 		this.dialog = true;
 	}
@@ -125,11 +120,6 @@ export default class AdmtransactionsComponent extends Vue {
 	}
 	private Actualizar(data: services.clase_transactions): void {
 		this.transactions = data;
-		this.transactions.createtimestamp = this.FormatDate(Date.now());
-		this.transactions.updatetimestamp = this.FormatDate(Date.now());
-		this.transactions.transporttimestamp = this.FormatDate(Date.now());
-		this.transactions.synctimestamp = this.FormatDate(Date.now());
-		this.transactions.canceledtimestamp = this.FormatDate(Date.now());
 		this.operacion = 'Update';
 		this.dialog = true;
 	}

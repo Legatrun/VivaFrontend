@@ -119,7 +119,7 @@
         </v-alert>
       </template>
     </v-data-table>
-    <v-dialog v-model="dialog" persistent max-width="75%">
+    <v-dialog v-model="dialog" persistent max-width="60%">
       <v-card>
         <v-toolbar style="padding:10px" dark class="primary">
           <v-toolbar-title class="font-medium-color"
@@ -164,7 +164,7 @@
               </v-flex>
 
               <v-flex sm4 class="hidden-xs-only" style="padding: 5px">
-                <v-menu
+                <!-- <v-menu
                   ref="menu_createtimestamp"
                   v-model="menu_createtimestamp"
                   :close-on-content-click="false"
@@ -173,8 +173,8 @@
                   full-width
                   max-width="290px"
                   min-width="290px"
-                >
-                  <template v-slot:activator="{ on }">
+                > -->
+                  <!-- <template v-slot:activator="{ on }">
                     <v-text-field
                       class="date-small"
                       v-model="transactions.createtimestamp"
@@ -190,7 +190,17 @@
                     no-title
                     @input="menu_createtimestamp = false"
                   ></v-date-picker>
-                </v-menu>
+                </v-menu> -->
+                 <v-text-field
+                      class="date-small"
+                      v-model="transactions.createtimestamp"
+                      label="Fecha"
+                      persistent-hint
+                      v-on="on"
+                      outlined
+                      dense
+                    >
+                    </v-text-field>
               </v-flex>
               <v-flex sm4 style="padding: 5px">
                 <v-text-field
@@ -459,6 +469,10 @@
                 </v-text-field>
               </v-flex>
               <v-flex sm4 style="padding: 5px">
+              </v-flex>
+              <v-flex sm4 style="padding: 5px">
+              </v-flex>
+              <v-flex sm4 style="padding: 5px">
                 <v-text-field
                   class="input-small"
                   v-model="transactions.batchnumber"
@@ -516,7 +530,7 @@
                 >
                 </v-text-field>
               </v-flex>
-              <v-flex sm12 style="padding: 5px">
+              <v-flex sm4 style="padding: 5px">
                 <v-text-field
                   class="input-small"
                   v-model="transactions.sequencenumber"
@@ -536,7 +550,7 @@
                 >
                 </v-text-field>
               </v-flex>
-              <v-flex sm12 style="padding: 5px">
+              <v-flex sm4 style="padding: 5px">
                 <v-text-field
                   class="input-small"
                   v-model="transactions.providertransactionid"
@@ -555,7 +569,7 @@
                 >
                 </v-text-field>
               </v-flex>
-              <v-flex sm12 style="padding: 5px">
+              <v-flex sm4 style="padding: 5px">
                 <v-text-field
                   class="input-small"
                   v-model="transactions.devicetransactionid"
