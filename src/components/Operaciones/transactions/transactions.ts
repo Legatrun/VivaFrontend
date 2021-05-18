@@ -21,6 +21,7 @@ export default class AdmtransactionsComponent extends Vue {
 		{ text: 'Vuelto no Entregado', align: 'left', sortable: true, value: 'amountticketundelivered', width: '7%' },
 		{ text: 'Detalle Recibo', align: 'left', sortable: true, value: 'amountentereddetail', width: '7%' },
 		{ text: 'Detalle Vuelto', align: 'left', sortable: true, value: 'amountticketundelivereddetail', width: '7%' },
+		{ text: 'Opciones', align: 'left', sortable: true, value: 'opciones', width: '5%' },
 	];
 	// tslint:disable-next-line: variable-name
 	private menu_createtimestamp: boolean = false;
@@ -79,11 +80,6 @@ export default class AdmtransactionsComponent extends Vue {
 	}
 	private Insertar(): void {
 		this.transactions = new services.clase_transactions();
-		this.transactions.createtimestamp = this.FormatDate(Date.now());
-		this.transactions.updatetimestamp = this.FormatDate(Date.now());
-		this.transactions.transporttimestamp = this.FormatDate(Date.now());
-		this.transactions.synctimestamp = this.FormatDate(Date.now());
-		this.transactions.canceledtimestamp = this.FormatDate(Date.now());
 		this.operacion = 'Insert';
 		this.dialog = true;
 	}
@@ -124,11 +120,6 @@ export default class AdmtransactionsComponent extends Vue {
 	}
 	private Actualizar(data: services.clase_transactions): void {
 		this.transactions = data;
-		this.transactions.createtimestamp = this.FormatDate(Date.now());
-		this.transactions.updatetimestamp = this.FormatDate(Date.now());
-		this.transactions.transporttimestamp = this.FormatDate(Date.now());
-		this.transactions.synctimestamp = this.FormatDate(Date.now());
-		this.transactions.canceledtimestamp = this.FormatDate(Date.now());
 		this.operacion = 'Update';
 		this.dialog = true;
 	}
