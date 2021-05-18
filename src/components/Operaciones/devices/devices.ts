@@ -104,13 +104,7 @@ export default class AdmdevicesComponent extends Vue {
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');
 	}
-	private FormatHabil(data: any){
-		if(data == 1){
-			return 'SI';
-		}else{
-			return 'NO';
-		}
-	}
+	
 	private FormatBoolean(data: any) {
 		if (data) {
 			return 'SI';

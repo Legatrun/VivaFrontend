@@ -35,6 +35,7 @@ export default class AdmdevicetypesComponent extends Vue {
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');
 	}
+
 	private FormatBoolean(data: any) {
 		if (data) {
 			return 'SI';

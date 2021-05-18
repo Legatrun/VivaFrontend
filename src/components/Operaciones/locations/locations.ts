@@ -10,7 +10,7 @@ import helpers from '@/helper';
 export default class AdmlocationsComponent extends Vue {
 	private headers: any[] = [
 		{ text: 'Identificacion', align: 'left', sortable: true, value: 'identification', width: '15%' },
-		{ text: 'Descripcion', align: 'left', sortable: false, value: 'description', width: '30%' },
+		{ text: 'Descripcion', align: 'left', sortable: false, value: 'description', width: '40%' },
 		//{ text: 'type', align: 'left', sortable: false, value: 'type', width: '15%' },
 		{ text: 'Habilitada', align: 'left', sortable: false, value: 'enabled', width: '15%' },
 		/*

@@ -1,8 +1,9 @@
 <template>
 	<v-card>
 		<v-toolbar color="primary" style="color:white">
-			<v-toolbar-title class="font-large-color">Datos de events</v-toolbar-title>
+			<v-toolbar-title class="font-large-color">Reportes</v-toolbar-title>
 			<v-divider></v-divider>
+			<!--
 			<v-text-field class="input-small"
 					v-model="buscarevents"
 					append-icon="search"
@@ -10,7 +11,55 @@
 					single-line
 					solo
 					hide-details></v-text-field>
+					-->
+					
 		</v-toolbar>
+			<template>
+				<v-form>
+					<v-container>
+						<v-row>
+							<v-flex sm4 style="padding: 5px">
+								<v-autocomplete
+								label="Reporte"
+								outlined
+								clearable
+								>
+								</v-autocomplete>
+							</v-flex>
+							
+						
+							<v-flex sm4 class="hidden-xs-only" style="padding: 5px">
+								<v-menu
+									ref="menu_notifytimestamp"
+										v-model="menu_notifytimestamp"
+										:close-on-content-click="false"
+										transition="scale-transition"
+										offset-y
+
+										full-width
+										max-width="290px"
+										min-width="290px"
+										>
+									<template v-slot:activator="{ on }">
+										<v-text-field class="date-small" 
+											v-model="events.notifytimestamp"
+											label="Fecha"
+											outlined
+											persistent-hint
+											prepend-icon="event"
+											v-on="on">
+										</v-text-field>
+									</template>
+									
+									<v-date-picker v-model="events.notifytimestamp" no-title @input="menu_notifytimestamp = false"></v-date-picker>
+								</v-menu>
+							</v-flex>
+							
+						</v-row>
+					</v-container>
+				</v-form>
+			</template>
+			<!---
 		<v-data-table 	style="padding: 5px"
 						:headers="headers" 
 						:items="lstevents" 
@@ -25,7 +74,7 @@
 						class="elevation-1">
 			<template slot="item" slot-scope="props">
 				<tr>
-					<!--<td class="datatable-items-small">{{ helper.showDataDescription(props.item.sequencenumber,lstevents, id, descripcion)  }}</td>// Ejemplo de Uso de Helper Para obtener la Descripcion de una Tabla por medio de su Id-->
+					<td class="datatable-items-small">{{ helper.showDataDescription(props.item.sequencenumber,lstevents, id, descripcion)  }}</td>// Ejemplo de Uso de Helper Para obtener la Descripcion de una Tabla por medio de su Id
 					<td class="datatable-items-small">{{ props.item.type }}</td>
 					<td class="datatable-items-small">{{ props.item.deviceidentification }}</td>
 					<td class="datatable-items-small">{{ props.item.locationidentification }}</td>
@@ -52,11 +101,15 @@
 					</td>
 				</tr>
 			</template>
+		
 			<template v-slot:top>
 				<v-tooltip bottom>
-					<template v-slot:activator="{ on }">
-						<v-btn class="btn-small-color" color="buttonadd" v-on="on" @click="Insertar()">REGISTRAR events</v-btn>
+					<template v-slot:activator="">
+				
+						<v-btn class="btn-small-color" color="buttonadd" v-on="on" @click="Insertar()">Rep</v-btn>
+						
 					</template>
+				
 					<span>Adicionar nuevo registro de events</span>
 				</v-tooltip>
 			</template>
@@ -291,6 +344,7 @@
 				</v-card-actions>
 			</v-card>
 		</v-dialog>
+		-->
 	</v-card>
 </template>
 
