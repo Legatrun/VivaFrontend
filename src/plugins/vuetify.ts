@@ -26,8 +26,8 @@ export default new Vuetify({
         footer:'#508146',
         // Buttons
         buttonadd: '#81b214',
-        buttonedit: '#ffcc29',
-        buttondelete: '#f58634',
+        btnedit: '#ffcc29',
+        btndelete: '#f58634',
         // Switch
         switch: '#de8971',
       },

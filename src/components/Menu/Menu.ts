@@ -22,7 +22,7 @@ export default class MenuComponent extends Vue {
         new MenuItem('Sucursales', 'mdi-bank', '/locations'), 
         new MenuItem('Tipos de Sucursales', 'mdi-bank-transfer', '/locationstype'), 
         new MenuItem('Estados', 'mdi-chart-bar-stacked', '/devices'), 
-        new MenuItem('Reportes', 'mdi-chart-arc', '/events'), 
+        new MenuItem('Reportes', 'mdi-chart-arc', '/reports'), 
         new MenuItem('Calendarios', 'mdi-calendar', '/calendar'), 
         new MenuItem('Usuarios', 'mdi-human-capacity-increase', '/tb_usuarios'), 
     ];

@@ -152,8 +152,8 @@ export default class AdmlocationstypeComponent extends Vue {
 	}
 	private Eliminar(data: services.clase_locationstype): void {
 		swal.fire({
-			title: 'Esta seguro de esta operacion?',
-			text: 'Eliminacion de Registro' + data.id,
+			title: '¿Está seguro de esta operación?',
+			text: 'Eliminación de Registro: ' + data.identification,
 			type: 'warning',
 			showCancelButton: true,
 			confirmButtonColor: 'green',

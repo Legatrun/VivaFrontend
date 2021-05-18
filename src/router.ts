@@ -33,6 +33,7 @@ import tb_sesiones from './components/Operaciones/tb_sesiones/tb_sesiones.vue';
 import tb_usuarios from './components/Operaciones/tb_usuarios/tb_usuarios.vue';
 import transactiondefinition from './components/Operaciones/transactiondefinition/transactiondefinition.vue';
 import transactions from './components/Operaciones/transactions/transactions.vue';
+import reports from './components/Operaciones/reports/reports.vue';
 
 Vue.use(Router);
 
@@ -71,6 +72,7 @@ export default new Router({
 		{ path: '/tb_usuarios', name: 'tb_usuarios', component: tb_usuarios },
 		{ path: '/transactiondefinition', name: 'transactiondefinition', component: transactiondefinition },
 		{ path: '/transactions', name: 'transactions', component: transactions },
+		{ path: '/reports', name: 'reports', component: reports },
 	],
 });
 
