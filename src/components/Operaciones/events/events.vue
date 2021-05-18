@@ -26,8 +26,6 @@
 								>
 								</v-autocomplete>
 							</v-flex>
-							
-						
 							<v-flex sm4 class="hidden-xs-only" style="padding: 5px">
 								<v-menu
 									ref="menu_notifytimestamp"
