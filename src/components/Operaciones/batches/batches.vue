@@ -29,6 +29,7 @@
 					<!--<td class="datatable-items-small">{{ helper.showDataDescription(props.item.id,lstbatches, id, descripcion)  }}</td>// Ejemplo de Uso de Helper Para obtener la Descripcion de una Tabla por medio de su Id-->
 					<!--<td class="datatable-items-small">{{ props.item.id }}</td>
 					<td class="datatable-items-small">{{ FormatDate(props.item.createtimestamp) }}</td>
+<<<<<<< HEAD
 					<td class="datatable-items-small">{{ FormatDate(props.item.updatetimestamp) }}</td>
                      -->
                     <td class="datatable-items-small">{{ props.item.locationidentification }}</td>
@@ -40,6 +41,17 @@
 					<td class="datatable-items-small">{{ props.item.number_ }}</td>
 					<td class="datatable-items-small">{{ props.item.status }}</td>-->
 					<td class="datatable-items-small">{{ FormatDate(props.item.opentimestamp) }}</td>
+=======
+					<!-- <td class="datatable-items-small">{{ FormatDate(props.item.updatetimestamp) }}</td> -->
+					<td class="datatable-items-small">{{ props.item.deviceidentification }}</td>
+					<td class="datatable-items-small">{{ props.item.locationidentification }}</td>
+					<!-- <td class="datatable-items-small">{{ props.item.payloadrequest }}</td> -->
+					<td class="datatable-items-small">{{ props.item.provideridentification }}</td>
+					<td class="datatable-items-small">{{ props.item.devicestatus }}</td>
+					<td class="datatable-items-small">{{ props.item.number_ }}</td>
+					<td class="datatable-items-small">{{ props.item.status }}</td>
+					<!-- <td class="datatable-items-small">{{ FormatDate(props.item.opentimestamp) }}</td>
+>>>>>>> 363e942657e3156a78d0ce0174fad9b5aa157b6b
 					<td class="datatable-items-small">{{ FormatDate(props.item.closetimestamp) }}</td>
 					<!---<td class="datatable-items-small">{{ props.item.syncstatus }}</td>
 					<td class="datatable-items-small">{{ FormatDate(props.item.synctimestamp) }}</td>
@@ -122,23 +134,28 @@
 					<td class="datatable-items-small">{{ props.item.return_200000 }}</td>
 					<td class="datatable-items-small">{{ props.item.aceptordetail }}</td>
 					<td class="datatable-items-small">{{ props.item.changerdetail }}</td>
+<<<<<<< HEAD
 					<td class="datatable-items-small">{{ props.item.returndetail }}</td>-->
+=======
+					<td class="datatable-items-small">{{ props.item.returndetail }}</td> -->
+>>>>>>> 363e942657e3156a78d0ce0174fad9b5aa157b6b
 					<td>
 						<v-tooltip bottom>
 							<template v-slot:activator="{ on }">
-								<v-btn color="btnedit" v-on="on" fab small dark  @click="Actualizar(props.item)"><v-icon>edit</v-icon></v-btn>
+								<v-btn color="btnedit" v-on="on" small dark  @click="Actualizar(props.item)"><v-icon>mdi-comment-eye</v-icon>Revisar</v-btn>
 							</template>
-							<span>Modificar datos de batches</span>
+							<span>Ver datos del lote</span>
 						</v-tooltip>
-						<v-tooltip style="padding-left:10px" bottom>
+						<!-- <v-tooltip style="padding-left:10px" bottom>
 							<template v-slot:activator="{ on }" >
 								<v-btn color="btndelete" v-on="on" fab small dark  @click="Eliminar(props.item)"><v-icon>delete</v-icon></v-btn>
 							</template>
 							<span>Eliminar batches </span>
-						</v-tooltip>
+						</v-tooltip> -->
 					</td>
 				</tr>
 			</template>
+<<<<<<< HEAD
 			
 			<template v-slot:top >
 				<v-card>
@@ -238,6 +255,8 @@
 			</template>
 			
 			
+=======
+>>>>>>> 363e942657e3156a78d0ce0174fad9b5aa157b6b
 			<template v-slot:no-data>
 				<v-alert :value="true" color="warning" icon="warning">
 					Lo sentimos, no exiten datos a desplegar: (
@@ -247,11 +266,10 @@
 		<v-dialog v-model="dialog" persistent max-width="50%">
 			<v-card>
 				<v-toolbar style="padding:10px" dark class="primary">
-					<v-toolbar-title class="font-medium-color" >Formulario de batches</v-toolbar-title>
+					<v-toolbar-title class="font-medium-color" >Lotes</v-toolbar-title>
 						<v-spacer></v-spacer>
 					<v-btn color="error" fab dark small @click="Cancelar()">X</v-btn>
 				</v-toolbar>
-
 				<v-divider></v-divider>
 				<v-form ref="form" style="padding:10px">
 					<v-card-text>
@@ -1409,6 +1427,6 @@
 			font-size: 1.5em; /* tamaño de letra */ 
 } 
 .datatable-items-small{ 
-			font-size: 1.3em; /* tamaño de letra */ 
+			font-size: 1em; /* tamaño de letra */ 
 } 
 </style> 

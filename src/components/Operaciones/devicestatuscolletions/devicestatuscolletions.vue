@@ -1,7 +1,7 @@
 <template>
 	<v-card>
 		<v-toolbar color="primary" style="color:white">
-			<v-toolbar-title class="font-large-color">Datos de devicestatuscolletions</v-toolbar-title>
+			<v-toolbar-title class="font-large-color">Estados</v-toolbar-title>
 			<v-divider></v-divider>
 			<v-text-field class="input-small"
 					v-model="buscardevicestatuscolletions"
@@ -26,24 +26,25 @@
 			<template slot="item" slot-scope="props">
 				<tr>
 					<!--<td class="datatable-items-small">{{ helper.showDataDescription(props.item.id,lstdevicestatuscolletions, id, descripcion)  }}</td>// Ejemplo de Uso de Helper Para obtener la Descripcion de una Tabla por medio de su Id-->
-					<td class="datatable-items-small">{{ props.item.id }}</td>
-					<td class="datatable-items-small">{{ FormatDate(props.item.createtimestamp) }}</td>
-					<td class="datatable-items-small">{{ FormatDate(props.item.updatetimestamp) }}</td>
-					<td class="datatable-items-small">{{ props.item.deviceidentification }}</td>
+					<!-- <td class="datatable-items-small">{{ props.item.id }}</td> -->
+					<!-- <td class="datatable-items-small">{{ FormatDate(props.item.updatetimestamp) }}</td>  -->
 					<td class="datatable-items-small">{{ props.item.locationidentification }}</td>
-					<td class="datatable-items-small">{{ props.item.servicename }}</td>
+					<td class="datatable-items-small">{{ props.item.deviceidentification }}</td>
+					<td class="datatable-items-small">{{ props.item.alarm }}</td>
+					<td class="datatable-items-small">{{ props.item.devicestatus }}</td>
+					<td class="datatable-items-small">{{ props.item.devicestatusdetail }}</td>
+					<td class="datatable-items-small">{{ props.item.operatingmode }}</td>
+					<td class="datatable-items-small">{{ props.item.status }}</td>
+					<!-- <td class="datatable-items-small">{{ FormatDate(props.item.createtimestamp) }}</td>
 					<td class="datatable-items-small">{{ props.item.operationname }}</td>
 					<td class="datatable-items-small">{{ props.item.sequencenumber }}</td>
 					<td class="datatable-items-small">{{ FormatDate(props.item.transporttimestamp) }}</td>
 					<td class="datatable-items-small">{{ props.item.provideridentification }}</td>
 					<td class="datatable-items-small">{{ props.item.providertransactionid }}</td>
 					<td class="datatable-items-small">{{ props.item.devicetransactionid }}</td>
-					<td class="datatable-items-small">{{ props.item.status }}</td>
+					<td class="datatable-items-small">{{ props.item.servicename }}</td> 
 					<td class="datatable-items-small">{{ props.item.batchnumber }}</td>
 					<td class="datatable-items-small">{{ props.item.transactionid }}</td>
-					<td class="datatable-items-small">{{ props.item.alarm }}</td>
-					<td class="datatable-items-small">{{ props.item.devicestatus }}</td>
-					<td class="datatable-items-small">{{ props.item.operatingmode }}</td>
 					<td class="datatable-items-small">{{ props.item.alarmid }}</td>
 					<td class="datatable-items-small">{{ props.item.aceptordetail }}</td>
 					<td class="datatable-items-small">{{ props.item.changerdetail }}</td>
@@ -72,7 +73,6 @@
 					<td class="datatable-items-small">{{ props.item.cashchangerstatus }}</td>
 					<td class="datatable-items-small">{{ props.item.coinacceptorstatus }}</td>
 					<td class="datatable-items-small">{{ props.item.coinchangerstatus }}</td>
-					<td class="datatable-items-small">{{ props.item.devicestatusdetail }}</td>
 					<td class="datatable-items-small">{{ props.item.totalcardsdelivered }}</td>
 					<td class="datatable-items-small">{{ props.item.totalcardrefilloperations }}</td>
 					<td class="datatable-items-small">{{ props.item.totalcardrefillamount }}</td>
@@ -80,7 +80,7 @@
 					<td class="datatable-items-small">{{ props.item.totalcardcollectamount }}</td>
 					<td class="datatable-items-small">{{ props.item.carddispenserstatus }}</td>
 					<td class="datatable-items-small">{{ props.item.cardreaderstatus }}</td>
-					<td class="datatable-items-small">{{ props.item.carddispensercount }}</td>
+					<td class="datatable-items-small">{{ props.item.carddispensercount }}</td>-->
 					<td>
 						<v-tooltip bottom>
 							<template v-slot:activator="{ on }">
@@ -98,12 +98,57 @@
 				</tr>
 			</template>
 			<template v-slot:top>
-				<v-tooltip bottom>
-					<template v-slot:activator="{ on }">
-						<v-btn class="btn-small-color" color="buttonadd" v-on="on" @click="Insertar()">REGISTRAR devicestatuscolletions</v-btn>
-					</template>
-					<span>Adicionar nuevo registro de devicestatuscolletions</span>
-				</v-tooltip>
+				<v-card>
+					<v-form ref="form" style="padding:30px 50px 20px 50px">
+						<v-toolbar style="padding:0px" dark class="green">
+							<v-toolbar-title class="font-small-color" >Filtros</v-toolbar-title>
+						</v-toolbar>
+						<v-card-text>
+						<v-layout wrap>
+							<v-flex sm3 style="padding: 5px">
+								<v-autocomplete class="input-small" 
+											v-model="devicestatuscolletions.id"
+											label="Sucursal"
+											clearable
+											persistent-hint
+											required>
+								</v-autocomplete>
+							</v-flex>
+							<v-flex sm3 style="padding: 5px">
+								<v-autocomplete class="input-small" 
+											v-model="devicestatuscolletions.id"
+											label="Terminal"
+											clearable
+											persistent-hint
+											required>
+								</v-autocomplete>
+							</v-flex>
+							<v-flex sm3 style="padding: 5px">
+								<v-autocomplete class="input-small" 
+											v-model="devicestatuscolletions.id"
+											label="Estado"
+											clearable
+											persistent-hint
+											required>
+								</v-autocomplete>
+							</v-flex>
+							<v-spacer></v-spacer>
+							<v-flex sm1.5 style="padding: 5px">
+								<v-btn small color="green" dark>
+									<v-icon>mdi-selection-search</v-icon> 
+									 Buscar
+							    </v-btn>
+							</v-flex>
+							<v-flex sm1.5 style="padding: 5px">
+								<v-btn small color="grey" dark>
+									<v-icon>mdi-monitor-clean</v-icon> 
+									 Limpiar
+							    </v-btn>
+							</v-flex>
+						</v-layout>
+						</v-card-text>
+					</v-form>
+				</v-card>
 			</template>
 			<template v-slot:no-data>
 				<v-alert :value="true" color="warning" icon="warning">
@@ -114,7 +159,7 @@
 		<v-dialog v-model="dialog" persistent max-width="50%">
 			<v-card>
 				<v-toolbar style="padding:10px" dark class="primary">
-					<v-toolbar-title class="font-medium-color" >Formulario de devicestatuscolletions</v-toolbar-title>
+					<v-toolbar-title class="font-medium-color" >Estados</v-toolbar-title>
 				</v-toolbar>
 				<v-divider></v-divider>
 				<v-form ref="form" style="padding:10px">
