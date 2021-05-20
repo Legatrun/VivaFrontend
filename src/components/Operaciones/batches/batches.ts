@@ -9,18 +9,23 @@ import helpers from '@/helper';
 @Component
 export default class AdmbatchesComponent extends Vue {
 	private headers: any[] = [
+		/*
 		{ text: 'ID', align: 'left', sortable: true, value: 'id', width: '15%' },
 		{ text: 'createtimestamp', align: 'left', sortable: false, value: 'createtimestamp', width: '15%' },
 		{ text: 'updatetimestamp', align: 'left', sortable: false, value: 'updatetimestamp', width: '15%' },
-		{ text: 'deviceidentification', align: 'left', sortable: false, value: 'deviceidentification', width: '15%' },
-		{ text: 'locationidentification', align: 'left', sortable: false, value: 'locationidentification', width: '15%' },
+*/
+        { text: 'Sucursal', align: 'left', sortable: false, value: 'locationidentification', width: '15%' },
+		{ text: 'Terminal', align: 'left', sortable: false, value: 'deviceidentification', width: '15%' },
+		/*
 		{ text: 'payloadrequest', align: 'left', sortable: false, value: 'payloadrequest', width: '15%' },
 		{ text: 'provideridentification', align: 'left', sortable: false, value: 'provideridentification', width: '15%' },
 		{ text: 'devicestatus', align: 'left', sortable: false, value: 'devicestatus', width: '15%' },
 		{ text: 'number_', align: 'left', sortable: false, value: 'number_', width: '15%' },
-		{ text: 'status', align: 'left', sortable: false, value: 'status', width: '15%' },
-		{ text: 'opentimestamp', align: 'left', sortable: false, value: 'opentimestamp', width: '15%' },
-		{ text: 'closetimestamp', align: 'left', sortable: false, value: 'closetimestamp', width: '15%' },
+        */
+		{ text: 'Estado', align: 'left', sortable: false, value: 'status', width: '15%' },
+		{ text: 'Fecha Apertura', align: 'left', sortable: false, value: 'opentimestamp', width: '15%' },
+		{ text: 'Fecha Cierre', align: 'left', sortable: false, value: 'closetimestamp', width: '15%' },
+		/*
 		{ text: 'syncstatus', align: 'left', sortable: false, value: 'syncstatus', width: '15%' },
 		{ text: 'synctimestamp', align: 'left', sortable: false, value: 'synctimestamp', width: '15%' },
 		{ text: 'operativeday', align: 'left', sortable: false, value: 'operativeday', width: '15%' },
@@ -103,7 +108,8 @@ export default class AdmbatchesComponent extends Vue {
 		{ text: 'aceptordetail', align: 'left', sortable: false, value: 'aceptordetail', width: '15%' },
 		{ text: 'changerdetail', align: 'left', sortable: false, value: 'changerdetail', width: '15%' },
 		{ text: 'returndetail', align: 'left', sortable: false, value: 'returndetail', width: '15%' },
-		{ text: 'Operaciones', align: 'center', sortable: false, value: 'action', width: '20%' },
+		*/
+		//{ text: 'Operaciones', align: 'center', sortable: false, value: 'action', width: '20%' },
 	];
 	// tslint:disable-next-line: variable-name
 	private menu_createtimestamp: boolean = false;

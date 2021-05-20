@@ -1,7 +1,7 @@
 <template>
 	<v-card>
 		<v-toolbar color="primary" style="color:white">
-			<v-toolbar-title class="font-large-color">Datos de batches</v-toolbar-title>
+			<v-toolbar-title class="font-large-color">Lotes</v-toolbar-title>
 			<v-divider></v-divider>
 			<v-text-field class="input-small"
 					v-model="buscarbatches"
@@ -11,6 +11,7 @@
 					solo
 					hide-details></v-text-field>
 		</v-toolbar>
+		
 		<v-data-table 	style="padding: 5px"
 						:headers="headers" 
 						:items="lstbatches" 
@@ -26,19 +27,21 @@
 			<template slot="item" slot-scope="props">
 				<tr>
 					<!--<td class="datatable-items-small">{{ helper.showDataDescription(props.item.id,lstbatches, id, descripcion)  }}</td>// Ejemplo de Uso de Helper Para obtener la Descripcion de una Tabla por medio de su Id-->
-					<td class="datatable-items-small">{{ props.item.id }}</td>
+					<!--<td class="datatable-items-small">{{ props.item.id }}</td>
 					<td class="datatable-items-small">{{ FormatDate(props.item.createtimestamp) }}</td>
 					<td class="datatable-items-small">{{ FormatDate(props.item.updatetimestamp) }}</td>
+                     -->
+                    <td class="datatable-items-small">{{ props.item.locationidentification }}</td>
 					<td class="datatable-items-small">{{ props.item.deviceidentification }}</td>
-					<td class="datatable-items-small">{{ props.item.locationidentification }}</td>
-					<td class="datatable-items-small">{{ props.item.payloadrequest }}</td>
+					
+					<!--<td class="datatable-items-small">{{ props.item.payloadrequest }}</td>
 					<td class="datatable-items-small">{{ props.item.provideridentification }}</td>
 					<td class="datatable-items-small">{{ props.item.devicestatus }}</td>
 					<td class="datatable-items-small">{{ props.item.number_ }}</td>
-					<td class="datatable-items-small">{{ props.item.status }}</td>
+					<td class="datatable-items-small">{{ props.item.status }}</td>-->
 					<td class="datatable-items-small">{{ FormatDate(props.item.opentimestamp) }}</td>
 					<td class="datatable-items-small">{{ FormatDate(props.item.closetimestamp) }}</td>
-					<td class="datatable-items-small">{{ props.item.syncstatus }}</td>
+					<!---<td class="datatable-items-small">{{ props.item.syncstatus }}</td>
 					<td class="datatable-items-small">{{ FormatDate(props.item.synctimestamp) }}</td>
 					<td class="datatable-items-small">{{ props.item.operativeday }}</td>
 					<td class="datatable-items-small">{{ props.item.totaltx }}</td>
@@ -119,7 +122,7 @@
 					<td class="datatable-items-small">{{ props.item.return_200000 }}</td>
 					<td class="datatable-items-small">{{ props.item.aceptordetail }}</td>
 					<td class="datatable-items-small">{{ props.item.changerdetail }}</td>
-					<td class="datatable-items-small">{{ props.item.returndetail }}</td>
+					<td class="datatable-items-small">{{ props.item.returndetail }}</td>-->
 					<td>
 						<v-tooltip bottom>
 							<template v-slot:activator="{ on }">
@@ -136,14 +139,105 @@
 					</td>
 				</tr>
 			</template>
-			<template v-slot:top>
-				<v-tooltip bottom>
-					<template v-slot:activator="{ on }">
-						<v-btn class="btn-small-color" color="buttonadd" v-on="on" @click="Insertar()">REGISTRAR batches</v-btn>
-					</template>
-					<span>Adicionar nuevo registro de batches</span>
-				</v-tooltip>
+			
+			<template v-slot:top >
+				<v-card>
+					<v-form>
+						<v-container>
+							<v-row>
+								<v-flex sm4 style="padding:5px" class="input-small">
+									<v-autocomplete
+									label="Sucursal"
+									clearable
+									outlined
+									parsisten-hint
+									required
+									>
+
+									</v-autocomplete>
+								</v-flex>
+								<v-flex sm4 style="padding:5px" class="input-small">
+									<v-autocomplete
+									label="Terminal"
+									clearable
+									outlined
+									parsisten-hint
+									required
+									>
+									</v-autocomplete>
+								</v-flex>
+								</v-row>
+								<v-row>
+								<v-flex sm3 class="hidden-xs-only" style="padding: 5px">
+								<v-menu
+									ref="menu_createtimestamp"
+										v-model="menu_createtimestamp"
+										:close-on-content-click="false"
+										transition="scale-transition"
+										offset-y
+										full-width
+										max-width="290px"
+										min-width="290px">
+									<template v-slot:activator="{ on }">
+										<v-text-field class="date-small" 
+											v-model="batches.createtimestamp"
+											label="Fecha Desde"
+											outlined
+											persistent-hint
+											prepend-icon="event"
+											v-on="on">
+										</v-text-field>
+									</template>
+									<v-date-picker v-model="batches.createtimestamp" no-title @input="menu_createtimestamp = false"></v-date-picker>
+								</v-menu>
+							</v-flex>
+							<v-flex sm3 class="hidden-xs-only" style="padding: 5px">
+								<v-menu
+									ref="menu_updatetimestamp"
+										v-model="menu_updatetimestamp"
+										:close-on-content-click="false"
+										transition="scale-transition"
+										offset-y
+										full-width
+										max-width="290px"
+										min-width="290px">
+									<template v-slot:activator="{ on }">
+										<v-text-field class="date-small" 
+											v-model="batches.updatetimestamp"
+											label="Fecha Hasta"
+											outlined
+											persistent-hint
+											prepend-icon="event"
+											v-on="on">
+										</v-text-field>
+									</template>
+									<v-date-picker v-model="batches.updatetimestamp" no-title @input="menu_updatetimestamp = false"></v-date-picker>
+								</v-menu>
+							</v-flex>
+							<v-spacer></v-spacer>
+						
+						<v-card-actions>
+							<v-flex sm1.5 style="padding: 5px" text-xs-left>
+								<v-btn small color="#808B96" dark>
+									<v-icon>mdi-monitor-clean</v-icon> 
+									 Limpiar
+							    </v-btn>
+								&nbsp;
+								<v-btn small color="cyan" dark>
+									<v-icon>mdi-selection-search</v-icon> 
+									 Buscar
+							    </v-btn>
+							</v-flex>
+						</v-card-actions>
+						
+							
+							</v-row>
+						</v-container>
+					</v-form>
+				</v-card>
 			</template>
+			
+			
 			<template v-slot:no-data>
 				<v-alert :value="true" color="warning" icon="warning">
 					Lo sentimos, no exiten datos a desplegar: (
