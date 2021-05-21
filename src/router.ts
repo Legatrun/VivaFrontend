@@ -34,6 +34,9 @@ import tb_usuarios from './components/Operaciones/tb_usuarios/tb_usuarios.vue';
 import transactiondefinition from './components/Operaciones/transactiondefinition/transactiondefinition.vue';
 import transactions from './components/Operaciones/transactions/transactions.vue';
 import reports from './components/Operaciones/reports/reports.vue';
+// ModSeguridad
+import Usuarios from './components/mod_Seguridad/Usuarios/Usuarios.vue';
+import Instituciones from './components/mod_Seguridad/Instituciones/Instituciones.vue'
 
 Vue.use(Router);
 
@@ -73,6 +76,8 @@ export default new Router({
 		{ path: '/transactiondefinition', name: 'transactiondefinition', component: transactiondefinition },
 		{ path: '/transactions', name: 'transactions', component: transactions },
 		{ path: '/reports', name: 'reports', component: reports },
+		{ path: '/Usuarios', name: 'Usuarios', component: Usuarios },
+		{ path: '/Instituciones', name: 'Instituciones', component: Instituciones },
 	],
 });
 

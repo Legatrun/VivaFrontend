@@ -795,6 +795,128 @@ export class clase_reports {
 	public url!: string;
 }
 
+// MODULO SEGURIDAD
+
+// tslint:disable-next-line: max-classes-per-file class-name
+export class clase_instituciones {
+	public idinstitucion!: number;
+	public descripcion!: string;
+	public estado!: number;
+  }
+
+  // tslint:disable-next-line: max-classes-per-file class-name
+export class clase_usuarios {
+	public idusuario!: number;
+	public nombre!: string;
+	public email!: string;
+	public fechacreacion!: any;
+	public usrdominio!: boolean;
+	public idinstitucion!: number;
+	public idautenticacion!: number;
+	public id_agencia!: number;
+	public estado!: boolean;
+  }
+
+  
+// tslint:disable-next-line: max-classes-per-file class-name
+export class clase_grpusuario {
+	public idgrpusuario!: number;
+	public idgrupo!: number;
+	public idusuario!: number;
+	public estado!: number;
+	public id_agencia!: number;
+  
+  }
+  
+  // tslint:disable-next-line: max-classes-per-file class-name
+  export class clase_institucionesroles {
+	public idinstitucionrol!: number;
+	public idinstitucion!: number;
+	public idrol!: number;
+	public estado!: number;
+  }
+  
+  // tslint:disable-next-line: max-classes-per-file class-name
+  export class clase_grpusrrolesinstituciones {
+	public idgrpusuariorolinstitucion!: number;
+	public idgrpusuario!: number;
+	public idinstitucionrol!: number;
+	public estado!: boolean;
+	public id_agencia!: number;
+  }
+
+  
+// tslint:disable-next-line: max-classes-per-file class-name
+export class clase_operaciones {
+	public idoperacion!: number;
+	public descripcion!: string;
+	public id_agencia!: number;
+	public estado!: number;
+  }
+  
+  // tslint:disable-next-line: max-classes-per-file class-name
+  export class clase_grupo {
+	public idgrupo!: number;
+	public descripcion!: string;
+	public estado!: number;
+	public id_agencia!: number;
+  }
+  
+  // tslint:disable-next-line: max-classes-per-file class-name
+  export class clase_roles {
+	public idrol!: number;
+	public descripcion!: string;
+	public estado!: number;
+	public id_agencia!: number;
+  }
+  
+  // tslint:disable-next-line: max-classes-per-file class-name
+  export class clase_aplicaciones {
+	public idaplicacion!: number;
+	public nombre!: string;
+	public descripcion!: string;
+	public estado!: number;
+	public id_agencia!: number;
+  }
+  
+  // tslint:disable-next-line: max-classes-per-file class-name
+  export class clase_modulos {
+	public idmodulo!: number;
+	public descripcion!: string;
+	public operaciones!: clase_operaciones;
+	public id_agencia!: number;
+	public estado!: boolean;
+  }
+  
+  // tslint:disable-next-line: max-classes-per-file class-name
+  export class clase_rolesaplicaciones {
+	public idrolesaplicaciones!: number;
+	public idrol!: number;
+	public idaplicacion!: number;
+	public id_agencia!: number;
+	public estado!: boolean;
+  }
+  
+  // tslint:disable-next-line: max-classes-per-file class-name
+  export class clase_aplicacionesoperaciones {
+	public idaplicacionesoperaciones!: number;
+	public idaplicaciones!: number;
+	public idoperaciones!: number;
+	public estado!: number;
+  }
+  
+  // tslint:disable-next-line: max-classes-per-file class-name
+  export class clase_aplicacionesopmodulos {
+	public idaplicacionesopmodulos!: number;
+	public idrolesaplicaciones!: number;
+	public idoperacion!: number;
+	public idmodulo!: number;
+	public activo!: boolean;
+	public estado!: boolean;
+	public id_agencia!: number;
+  
+  }
+
 // tslint:disable-next-line: max-classes-per-file class-name
 export class Operaciones {
 	public Login(url: string, objeto: any) {
