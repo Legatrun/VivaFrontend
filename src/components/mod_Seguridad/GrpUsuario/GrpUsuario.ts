@@ -5,7 +5,7 @@ import swal from 'sweetalert2';
 import moment from 'moment';
 import grupo from '../Grupo/Grupo';
 import user from '../Usuarios/Usuarios';
-import helpers from '@/components/Helpers/helper';
+import helpers from '@/helper';
 import * as popup from '@/popup';
 
 

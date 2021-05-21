@@ -24,7 +24,7 @@ export default class MenuComponent extends Vue {
         new MenuItem('Estados', 'mdi-chart-bar-stacked', '/devicestatuscolletions'), 
         new MenuItem('Reportes', 'mdi-chart-arc', '/reports'), 
         new MenuItem('Calendarios', 'mdi-calendar', '/calendar'), 
-        new MenuItem('Usuarios', 'mdi-human-capacity-increase', '/tb_usuarios'), 
+        new MenuItem('Usuarios', 'mdi-human-capacity-increase', '/usuarios'), 
     ];
 
     public menuParametros: MenuItem[] = [

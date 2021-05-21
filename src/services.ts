@@ -162,7 +162,7 @@ export class Endpoints {
 
 
 // tslint:disable-next-line: max-classes-per-file class-name
-export class ClaseAutenticacion {
+export class clase_autenticacion {
     public usuario!: string;
     public password!: string;
     public dominio?: string;

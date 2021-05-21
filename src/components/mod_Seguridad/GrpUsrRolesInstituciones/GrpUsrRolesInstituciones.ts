@@ -3,7 +3,7 @@ import { Component, Watch } from 'vue-property-decorator';
 import * as services from '@/services';
 import swal from 'sweetalert2';
 import moment from 'moment';
-import helpers from '@/components/Helpers/helper';
+import helpers from '@/helper';
 import * as popup from '@/popup';
 
 @Component
