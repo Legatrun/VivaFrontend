@@ -24,7 +24,7 @@ export default class MenuComponent extends Vue {
         new MenuItem('Estados', 'mdi-chart-bar-stacked', '/devicestatuscolletions'), 
         new MenuItem('Reportes', 'mdi-chart-arc', '/reports'), 
         new MenuItem('Calendarios', 'mdi-calendar', '/calendar'), 
-        new MenuItem('Usuarios', 'mdi-human-capacity-increase', '/usuarios'), 
+         
     ];
 
     public menuParametros: MenuItem[] = [
@@ -61,6 +61,15 @@ export default class MenuComponent extends Vue {
         new MenuItem('tb_usuarios', 'exit_to_app', '/tb_usuarios'), 
         new MenuItem('transactiondefinition', 'exit_to_app', '/transactiondefinition'), 
         new MenuItem('transactions', 'exit_to_app', '/transactions'), 
+    ];
+
+    public menuUsuarios: MenuItem[] = [
+        new MenuItem('Usuarios', 'mdi-human-capacity-increase', '/usuarios'),
+    ];
+    public menuListaUsuarios: MenuItem[] = [
+        new MenuItem('Instituciones', 'mdi-shield', '/instituciones'), 
+        new MenuItem('Usuarios', 'mdi-shield', '/usuarios'), 
+        
     ];
 
     public menuSalir: MenuItem[] = [
