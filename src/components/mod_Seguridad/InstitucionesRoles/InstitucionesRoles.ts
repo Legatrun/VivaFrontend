@@ -7,7 +7,7 @@ import roles from "../Roles/Roles";
 import aplicaciones from "../Aplicaciones/Aplicaciones";
 import Modulos from "../Modulos/Modulos";
 import { HexToHSVA } from "vuetify/src/util/colorUtils";
-import helpers from "@/components/Helpers/helper";
+import helpers from "@/helper";
 import * as popup from "@/popup";
 
 @Component({

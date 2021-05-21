@@ -163,10 +163,14 @@ export class Endpoints {
 
 // tslint:disable-next-line: max-classes-per-file class-name
 export class clase_autenticacion {
-    public usuario!: string;
-    public password!: string;
-    public dominio?: string;
-}
+	public idautenticacion!: number;
+	public usuario!: string;
+	public password!: string;
+	public sesioniniciada!: any;
+	public fechaultimasesioniniciada!: any;
+	public fechaultimasesioncerrada!: any;
+	public estado!: boolean;
+  }
 
 // tslint:disable-next-line: max-classes-per-file class-name
 export class clase_applicationdefinition {
@@ -797,6 +801,17 @@ export class clase_reports {
 
 // MODULO SEGURIDAD
 
+// tslint:disable-next-line: max-classes-per-file class-name
+export class clase_agencias {
+	public id_agencia!: number;
+	public cod_agencia!: string;
+	public nombre!: string;
+	public idtipoagencia!: number;
+	public ip_agencia!: string;
+	public latitud!: string;
+	public longitud!: string;
+	public idciudad!: number;
+}
 // tslint:disable-next-line: max-classes-per-file class-name
 export class clase_instituciones {
 	public idinstitucion!: number;
