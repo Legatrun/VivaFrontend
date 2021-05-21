@@ -158,6 +158,6 @@
 			font-size: 1.5em; /* tamaño de letra */ 
 } 
 .datatable-items-small{ 
-			font-size: 1.3em; /* tamaño de letra */ 
+			font-size: 1.1em; /* tamaño de letra */ 
 } 
 </style> 
