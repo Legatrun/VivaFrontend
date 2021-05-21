@@ -105,6 +105,26 @@ export default class AdmbatchesComponent extends Vue {
 		// { text: 'returndetail', align: 'left', sortable: false, value: 'returndetail', width: '15%' },
 		{ text: 'Operaciones', align: 'center', sortable: false, value: 'action', width: '5%' },
 	];
+	private headersAceptadores: any[] = [
+		{ text: '10', align: 'left', sortable: false, value: 'aceptor_001000', width: '15%' },
+		{ text: '20', align: 'left', sortable: false, value: 'aceptor_002000', width: '15%' },
+		{ text: '50', align: 'left', sortable: false, value: 'aceptor_005000', width: '15%' },
+		{ text: 'aceptor_010000', align: 'left', sortable: false, value: 'aceptor_010000', width: '15%' },
+		{ text: 'aceptor_200000', align: 'left', sortable: false, value: 'aceptor_200000', width: '15%' },
+		// { text: 'aceptor_1000000', align: 'left', sortable: false, value: 'aceptor_1000000', width: '15%' },
+		// { text: 'changer_100000', align: 'left', sortable: false, value: 'changer_100000', width: '15%' },
+		// { text: 'changer_200000', align: 'left', sortable: false, value: 'changer_200000', width: '15%' },
+		// { text: 'changer_500000', align: 'left', sortable: false, value: 'changer_500000', width: '15%' },
+		// { text: 'changer_1000000', align: 'left', sortable: false, value: 'changer_1000000', width: '15%' },
+		// { text: 'return_100000', align: 'left', sortable: false, value: 'return_100000', width: '15%' },
+		// { text: 'return_1000000', align: 'left', sortable: false, value: 'return_1000000', width: '15%' },
+		// { text: 'return_500000', align: 'left', sortable: false, value: 'return_500000', width: '15%' },
+		// { text: 'return_200000', align: 'left', sortable: false, value: 'return_200000', width: '15%' },
+		// { text: 'aceptordetail', align: 'left', sortable: false, value: 'aceptordetail', width: '15%' },
+		// { text: 'changerdetail', align: 'left', sortable: false, value: 'changerdetail', width: '15%' },
+		// { text: 'returndetail', align: 'left', sortable: false, value: 'returndetail', width: '15%' },
+		{ text: 'Operaciones', align: 'center', sortable: false, value: 'action', width: '5%' },
+	];
 	currentItem = 'tab-Web'
 	items = [
 	  'Web', 'Shopping', 'Videos', 'Images',

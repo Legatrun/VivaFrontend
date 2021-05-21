@@ -1769,73 +1769,56 @@
                   </v-tab>
                   <v-tab-item>
                     <v-card flat>
-                          <v-data-table
-                          style="padding: 5px;"
-                          :headers="headers"
-                          :items="lstbatches"
-                          :items-per-page="30"
-                          :search="buscarbatches"
-                          :footer-props="{
-                            showFirstLastPage: true,
-                            'items-per-page-options': [10, 20, 30, 40, 50, -1],
-                            'items-per-page-text': 'Registros por Pagina:',
-                          }"
-                          class="elevation-1"
-                    >
-                <template slot="item" slot-scope="props">
-                  <tr>
-                    <td class="datatable-items-small">
-                      {{ props.item.locationidentification }}
-                    </td>
-                    <td class="datatable-items-small">
-                      {{ props.item.deviceidentification }}
-                    </td>
-              <td class="datatable-items-small">
-                {{ FormatDate(props.item.opentimestamp) }}
-              </td>
-              <!-- <td class="datatable-items-small">{{ FormatDate(props.item.updatetimestamp) }}</td> -->
-              <td class="datatable-items-small">
-                {{ props.item.deviceidentification }}
-              </td>
-              <td class="datatable-items-small">
-                {{ props.item.locationidentification }}
-              </td>
-              <!-- <td class="datatable-items-small">{{ props.item.payloadrequest }}</td> -->
-              <td class="datatable-items-small">
-                {{ props.item.provideridentification }}
-              </td>
-              <td class="datatable-items-small">{{ props.item.devicestatus }}</td>
-              <td class="datatable-items-small">{{ props.item.number_ }}</td>
-              <td class="datatable-items-small">{{ props.item.status }}</td>
-          <td>
-            <v-tooltip bottom>
-              <template v-slot:activator="{ on }">
-                <v-btn
-                  color="btnedit"
-                  v-on="on"
-                  small
-                  dark
-                  @click="Actualizar(props.item)"
-                  ><v-icon>mdi-comment-eye</v-icon>Revisar</v-btn
-                >
-              </template>
-              <span>Ver datos del lote</span>
-            </v-tooltip>
-            <!-- <v-tooltip style="padding-left:10px" bottom>
-							<template v-slot:activator="{ on }" >
-								<v-btn color="btndelete" v-on="on" fab small dark  @click="Eliminar(props.item)"><v-icon>delete</v-icon></v-btn>
-							</template>
-							<span>Eliminar batches </span>
-						</v-tooltip> -->
-          </td>
-        </tr>
-      </template>
-      <template v-slot:no-data>
-        <v-alert :value="true" color="warning" icon="warning">
-          Lo sentimos, no exiten datos a desplegar: (
-        </v-alert>
-      </template>
-    </v-data-table>
+                        <v-form>
+                        <v-container>
+                          <v-row>
+                          <v-flex sm4 style="padding: 5px">
+                            <v-text-field
+                              class="input-small"
+                              v-model="batches.aceptor_000100"
+                              hint="Billetes de 10 Bs"
+                              placeholder="10 BS"
+                              readonly
+                              persistent-hint
+                              required>
+                            </v-text-field>
+                          </v-flex>
+                          <v-flex sm4 style="padding: 5px">
+                            <v-text-field
+                              class="input-small"
+                              v-model="batches.aceptor_000100"
+                              hint="Billetes de 10 Bs"
+                              placeholder="10 BS"
+                              readonly
+                              persistent-hint
+                              required>
+                            </v-text-field>
+                          </v-flex>
+                          <v-flex sm4 style="padding: 5px">
+                            <v-text-field
+                              class="input-small"
+                              v-model="batches.aceptor_000100"
+                              hint="Billetes de 10 Bs"
+                              placeholder="10 BS"
+                              readonly
+                              persistent-hint
+                              required>
+                            </v-text-field>
+                          </v-flex>
+                          <v-flex sm4 style="padding: 5px">
+                            <v-text-field
+                              class="input-small"
+                              v-model="batches.carddispenserstatus"
+                              hint="Billetes de 10 Bs"
+                              placeholder="10 BS"
+                              readonly
+                              persistent-hint
+                              required>
+                            </v-text-field>
+                          </v-flex>
+                            </v-row>
+                          </v-container>
+                        </v-form>
                     </v-card>
                   </v-tab-item>
                   <v-tab-item>
