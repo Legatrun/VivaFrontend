@@ -105,6 +105,14 @@ export default class AdmbatchesComponent extends Vue {
 		// { text: 'returndetail', align: 'left', sortable: false, value: 'returndetail', width: '15%' },
 		{ text: 'Operaciones', align: 'center', sortable: false, value: 'action', width: '5%' },
 	];
+	currentItem = 'tab-Web'
+	items = [
+	  'Web', 'Shopping', 'Videos', 'Images',
+	]
+	more = [
+	  'News', 'Maps', 'Books', 'Flights', 'Apps',
+	]
+	text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
 	// tslint:disable-next-line: variable-name
 	private menu_createtimestamp: boolean = false;
 	// tslint:disable-next-line: variable-name
