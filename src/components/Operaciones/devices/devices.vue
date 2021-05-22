@@ -173,7 +173,7 @@
 											dense
 											autocomplete="off"
 											:rules="habilitado"
-											no-data-text="No se encontro ningun tema"
+											no-data-text="No se encontro ningun dato"
 											>
 								</v-autocomplete>
 							</v-flex>
@@ -188,7 +188,7 @@
 											dense
 											autocomplete="off"
 											:rules="validacion"
-											no-data-text="No se encontro ningun tema"
+											no-data-text="No se encontro ningun dato"
 											>
 								</v-autocomplete>
 							</v-flex>
@@ -201,7 +201,7 @@
 											item-value="description"
 											autocomplete="off"
 											:rules="validacion"
-											no-data-text="No se encontro ningun tema"
+											no-data-text="No se encontro ningun dato"
 											outlined
 											
 											>
@@ -737,6 +737,6 @@
 			font-size: 1.5em; /* tamaño de letra */ 
 } 
 .datatable-items-small{ 
-			font-size: 1.3em; /* tamaño de letra */ 
+			font-size: 1.1em; /* tamaño de letra */ 
 } 
 </style> 

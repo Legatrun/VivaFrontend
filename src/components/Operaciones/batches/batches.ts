@@ -103,7 +103,7 @@ export default class AdmbatchesComponent extends Vue {
 		// { text: 'aceptordetail', align: 'left', sortable: false, value: 'aceptordetail', width: '15%' },
 		// { text: 'changerdetail', align: 'left', sortable: false, value: 'changerdetail', width: '15%' },
 		// { text: 'returndetail', align: 'left', sortable: false, value: 'returndetail', width: '15%' },
-		//{ text: 'Operaciones', align: 'center', sortable: false, value: 'action', width: '5%' },
+		// { text: 'Operaciones', align: 'center', sortable: false, value: 'action', width: '5%' },
 
 	];
 	// tslint:disable-next-line: variable-name
