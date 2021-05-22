@@ -28,8 +28,7 @@
 				<tr>
 					<!--<td class="datatable-items-small">{{ helper.showDataDescription(props.item.id,lstbatches, id, descripcion)  }}</td>// Ejemplo de Uso de Helper Para obtener la Descripcion de una Tabla por medio de su Id-->
 					<!--<td class="datatable-items-small">{{ props.item.id }}</td>
-					<td class="datatable-items-small">{{ FormatDate(props.item.createtimestamp) }}</td>
-<<<<<<< HEAD
+					<td class="datatable-items-small">{{ FormatDate(props.item.createtimestamp) }}</td>D
 					<td class="datatable-items-small">{{ FormatDate(props.item.updatetimestamp) }}</td>
                      -->
                     <td class="datatable-items-small">{{ props.item.locationidentification }}</td>
@@ -38,20 +37,9 @@
 					<!--<td class="datatable-items-small">{{ props.item.payloadrequest }}</td>
 					<td class="datatable-items-small">{{ props.item.provideridentification }}</td>
 					<td class="datatable-items-small">{{ props.item.devicestatus }}</td>
-					<td class="datatable-items-small">{{ props.item.number_ }}</td>
-					<td class="datatable-items-small">{{ props.item.status }}</td>-->
-					<td class="datatable-items-small">{{ FormatDate(props.item.opentimestamp) }}</td>
-=======
-					<!-- <td class="datatable-items-small">{{ FormatDate(props.item.updatetimestamp) }}</td> -->
-					<td class="datatable-items-small">{{ props.item.deviceidentification }}</td>
-					<td class="datatable-items-small">{{ props.item.locationidentification }}</td>
-					<!-- <td class="datatable-items-small">{{ props.item.payloadrequest }}</td> -->
-					<td class="datatable-items-small">{{ props.item.provideridentification }}</td>
-					<td class="datatable-items-small">{{ props.item.devicestatus }}</td>
-					<td class="datatable-items-small">{{ props.item.number_ }}</td>
+					<td class="datatable-items-small">{{ props.item.number_ }}</td>-->
 					<td class="datatable-items-small">{{ props.item.status }}</td>
-					<!-- <td class="datatable-items-small">{{ FormatDate(props.item.opentimestamp) }}</td>
->>>>>>> 363e942657e3156a78d0ce0174fad9b5aa157b6b
+					<td class="datatable-items-small">{{ FormatDate(props.item.opentimestamp) }}</td>
 					<td class="datatable-items-small">{{ FormatDate(props.item.closetimestamp) }}</td>
 					<!---<td class="datatable-items-small">{{ props.item.syncstatus }}</td>
 					<td class="datatable-items-small">{{ FormatDate(props.item.synctimestamp) }}</td>
@@ -134,11 +122,9 @@
 					<td class="datatable-items-small">{{ props.item.return_200000 }}</td>
 					<td class="datatable-items-small">{{ props.item.aceptordetail }}</td>
 					<td class="datatable-items-small">{{ props.item.changerdetail }}</td>
-<<<<<<< HEAD
-					<td class="datatable-items-small">{{ props.item.returndetail }}</td>-->
-=======
+					<td class="datatable-items-small">{{ props.item.returndetail }}</td>
 					<td class="datatable-items-small">{{ props.item.returndetail }}</td> -->
->>>>>>> 363e942657e3156a78d0ce0174fad9b5aa157b6b
+
 					<td>
 						<v-tooltip bottom>
 							<template v-slot:activator="{ on }">
@@ -155,10 +141,10 @@
 					</td>
 				</tr>
 			</template>
-<<<<<<< HEAD
+
 			
 			<template v-slot:top >
-				<v-card>
+				<v-card flat>
 					<v-form>
 						<v-container>
 							<v-row>
@@ -246,17 +232,11 @@
 							    </v-btn>
 							</v-flex>
 						</v-card-actions>
-						
-							
-							</v-row>
+						</v-row>
 						</v-container>
 					</v-form>
 				</v-card>
 			</template>
-			
-			
-=======
->>>>>>> 363e942657e3156a78d0ce0174fad9b5aa157b6b
 			<template v-slot:no-data>
 				<v-alert :value="true" color="warning" icon="warning">
 					Lo sentimos, no exiten datos a desplegar: (
