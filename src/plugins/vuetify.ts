@@ -24,6 +24,7 @@ export default new Vuetify({
         headerform: '#959FA9',
         bodyform: '#cfe0de',
         footer:'#508146',
+        headerpestañas: '#FFC300',
         // Buttons
         buttonadd: '#81b214',
         btnedit: '#ffcc29',

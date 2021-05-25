@@ -228,14 +228,14 @@
               <v-flex sm4 style="padding: 5px">
               </v-flex>
               <!-- PESTAÑAS -->
-                <v-toolbar color="#FFC300" >
+                <v-toolbar color="headerpestañas" >
                   <v-toolbar-title class="font-medium-color">Contadores</v-toolbar-title>
                 </v-toolbar>
                  <!-- DESDE -->
                 <v-tabs
                   color="white"
                   dark
-                  slider-color="green"
+                  slider-color="yellow"
                   background-color="blue"
                   style="border:solid;"
                 >
@@ -245,7 +245,7 @@
                   <v-tab ripple>Totales</v-tab>
                   <v-tab ripple>Estados</v-tab>
                   <v-tab-item>
-                    <v-card flat dark style="background-color:#264653">
+                    <v-card id="Aceptadores" flat dark class="pestaña-aceptadores">
                         <v-form>
                           <v-container>
                             <v-row>
@@ -279,23 +279,23 @@
                         </v-form>
                     </v-card>
                   </v-tab-item>
-                  <v-tab-item>
-                    <v-card flat dark style="background-color:#2A9D8F">
+                  <v-tab-item >
+                    <v-card id="Dispensadores" flat dark class="pestaña-dispensadores">
                         <v-form>
                           <v-container>
                             <v-row>
                               <v-flex sm4 style="padding: 5px">
-                               <v-text-field class="input-small" v-model="batches.return_001000" 
+                               <v-text-field class="input-small" v-model="batches.changer_001000" 
                                   hint="10" readonly persistent-hint required>
                                 </v-text-field>
                               </v-flex>
                               <v-flex sm4 style="padding: 5px">
-                                <v-text-field class="input-small" v-model="batches.return_002000" 
+                                <v-text-field class="input-small" v-model="batches.changer_002000" 
                                   hint="20" readonly persistent-hint required>
                                 </v-text-field>
                               </v-flex>
                               <v-flex sm4 style="padding: 5px">
-                                  <v-text-field class="input-small" v-model="batches.return_005000" 
+                                  <v-text-field class="input-small" v-model="batches.changer_005000" 
                                   hint="50" readonly persistent-hint required>
                                 </v-text-field>
                               </v-flex>
@@ -309,8 +309,8 @@
                         </v-form>
                     </v-card>
                   </v-tab-item>
-                  <v-tab-item>
-                    <v-card flat dark style="background-color:#82C0CC">
+                  <v-tab-item >
+                    <v-card id="Vueltos"  flat dark class="pestaña-vueltos">
                         <v-form>
                           <v-container>
                             <v-row>
@@ -327,11 +327,6 @@
                               <v-flex sm4 style="padding: 5px">
                                   <v-text-field class="input-small" v-model="batches.return_005000" 
                                   hint="50" readonly persistent-hint required>
-                                </v-text-field>
-                              </v-flex>
-                              <v-flex sm4 style="padding: 5px">
-                                  <v-text-field class="input-small" v-model="batches.totalcardsdelivered" 
-                                  hint="Tarjetas" readonly persistent-hint required>
                                 </v-text-field>
                               </v-flex>
                             </v-row>
@@ -340,29 +335,113 @@
                     </v-card>
                   </v-tab-item>
                   <v-tab-item>
-                    <v-card flat dark style="background-color:#F4A261">
+                    <v-card id="Totales" flat dark class="pestaña-totales">
                         <v-form>
                           <v-container>
                             <v-row>
                               <v-flex sm4 style="padding: 5px">
-                               <v-text-field class="input-small" v-model="batches.return_001000" 
-                                  hint="10" readonly persistent-hint required>
+                               <h3>Transacciones</h3>
+                               <v-text-field class="input-small" v-model="batches.totaltx" 
+                                  readonly persistent-hint required>
                                 </v-text-field>
                               </v-flex>
                               <v-flex sm4 style="padding: 5px">
-                                <v-text-field class="input-small" v-model="batches.return_002000" 
-                                  hint="20" readonly persistent-hint required>
+                                <h3>Monto Total</h3>
+                                <v-text-field class="input-small" v-model="batches.totalamount" 
+                                  readonly persistent-hint required>
                                 </v-text-field>
                               </v-flex>
                               <v-flex sm4 style="padding: 5px">
-                                  <v-text-field class="input-small" v-model="batches.return_005000" 
-                                  hint="50" readonly persistent-hint required>
+                                  <h3>Aceptado</h3>
+                                  <v-text-field class="input-small" v-model="batches.totalaccepted" 
+                                  readonly persistent-hint required>
                                 </v-text-field>
                               </v-flex>
                               <v-flex sm4 style="padding: 5px">
+                                  <h3>Vuelto Retornado</h3>
+                                  <v-text-field class="input-small" v-model="batches.totalreturned" 
+                                  readonly persistent-hint required>
+                                </v-text-field>
+                              </v-flex>
+                              <v-flex sm4 style="padding: 5px">
+                                  <h3>Disponible</h3>
+                                  <v-text-field class="input-small" v-model="batches.totalavailable" 
+                                  readonly persistent-hint required>
+                                </v-text-field>
+                              </v-flex>
+                              <v-flex sm4 style="padding: 5px">
+                                  <h3>Regalado</h3>
+                                  <v-text-field class="input-small" v-model="batches.totalgivenamount" 
+                                  readonly persistent-hint required>
+                                </v-text-field>
+                              </v-flex>
+                              <v-flex sm4 style="padding: 5px">
+                                  <h3>Total de Pagos</h3>
+                                  <v-text-field class="input-small" v-model="batches.totalcollectamount" 
+                                  readonly persistent-hint required>
+                                </v-text-field>
+                              </v-flex>
+                              <v-flex sm4 style="padding: 5px">
+                                  <h3>Cantidad de Recargas</h3>
+                                  <v-text-field class="input-small" v-model="batches.totalrefilloperations" 
+                                  readonly persistent-hint required>
+                                </v-text-field>
+                              </v-flex>
+                              <v-flex sm4 style="padding: 5px">
+                                  <h3>Monto Recargas</h3>
+                                  <v-text-field class="input-small" v-model="batches.totalrefillamount" 
+                                  readonly persistent-hint required>
+                                </v-text-field>
+                              </v-flex>
+                              <v-flex sm4 style="padding: 5px">
+                                  <h3>Cantidad de Retiros</h3>
+                                  <v-text-field class="input-small" v-model="batches.totaldebtamount" 
+                                  readonly persistent-hint required>
+                                </v-text-field>
+                              </v-flex>
+                              <v-flex sm4 style="padding: 5px">
+                                  <h3>Monto de Retiros</h3>
+                                  <v-text-field class="input-small" v-model="batches.totaldebtamount" 
+                                  readonly persistent-hint required>
+                                </v-text-field>
+                              </v-flex>
+                               <v-flex sm4 style="padding: 5px">
+                                  <h3>Cantidad de Bloqueos</h3>
+                                  <v-text-field class="input-small" v-model="batches.totallocks" 
+                                  readonly persistent-hint required>
+                                </v-text-field>
+                              </v-flex>
+                               <v-flex sm4 style="padding: 5px">
+                                  <h3>Total de Tarjetas Dispensadas</h3>
                                   <v-text-field class="input-small" v-model="batches.totalcardsdelivered" 
-                                  hint="Tarjetas" readonly persistent-hint required>
+                                  readonly persistent-hint required>
                                 </v-text-field>
+                              </v-flex>
+                               <v-flex sm4 style="padding: 5px">
+                                  <h3>Cantidad Operaciones Recarga de Tarjetas</h3>
+                                  <v-text-field class="input-small" v-model="batches.totalcardrefilloperations" 
+                                  readonly persistent-hint required>
+                                </v-text-field>
+                              </v-flex>
+                              <v-flex sm4 style="padding: 5px">
+                                  <h3>Cantidad de Tarjetas Recargadas</h3>
+                                  <v-text-field class="input-small" v-model="batches.totalcardrefillamount" 
+                                  readonly persistent-hint required>
+                                </v-text-field>
+                              </v-flex>
+                              <v-flex sm4 style="padding: 5px">
+                                  <h3>Cantidad Operaciones Retiro de Tarjetas</h3>
+                                  <v-text-field class="input-small" v-model="batches.totalcardcollectoperations" 
+                                  readonly persistent-hint required>
+                                </v-text-field>
+                              </v-flex>
+                              <v-flex sm4 style="padding: 5px">
+                                  <h3>Cantidad de Tarjetas Retiradas</h3>
+                                  <v-text-field class="input-small" v-model="batches.totalcardcollectamount" 
+                                  readonly persistent-hint required>
+                                </v-text-field>
+                              </v-flex>
+                              <v-flex sm4 style="padding: 5px">
                               </v-flex>
                             </v-row>
                           </v-container>
@@ -370,28 +449,68 @@
                     </v-card>
                   </v-tab-item>
                   <v-tab-item>
-                    <v-card flat dark style="background-color:#E76F51">
+                    <v-card id="Estados"  flat dark class="pestaña-estados">
                         <v-form>
                           <v-container>
                             <v-row>
-                              <v-flex sm4 style="padding: 5px">
-                               <v-text-field class="input-small" v-model="batches.return_001000" 
-                                  hint="10" readonly persistent-hint required>
+                             <v-flex sm4 style="padding: 5px">
+                               <h3>Estado de Scanner</h3>
+                               <v-text-field class="input-small" v-model="batches.scannerstatus" 
+                                  readonly persistent-hint required>
                                 </v-text-field>
                               </v-flex>
                               <v-flex sm4 style="padding: 5px">
-                                <v-text-field class="input-small" v-model="batches.return_002000" 
-                                  hint="20" readonly persistent-hint required>
+                               <h3>Estado de Sensor de Mov.</h3>
+                               <v-text-field class="input-small" v-model="batches.motionsensorstatus" 
+                                  readonly persistent-hint required>
                                 </v-text-field>
                               </v-flex>
                               <v-flex sm4 style="padding: 5px">
-                                  <v-text-field class="input-small" v-model="batches.return_005000" 
-                                  hint="50" readonly persistent-hint required>
+                               <h3>Estado de Impresora</h3>
+                               <v-text-field class="input-small" v-model="batches.printerstatus" 
+                                  readonly persistent-hint required>
                                 </v-text-field>
                               </v-flex>
                               <v-flex sm4 style="padding: 5px">
-                                  <v-text-field class="input-small" v-model="batches.totalcardsdelivered" 
-                                  hint="Tarjetas" readonly persistent-hint required>
+                               <h3>Estado de Aceptador de Efectivo</h3>
+                               <v-text-field class="input-small" v-model="batches.cashacceptorstatus" 
+                                  readonly persistent-hint required>
+                                </v-text-field>
+                              </v-flex>
+                              <v-flex sm4 style="padding: 5px">
+                               <h3>Estado de Dispensador de Efectivo</h3>
+                               <v-text-field class="input-small" v-model="batches.cashchangerstatus" 
+                                  readonly persistent-hint required>
+                                </v-text-field>
+                              </v-flex>
+                              <v-flex sm4 style="padding: 5px">
+                               <h3>Estado de Aceptador de Monedas</h3>
+                               <v-text-field class="input-small" v-model="batches.coinacceptorstatus" 
+                                  readonly persistent-hint required>
+                                </v-text-field>
+                              </v-flex>
+                              <v-flex sm4 style="padding: 5px">
+                               <h3>Estado de Disp. de Monedas</h3>
+                               <v-text-field class="input-small" v-model="batches.coinchangerstatus" 
+                                  readonly persistent-hint required>
+                                </v-text-field>
+                              </v-flex>
+                              <v-flex sm4 style="padding: 5px">
+                               <h3>Estado de Bloqueo</h3>
+                               <v-text-field class="input-small" v-model="batches.blockstatus" 
+                                  readonly persistent-hint required>
+                                </v-text-field>
+                              </v-flex>
+                              <v-flex sm4 style="padding: 5px">
+                               <h3>Razón de Bloqueo</h3>
+                               <v-text-field class="input-small" v-model="batches.blockreason" 
+                                  readonly persistent-hint required>
+                                </v-text-field>
+                              </v-flex>
+                              <v-flex sm4 style="padding: 5px">
+                               <h3>Estado de Dispensador de Tarjetas</h3>
+                               <v-text-field class="input-small" v-model="batches.carddispenserstatus" 
+                                  readonly persistent-hint required>
                                 </v-text-field>
                               </v-flex>
                             </v-row>
@@ -444,4 +563,19 @@
 .datatable-items-small{ 
 			font-size: 1.3em; /* tamaño de letra */ 
 } 
+.pestaña-aceptadores{
+  background-color: #264653;
+}
+.pestaña-dispensadores{
+  background-color: #2A9D8F;
+}
+.pestaña-vueltos{
+  background-color: #82C0CC;
+}
+.pestaña-totales{
+  background-color: #F4A261;
+}
+.pestaña-estados{
+  background-color: #E76F51;
+}
 </style>
