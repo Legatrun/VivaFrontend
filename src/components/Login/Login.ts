@@ -12,7 +12,7 @@ export default class LoginComponent extends Vue {
     public objcrypt: any;
     public cryptedLogin: any;
     public popup = new popup.Swal();
-    public login = new services.ClaseAutenticacion();
+    public login = new services.clase_autenticacion();
     public WebApiLoginBd: string = $store.state.server + 'Api/Autenticacion/Login';
 	public WebApiLoginAd: string = $store.state.server + 'Api/Autenticacion/LoginAD';
 	public WebApiLogout: string = $store.state.server + 'Api/Autenticacion/Logout';
@@ -60,7 +60,7 @@ export default class LoginComponent extends Vue {
             this.popup.error('Campos Incompletos', 'Llene ambos campos por favor');
         } else {
             this.objcrypt = new crypto();
-            this.cryptedLogin = new services.ClaseAutenticacion();
+            this.cryptedLogin = new services.clase_autenticacion();
             this.cryptedLogin.usuario = this.objcrypt.EncryptAES(this.login.usuario.toString());
             this.cryptedLogin.password = this.objcrypt.EncryptAES(this.login.password.toString());
             this.WebApiAuth = this.WebApiLoginBd;
