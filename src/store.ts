@@ -7,10 +7,10 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     auth: false,
-    server: 'http://localhost:57170/',
+    server: 'http://localhost:57171/',
     user: '',
     pass:'',
-    serverAgen:'http://localhost:57170/', 
+    serverAgen:'http://localhost:57171/', 
     snackbarAgencia: false,
     snackbarErrorRegistroAgencia: false,
     snackbarCentraliza: false,

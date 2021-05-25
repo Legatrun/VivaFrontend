@@ -67,7 +67,15 @@ export default class MenuComponent extends Vue {
         new MenuItem('Usuarios', 'mdi-human-capacity-increase', '/usuarios'),
     ];
     public menuListaUsuarios: MenuItem[] = [
+        new MenuItem('Aplicaciones', 'mdi-shield', '/aplicaciones'), 
+        new MenuItem('GrpUsrRolesInstituciones', 'mdi-shield', '/grpUsrRolesInstituciones'), 
+        new MenuItem('GrpUsuario', 'mdi-shield', '/grpUsuario'), 
+        new MenuItem('Grupo', 'mdi-shield', '/grupo'), 
+        new MenuItem('InstitucionesRoles', 'mdi-shield', '/institucionesRoles'), 
         new MenuItem('Instituciones', 'mdi-shield', '/instituciones'), 
+        new MenuItem('Modulos', 'mdi-shield', '/modulos'), 
+        new MenuItem('Roles', 'mdi-shield', '/roles'), 
+        new MenuItem('RolesAplicaciones', 'mdi-shield', '/rolesAplicaciones'), 
         new MenuItem('Usuarios', 'mdi-shield', '/usuarios'), 
         
     ];

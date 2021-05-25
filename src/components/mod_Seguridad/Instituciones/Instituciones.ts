@@ -4,15 +4,15 @@ import * as services from '@/services';
 import swal from 'sweetalert2';
 import moment from 'moment';
 import popUpContent from '../PopUpContent.vue'
-// import grupoUser from '../GrpUsuario/GrpUsuario';
-// import institucionesRoles from '../InstitucionesRoles/InstitucionesRoles';
-// import grpssrroles from '../GrpUsrRolesInstituciones/GrpUsrRolesInstituciones';
+ import grupoUser from '../GrpUsuario/GrpUsuario';
+ import institucionesRoles from '../InstitucionesRoles/InstitucionesRoles';
+ import grpssrroles from '../GrpUsrRolesInstituciones/GrpUsrRolesInstituciones';
 
 @Component({
   components: {
-    // grupoUser,
-    // institucionesRoles,
-    // grpssrroles,
+     grupoUser,
+     institucionesRoles,
+     grpssrroles,
     popUpContent
   },
 })

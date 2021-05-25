@@ -10,17 +10,17 @@ import helpers from '@/helper';
 export default class AdmbatchesComponent extends Vue {
 	private headers: any[] = [
 		// { text: 'ID', align: 'left', sortable: true, value: 'id', width: '15%' },
-		{ text: 'Fecha', align: 'left', sortable: false, value: 'createtimestamp', width: '7%' },
+		//{ text: 'Fecha', align: 'left', sortable: false, value: 'createtimestamp', width: '7%' },
 		// { text: 'updatetimestamp', align: 'left', sortable: false, value: 'updatetimestamp', width: '15%' },
-		{ text: 'Terminal', align: 'left', sortable: false, value: 'deviceidentification', width: '7%' },
-		{ text: 'Sucursal', align: 'left', sortable: false, value: 'locationidentification', width: '7%' },
+		{ text: 'Sucursal', align: 'left', sortable: false, value: 'locationidentification', width: '15%' },
+		{ text: 'Terminal', align: 'left', sortable: false, value: 'deviceidentification', width: '15%' },
 		// { text: 'payloadrequest', align: 'left', sortable: false, value: 'payloadrequest', width: '7%' },
-		{ text: 'Identificación de Proveedor', align: 'left', sortable: false, value: 'provideridentification', width: '7%' },
-		{ text: 'Estado de Dispositivo', align: 'left', sortable: false, value: 'devicestatus', width: '7%' },
-		{ text: 'Número', align: 'left', sortable: false, value: 'number_', width: '7%' },
-		{ text: 'Estado', align: 'left', sortable: false, value: 'status', width: '7%' },
-		// { text: 'opentimestamp', align: 'left', sortable: false, value: 'opentimestamp', width: '15%' },
-		// { text: 'closetimestamp', align: 'left', sortable: false, value: 'closetimestamp', width: '15%' },
+		//{ text: 'Identificación de Proveedor', align: 'left', sortable: false, value: 'provideridentification', width: '7%' },
+		//{ text: 'Estado de Dispositivo', align: 'left', sortable: false, value: 'devicestatus', width: '7%' },
+	    //{ text: 'Número', align: 'left', sortable: false, value: 'number_', width: '7%' },
+		{ text: 'Estado', align: 'left', sortable: false, value: 'status', width: '15%' },
+		{ text: 'Fecha Apertura', align: 'left', sortable: false, value: 'opentimestamp', width: '15%' },
+		{ text: 'Fecha Cierre', align: 'left', sortable: false, value: 'closetimestamp', width: '15%' },
 		// { text: 'syncstatus', align: 'left', sortable: false, value: 'syncstatus', width: '15%' },
 		// { text: 'synctimestamp', align: 'left', sortable: false, value: 'synctimestamp', width: '15%' },
 		// { text: 'operativeday', align: 'left', sortable: false, value: 'operativeday', width: '15%' },
@@ -103,7 +103,8 @@ export default class AdmbatchesComponent extends Vue {
 		// { text: 'aceptordetail', align: 'left', sortable: false, value: 'aceptordetail', width: '15%' },
 		// { text: 'changerdetail', align: 'left', sortable: false, value: 'changerdetail', width: '15%' },
 		// { text: 'returndetail', align: 'left', sortable: false, value: 'returndetail', width: '15%' },
-		{ text: 'Operaciones', align: 'center', sortable: false, value: 'action', width: '5%' },
+		// { text: 'Operaciones', align: 'center', sortable: false, value: 'action', width: '5%' },
+
 	];
 	private headersAceptadores: any[] = [
 		{ text: '10', align: 'left', sortable: false, value: 'aceptor_001000', width: '15%' },

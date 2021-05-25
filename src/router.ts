@@ -35,8 +35,19 @@ import transactiondefinition from './components/Operaciones/transactiondefinitio
 import transactions from './components/Operaciones/transactions/transactions.vue';
 import reports from './components/Operaciones/reports/reports.vue';
 // ModSeguridad
-import Usuarios from './components/mod_Seguridad/Usuarios/Usuarios.vue';
+
+import Aplicaciones from './components/mod_Seguridad/Aplicaciones/Aplicaciones.vue';
+import GrpUsrRolesInstituciones from './components/mod_Seguridad/GrpUsrRolesInstituciones/GrpUsrRolesInstituciones.vue';
+import GrpUsuario from './components/mod_Seguridad/Usuarios/Usuarios.vue';
+import Grupo from './components/mod_Seguridad/Grupo/Grupo.vue';
 import Instituciones from './components/mod_Seguridad/Instituciones/Instituciones.vue'
+import InstitucionesRoles from './components/mod_Seguridad/InstitucionesRoles/InstitucionesRoles.vue';
+import Modulos from './components/mod_Seguridad/Modulos/Modulos.vue';
+import Roles from './components/mod_Seguridad/Roles/Roles.vue';
+import RolesAplicaciones from './components/mod_Seguridad/RolesAplicaciones/RolesAplicaciones.vue';
+import Usuarios from './components/mod_Seguridad/Usuarios/Usuarios.vue';
+
+
 
 Vue.use(Router);
 
@@ -76,8 +87,20 @@ export default new Router({
 		{ path: '/transactiondefinition', name: 'transactiondefinition', component: transactiondefinition },
 		{ path: '/transactions', name: 'transactions', component: transactions },
 		{ path: '/reports', name: 'reports', component: reports },
-		{ path: '/Usuarios', name: 'Usuarios', component: Usuarios },
+
+		
+		{ path: '/Aplicaciones', name: 'Aplicaciones', component: Aplicaciones },
+		{ path: '/GrpUsrRolesInstituciones', name: 'GrpUsrRolesInstituciones', component: GrpUsrRolesInstituciones },
+		{ path: '/GrpUsuario', name: 'GrpUsuario', component: GrpUsuario },
+		{ path: '/Grupo', name: 'Grupo', component: Grupo },
 		{ path: '/Instituciones', name: 'Instituciones', component: Instituciones },
+		{ path: '/InstitucionesRoles', name: 'InstitucionesRoles', component: InstitucionesRoles },
+		{ path: '/Modulos', name: 'Modulos', component: Modulos },
+		{ path: '/Roles', name: 'Roles', component: Roles },
+		{ path: '/RolesAplicaciones', name: 'RolesAplicaciones', component: RolesAplicaciones },
+		{ path: '/Usuarios', name: 'Usuarios', component: Usuarios },
+
+		
 	],
 });
 

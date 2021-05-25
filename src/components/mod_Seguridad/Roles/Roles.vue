@@ -91,21 +91,21 @@
           <v-toolbar-title>Datos de Roles</v-toolbar-title>
         </v-toolbar>
         <v-divider></v-divider>
-        <v-form ref="form" style="padding:10px">
+        <v-form ref="form" style="padding:10px" v-model="activa">
           <v-card-text>
             <v-layout wrap>
               <template v-if="operacion == 'Insert'">
-                <!-- <v-flex sm12 style="padding: 5px">
+               <!-- <v-flex sm12 style="padding: 5px">
 									<v-text-field v-model="roles.idrol"
-												label="Id_Rol"
-												hint="Ingrese Nombre de IdRol"
-												placeholder="IdRol"
+												label="IdRol"
+                        outlined
 												clearable
 												persistent-hint
 												required
+                        :rules="RulLetras"
 												@input="roles.idrol = updateText(roles.idrol)">
 									</v-text-field>
-                  </v-flex>-->
+               </v-flex>-->
               </template>
               <template v-else>
                 <!-- <v-flex sm12 style="padding: 5px">
@@ -121,11 +121,12 @@
                 <v-text-field
                   v-model="roles.descripcion"
                   label="Descripcion"
-                  hint="Ingrese Nombre de Descripcion"
-                  placeholder="Descripcion"
+                  outlined
                   clearable
                   persistent-hint
                   required
+                  
+                  :rules="validacion"
                   @input="roles.descripcion = updateText(roles.descripcion)"
                 ></v-text-field>
               </v-flex>
@@ -134,7 +135,8 @@
         </v-form>
         <v-divider></v-divider>
         <v-card-actions style="justify-content: center;padding:10px">
-          <v-btn color="success" dark style="width: 50%" @click="Grabar()"
+          <v-btn color="success" dark style="width: 50%" :disabled="!ativa
+          " @click="Grabar()"
             >Grabar</v-btn
           >
           <v-btn color="error" dark style="width: 50%" @click="Cancelar()"

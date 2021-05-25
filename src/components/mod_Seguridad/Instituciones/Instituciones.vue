@@ -205,10 +205,11 @@
     </v-dialog>
     <!--//?? Componentes de Pop Ups -->
     <popUpContent :title="tituloComponent" :content="contenidoComponente" />
-    <!-- <grupoUser />
+     <grupoUser />
     <institucionesRoles />
-    <grpssrroles /> -->
+    <grpssrroles /> 
   </v-card>
+  
 </template>
 
 <script src="./Instituciones.ts"></script>
