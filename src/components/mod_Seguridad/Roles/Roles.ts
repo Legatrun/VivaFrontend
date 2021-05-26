@@ -11,6 +11,8 @@ import * as popup from '@/popup';
 export default class AdmRolesComponent extends Vue {
   private headers: any[] = [
     //{ text: 'Id_Rol', align: 'left', sortable: true, value: 'idrol', width: '15%' },
+    //{ text: 'Descripcion', aligen: 'left', sortable: true, value: 'descripcion', width: '15%'},
+    //{ text: 'Operaciones', align: 'center', sortable: false, value: 'action', width: '20%' },
     {
       text: 'Descripcion',
       align: 'left',
@@ -47,9 +49,17 @@ export default class AdmRolesComponent extends Vue {
   private operacion = '';
   private helper:helpers = new helpers();
 	private popup = new popup.Swal();
-  
+  private activa = false;
 
   private lstroles: services.clase_roles[] = [];
+  validacion = [
+		(v: any) => !!v || 'El campo es requerido',
+		(v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
+	];
+	RulLetras = [
+		(v: any) => !!v || 'El campo es requerido',
+		(v: any) => !(!/^[a-z A-Z]*$/.test(v)) || "No se permite vacio o espacios en blanco",
+	];
   private FormatDate(data: any) {
     return moment(data).format('YYYY-MM-DD');
   }
