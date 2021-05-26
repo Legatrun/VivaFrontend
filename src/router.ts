@@ -36,7 +36,7 @@ import transactions from './components/Operaciones/transactions/transactions.vue
 import reports from './components/Operaciones/reports/reports.vue';
 // ModSeguridad
 
-import Aplicaciones from './components/mod_Seguridad/Aplicaciones/Aplicaciones';
+import Aplicaciones from './components/mod_Seguridad/Aplicaciones/Aplicaciones.vue';
 import GrpUsrRolesInstituciones from './components/mod_Seguridad/GrpUsrRolesInstituciones/GrpUsrRolesInstituciones.vue';
 import GrpUsuario from './components/mod_Seguridad/Usuarios/Usuarios.vue';
 import Grupo from './components/mod_Seguridad/Grupo/Grupo.vue';
