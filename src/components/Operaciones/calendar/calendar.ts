@@ -28,11 +28,14 @@ export default class AdmcalendarComponent extends Vue {
 	private WebApi = new services.Endpoints();
 
 	private calendar = new services.clase_calendar();
+	private calendarversion = new services.clase_calendarversion();
 	private lstcalendar: services.clase_calendar[] = [];
 	private lstcalendarversion: services.clase_calendarversion[] = [];
 	private buscarcalendar = '';
 	private dialog = false;
 	private dialogVisualizar = false;
+	private dialogAddCalendarVersion = false;
+	private dialogRevisarCalendarVersion = false;
 	private operacion = '';
 	private helper: helpers = new helpers();
 	private popup = new popup.Swal();
@@ -94,20 +97,36 @@ export default class AdmcalendarComponent extends Vue {
 		.catch((error) => {
 			this.popup.error('Actualizar', 'Error Inesperado: ' + error);
 			});
-	} else {
-		new services.Operaciones().Insertar(this.WebApi.ws_calendar_Insertar, this.calendar)
-		.then((result) => {
-			if (result.data.error === 0) {
-			this.popup.success('Insertar', result.data.descripcion);
-			this.cargar_data();
-			this.dialog = false;
-			} else {
-			this.popup.error('Insertar', result.data.descripcion);
-			}
-		})
-		.catch((error) => {
-			this.popup.error('Insertar', 'Error Inesperado: ' + error);
-			});
+		} else if(this.operacion === 'Insert'){
+			new services.Operaciones().Insertar(this.WebApi.ws_calendar_Insertar, this.calendar)
+			.then((result) => {
+				if (result.data.error === 0) {
+				this.popup.success('Insertar', result.data.descripcion);
+				this.cargar_data();
+				this.dialog = false;
+				} else {
+				this.popup.error('Insertar', result.data.descripcion);
+				}
+			})
+			.catch((error) => {
+				this.popup.error('Insertar', 'Error Inesperado: ' + error);
+				});
+		}
+		else{
+			this.calendarversion.calendarid = this.calendar.id;
+			new services.Operaciones().Insertar(this.WebApi.ws_calendarversion_Insertar, this.calendarversion)
+			.then((result) => {
+				if (result.data.error === 0) {
+				this.popup.success('Insertar', result.data.descripcion);
+				this.CargarCalendariosVersion();
+				this.dialogAddCalendarVersion = false;
+				} else {
+				this.popup.error('Insertar', result.data.descripcion);
+				}
+			})
+			.catch((error) => {
+				this.popup.error('Insertar', 'Error Inesperado: ' + error);
+				});
 		}
 	}
 	private Cancelar() {
@@ -118,6 +137,14 @@ export default class AdmcalendarComponent extends Vue {
 		this.cargar_data();
 		this.dialogVisualizar = false;
 	}
+	private CancelarPopupAddCalendarVersion() {
+		this.cargar_data();
+		this.dialogAddCalendarVersion = false;
+	}
+	private CancelarPopupRevisarCalendarVersion() {
+		this.cargar_data();
+		this.dialogRevisarCalendarVersion = false;
+	}
 	private Revisar(data: services.clase_calendar): void {
 		this.calendar = data;
 		this.calendar.createtimestamp = this.FormatDate(Date.now());
@@ -126,13 +153,26 @@ export default class AdmcalendarComponent extends Vue {
 		this.CargarCalendariosVersion();
 		this.dialogVisualizar = true;
 	}
+	private AddCalendarVersion(){
+		this.operacion = 'InsertarVersion';
+		this.dialogAddCalendarVersion =  true;
+	}
+	private RevisarCalendarVersion(data: services.clase_calendarversion): void {
+		this.calendarversion = data;
+		this.calendarversion.validfrom = this.FormatDate(Date.now());
+		this.calendarversion.validuntil = this.FormatDate(Date.now());
+		this.calendarversion.createtimestamp = this.FormatDate(Date.now());
+		this.calendarversion.updatetimestamp = this.FormatDate(Date.now());
+		this.dialogRevisarCalendarVersion = true;
+		// this.CargarCalendariosVersion();
+	}
 	private select_fecha(fecha: string) {
 		return fecha.substr(0, 10);
 	}
 	private Eliminar(data: services.clase_calendar): void {
 		swal.fire({
 			title: 'Esta seguro de esta operacion?',
-			text: 'Eliminacion de Registro' + data.id,
+			text: 'Eliminacion de Registro: ' + data.description,
 			type: 'warning',
 			showCancelButton: true,
 			confirmButtonColor: 'green',
@@ -173,6 +213,52 @@ export default class AdmcalendarComponent extends Vue {
 		}
 		});
 	}
+
+	private EliminarCalendarVersion(data: services.clase_calendarversion): void {
+		swal.fire({
+			title: 'Esta seguro de esta operacion?',
+			text: 'Eliminacion de Registro: ' + data.description,
+			type: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: 'green',
+			cancelButtonColor: 'red',
+			cancelButtonText: 'Cancelar',
+			confirmButtonText: 'Eliminar!',
+		}).then((resultOfQuestion) => {
+			if (resultOfQuestion.value) {
+			new services.Operaciones().Eliminar(this.WebApi.ws_calendar_Eliminar, data)
+				.then((result) => {
+				if (result.data.error === 0) {
+					swal.fire({
+					type: 'success',
+					title: 'Eliminar',
+					text: result.data.descripcion,
+					showConfirmButton: false,
+					timer: 2000,
+				});
+				this.cargar_data();
+				} else {
+					swal.fire({
+						type: 'error',
+						title: 'Eliminar',
+						text: result.data.descripcion,
+						showConfirmButton: false,
+						timer: 2000,
+					});
+				}
+			}).catch((error) => {
+				swal.fire({
+					type: 'error',
+					title: 'Eliminar',
+					text: 'Error Inesperado',
+					showConfirmButton: false,
+					timer: 2000,
+				});
+			});
+		}
+		});
+	}
+
 
 	CargarCalendariosVersion(){
 		new services.Operaciones().Consultar(this.WebApi.ws_calendarversion_Consultar)
