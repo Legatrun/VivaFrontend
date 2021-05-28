@@ -191,7 +191,7 @@
                   class="input-small"
                   v-model="batches.status"
                   hint="Solo lectura"
-                  placeholder="Estado"
+                  label="Estado"
                   readonly
                   persistent-hint
                   required

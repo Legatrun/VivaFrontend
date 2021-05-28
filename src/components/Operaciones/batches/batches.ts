@@ -28,6 +28,8 @@ export default class AdmbatchesComponent extends Vue {
 	private WebApi = new services.Endpoints();
 	private batches = new services.clase_batches();
 	private lstbatches: services.clase_batches[] = [];
+	private lstlocations: services.clase_locations[] = [];
+	private locationdescription = "";
 	private buscarbatches = '';
 	private dialog = false;
 	private operacion = '';
@@ -122,6 +124,7 @@ export default class AdmbatchesComponent extends Vue {
 		this.batches.closetimestamp = this.FormatDate(Date.now());
 		this.batches.synctimestamp = this.FormatDate(Date.now());
 		this.operacion = 'Update';
+		this.FormatLocation(this.batches.locationidentification);
 		this.dialog = true;
 	}
 	private select_fecha(fecha: string) {
@@ -170,5 +173,26 @@ export default class AdmbatchesComponent extends Vue {
 			});
 		}
 		});
+	}
+
+	private FormatLocation(locationId:any):string{
+		new services.Operaciones().Consultar(this.WebApi.ws_locations_Consultar)
+			.then((reslocation) => {
+				if (reslocation.data._error.error === 0) {
+					this.lstlocations = reslocation.data._data;
+					var newthis = this;
+					this.lstlocations.forEach(function(loc)
+					{
+						newthis.locationdescription = loc.description;
+					})
+
+					return this.locationdescription;
+				} else {
+					this.popup.error('Consultar', reslocation.data._error.descripcion);
+				}
+			}).catch((error) => {
+			this.popup.error('Consultar', 'Error Inesperado: ' + error);
+		});
+		return this.locationdescription;
 	}
 }
