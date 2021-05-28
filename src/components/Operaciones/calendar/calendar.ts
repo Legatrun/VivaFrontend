@@ -9,14 +9,17 @@ import helpers from '@/helper';
 @Component
 export default class AdmcalendarComponent extends Vue {
 	private headers: any[] = [
-		{ text: 'ID', align: 'left', sortable: true, value: 'id', width: '15%' },
-		{ text: 'identification', align: 'left', sortable: false, value: 'identification', width: '15%' },
-		{ text: 'description', align: 'left', sortable: false, value: 'description', width: '15%' },
-		{ text: 'createtimestamp', align: 'left', sortable: false, value: 'createtimestamp', width: '15%' },
-		{ text: 'updatetimestamp', align: 'left', sortable: false, value: 'updatetimestamp', width: '15%' },
-		{ text: 'createuser', align: 'left', sortable: false, value: 'createuser', width: '15%' },
-		{ text: 'updateuser', align: 'left', sortable: false, value: 'updateuser', width: '15%' },
+		{ text: 'Identificación', align: 'left', sortable: true, value: 'identification', width: '20%' },
+		{ text: 'Descripción', align: 'left', sortable: true, value: 'description', width: '30%' },
+		{ text: 'Calendarios', align: 'left', sortable: true, value: 'description', width: '30%' },
 		{ text: 'Operaciones', align: 'center', sortable: false, value: 'action', width: '20%' },
+	];
+	private headersCalendarVersion: any[] = [
+		{ text: 'Versión', align: 'left', sortable: true, value: 'description', width: '25%' },
+		{ text: 'Videncia Desde', align: 'left', sortable: true, value: 'validfrom', width: '25%' },
+		{ text: 'Vigencia Hasta', align: 'left', sortable: true, value: 'validuntil', width: '25%' },
+		// { text: 'calendarid', align: 'left', sortable: false, value: 'calendarid', width: '15%' },
+		{ text: 'Operaciones', align: 'center', sortable: false, value: 'action', width: '25%' },
 	];
 	// tslint:disable-next-line: variable-name
 	private menu_createtimestamp: boolean = false;
@@ -26,8 +29,10 @@ export default class AdmcalendarComponent extends Vue {
 
 	private calendar = new services.clase_calendar();
 	private lstcalendar: services.clase_calendar[] = [];
+	private lstcalendarversion: services.clase_calendarversion[] = [];
 	private buscarcalendar = '';
 	private dialog = false;
+	private dialogVisualizar = false;
 	private operacion = '';
 	private helper: helpers = new helpers();
 	private popup = new popup.Swal();
@@ -81,7 +86,7 @@ export default class AdmcalendarComponent extends Vue {
 				if (result.data.error === 0) {
 					this.popup.success('Actualizar', result.data.descripcion);
 				this.cargar_data();
-				this.dialog = false;
+				this.dialogVisualizar = false;
 			} else {
 			this.popup.error('Actualizar', result.data.descripcion);
 			}
@@ -109,12 +114,17 @@ export default class AdmcalendarComponent extends Vue {
 		this.cargar_data();
 		this.dialog = false;
 	}
-	private Actualizar(data: services.clase_calendar): void {
+	private CancelarPopupVisualizar() {
+		this.cargar_data();
+		this.dialogVisualizar = false;
+	}
+	private Revisar(data: services.clase_calendar): void {
 		this.calendar = data;
 		this.calendar.createtimestamp = this.FormatDate(Date.now());
 		this.calendar.updatetimestamp = this.FormatDate(Date.now());
 		this.operacion = 'Update';
-		this.dialog = true;
+		this.CargarCalendariosVersion();
+		this.dialogVisualizar = true;
 	}
 	private select_fecha(fecha: string) {
 		return fecha.substr(0, 10);
@@ -162,5 +172,18 @@ export default class AdmcalendarComponent extends Vue {
 			});
 		}
 		});
+	}
+
+	CargarCalendariosVersion(){
+		new services.Operaciones().Consultar(this.WebApi.ws_calendarversion_Consultar)
+			.then((rescalendarversion) => {
+				if (rescalendarversion.data._error.error === 0) {
+					this.lstcalendarversion = rescalendarversion.data._data;
+				} else {
+					this.popup.error('Consultar', rescalendarversion.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
 	}
 }

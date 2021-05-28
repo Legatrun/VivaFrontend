@@ -9,16 +9,11 @@ import helpers from '@/helper';
 @Component
 export default class AdmcalendarversionComponent extends Vue {
 	private headers: any[] = [
-		{ text: 'ID', align: 'left', sortable: true, value: 'id', width: '15%' },
-		{ text: 'description', align: 'left', sortable: false, value: 'description', width: '15%' },
-		{ text: 'validfrom', align: 'left', sortable: false, value: 'validfrom', width: '15%' },
-		{ text: 'validuntil', align: 'left', sortable: false, value: 'validuntil', width: '15%' },
-		{ text: 'calendarid', align: 'left', sortable: false, value: 'calendarid', width: '15%' },
-		{ text: 'createtimestamp', align: 'left', sortable: false, value: 'createtimestamp', width: '15%' },
-		{ text: 'updatetimestamp', align: 'left', sortable: false, value: 'updatetimestamp', width: '15%' },
-		{ text: 'createuser', align: 'left', sortable: false, value: 'createuser', width: '15%' },
-		{ text: 'updateuser', align: 'left', sortable: false, value: 'updateuser', width: '15%' },
-		{ text: 'Operaciones', align: 'center', sortable: false, value: 'action', width: '20%' },
+		{ text: 'Versión', align: 'left', sortable: true, value: 'description', width: '25%' },
+		{ text: 'Videncia Desde', align: 'left', sortable: true, value: 'validfrom', width: '25%' },
+		{ text: 'Vigencia Hasta', align: 'left', sortable: true, value: 'validuntil', width: '25%' },
+		// { text: 'calendarid', align: 'left', sortable: false, value: 'calendarid', width: '15%' },
+		{ text: 'Operaciones', align: 'center', sortable: false, value: 'action', width: '25%' },
 	];
 	// tslint:disable-next-line: variable-name
 	private menu_validfrom: boolean = false;
