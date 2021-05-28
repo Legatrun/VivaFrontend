@@ -237,7 +237,7 @@
                   dark
                   slider-color="yellow"
                   background-color="blue"
-                  style="border:solid;"
+                  style="border:solid 1px;"
                 >
                   <v-tab ripple>Aceptadores</v-tab>
                   <v-tab ripple>Dispensadores</v-tab>
