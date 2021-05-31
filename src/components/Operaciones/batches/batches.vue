@@ -57,21 +57,29 @@
 							<v-row>
 								<v-flex sm4 style="padding:5px" class="input-small">
 									<v-autocomplete
+                   v-model="buscarbatches"
 									label="Sucursal"
 									clearable
 									outlined
 									parsisten-hint
 									required
+                  :items="lstbatches"
+                  :item-text="locationidentification"
+                  :item-value="buscarbatches"
 									>
 									</v-autocomplete>
 								</v-flex>
 								<v-flex sm4 style="padding:5px" class="input-small">
 									<v-autocomplete
+                  v-model="buscarbatches"
 									label="Terminal"
 									clearable
 									outlined
 									parsisten-hint
 									required
+                  :items="lstbatches"
+                  :item-text="deviceidentification"
+                  :item-value="deviceidentification"
 									>
 									</v-autocomplete>
 								</v-flex>

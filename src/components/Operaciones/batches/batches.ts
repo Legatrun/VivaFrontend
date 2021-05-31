@@ -54,6 +54,7 @@ export default class AdmbatchesComponent extends Vue {
 	}
 	private mounted() {
 		this.cargar_data();
+		this.CargarSucursales();
 	}
 	private cargar_data() {
 		if (this.$store.state.auth !== true) {​​​​
@@ -194,5 +195,18 @@ export default class AdmbatchesComponent extends Vue {
 			this.popup.error('Consultar', 'Error Inesperado: ' + error);
 		});
 		return this.locationdescription;
+	}
+
+	CargarSucursales(){
+		new services.Operaciones().Consultar(this.WebApi.ws_locations_Consultar)
+			.then((reslocations) => {
+				if (reslocations.data._error.error === 0) {
+					this.lstlocations = reslocations.data._data;
+				} else {
+					this.popup.error('Consultar', reslocations.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
 	}
 }
