@@ -113,6 +113,103 @@
 					<span>Adicionar nuevo registro de Transacción</span>
 				</v-tooltip>
 			</template> -->
+      	<template v-slot:top>
+				<v-card>
+					<v-form ref="form" style="padding:30px 50px 20px 50px">
+						<v-toolbar style="padding:0px" dark class="green">
+							<v-toolbar-title class="font-small-color" >Filtros</v-toolbar-title>
+						</v-toolbar>
+						<v-card-text>
+						<v-layout wrap>
+              <v-flex sm6 style="padding: 5px">
+								<v-text-field class="input-small" 
+											v-model="buscartransactions"
+											label="Nro. Recibo"
+											clearable
+											persistent-hint
+											required
+                      outlined
+                      >
+								</v-text-field>
+							</v-flex>
+							<v-flex sm6 style="padding: 5px">
+								<v-text-field class="input-small" 
+											v-model="transactions.customercode"
+											label="Cliente"
+											clearable
+											persistent-hint
+											required
+                      outlined>
+								</v-text-field>
+							</v-flex>
+							<v-flex sm4 style="padding: 5px">
+								<v-autocomplete class="input-small" 
+											v-model="transactions.locationidentification"
+											label="Sucursal"
+											clearable
+											persistent-hint
+											required
+                      outlined>
+								</v-autocomplete>
+							</v-flex>
+							<v-flex sm4 style="padding: 5px">
+								<v-autocomplete class="input-small" 
+											v-model="transactions.deviceidentification"
+											label="Terminal"
+											clearable
+											persistent-hint
+											required
+                      outlined>
+								</v-autocomplete>
+							</v-flex>
+              <v-flex sm4 style="padding: 5px">
+								<v-autocomplete class="input-small" 
+											v-model="transactions.deviceidentification"
+											label="Tipo de Transacción"
+											clearable
+											persistent-hint
+											required
+                      outlined>
+								</v-autocomplete>
+							</v-flex>
+							<v-spacer></v-spacer>
+              <v-flex sm4 style="padding: 5px">
+								<v-autocomplete class="input-small" 
+											v-model="transactions.deviceidentification"
+											label="Tipo de Transacción"
+											clearable
+											persistent-hint
+											required
+                      outlined>
+								</v-autocomplete>
+							</v-flex>
+              <v-flex sm4 style="padding: 5px">
+								<v-autocomplete class="input-small" 
+											v-model="transactions.deviceidentification"
+											label="Tipo de Transacción"
+											clearable
+											persistent-hint
+											required
+                      outlined>
+								</v-autocomplete>
+							</v-flex>
+							<v-flex sm2 style="padding: 5px">
+								<v-btn small color="green" dark>
+									<v-icon>mdi-selection-search</v-icon> 
+									 Buscar
+							    </v-btn>
+							</v-flex>
+							<v-flex sm2 style="padding: 5px">
+								<v-btn small color="grey" dark>
+									<v-icon>mdi-monitor-clean</v-icon> 
+									 Limpiar
+							    </v-btn>
+							</v-flex>
+						</v-layout>
+						</v-card-text>
+					</v-form>
+				</v-card>
+			</template>
       <template v-slot:no-data>
         <v-alert :value="true" color="warning" icon="warning">
           Lo sentimos, no exiten datos a desplegar: (
