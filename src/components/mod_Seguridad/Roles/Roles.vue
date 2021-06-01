@@ -1,12 +1,16 @@
 <template>
   <v-card max-width="100%" style="margin:auto;">
-    <v-toolbar color="contrast" dark>
-      <v-toolbar-title>
+    <v-toolbar color="primary" style="color:white">
+      <v-toolbar-title class="font-large-color">
+        <!--
         <v-btn color="special" dark @click="close">
           <v-icon>mdi-arrow-left-thick</v-icon>
           Volver
         </v-btn>
-        &nbsp; &nbsp; Datos de Roles</v-toolbar-title
+
+        &nbsp; &nbsp; 
+        -->
+        Roles</v-toolbar-title
       >
       <v-divider></v-divider>
       <v-text-field
@@ -72,8 +76,8 @@
       <template v-slot:top>
         <v-tooltip bottom>
           <template v-slot:activator="{ on }">
-            <v-btn color="accent" v-on="on" @click="Insertar()"
-              >REGISTRAR</v-btn
+            <v-btn class="btn-small-color" color="cyan" v-on="on" @click="Insertar()"
+              ><v-icon left>mdi-plus</v-icon>AGREGAR</v-btn
             >
           </template>
           <span>Adicionar nuevo ROL</span>
@@ -88,7 +92,9 @@
     <v-dialog v-model="dialog" persistent max-width="50%">
       <v-card>
         <v-toolbar style="padding:10px" dark class="primary">
-          <v-toolbar-title>Datos de Roles</v-toolbar-title>
+          <v-toolbar-title>Roles</v-toolbar-title>
+          <v-spacer></v-spacer>
+					<v-btn color="error" fab dark small @click="Cancelar()">X</v-btn>
         </v-toolbar>
         <v-divider></v-divider>
         <v-form ref="form" style="padding:10px" v-model="activa">
@@ -126,7 +132,7 @@
                   persistent-hint
                   required
                   
-                  :rules="validacion"
+                  :rules="RulLetras"
                   @input="roles.descripcion = updateText(roles.descripcion)"
                 ></v-text-field>
               </v-flex>
@@ -135,7 +141,7 @@
         </v-form>
         <v-divider></v-divider>
         <v-card-actions style="justify-content: center;padding:10px">
-          <v-btn color="success" dark style="width: 50%" :disabled="!ativa
+          <v-btn color="success" dark style="width: 50%" :disabled="!activa
           " @click="Grabar()"
             >Grabar</v-btn
           >
@@ -149,3 +155,34 @@
 </template>
 
 <script src="./Roles.ts"></script>
+<style scoped>
+.font-extralarge-color {
+			font-size: 3em; /* tamaño de letra */ 
+			color: white; /* color de letra */  
+} 
+.font-large-color { 
+			font-size: 2.4em; /* tamaño de letra */ 
+			color: white; /* color de letra */ 
+} 
+.font-medium-color { 
+			font-size: 2em; /* tamaño de letra */ 
+			color: white; /* color de letra */ 
+} 
+.font-small-color { 
+			font-size: 1.4em; /* tamaño de letra */ 
+			color: white; /* color de letra */ 
+} 
+.btn-small-color{ 
+			font-size: 1.4em; /* tamaño de letra */ 
+			color: white; /* color de letra */ 
+} 
+.input-small{ 
+			font-size: 1.6em; /* tamaño de letra */ 
+} 
+.date-small{ 
+			font-size: 1.5em; /* tamaño de letra */ 
+} 
+.datatable-items-small{ 
+			font-size: 1.1em; /* tamaño de letra */ 
+} 
+</style>

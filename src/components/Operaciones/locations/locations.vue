@@ -101,7 +101,7 @@
 												dense
 												clearable
 												required
-												:rules="validacion"
+												:rules="RulLetras"
 												@input="locations.identification = updateText(locations.identification)">
 									</v-text-field>
 								</v-flex>
@@ -185,9 +185,9 @@
 											@input="locations.state_code = updateText(locations.state_code)">
 								</v-text-field>
 							</v-flex>
-						<!--falta-->
 						
-							<v-flex sm4 style="padding: 5px">
+						
+							<v-flex sm5 style="padding: 5px">
 								<v-text-field class="input-small" 
 											v-model="locations.address"
 											label="Direccion"
@@ -199,7 +199,7 @@
 											@input="locations.address = updateText(locations.address)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm4 style="padding: 5px">
+							<v-flex sm3 style="padding: 5px">
 								<v-text-field class="input-small" 
 											v-model="locations.zipcode"
 											label="Codigo Postal"
@@ -207,7 +207,7 @@
 											dense
 											clearable
 											required
-											:rules="validacion"
+											:rules="RulLetras"
 											@input="locations.zipcode = updateText(locations.zipcode)">
 								</v-text-field>
 							</v-flex>
@@ -324,7 +324,7 @@
 											dense
 											clearable
 											required
-											:rules="validacion"
+											:rules="RulLetras"
 											@input="locations.city_code = updateText(locations.city_code)">
 								</v-text-field>
 							</v-flex>
@@ -336,7 +336,7 @@
 											dense
 											clearable
 											persistent-hint
-											:rules="validacion"
+											:rules="RulLetras"
 											required
 											@input="locations.state = updateText(locations.state)">
 								</v-text-field>

@@ -45,7 +45,7 @@ export default class AdmlocationstypeComponent extends Vue {
 	];
 	RulLetras = [
 		(v: any) => !!v || 'El campo es requerido',
-		(v: any) => !(!/^[a-z A-Z]*$/.test(v)) || "No se permite vacio o espacios en blanco",
+		(v: any) => !(!/^[a-z A-Z 0-9]*$/.test(v)) || "No se permiten caracteres especiales",
 	];
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');

@@ -126,7 +126,7 @@
 							<v-spacer></v-spacer>
 						<v-card-actions>
 							<v-flex sm1.5 style="padding: 5px" text-xs-left>
-								<v-btn small color="#808B96" dark>
+								<v-btn small color="#C9E890" dark>
 									<v-icon>mdi-monitor-clean</v-icon> 
 									 Limpiar
 							    </v-btn>
