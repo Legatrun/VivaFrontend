@@ -34,6 +34,12 @@
 					<td>
 						<v-tooltip bottom>
 							<template v-slot:activator="{ on }">
+								<v-btn color="cyan" v-on="on" fab small dark  @click="AbrirReporte(props.item)"><v-icon>event</v-icon></v-btn>
+							</template>
+							<span>Abrir reporte</span>
+						</v-tooltip>
+						<v-tooltip style="padding-left:10px"   bottom>
+							<template v-slot:activator="{ on }">
 								<v-btn color="btnedit" v-on="on" fab small dark  @click="Actualizar(props.item)"><v-icon>edit</v-icon></v-btn>
 							</template>
 							<span>Modificar datos de reports</span>
@@ -138,6 +144,63 @@
 				<v-card-actions style="justify-content: center;padding:10px">
 					<v-btn color="success" dark style="width: 50%" @click="Grabar()">Grabar</v-btn>
 					<v-btn color="error" dark style="width: 50%" @click="Cancelar()">Cancelar</v-btn>
+				</v-card-actions>
+			</v-card>
+		</v-dialog>
+		<v-dialog v-model="dialogAbrir" persistent max-width="50%">
+			<v-card>
+				<v-toolbar style="padding:10px" dark class="primary">
+					<v-toolbar-title class="font-medium-color" >Abrir Reporte</v-toolbar-title>
+
+					<v-spacer></v-spacer>
+					<v-btn color="error" fab dark small @click="CancelarFormAbrir()">X</v-btn>
+				</v-toolbar>
+				<v-divider></v-divider>
+				<v-form ref="form" style="padding:10px">
+					<v-card-text>
+						<v-layout wrap>
+							<v-flex sm4 style="padding: 5px">
+								<v-autocomplete
+								:items="reportes"
+								label="Reporte"
+								outlined
+								clearable
+								>
+								</v-autocomplete>
+							</v-flex>
+							<v-flex sm4 class="hidden-xs-only" style="padding: 5px">
+								<v-menu
+									ref="menu_notifytimestamp"
+										v-model="menu_notifytimestamp"
+										:close-on-content-click="false"
+										transition="scale-transition"
+										offset-y
+
+										full-width
+										max-width="290px"
+										min-width="290px"
+										>
+									<template v-slot:activator="{ on }">
+										<v-text-field class="date-small" 
+											v-model="fechareporte"
+											label="Fecha"
+											outlined
+											persistent-hint
+											prepend-icon="event"
+											v-on="on">
+										</v-text-field>
+									</template>
+									
+									<v-date-picker v-model="fechareporte" no-title @input="menu_notifytimestamp = false"></v-date-picker>
+								</v-menu>
+							</v-flex>
+						</v-layout>
+					</v-card-text>
+				</v-form>
+				<v-divider></v-divider>
+				<v-card-actions style="justify-content: center;padding:10px">
+					<v-btn color="success" dark style="width: 50%" >Abrir</v-btn>
+					<v-btn color="error" dark style="width: 50%" @click="CancelarFormAbrir()">Cancelar</v-btn>
 				</v-card-actions>
 			</v-card>
 		</v-dialog>

@@ -21,9 +21,12 @@ export default class AdmreportsComponent extends Vue {
 	private lstreports: services.clase_reports[] = [];
 	private buscarreports = '';
 	private dialog = false;
+	private dialogAbrir = false;
 	private operacion = '';
 	private helper: helpers = new helpers();
 	private popup = new popup.Swal();
+	private fechareporte:any;
+	reportes=['reporte diario','reporte mensual' ]
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');
 	}
@@ -100,6 +103,10 @@ export default class AdmreportsComponent extends Vue {
 		this.cargar_data();
 		this.dialog = false;
 	}
+	private CancelarFormAbrir() {
+		this.cargar_data();
+		this.dialogAbrir = false;
+	}
 	private Actualizar(data: services.clase_reports): void {
 		this.reports = data;
 		this.operacion = 'Update';
@@ -151,5 +158,9 @@ export default class AdmreportsComponent extends Vue {
 			});
 		}
 		});
+	}
+
+	AbrirReporte(){
+		this.dialogAbrir = true;
 	}
 }
