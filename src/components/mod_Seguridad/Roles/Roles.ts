@@ -55,7 +55,7 @@ export default class AdmRolesComponent extends Vue {
 
 	RulLetras = [
 		(v: any) => !!v || 'El campo es requerido',
-		(v: any) => !(!/^[a-z A-Z 0-9]*$/.test(v)) || "No se permiten caracteres especiales",
+		(v: any) => !(!/^[a-z A-Z 0-9ñÑáéíóú]*$/.test(v)) || "No se permiten caracteres especiales",
 	];
   private FormatDate(data: any) {
     return moment(data).format('YYYY-MM-DD');
