@@ -35,6 +35,15 @@ export default class AdmbatchesComponent extends Vue {
 	private operacion = '';
 	private helper: helpers = new helpers();
 	private popup = new popup.Swal();
+
+
+	private validarFecha(){
+		//fecha_desde: new Date().toDateString().substr(0,10);
+		//fecha_hasta: new Date().toDateString().substr(0,10);
+		//var fecha_inicio = this.batches.fecha;
+		//var fecha_fin = this.batches.fecha_hasta;
+
+	}
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');
 	}

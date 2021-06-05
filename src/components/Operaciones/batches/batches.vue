@@ -87,8 +87,8 @@
 								<v-row>
 								<v-flex sm3 class="hidden-xs-only" style="padding: 5px">
 								<v-menu
-									ref="menu_createtimestamp"
-										v-model="menu_createtimestamp"
+									ref="menu"
+										v-model="menu"
 										:close-on-content-click="false"
 										transition="scale-transition"
 										offset-y
@@ -96,8 +96,9 @@
 										max-width="290px"
 										min-width="290px">
 									<template v-slot:activator="{ on }">
+
 										<v-text-field class="date-small" 
-											v-model="batches.createtimestamp"
+											v-model="batches.fecha_desde"
 											label="Fecha Desde"
 											outlined
 											persistent-hint
@@ -105,22 +106,22 @@
 											v-on="on">
 										</v-text-field>
 									</template>
-									<v-date-picker v-model="batches.createtimestamp" no-title @input="menu_createtimestamp = false"></v-date-picker>
+									<v-date-picker v-model="batches.fecha_desde" no-title @input="menu = false"></v-date-picker>
 								</v-menu>
 							</v-flex>
 							<v-flex sm3 class="hidden-xs-only" style="padding: 5px">
 								<v-menu
-									ref="menu_updatetimestamp"
-										v-model="menu_updatetimestamp"
+									ref="menu2"
+										v-model="menu2"
 										:close-on-content-click="false"
 										transition="scale-transition"
 										offset-y
 										full-width
 										max-width="290px"
 										min-width="290px">
-									<template v-slot:activator="{ on }">
+									<template v-slot:activator="{ on}">
 										<v-text-field class="date-small" 
-											v-model="batches.updatetimestamp"
+											v-model="batches.fecha_hasta"
 											label="Fecha Hasta"
 											outlined
 											persistent-hint
@@ -128,7 +129,7 @@
 											v-on="on">
 										</v-text-field>
 									</template>
-									<v-date-picker v-model="batches.updatetimestamp" no-title @input="menu_updatetimestamp = false"></v-date-picker>
+									<v-date-picker v-model="batches.fecha_hasta" no-title @input="menu2 = false"></v-date-picker>
 								</v-menu>
 							</v-flex>
 							<v-spacer></v-spacer>

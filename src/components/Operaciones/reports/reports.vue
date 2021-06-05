@@ -1,7 +1,7 @@
 <template>
 	<v-card>
 		<v-toolbar color="primary" style="color:white">
-			<v-toolbar-title class="font-large-color">Datos de reports</v-toolbar-title>
+			<v-toolbar-title class="font-large-color">Reportes</v-toolbar-title>
 			
 			<v-divider></v-divider>
 			<v-text-field class="input-small"
@@ -42,13 +42,13 @@
 							<template v-slot:activator="{ on }">
 								<v-btn color="btnedit" v-on="on" fab small dark  @click="Actualizar(props.item)"><v-icon>edit</v-icon></v-btn>
 							</template>
-							<span>Modificar datos de reports</span>
+							<span>Modificar datos de reporte</span>
 						</v-tooltip>
 						<v-tooltip style="padding-left:10px" bottom>
 							<template v-slot:activator="{ on }" >
 								<v-btn color="btndelete" v-on="on" fab small dark  @click="Eliminar(props.item)"><v-icon>delete</v-icon></v-btn>
 							</template>
-							<span>Eliminar reports </span>
+							<span>Eliminar reporte </span>
 						</v-tooltip>
 					</td>
 				</tr>
@@ -56,9 +56,9 @@
 			<template v-slot:top>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn class="btn-small-color" color="buttonadd" v-on="on" @click="Insertar()">REGISTRAR reports</v-btn>
+						<v-btn class="btn-small-color" color="cyan" v-on="on" @click="Insertar()"><v-icon left>mdi-plus</v-icon>Agregar</v-btn>
 					</template>
-					<span>Adicionar nuevo registro de reports</span>
+					<span>Adicionar nuevo registro de reporte</span>
 				</v-tooltip>
 			</template>
 			<template v-slot:no-data>
@@ -67,19 +67,20 @@
 				</v-alert>
 			</template>
 		</v-data-table>
-		<v-dialog v-model="dialog" persistent max-width="50%">
+		<v-dialog v-model="dialog" persistent max-width="40%">
 			<v-card>
 				<v-toolbar style="padding:10px" dark class="primary">
-					<v-toolbar-title class="font-medium-color" >Formulario de reports</v-toolbar-title>
+					<v-toolbar-title class="font-medium-color" >Reportes</v-toolbar-title>
 
 					<v-spacer></v-spacer>
 					<v-btn color="error" fab dark small @click="Cancelar()">X</v-btn>
 				</v-toolbar>
 				<v-divider></v-divider>
-				<v-form ref="form" style="padding:10px">
+				<v-form ref="form" style="padding:10px" v-model="activa">
 					<v-card-text>
 						<v-layout wrap>
 							<template v-if="operacion == 'Insert'">
+								<!--
 								<v-flex sm12 style="padding: 5px">
 									<v-text-field class="input-small" 
 												v-model="reports.id"
@@ -92,8 +93,10 @@
 												@input="reports.id = updateText(reports.id)">
 									</v-text-field>
 								</v-flex>
+								-->
 							</template>
 							<template v-else>
+								<!--
 								<v-flex sm12 style="padding: 5px">
 									<v-text-field class="input-small" 
 												v-model="reports.id"
@@ -103,46 +106,52 @@
 												persistent-hint>
 									</v-text-field>
 								</v-flex>
+								-->
 							</template>
 							<v-flex sm12 style="padding: 5px">
 								<v-text-field class="input-small" 
 											v-model="reports.reportname"
-											hint="Ingrese REPORTNAME"
-											placeholder="REPORTNAME"
+											label="Nombre de Reporte"
 											clearable
 											persistent-hint
+											outlined
 											required
+											:rules="validacion"
 											@input="reports.reportname = updateText(reports.reportname)">
 								</v-text-field>
 							</v-flex>
 							<v-flex sm12 style="padding: 5px">
-								<v-text-field class="input-small" 
+								<v-textarea class="input-small" 
 											v-model="reports.description"
-											hint="Ingrese DESCRIPTION"
-											placeholder="DESCRIPTION"
+											label="Descripción"
+											outlined
 											clearable
 											persistent-hint
 											required
+											rows="3"
+											:rules="validacion"
 											@input="reports.description = updateText(reports.description)">
-								</v-text-field>
+								</v-textarea>
 							</v-flex>
 							<v-flex sm12 style="padding: 5px">
-								<v-text-field class="input-small" 
+								<v-textarea class="input-small" 
 											v-model="reports.url"
-											hint="Ingrese URL"
-											placeholder="URL"
+											label=" URL"
+											outlined
 											clearable
 											persistent-hint
 											required
+											rows="1"
+											:rules="validacion"
 											@input="reports.url = updateText(reports.url)">
-								</v-text-field>
+								</v-textarea>
 							</v-flex>
 						</v-layout>
 					</v-card-text>
 				</v-form>
 				<v-divider></v-divider>
 				<v-card-actions style="justify-content: center;padding:10px">
-					<v-btn color="success" dark style="width: 50%" @click="Grabar()">Grabar</v-btn>
+					<v-btn color="success" dark style="width: 50%" :disabled="!activa" @click="Grabar()">Grabar</v-btn>
 					<v-btn color="error" dark style="width: 50%" @click="Cancelar()">Cancelar</v-btn>
 				</v-card-actions>
 			</v-card>

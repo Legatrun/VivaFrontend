@@ -26,6 +26,10 @@ export default class AdmreportsComponent extends Vue {
 	private helper: helpers = new helpers();
 	private popup = new popup.Swal();
 	private fechareporte:any;
+	private activa = false;
+	validacion = [
+		(v: any) => !!v || 'El campo es requerido',
+	];
 	reportes=['reporte diario','reporte mensual' ]
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');
