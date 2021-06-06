@@ -29,19 +29,34 @@ export default class AdmbatchesComponent extends Vue {
 	private batches = new services.clase_batches();
 	private lstbatches: services.clase_batches[] = [];
 	private lstlocations: services.clase_locations[] = [];
+	private message="";
+	private activa = false;
 	private locationdescription = "";
 	private buscarbatches = '';
 	private dialog = false;
 	private operacion = '';
+	
 	private helper: helpers = new helpers();
 	private popup = new popup.Swal();
+	validacion = [
+		(v: any) => !!v || "El campo es requerido"
+		
+	];
 
-
+	beforeUpdate(){
+		this.validarFecha()
+	}
 	private validarFecha(){
 		//fecha_desde: new Date().toDateString().substr(0,10);
 		//fecha_hasta: new Date().toDateString().substr(0,10);
-		//var fecha_inicio = this.batches.fecha;
-		//var fecha_fin = this.batches.fecha_hasta;
+		var fecha_inicio = this.batches.opentimestamp;
+		var fecha_fin = this.batches.closetimestamp;
+		//fecha_inicio.setHours(0,0,0,0);
+		if(fecha_inicio <= fecha_fin){
+			this.message = "";
+		}else{
+			this.message = "Fecha de Hasta tiene que ser mayor de fecha desde";
+		}
 
 	}
 	private FormatDate(data: any) {

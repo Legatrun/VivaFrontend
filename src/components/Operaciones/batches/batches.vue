@@ -52,7 +52,7 @@
 			</template>
 			<template v-slot:top >
 				<v-card flat>
-					<v-form>
+					<v-form ref="form" v-model="activa">
 						<v-container>
 							<v-row>
 								<v-flex sm4 style="padding:5px" class="input-small">
@@ -98,38 +98,42 @@
 									<template v-slot:activator="{ on }">
 
 										<v-text-field class="date-small" 
-											v-model="batches.fecha_desde"
+											v-model="batches.opentimestamp"
 											label="Fecha Desde"
 											outlined
+                      readonly
 											persistent-hint
 											prepend-icon="event"
 											v-on="on">
 										</v-text-field>
 									</template>
-									<v-date-picker v-model="batches.fecha_desde" no-title @input="menu = false"></v-date-picker>
+									<v-date-picker v-model="batches.opentimestamp" no-title @input="menu = false"></v-date-picker>
 								</v-menu>
 							</v-flex>
 							<v-flex sm3 class="hidden-xs-only" style="padding: 5px">
 								<v-menu
-									ref="menu2"
-										v-model="menu2"
+									ref="menu_closetimestamp"
+										v-model="menu_closetimestamp"
 										:close-on-content-click="false"
 										transition="scale-transition"
 										offset-y
 										full-width
 										max-width="290px"
 										min-width="290px">
-									<template v-slot:activator="{ on}">
+									<template v-slot:activator="{ on }">
 										<v-text-field class="date-small" 
-											v-model="batches.fecha_hasta"
+											v-model="batches.closetimestamp"
 											label="Fecha Hasta"
 											outlined
+                      readonly
 											persistent-hint
 											prepend-icon="event"
+                      :error-messages="message"
+                      :rules="validacion"
 											v-on="on">
 										</v-text-field>
 									</template>
-									<v-date-picker v-model="batches.fecha_hasta" no-title @input="menu2 = false"></v-date-picker>
+									<v-date-picker v-model="batches.closetimestamp" no-title @input="menu_closetimestamp = false"></v-date-picker>
 								</v-menu>
 							</v-flex>
 							<v-spacer></v-spacer>
@@ -140,7 +144,7 @@
 									 Limpiar
 							    </v-btn>
 								&nbsp;
-								<v-btn small color="cyan" dark>
+								<v-btn small color="cyan" dark :disabled="!activa">
 									<v-icon>mdi-selection-search</v-icon> 
 									 Buscar
 							    </v-btn>
