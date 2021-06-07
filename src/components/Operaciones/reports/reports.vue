@@ -27,10 +27,10 @@
 			<template slot="item" slot-scope="props">
 				<tr>
 					<!--<td class="datatable-items-small">{{ helper.showDataDescription(props.item.id,lstreports, id, descripcion)  }}</td>// Ejemplo de Uso de Helper Para obtener la Descripcion de una Tabla por medio de su Id-->
-					<td class="datatable-items-small">{{ props.item.id }}</td>
+					<!--<td class="datatable-items-small">{{ props.item.id }}</td>-->
 					<td class="datatable-items-small">{{ props.item.reportname }}</td>
-					<td class="datatable-items-small">{{ props.item.description }}</td>
-					<td class="datatable-items-small">{{ props.item.url }}</td>
+					<!--<td class="datatable-items-small">{{ props.item.description }}</td>-->
+					<!--<td class="datatable-items-small">{{ props.item.url }}</td>-->
 					<td>
 						<v-tooltip bottom>
 							<template v-slot:activator="{ on }">

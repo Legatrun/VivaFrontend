@@ -9,11 +9,11 @@ import helpers from '@/helper';
 @Component
 export default class AdmreportsComponent extends Vue {
 	private headers: any[] = [
-		{ text: 'ID', align: 'left', sortable: true, value: 'id', width: '15%' },
-		{ text: 'reportname', align: 'left', sortable: false, value: 'reportname', width: '15%' },
-		{ text: 'description', align: 'left', sortable: false, value: 'description', width: '15%' },
-		{ text: 'url', align: 'left', sortable: false, value: 'url', width: '15%' },
-		{ text: 'Operaciones', align: 'center', sortable: false, value: 'action', width: '20%' },
+		//{ text: 'ID', align: 'left', sortable: true, value: 'id', width: '15%' },
+		{ text: 'REPORTE', align: 'left', sortable: false, value: 'reportname', width: '20%' },
+		//{ text: 'description', align: 'left', sortable: false, value: 'description', width: '15%' },
+		//{ text: 'url', align: 'left', sortable: false, value: 'url', width: '15%' },
+		{ text: 'OPERACIONES', align: 'center', sortable: false, value: 'action', width: '20%' },
 	];
 	private WebApi = new services.Endpoints();
 
