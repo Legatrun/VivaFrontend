@@ -133,7 +133,7 @@
 											v-on="on">
 										</v-text-field>
 									</template>
-									<v-date-picker v-model="batches.closetimestamp" no-title @input="menu_closetimestamp = false"></v-date-picker>
+									<v-date-picker v-model="batches.closetimestamp" :min="batches.opentimestamp" no-title @input="menu_closetimestamp = false"></v-date-picker>
 								</v-menu>
 							</v-flex>
 							<v-spacer></v-spacer>
