@@ -51,11 +51,12 @@
 				</tr>
 			</template>
 			<template v-slot:top >
-				<v-card flat>
+				<v-card dark color="blue-grey darken-3">
 					<v-form ref="form" v-model="activa">
-						<v-container>
-							<v-row>
-								<v-flex sm4 style="padding:5px" class="input-small">
+            <h2 style="text-align:center; ">Filtros</h2>
+							<v-card-text>
+						    <v-layout wrap>
+								<v-flex sm6 style="padding:0px" class="input-small">
 									<v-autocomplete
                    v-model="buscarbatches"
 									label="Sucursal"
@@ -69,7 +70,7 @@
 									>
 									</v-autocomplete>
 								</v-flex>
-								<v-flex sm4 style="padding:5px" class="input-small">
+								<v-flex sm6 style="padding:0px" class="input-small">
 									<v-autocomplete
                   v-model="buscarbatches"
 									label="Terminal"
@@ -83,9 +84,7 @@
 									>
 									</v-autocomplete>
 								</v-flex>
-								</v-row>
-								<v-row>
-								<v-flex sm3 class="hidden-xs-only" style="padding: 5px">
+								<v-flex sm3 class="hidden-xs-only" style="padding: 0px">
 								<v-menu
 									ref="menu"
 										v-model="menu"
@@ -110,7 +109,7 @@
 									<v-date-picker v-model="batches.opentimestamp" no-title @input="menu = false"></v-date-picker>
 								</v-menu>
 							</v-flex>
-							<v-flex sm3 class="hidden-xs-only" style="padding: 5px">
+							<v-flex sm3 class="hidden-xs-only" style="padding: 0px">
 								<v-menu
 									ref="menu_closetimestamp"
 										v-model="menu_closetimestamp"
@@ -137,21 +136,21 @@
 								</v-menu>
 							</v-flex>
 							<v-spacer></v-spacer>
-						<v-card-actions>
-							<v-flex sm1.5 style="padding: 5px" text-xs-left>
-								<v-btn small color="#C9E890" dark>
-									<v-icon>mdi-monitor-clean</v-icon> 
-									 Limpiar
-							    </v-btn>
-								&nbsp;
-								<v-btn small color="cyan" dark :disabled="!activa">
+							<v-spacer></v-spacer>
+							<v-flex sm1.5 style="padding: 0px">
+								<v-btn color="green" dark>
 									<v-icon>mdi-selection-search</v-icon> 
 									 Buscar
 							    </v-btn>
 							</v-flex>
-						</v-card-actions>
-						</v-row>
-						</v-container>
+							<v-flex sm1.5 style="padding: 0px">
+								<v-btn color="grey" dark>
+									<v-icon>mdi-monitor-clean</v-icon> 
+									 Limpiar
+							    </v-btn>
+							</v-flex>
+						  </v-layout>
+						</v-card-text>
 					</v-form>
 				</v-card>
 			</template>
