@@ -2,5 +2,4 @@
     "urlService": "http://localhost:57171/",
     "WSAgenciaPrefix": "http://",
     "WSAgenciaSufix": "/bckSistemadecolasAgencia/"
-
 }

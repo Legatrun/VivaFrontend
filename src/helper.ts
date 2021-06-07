@@ -125,10 +125,11 @@ export default class Filter {
     
       public getWebServiceDinamico(endPoint: string) {
         // método para consultas
-        if ($store.state.agenciaOrigenSelected == -1) {
-          return $store.state.lstWSAgencias[0] + endPoint;
-        } else {
-          return $store.state.lstWSAgencias[1] + endPoint;
-        }
+        // if ($store.state.agenciaOrigenSelected == -1) {
+        //   return $store.state.lstWSAgencias[0] + endPoint;
+        // } else {
+        //   return $store.state.lstWSAgencias[1] + endPoint;
+        // }
+        return $store.state.server + endPoint;
       }
 }
