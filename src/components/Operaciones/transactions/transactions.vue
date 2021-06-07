@@ -191,14 +191,15 @@
                       outlined>
 								</v-autocomplete>
 							</v-flex>
-							<v-flex sm2 style="padding: 0px">
-								<v-btn small color="green" dark>
+              <v-spacer></v-spacer>
+							<v-flex sm2 >
+								<v-btn large color="green" dark>
 									<v-icon>mdi-selection-search</v-icon> 
 									 Buscar
 							    </v-btn>
 							</v-flex>
-							<v-flex sm2 style="padding: 0px">
-								<v-btn small color="grey" dark>
+							<v-flex sm2 >
+								<v-btn large color="grey" dark>
 									<v-icon>mdi-monitor-clean</v-icon> 
 									 Limpiar
 							    </v-btn>
