@@ -122,7 +122,7 @@ export default class AdmreportsComponent extends Vue {
 	private Eliminar(data: services.clase_reports): void {
 		swal.fire({
 			title: 'Esta seguro de esta operacion?',
-			text: 'Eliminacion de Registro' + data.id,
+			text: 'Eliminacion de Registro' + data.reportname,
 			type: 'warning',
 			showCancelButton: true,
 			confirmButtonColor: 'green',
