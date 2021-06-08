@@ -61,8 +61,8 @@
 									label="Sucursal"
 									clearable
 									outlined
-									parsisten-hint
-									required
+									parsisten-hint								
+                  no-data-text="No se encontro ningun datos"
                   :items="lstbatches"
                   :item-text="locationidentification"
                   :item-value="buscarbatches"
@@ -76,7 +76,7 @@
 									clearable
 									outlined
 									parsisten-hint
-									required
+                  no-data-text="No se encontro ningun datos"
                   :items="lstbatches"
                   :item-text="deviceidentification"
                   :item-value="deviceidentification"

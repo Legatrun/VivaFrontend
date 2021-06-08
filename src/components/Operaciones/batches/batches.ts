@@ -47,15 +47,13 @@ export default class AdmbatchesComponent extends Vue {
 		this.validarFecha()
 	}
 	private validarFecha(){
-		//fecha_desde: new Date().toDateString().substr(0,10);
-		//fecha_hasta: new Date().toDateString().substr(0,10);
 		var fecha_inicio = this.batches.opentimestamp;
 		var fecha_fin = this.batches.closetimestamp;
 		//fecha_inicio.setHours(0,0,0,0);
 		if(fecha_inicio <= fecha_fin){
 			this.message = "";
 		}else{
-			this.message = "Fecha de Hasta tiene que ser mayor de fecha desde";
+			this.message = "Fecha de Hasta no tiene que ser menor de fecha desde";
 		}
 
 	}
@@ -79,6 +77,8 @@ export default class AdmbatchesComponent extends Vue {
 	private mounted() {
 		this.cargar_data();
 		this.CargarSucursales();
+		this.batches.opentimestamp = this.FormatDate(Date.now());
+		this.batches.closetimestamp = this.FormatDate(Date.now());
 	}
 	private cargar_data() {
 		if (this.$store.state.auth !== true) {​​​​
