@@ -59,15 +59,14 @@ export default class AdmlocationsComponent extends Vue {
 	];
 	validacion = [
 		(v: any) => !!v || 'El campo es requerido',
-		(v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
 	];
 	RulLetras = [
 		(v: any) => !!v || 'El campo es requerido',
-		(v: any) => !(!/^[a-z A-Z 0-9ñÑ.#áéíóú]*$/.test(v)) || "No se permiten caracteres especiales",
+		(v: any) => !(!/^[a-z A-Z 0-9ñÑ.(),/#áéíóú]*$/.test(v)) || "No se permiten caracteres especiales",
 	];
 	Rules = [
 		(v: any) => !!v || 'El campo es requerido',
-		(v: any) => !(!/^[a-z A-ZñÑáéíóú]*$/.test(v)) || "No se permiten numeros o caracteres especiales",
+		(v: any) => !(!/^[a-z A-Z()/,ñÑáéíóú]*$/.test(v)) || "No se permiten numeros o caracteres especiales",
 	];
 	habilitado = [
 		
@@ -205,7 +204,7 @@ export default class AdmlocationsComponent extends Vue {
 	private Eliminar(data: services.clase_locations): void {
 		swal.fire({
 			title: 'Esta seguro de esta operacion?',
-			text: 'Eliminacion de Registro' + data.identification,
+			text: 'Eliminacion de Registro' + data.description,
 			type: 'warning',
 			showCancelButton: true,
 			confirmButtonColor: 'green',
