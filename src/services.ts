@@ -9,6 +9,7 @@ export class Endpoints {
 	public ws_applicationdefinition_Actualizar: string = $store.state.server + 'Api/applicationdefinition/Actualizar';
 	public ws_applicationdefinition_Eliminar: string = $store.state.server + 'Api/applicationdefinition/Eliminar';
 	public ws_batches_Consultar: string = $store.state.server + 'Api/batches/Consultar';
+	public ws_batches_ConsultarPorPaginacion: string = $store.state.server + 'Api/batches/ConsultarPorPaginacion';
 	public ws_batches_Buscar: string = $store.state.server + 'Api/batches/Buscar';
 	public ws_batches_Insertar: string = $store.state.server + 'Api/batches/Insertar';
 	public ws_batches_Actualizar: string = $store.state.server + 'Api/batches/Actualizar';
@@ -281,6 +282,8 @@ export class clase_batches {
 	public aceptordetail!: string;
 	public changerdetail!: string;
 	public returndetail!: string;
+	public initItemPagination!: number;
+	public untilItemPagination!: number;
 }
 
 // tslint:disable-next-line: max-classes-per-file class-name
@@ -799,6 +802,15 @@ export class clase_reports {
 	public url!: string;
 }
 
+// PAGINACION
+
+export class clase_pagination {
+	public initItem!: number;
+	public untilItem!: number;
+	public itemsPerPage!: number;
+	public itemsLength!: number;
+}
+
 // MODULO SEGURIDAD
 
 // tslint:disable-next-line: max-classes-per-file class-name
@@ -947,16 +959,21 @@ export class Operaciones {
 	public Consultar(url: string) {
 	  return axios.post(url);
 	}
+	public ConsultarPorPaginacion(url: string, objeto: any) {
+		return axios.post(url, objeto, {
+			headers: { 'Content-Type': 'application/json' },
+		  });
+	}
 	public Buscar(url: string, objeto: any) {
 		return axios.post(url, objeto, {
 			headers: { 'Content-Type': 'application/json' },
 		  });
-	  }
-	  public Insertar(url: string, objeto: any) {
+	}
+	public Insertar(url: string, objeto: any) {
 		  return axios.post(url, objeto, {
 			  headers: { 'Content-Type': 'application/json' },
 			});
-		}
+	}
 	public Actualizar(url: string, objeto: any) {
 		return axios.put(url, objeto, {
 		headers: { 'Content-Type': 'application/json' },

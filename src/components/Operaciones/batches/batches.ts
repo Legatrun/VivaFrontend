@@ -29,6 +29,7 @@ export default class AdmbatchesComponent extends Vue {
 	private batches = new services.clase_batches();
 	private lstbatches: services.clase_batches[] = [];
 	private sucursal = new services.clase_locations();
+	private pagination = new services.clase_pagination();
 	private lstsucursal: services.clase_locations[] = [];
 	private message="";
 	private activa = false;
@@ -107,10 +108,15 @@ export default class AdmbatchesComponent extends Vue {
 		if (this.$store.state.auth !== true) {​​​​
 			this.$router.push({​​​​ path: '/Login' }​​​​);​​​​
 		}
-		new services.Operaciones().Consultar(this.WebApi.ws_batches_Consultar)
+		this.batches.initItemPagination = 0;
+		this.batches.untilItemPagination = 5;
+
+		new services.Operaciones().ConsultarPorPaginacion(this.WebApi.ws_batches_ConsultarPorPaginacion,this.batches)
 			.then((resbatches) => {
 				if (resbatches.data._error.error === 0) {
+					debugger
 					this.lstbatches = resbatches.data._data;
+					this.pagination = resbatches.data._pagination;
 					this.dialog = false;
 				} else {
 					this.popup.error('Consultar', resbatches.data._error.descripcion);
