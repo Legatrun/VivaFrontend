@@ -26,7 +26,7 @@
 			<template slot="item" slot-scope="props">
 				<tr>
           <td class="datatable-items-small">
-            {{ FormatearSucursal(props.item.locationidentification) }}
+            {{ FormatSucursal(props.item.locationidentification) }}
           </td>
           <td class="datatable-items-small">
             {{ props.item.deviceidentification }}
@@ -159,7 +159,7 @@
 				</v-alert>
 			</template>
 		</v-data-table>
-		<v-dialog v-model="dialog" max-width="55%">
+		<v-dialog v-model="dialog" max-width="70%">
 			<v-card>
 				<v-toolbar style="padding:10px" dark class="primary">
 					<v-toolbar-title class="font-medium-color" >Lotes</v-toolbar-title>
@@ -566,7 +566,7 @@
 			color: white; /* color de letra */ 
 } 
 .input-small{ 
-			font-size: 1.6em; /* tamaño de letra */ 
+			font-size: 1.3em; /* tamaño de letra */ 
 } 
 .date-small{ 
 			font-size: 1.5em; /* tamaño de letra */ 

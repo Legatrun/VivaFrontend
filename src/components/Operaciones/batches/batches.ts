@@ -28,7 +28,6 @@ export default class AdmbatchesComponent extends Vue {
 	private WebApi = new services.Endpoints();
 	private batches = new services.clase_batches();
 	private lstbatches: services.clase_batches[] = [];
-	private lstlocations: services.clase_locations[] = [];
 	private sucursal = new services.clase_locations();
 	private lstsucursal: services.clase_locations[] = [];
 	private message="";
@@ -81,13 +80,15 @@ export default class AdmbatchesComponent extends Vue {
 			return 'NO';
 		}
 	}
-	private FormatEstado(data: any){
+	private FormatEstado(data: any): string{
 		if(data == 1){
-			return 'Close';
+			return "Close";
 		}
 		if(data == 2){
-			return 'Open';
+			return "Open";
 		}	
+
+		return ""
 	}
 	private updateText(Value: string) {
 		if (Value !== null) {
@@ -160,8 +161,8 @@ export default class AdmbatchesComponent extends Vue {
 		}
 	}
 	private Cancelar() {
-		this.cargar_data();
 		this.dialog = false;
+		this.cargar_data();
 	}
 	private Actualizar(data: services.clase_batches): void {
 		this.batches = data;
@@ -171,8 +172,7 @@ export default class AdmbatchesComponent extends Vue {
 		this.batches.closetimestamp = this.FormatDate(Date.now());
 		this.batches.synctimestamp = this.FormatDate(Date.now());
 		this.operacion = 'Update';
-		this.FormatLocation(this.batches.locationidentification);
-		//this.FormatearSucursal(this.batches.locationidentification);
+		this.batches.locationidentification = this.FormatSucursal(this.batches.locationidentification);
 		this.dialog = true;
 	}
 	private select_fecha(fecha: string) {
@@ -222,33 +222,12 @@ export default class AdmbatchesComponent extends Vue {
 		}
 		});
 	}
-
-	private FormatLocation(locationId:any):string{
-		new services.Operaciones().Consultar(this.WebApi.ws_locations_Consultar)
-			.then((reslocation) => {
-				if (reslocation.data._error.error === 0) {
-					this.lstlocations = reslocation.data._data;
-					var newthis = this;
-					this.lstlocations.forEach(function(loc)
-					{
-						newthis.locationdescription = loc.description;
-					})
-
-					return this.locationdescription;
-				} else {
-					this.popup.error('Consultar', reslocation.data._error.descripcion);
-				}
-			}).catch((error) => {
-			this.popup.error('Consultar', 'Error Inesperado: ' + error);
-		});
-		return this.locationdescription;
-	}
-
-	CargarSucursales(){
+	
+	private CargarSucursales(){
 		new services.Operaciones().Consultar(this.WebApi.ws_locations_Consultar)
 			.then((reslocations) => {
 				if (reslocations.data._error.error === 0) {
-					this.lstlocations = reslocations.data._data;
+					this.lstsucursal = reslocations.data._data;
 				} else {
 					this.popup.error('Consultar', reslocations.data._error.descripcion);
 				}
@@ -256,7 +235,7 @@ export default class AdmbatchesComponent extends Vue {
 					this.popup.error('Consultar', 'Error Inesperado: ' + error);
 			});
 	}
-	private FormatearSucursal(locationidentification: any):string {
+	private FormatSucursal(locationidentification: any):string {
 		var nombreSucursal = "";
 		this.lstsucursal.forEach(function(value) {
 		  if (value.identification == locationidentification) {
