@@ -196,7 +196,7 @@ export default class AdmAplicacionesComponent extends Vue {
 
     if (this.operacion === 'Update') {
 
-      await this.helper.setPromesas('Api/Aplicaciones', this.aplicaciones, 'Actualizar', 'idaplicacion');
+      await this.helper.setPromesas('Api/Aplicaciones', this.aplicaciones, 'Actualizar');
 
       await Promise.all(this.$store.state.lstPromises).then((result) => {
         this.popup.success('Actualizar', 'La modificación se efectuó en Central y Agencia');
@@ -209,7 +209,7 @@ export default class AdmAplicacionesComponent extends Vue {
 
       this.aplicaciones.id_agencia = this.$store.state.agenciaSelected;
 
-      await this.helper.setPromesas('Api/Aplicaciones', this.aplicaciones, 'Insertar', 'idaplicacion');
+      await this.helper.setPromesas('Api/Aplicaciones', this.aplicaciones, 'Insertar');
 
       await Promise.all(this.$store.state.lstPromises).then((result) => {
         this.popup.success('Insertar', 'La inserción se efectuó en Central y Agencia');
@@ -247,7 +247,7 @@ export default class AdmAplicacionesComponent extends Vue {
       .then((result) => {
         if (result.value) {
 
-            this.helper.setPromesas('Api/Aplicaciones', data, 'Eliminar', 'idaplicacion');
+            this.helper.setPromesas('Api/Aplicaciones', data, 'Eliminar');
 
             Promise.all(this.$store.state.lstPromises).then((result) => {
               this.popup.success('Baja', 'La baja se efectuó en Central y Agencia');

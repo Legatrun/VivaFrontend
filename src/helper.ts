@@ -31,48 +31,26 @@ export default class Filter {
       public async setPromesas(
         endPoint: string,
         objComponent: any,
-        metodo: string,
-        nombreID: string
+        metodo: string
       ) {
         $store.commit("setPromises", []);
         let lstpromesas: Promise<void>[] = [];
-        // $store.state.lstWSAgencias.forEach((element:any) => { //?? importante: Para realizar request asincrono consecutivo no utilizar foreach, usar for in junto con async/await a la promesa
-        for (let element of $store.state.lstWSAgencias) {
-          if ($store.state.agenciaSelected == -1) {
-            //TODO: En caso de seleccionar todas las agencias, se debe registrar en cada agencia y en central por cada agencia
-            console.log("pendiente");
-          } else {
-            let promesa: any;
+
+        let promesa: any;
             if (metodo == "Insertar") {
-              //!! El service de central siempre debe ser el primero en el array
-              if (element != $store.state.server) {
-                //?? Si el servicio no es el de central, setear el id del objComponent al que devolvió la central
-    
-                objComponent[nombreID] = $store.state.centralIDresponse; // Primer valor del obj seteado
-              }
-    
               promesa = await new services.Operaciones()
-                .Insertar(element + endPoint, objComponent)
+                .Insertar($store.state.server + endPoint, objComponent)
                 .then((result) => {
                   if (result.data.error === 0) {
-                    console.log("registro en Agencia insertada satisfactoriamente");
+                    console.log("Registro realizado correctamente");
                   } else {
-                    $store.commit("switchSnackErrorRegAgencia");
-                  }
-    
-                  if (element == $store.state.server) {
-                    //?? Verificar si el servicio es el de central, si es así obtener el id que devuelve al insertar
-                    $store.commit(
-                      "setIDCentral",
-                      parseInt(result.data.descripcion)
-                    );
+                    console.log("error al ingresar nuevo registro")
                   }
                 })
                 .catch((error) => {
-                  $store.commit("switchSnackErrorRegAgencia");
                   console.error(
-                    "Error al insertar registro en Agencia: " +
-                      element +
+                    "Error al insertar registro: " +
+                    objComponent.stringify +
                       "Error: " +
                       error
                   );
@@ -81,19 +59,21 @@ export default class Filter {
             } else if (metodo == "Actualizar") {
               lstpromesas.push(
                 new services.Operaciones()
-                  .Actualizar(element + endPoint, objComponent)
+                  .Actualizar($store.state.server + endPoint, objComponent)
                   .then((result) => {
                     if (result.data.error === 0) {
-                      console.log("Modificacion en Agencia satisfactoria");
+                      console.log("Modificacion satisfactoria");
                     } else {
-                      $store.commit("switchSnackErrorRegAgencia");
+                      console.error(
+                        "Error al modificar en Agencia: " +
+                        objComponent.stringify 
+                      );
                     }
                   })
                   .catch((error) => {
-                    $store.commit("switchSnackErrorRegAgencia");
                     console.error(
                       "Error al modificar en Agencia: " +
-                        element +
+                        objComponent.stringify +
                         "Error: " +
                         error
                     );
@@ -102,24 +82,23 @@ export default class Filter {
             } else if (metodo == "Eliminar") {
               lstpromesas.push(
                 new services.Operaciones()
-                  .Eliminar(element + endPoint, objComponent)
+                  .Eliminar($store.state.server + endPoint, objComponent)
                   .then((result) => {
                     if (result.data.error === 0) {
-                      console.log("Eliminacion en Agencia satisfactoria");
+                      console.log("Eliminacion satisfactoria");
                     } else {
-                      $store.commit("switchSnackErrorRegAgencia");
+                      console.error(
+                        "Error al Eliminar en Agencia: " + objComponent.stringify
+                      );
                     }
                   })
                   .catch((error) => {
-                    $store.commit("switchSnackErrorRegAgencia");
                     console.error(
-                      "Error al Eliminar en Agencia: " + element + "Error: " + error
+                      "Error al Eliminar en Agencia: " + objComponent.stringify + "Error: " + error
                     );
                   })
               );
             }
-          }
-        }
         $store.commit("setPromises", lstpromesas);
       }
     
