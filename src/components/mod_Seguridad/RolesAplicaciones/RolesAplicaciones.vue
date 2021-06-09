@@ -25,9 +25,9 @@
 			<template slot="item" slot-scope="props">
 				<tr>
 					
+					<!-- <td>{{ props.item.idrolesaplicaciones }}</td> -->
 					<td>{{ FormatRol(props.item.idrol) }}</td>
-					<td>{{ props.item.idrolesaplicaciones }}</td>
-					<td>{{ props.item.idaplicacion }}</td>
+					<td>{{ FormatAplicacion(props.item.idaplicacion) }}</td>
 					<td>
 						<v-tooltip bottom>
 							<template v-slot:activator="{ on }">
