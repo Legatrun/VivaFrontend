@@ -222,7 +222,7 @@
               <v-flex sm4 style="padding: 5px">
                 <v-text-field
                   class="input-small"
-                  v-model="batches.status"
+                  v-model="statusDetail"
                   hint="Solo lectura"
                   label="Estado"
                   readonly

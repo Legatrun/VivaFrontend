@@ -37,6 +37,7 @@ export default class AdmbatchesComponent extends Vue {
 	private buscarbatches = '';
 	private dialog = false;
 	private operacion = '';
+	private statusDetail = '';
 	itemsPerPage: number = 0;
 	totalItems: number = 0;
 	totalPages: number = 0;
@@ -184,6 +185,7 @@ export default class AdmbatchesComponent extends Vue {
 		this.batches.synctimestamp = this.FormatDate(Date.now());
 		this.operacion = 'Update';
 		this.batches.locationidentification = this.FormatSucursal(this.batches.locationidentification);
+		this.statusDetail = this.FormatEstado(this.batches.status);
 		this.dialog = true;
 	}
 	private select_fecha(fecha: string) {
