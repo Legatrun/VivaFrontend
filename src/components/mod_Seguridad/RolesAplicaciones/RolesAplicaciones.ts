@@ -2,27 +2,28 @@ import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
 import * as services from '@/services';
 import swal from 'sweetalert2';
+import * as popup from '@/popup';
 import moment from 'moment';
 
 @Component
 export default class AdmRolesAplicacionesComponent extends Vue {
   private headers: any[] = [
+   // {
+     // text: 'IDRolesAplicaciones',
+      //align: 'left',
+      //sortable: true,
+      //value: 'idrolesaplicaciones',
+      //width: '15%',
+    //},
     {
-      text: 'IDRolesAplicaciones',
-      align: 'left',
-      sortable: true,
-      value: 'idrolesaplicaciones',
-      width: '15%',
-    },
-    {
-      text: 'idrol',
+      text: 'Rol',
       align: 'left',
       sortable: false,
       value: 'idrol',
       width: '15%',
     },
     {
-      text: 'idaplicacion',
+      text: 'Aplicación',
       align: 'left',
       sortable: false,
       value: 'idaplicacion',
@@ -39,11 +40,25 @@ export default class AdmRolesAplicacionesComponent extends Vue {
   private WebApi: string = this.$store.state.server + 'Api/RolesAplicaciones';
   private WebApiConsultar: string = this.$store.state.server + 'Api/RolesAplicaciones/Consultar';
   private WebApiBuscar: string = this.$store.state.server + 'Api/RolesAplicaciones/Buscar';
+
+  private WebApiRolesConsultar: string = this.$store.state.server + 'Api/Roles/Consultar';
+  private WebApiAplicacionesConsultar: string = this.$store.state.server + 'Api/Aplicaciones/Consultar';
+
   private rolesaplicaciones = new services.clase_rolesaplicaciones();
   private lstrolesaplicaciones: services.clase_rolesaplicaciones[] = [];
+  private rules = new services.clase_roles();
+  private lstrules: services.clase_roles[] = [];
+  private aplicaciones = new services.clase_aplicaciones();
+  private lstaplicaciones: services.clase_aplicaciones[] = [];
   private buscarrolesaplicaciones = '';
   private dialog = false;
   private operacion = '';
+  private activa =  false;
+  private popup = new popup.Swal();
+  validacion = [
+		(v: any) => !!v || "El campo es requerido"
+		
+	];
   private FormatDate(data: any) {
     return moment(data).format('YYYY-MM-DD');
   }
@@ -63,6 +78,8 @@ export default class AdmRolesAplicacionesComponent extends Vue {
   }
   private mounted() {
     this.cargar_data();
+    this.CargarRoles();
+    this.CargarAplicaciones();
   }
   private cargar_data() {
     // /*eslint no-shadow: 'error'*/
@@ -229,4 +246,46 @@ export default class AdmRolesAplicacionesComponent extends Vue {
         }
       });
   }
+  private CargarRoles(){
+    new services.Operaciones().Consultar(this.WebApiRolesConsultar)
+			.then((reslocations) => {
+				if (reslocations.data._error.error === 0) {
+					this.lstrules = reslocations.data._data;
+				} else {
+					this.popup.error('Consultar', reslocations.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+  }
+  private CargarAplicaciones(){
+    new services.Operaciones().Consultar(this.WebApiAplicacionesConsultar)
+			.then((reslocations) => {
+				if (reslocations.data._error.error === 0) {
+					this.lstaplicaciones = reslocations.data._data;
+				} else {
+					this.popup.error('Consultar', reslocations.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+  }
+  private FormatRol(idrol: any):string {
+		var nombreRol = "";
+		this.lstrules.forEach(function(value) {
+		  if (value.idrol == idrol) {
+        nombreRol = value.descripcion;
+		  }
+		});
+		return nombreRol;
+	}
+  private FormatAplicacion(idaplicacion: any):string {
+		var nombreAplicacion = "";
+		this.lstaplicaciones.forEach(function(value) {
+		  if (value.idaplicacion == idaplicacion) {
+        nombreAplicacion = value.nombre;
+		  }
+		});
+		return nombreAplicacion;
+	}
 }
