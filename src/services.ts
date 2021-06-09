@@ -805,10 +805,10 @@ export class clase_reports {
 // PAGINACION
 
 export class clase_pagination {
-	public initItem!: number;
-	public untilItem!: number;
-	public itemsPerPage!: number;
-	public itemsLength!: number;
+	public initItemPagination!: number;
+	public untilItemPagination!: number;
+	public itemsPerPagePagination!: number;
+	public itemsLengthPagination!: number;
 }
 
 // MODULO SEGURIDAD
