@@ -29,6 +29,7 @@ export default class AdmbatchesComponent extends Vue {
 	private batches = new services.clase_batches();
 	private lstbatches: services.clase_batches[] = [];
 	private lstlocations: services.clase_locations[] = [];
+	private lstsucursal: services.clase_locations[] = [];
 	private message="";
 	private activa = false;
 	private locationdescription = "";
@@ -42,6 +43,17 @@ export default class AdmbatchesComponent extends Vue {
 		(v: any) => !!v || "El campo es requerido"
 		
 	];
+	get lstLotesFormateados() {
+		return this.lstbatches.map((batches: services.clase_batches) => {
+		  return {
+			locationidentification:this.FormatearSucursal(batches.locationidentification),
+			deviceidentification:batches.deviceidentification,
+			status:this.FormatEstado(batches.status),
+			opentimestamp:this.FormatDate(batches.opentimestamp),
+			closetimestamp:this.FormatDate(batches.closetimestamp),
+		  };
+		});
+	  }
 
 	beforeUpdate(){
 		this.validarFecha()
@@ -66,6 +78,14 @@ export default class AdmbatchesComponent extends Vue {
 		} else {
 			return 'NO';
 		}
+	}
+	private FormatEstado(data: any){
+		if(data == 1){
+			return 'Close';
+		}
+		if(data == 2){
+			return 'Open';
+		}	
 	}
 	private updateText(Value: string) {
 		if (Value !== null) {
@@ -233,4 +253,13 @@ export default class AdmbatchesComponent extends Vue {
 					this.popup.error('Consultar', 'Error Inesperado: ' + error);
 			});
 	}
+	private FormatearSucursal(locationidentification: any) {
+		let nombreSucursal: string = "";
+		this.lstsucursal.forEach(function(value) {
+		  if (value.identification == locationidentification) {
+			nombreSucursal = value.description;
+		  }
+		});
+		return nombreSucursal;
+	  }
 }
