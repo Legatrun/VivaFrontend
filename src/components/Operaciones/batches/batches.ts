@@ -9,11 +9,12 @@ import helpers from '@/helper';
 @Component
 export default class AdmbatchesComponent extends Vue {
 	private headers: any[] = [
-		{ text: 'Sucursal', align: 'left', sortable: false, value: 'locationidentification', width: '15%' },
-		{ text: 'Terminal', align: 'left', sortable: false, value: 'deviceidentification', width: '15%' },
-		{ text: 'Estado', align: 'left', sortable: false, value: 'status', width: '15%' },
-		{ text: 'Fecha Apertura', align: 'left', sortable: false, value: 'opentimestamp', width: '15%' },
-		{ text: 'Fecha Cierre', align: 'left', sortable: false, value: 'closetimestamp', width: '15%' },
+		{ text: 'Sucursal', align: 'left', sortable: true, value: 'locationidentification', width: '15%' },
+		{ text: 'Terminal', align: 'left', sortable: true, value: 'deviceidentification', width: '15%' },
+		{ text: 'Estado', align: 'left', sortable: true, value: 'status', width: '15%' },
+		{ text: 'Fecha Apertura', align: 'left', sortable: true, value: 'opentimestamp', width: '15%' },
+		{ text: 'Fecha Cierre', align: 'left', sortable: true, value: 'closetimestamp', width: '15%' },
+		{ text: 'Operaciones', align: 'left', sortable: false, value: 'operations', width: '15%' },
 	];
 	// tslint:disable-next-line: variable-name
 	private menu_createtimestamp: boolean = false;
@@ -43,6 +44,7 @@ export default class AdmbatchesComponent extends Vue {
 	totalPages: number = 0;
 	maxPagesVisible: number = 10;
 	currentPageSelected: number = 1;
+	loadingDataTable: boolean = false;
 	private helper: helpers = new helpers();
 	private popup = new popup.Swal();
 	// pag
@@ -261,11 +263,18 @@ export default class AdmbatchesComponent extends Vue {
 	private CargarPorPaginacion(init:number,until: number){
 		this.batches.initItemPagination = init;
 		this.batches.untilItemPagination = until;
+		this.loadingDataTable = true;
+		this.lstbatches = [];
 		new services.Operaciones().ConsultarPorPaginacion(this.WebApi.ws_batches_ConsultarPorPaginacion,this.batches)
 		.then((resbatches) => {
 			if (resbatches.data._error.error === 0) {
 				this.lstbatches = resbatches.data._data;
 				this.pagination = resbatches.data._pagination;
+				// Config Pagination
+				this.itemsPerPage = this.pagination.itemsPerPagePagination;
+				this.totalPages = Math.ceil(this.pagination.itemsLengthPagination/this.pagination.itemsPerPagePagination)
+				
+				this.loadingDataTable = false;
 				this.dialog = false;
 				} else {
 					this.popup.error('Consultar', resbatches.data._error.descripcion);
@@ -275,16 +284,9 @@ export default class AdmbatchesComponent extends Vue {
 			});
 	}
 	
-	elementosPorPagina(){
-		debugger
-		let desde = this.pagination.untilItemPagination;
+	private elementosPorPagina(){
+		let desde = this.pagination.untilItemPagination - 1;
 		let hasta = this.pagination.untilItemPagination + this.pagination.itemsPerPagePagination;
 		this.CargarPorPaginacion(desde, hasta);
-		// configuration
-		this.itemsPerPage = this.pagination.itemsPerPagePagination;
-		this.totalPages = Math.ceil(this.pagination.itemsLengthPagination/
-												this.pagination.itemsPerPagePagination)
-		this.currentPageSelected = 1;
-		
 	}
 }

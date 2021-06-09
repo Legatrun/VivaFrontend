@@ -34,6 +34,9 @@
 							'items-per-page-options': [10, 20, 30, 40, 50, -1],
 							'items-per-page-text': 'Registros por Pagina:',
 						}"
+            :loading="loadingDataTable"
+            loading-text="Cargando Lotes"
+            disable-pagination=true
 						dense
 						class="elevation-1">
 			<template slot="item" slot-scope="props">
@@ -173,12 +176,13 @@
 			</template>
 		</v-data-table>
     <v-pagination
-          v-model="itemsPerPage"
+          v-model="currentPageSelected"
           :length="totalPages"
           dark
           color="cyan"
           @input="elementosPorPagina"
-
+          :total-visible="maxPagesVisible"
+          :value="currentPageSelected"
         >
      </v-pagination>
 		<v-dialog v-model="dialog" max-width="70%">
@@ -594,7 +598,7 @@
 			font-size: 1.5em; /* tamaño de letra */ 
 } 
 .datatable-items-small{ 
-			font-size: 1.3em; /* tamaño de letra */ 
+			font-size: 1.1em; /* tamaño de letra */ 
 } 
 .pestaña-aceptadores{
   background-color: #264653;
