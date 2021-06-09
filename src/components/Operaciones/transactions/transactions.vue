@@ -114,14 +114,12 @@
 				</v-tooltip>
 			</template> -->
       	<template v-slot:top>
-				<v-card>
-					<v-form ref="form" style="padding:30px 50px 20px 50px">
-						<v-toolbar style="padding:0px" dark class="green">
-							<v-toolbar-title class="font-small-color" >Filtros</v-toolbar-title>
-						</v-toolbar>
+				<v-card dark color="blue-grey darken-3">
+					<v-form ref="form" >
+				  	<h2 style="text-align:center; ">Filtros</h2>
 						<v-card-text>
 						<v-layout wrap>
-              <v-flex sm6 style="padding: 5px">
+              <v-flex sm6 style="padding: 0px">
 								<v-text-field class="input-small" 
 											v-model="buscartransactions"
 											label="Nro. Recibo"
@@ -132,7 +130,7 @@
                       >
 								</v-text-field>
 							</v-flex>
-							<v-flex sm6 style="padding: 5px">
+							<v-flex sm6 style="padding: 0px">
 								<v-text-field class="input-small" 
 											v-model="transactions.customercode"
 											label="Cliente"
@@ -142,7 +140,7 @@
                       outlined>
 								</v-text-field>
 							</v-flex>
-							<v-flex sm4 style="padding: 5px">
+							<v-flex sm4 style="padding: 0px">
 								<v-autocomplete class="input-small" 
 											v-model="transactions.locationidentification"
 											label="Sucursal"
@@ -152,7 +150,7 @@
                       outlined>
 								</v-autocomplete>
 							</v-flex>
-							<v-flex sm4 style="padding: 5px">
+							<v-flex sm4 style="padding: 0px">
 								<v-autocomplete class="input-small" 
 											v-model="transactions.deviceidentification"
 											label="Terminal"
@@ -162,7 +160,7 @@
                       outlined>
 								</v-autocomplete>
 							</v-flex>
-              <v-flex sm4 style="padding: 5px">
+              <v-flex sm4 style="padding: 0px">
 								<v-autocomplete class="input-small" 
 											v-model="transactions.deviceidentification"
 											label="Tipo de Transacción"
@@ -173,7 +171,7 @@
 								</v-autocomplete>
 							</v-flex>
 							<v-spacer></v-spacer>
-              <v-flex sm4 style="padding: 5px">
+              <v-flex sm4 style="padding: 0px">
 								<v-autocomplete class="input-small" 
 											v-model="transactions.deviceidentification"
 											label="Tipo de Transacción"
@@ -183,7 +181,7 @@
                       outlined>
 								</v-autocomplete>
 							</v-flex>
-              <v-flex sm4 style="padding: 5px">
+              <v-flex sm4 style="padding: 0px">
 								<v-autocomplete class="input-small" 
 											v-model="transactions.deviceidentification"
 											label="Tipo de Transacción"
@@ -193,14 +191,15 @@
                       outlined>
 								</v-autocomplete>
 							</v-flex>
-							<v-flex sm2 style="padding: 5px">
-								<v-btn small color="green" dark>
+              <v-spacer></v-spacer>
+							<v-flex sm2 >
+								<v-btn large color="green" dark>
 									<v-icon>mdi-selection-search</v-icon> 
 									 Buscar
 							    </v-btn>
 							</v-flex>
-							<v-flex sm2 style="padding: 5px">
-								<v-btn small color="grey" dark>
+							<v-flex sm2 >
+								<v-btn large color="grey" dark>
 									<v-icon>mdi-monitor-clean</v-icon> 
 									 Limpiar
 							    </v-btn>

@@ -98,49 +98,50 @@
 				</tr>
 			</template>
 			<template v-slot:top>
-				<v-card>
-					<v-form ref="form" style="padding:30px 50px 20px 50px">
-						<v-toolbar style="padding:0px" dark class="green">
-							<v-toolbar-title class="font-small-color" >Filtros</v-toolbar-title>
-						</v-toolbar>
+				<v-card dark color="blue-grey darken-3">
+					<v-form ref="form" >
+						<h2 style="text-align:center; ">Filtros</h2>
 						<v-card-text>
 						<v-layout wrap>
-							<v-flex sm3 style="padding: 5px">
+							<v-flex sm3 style="padding: 0px">
 								<v-autocomplete class="input-small" 
 											v-model="devicestatuscolletions.id"
 											label="Sucursal"
 											clearable
 											persistent-hint
-											required>
+											required
+											outlined>
 								</v-autocomplete>
 							</v-flex>
-							<v-flex sm3 style="padding: 5px">
+							<v-flex sm3 style="padding: 0px">
 								<v-autocomplete class="input-small" 
 											v-model="devicestatuscolletions.id"
 											label="Terminal"
 											clearable
 											persistent-hint
-											required>
+											required
+											outlined>
 								</v-autocomplete>
 							</v-flex>
-							<v-flex sm3 style="padding: 5px">
+							<v-flex sm3 style="padding: 0px">
 								<v-autocomplete class="input-small" 
 											v-model="devicestatuscolletions.id"
 											label="Estado"
 											clearable
 											persistent-hint
-											required>
+											required
+											outlined>
 								</v-autocomplete>
 							</v-flex>
 							<v-spacer></v-spacer>
-							<v-flex sm1.5 style="padding: 5px">
-								<v-btn small color="green" dark>
+							<v-flex sm1.5 style="padding: 0px">
+								<v-btn large color="green" dark>
 									<v-icon>mdi-selection-search</v-icon> 
 									 Buscar
 							    </v-btn>
 							</v-flex>
-							<v-flex sm1.5 style="padding: 5px">
-								<v-btn small color="grey" dark>
+							<v-flex sm1.5 style="padding: 0px">
+								<v-btn large color="grey" dark>
 									<v-icon>mdi-monitor-clean</v-icon> 
 									 Limpiar
 							    </v-btn>
