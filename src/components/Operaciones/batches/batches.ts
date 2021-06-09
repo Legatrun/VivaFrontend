@@ -39,12 +39,14 @@ export default class AdmbatchesComponent extends Vue {
 	private dialog = false;
 	private operacion = '';
 	private statusDetail = '';
-	itemsPerPage: number = 0;
+	itemsPerPage: number = 10;
 	totalItems: number = 0;
 	totalPages: number = 0;
 	maxPagesVisible: number = 10;
 	currentPageSelected: number = 1;
+	pagePreviousSelected: number = 0;
 	loadingDataTable: boolean = false;
+	disabledPagination: boolean = false;
 	private helper: helpers = new helpers();
 	private popup = new popup.Swal();
 	// pag
@@ -79,6 +81,7 @@ export default class AdmbatchesComponent extends Vue {
 	  */
 	beforeUpdate(){
 		this.validarFecha()
+		this.pagePreviousSelected = this.currentPageSelected;
 	}
 	private validarFecha(){
 		var fecha_inicio = this.batches.opentimestamp;
@@ -123,13 +126,22 @@ export default class AdmbatchesComponent extends Vue {
 		this.CargarSucursales();
 		this.batches.opentimestamp = this.FormatDate(Date.now());
 		this.batches.closetimestamp = this.FormatDate(Date.now());
+
+		this.itemsPerPage = 10;
+		this.totalItems = 0;
+		this.totalPages = 0;
+		this.maxPagesVisible = 10;
+		this.currentPageSelected = 1;
+		this.pagePreviousSelected = 0;
+		this.loadingDataTable = false;
+		this.disabledPagination = false;
 	}
 	private cargar_data() {
 		if (this.$store.state.auth !== true) {​​​​
 			this.$router.push({​​​​ path: '/Login' }​​​​);​​​​
 		}
 		let desde = 0;
-		let hasta = 20;
+		let hasta = 10;
 		this.CargarPorPaginacion(desde,hasta);
 		
 	}
@@ -264,17 +276,21 @@ export default class AdmbatchesComponent extends Vue {
 		this.batches.initItemPagination = init;
 		this.batches.untilItemPagination = until;
 		this.loadingDataTable = true;
+		this.disabledPagination = true;
 		this.lstbatches = [];
+
+
 		new services.Operaciones().ConsultarPorPaginacion(this.WebApi.ws_batches_ConsultarPorPaginacion,this.batches)
 		.then((resbatches) => {
 			if (resbatches.data._error.error === 0) {
 				this.lstbatches = resbatches.data._data;
 				this.pagination = resbatches.data._pagination;
 				// Config Pagination
-				this.itemsPerPage = this.pagination.itemsPerPagePagination;
-				this.totalPages = Math.ceil(this.pagination.itemsLengthPagination/this.pagination.itemsPerPagePagination)
+				// this.itemsPerPage = this.pagination.itemsPerPagePagination;
+				this.totalPages = Math.ceil(this.pagination.itemsLengthPagination/this.itemsPerPage)
 				
 				this.loadingDataTable = false;
+				this.disabledPagination = false;
 				this.dialog = false;
 				} else {
 					this.popup.error('Consultar', resbatches.data._error.descripcion);
@@ -285,8 +301,22 @@ export default class AdmbatchesComponent extends Vue {
 	}
 	
 	private elementosPorPagina(){
-		let desde = this.pagination.untilItemPagination - 1;
-		let hasta = this.pagination.untilItemPagination + this.pagination.itemsPerPagePagination;
-		this.CargarPorPaginacion(desde, hasta);
+		// this.pagePreviousSelected = this.currentPageSelected;
+		let desde = this.pagination.untilItemPagination;
+		let hasta = this.pagination.untilItemPagination + this.itemsPerPage;
+		// alert("Pagina actual: "+this.currentPageSelected + " Pagina Anterior: "+this.pagePreviousSelected)
+		if(this.currentPageSelected > this.pagePreviousSelected)
+		{
+			this.CargarPorPaginacion(desde, hasta);
+		}
+		else{
+			var residuo = desde - hasta;
+			// alert("else: desde: "+ desde + " hasta: " +hasta)
+			this.CargarPorPaginacion(hasta-hasta, desde);
+		}
+	}
+
+	private prev(){
+		alert('Atras')
 	}
 }

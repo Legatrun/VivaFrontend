@@ -22,8 +22,8 @@
                             next-icon=">"
                             prev-icon="<"
                               > -->
+            <!-- :hide-default-footer="true" -->
 		<v-data-table 	style="padding: 5px"
-            
 						:headers="headers" 
 						:items="lstbatches" 
 						:items-per-page="itemsPerPage"
@@ -183,6 +183,8 @@
           @input="elementosPorPagina"
           :total-visible="maxPagesVisible"
           :value="currentPageSelected"
+          @previous="prev"
+          :disabled="disabledPagination"
         >
      </v-pagination>
 		<v-dialog v-model="dialog" max-width="70%">
