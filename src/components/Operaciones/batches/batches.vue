@@ -11,12 +11,25 @@
 					solo
 					hide-details></v-text-field>
 		</v-toolbar>
+    <!-- <v-data-table v-bind:items="lstagencia"
+							v-bind:headers="headers"
+							:search="buscaragencia"
+							:rows-per-page-text="rowsPerPageText"
+                            :rows-per-page-items="rowsPerPage"
+							class="elevation-1"
+                            :pagination.sync="pagination"
+                            sort-icon="🔽"
+                            next-icon=">"
+                            prev-icon="<"
+                              > -->
 		<v-data-table 	style="padding: 5px"
+            
 						:headers="headers" 
 						:items="lstbatches" 
-						:items-per-page="30"
+						:items-per-page="itemsPerPage"
 						:search = "buscarbatches" 
 						:footer-props="{
+              disablepagination:true,
 							showFirstLastPage: true,
 							'items-per-page-options': [10, 20, 30, 40, 50, -1],
 							'items-per-page-text': 'Registros por Pagina:',
@@ -159,6 +172,15 @@
 				</v-alert>
 			</template>
 		</v-data-table>
+    <v-pagination
+          v-model="itemsPerPage"
+          :length="totalPages"
+          dark
+          color="cyan"
+          @input="elementosPorPagina"
+
+        >
+     </v-pagination>
 		<v-dialog v-model="dialog" max-width="70%">
 			<v-card>
 				<v-toolbar style="padding:10px" dark class="primary">

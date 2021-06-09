@@ -37,12 +37,29 @@ export default class AdmbatchesComponent extends Vue {
 	private buscarbatches = '';
 	private dialog = false;
 	private operacion = '';
-	
+	itemsPerPage: number = 0;
+	totalItems: number = 0;
+	totalPages: number = 0;
+	maxPagesVisible: number = 10;
+	currentPageSelected: number = 1;
 	private helper: helpers = new helpers();
 	private popup = new popup.Swal();
+	// pag
+	// public buscaragencia = '';
+	// public noDataMessage = "Cargando...";
+	// public rowsPerPageText = 'Registros por Pagina:';
+	// public rowsPerPage = 20;
+    // public totalItems = 0;
+    // public desactivado = new Boolean;
+	// pages()
+	// {
+	// 	if (this.rowsPerPage == null ||
+	// 		this.totalItems == null
+	// 	) return 0
+	// 	return Math.ceil(this.totalItems / this.rowsPerPage)
+	// }
 	validacion = [
 		(v: any) => !!v || "El campo es requerido"
-		
 	];
 	/*
 	get lstLotesFormateados() {
@@ -108,22 +125,10 @@ export default class AdmbatchesComponent extends Vue {
 		if (this.$store.state.auth !== true) {​​​​
 			this.$router.push({​​​​ path: '/Login' }​​​​);​​​​
 		}
-		this.batches.initItemPagination = 0;
-		this.batches.untilItemPagination = 5;
-
-		new services.Operaciones().ConsultarPorPaginacion(this.WebApi.ws_batches_ConsultarPorPaginacion,this.batches)
-			.then((resbatches) => {
-				if (resbatches.data._error.error === 0) {
-					debugger
-					this.lstbatches = resbatches.data._data;
-					this.pagination = resbatches.data._pagination;
-					this.dialog = false;
-				} else {
-					this.popup.error('Consultar', resbatches.data._error.descripcion);
-				}
-			}).catch((error) => {
-					this.popup.error('Consultar', 'Error Inesperado: ' + error);
-			});
+		let desde = 0;
+		let hasta = 20;
+		this.CargarPorPaginacion(desde,hasta);
+		
 	}
 	private Insertar(): void {
 		this.batches = new services.clase_batches();
@@ -249,5 +254,35 @@ export default class AdmbatchesComponent extends Vue {
 		  }
 		});
 		return nombreSucursal;
-	  }
+	}
+
+	private CargarPorPaginacion(init:number,until: number){
+		this.batches.initItemPagination = init;
+		this.batches.untilItemPagination = until;
+		new services.Operaciones().ConsultarPorPaginacion(this.WebApi.ws_batches_ConsultarPorPaginacion,this.batches)
+		.then((resbatches) => {
+			if (resbatches.data._error.error === 0) {
+				this.lstbatches = resbatches.data._data;
+				this.pagination = resbatches.data._pagination;
+				this.dialog = false;
+				} else {
+					this.popup.error('Consultar', resbatches.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+	}
+	
+	elementosPorPagina(){
+		debugger
+		let desde = this.pagination.untilItemPagination;
+		let hasta = this.pagination.untilItemPagination + this.pagination.itemsPerPagePagination;
+		this.CargarPorPaginacion(desde, hasta);
+		// configuration
+		this.itemsPerPage = this.pagination.itemsPerPagePagination;
+		this.totalPages = Math.ceil(this.pagination.itemsLengthPagination/
+												this.pagination.itemsPerPagePagination)
+		this.currentPageSelected = 1;
+		
+	}
 }
