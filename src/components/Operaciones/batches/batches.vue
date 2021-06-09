@@ -13,7 +13,7 @@
 		</v-toolbar>
 		<v-data-table 	style="padding: 5px"
 						:headers="headers" 
-						:items="lstLotesFormateados" 
+						:items="lstbatches" 
 						:items-per-page="30"
 						:search = "buscarbatches" 
 						:footer-props="{
@@ -26,19 +26,19 @@
 			<template slot="item" slot-scope="props">
 				<tr>
           <td class="datatable-items-small">
-            {{ props.item.locationidentification }}
+            {{ FormatearSucursal(props.item.locationidentification) }}
           </td>
           <td class="datatable-items-small">
             {{ props.item.deviceidentification }}
           </td>
 					<td class="datatable-items-small">
-            {{ props.item.status }}
+            {{ FormatEstado(props.item.status) }}
           </td>
 					<td class="datatable-items-small">
-            {{ props.item.opentimestamp }}
+            {{ FormatDate(props.item.opentimestamp) }}
           </td>
 					<td class="datatable-items-small">
-            {{ props.item.closetimestamp }}
+            {{ FormatDate(props.item.closetimestamp) }}
           </td>
           <td>
 						<v-tooltip bottom>

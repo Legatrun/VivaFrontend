@@ -29,6 +29,7 @@ export default class AdmbatchesComponent extends Vue {
 	private batches = new services.clase_batches();
 	private lstbatches: services.clase_batches[] = [];
 	private lstlocations: services.clase_locations[] = [];
+	private sucursal = new services.clase_locations();
 	private lstsucursal: services.clase_locations[] = [];
 	private message="";
 	private activa = false;
@@ -43,6 +44,7 @@ export default class AdmbatchesComponent extends Vue {
 		(v: any) => !!v || "El campo es requerido"
 		
 	];
+	/*
 	get lstLotesFormateados() {
 		return this.lstbatches.map((batches: services.clase_batches) => {
 		  return {
@@ -54,7 +56,7 @@ export default class AdmbatchesComponent extends Vue {
 		  };
 		});
 	  }
-
+	  */
 	beforeUpdate(){
 		this.validarFecha()
 	}
@@ -170,6 +172,7 @@ export default class AdmbatchesComponent extends Vue {
 		this.batches.synctimestamp = this.FormatDate(Date.now());
 		this.operacion = 'Update';
 		this.FormatLocation(this.batches.locationidentification);
+		//this.FormatearSucursal(this.batches.locationidentification);
 		this.dialog = true;
 	}
 	private select_fecha(fecha: string) {
@@ -253,8 +256,8 @@ export default class AdmbatchesComponent extends Vue {
 					this.popup.error('Consultar', 'Error Inesperado: ' + error);
 			});
 	}
-	private FormatearSucursal(locationidentification: any) {
-		let nombreSucursal: string = "";
+	private FormatearSucursal(locationidentification: any):string {
+		var nombreSucursal = "";
 		this.lstsucursal.forEach(function(value) {
 		  if (value.identification == locationidentification) {
 			nombreSucursal = value.description;
