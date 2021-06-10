@@ -30,11 +30,12 @@
 					<!-- <td class="datatable-items-small">{{ FormatDate(props.item.updatetimestamp) }}</td>  -->
 					<td class="datatable-items-small">{{ props.item.locationidentification }}</td>
 					<td class="datatable-items-small">{{ props.item.deviceidentification }}</td>
+					<td class="datatable-items-small">{{ FormatDate(props.item.createtimestamp) }}</td>
 					<td class="datatable-items-small">{{ props.item.alarm }}</td>
 					<td class="datatable-items-small">{{ props.item.devicestatus }}</td>
 					<td class="datatable-items-small">{{ props.item.devicestatusdetail }}</td>
 					<td class="datatable-items-small">{{ props.item.operatingmode }}</td>
-					<td class="datatable-items-small">{{ props.item.status }}</td>
+					<td class="datatable-items-small">{{ props.item.operationname }}</td>
 					<!-- <td class="datatable-items-small">{{ FormatDate(props.item.createtimestamp) }}</td>
 					<td class="datatable-items-small">{{ props.item.operationname }}</td>
 					<td class="datatable-items-small">{{ props.item.sequencenumber }}</td>

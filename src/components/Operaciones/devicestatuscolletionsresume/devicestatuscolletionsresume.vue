@@ -1,7 +1,7 @@
 <template>
 	<v-card>
 		<v-toolbar color="primary" style="color:white">
-			<v-toolbar-title class="font-large-color">Datos de devicestatuscolletionsresume</v-toolbar-title>
+			<v-toolbar-title class="font-large-color">Estados</v-toolbar-title>
 			<v-divider></v-divider>
 			<v-text-field class="input-small"
 					v-model="buscardevicestatuscolletionsresume"
@@ -16,6 +16,8 @@
 						:items="lstdevicestatuscolletionsresume" 
 						:items-per-page="30"
 						:search = "buscardevicestatuscolletionsresume" 
+						:loading="loadingTable"
+						loading-text="Cargando datos de Estados"
 						:footer-props="{
 							showFirstLastPage: true,
 							'items-per-page-options': [10, 20, 30, 40, 50, -1],
@@ -26,7 +28,7 @@
 			<template slot="item" slot-scope="props">
 				<tr>
 					<!--<td class="datatable-items-small">{{ helper.showDataDescription(props.item.id,lstdevicestatuscolletionsresume, id, descripcion)  }}</td>// Ejemplo de Uso de Helper Para obtener la Descripcion de una Tabla por medio de su Id-->
-					<td class="datatable-items-small">{{ props.item.id }}</td>
+					<!-- <td class="datatable-items-small">{{ props.item.id }}</td>
 					<td class="datatable-items-small">{{ FormatDate(props.item.createtimestamp) }}</td>
 					<td class="datatable-items-small">{{ FormatDate(props.item.updatetimestamp) }}</td>
 					<td class="datatable-items-small">{{ props.item.deviceidentification }}</td>
@@ -72,30 +74,80 @@
 					<td class="datatable-items-small">{{ props.item.coinacceptorstatus }}</td>
 					<td class="datatable-items-small">{{ props.item.coinchangerstatus }}</td>
 					<td class="datatable-items-small">{{ props.item.devicestatusdetail }}</td>
-					<td class="datatable-items-small">{{ props.item.processid }}</td>
-					<td>
+					<td class="datatable-items-small">{{ props.item.processid }}</td> -->
+					<td class="datatable-items-small">{{ props.item.locationidentification }}</td>
+					<td class="datatable-items-small">{{ props.item.deviceidentification }}</td>
+					<td class="datatable-items-small">{{ FormatDateTime(props.item.createtimestamp) }}</td>
+					<td class="datatable-items-small">{{ props.item.alarm }}</td>
+					<td class="datatable-items-small">{{ FormatBloqueo(props.item.devicestatus) }}</td>
+					<td class="datatable-items-small">{{ props.item.devicestatusdetail }}</td>
+					<td class="datatable-items-small">{{ props.item.operatingmode }}</td>
+					<td class="datatable-items-small">{{ props.item.operationname }}</td> 
+					<!-- <v-btn :color="colorStatus" fab x-small></v-btn> -->
+					<!-- {{ FormatEstado(props.item.operationname) }} -->
+					<!-- <td>
 						<v-tooltip bottom>
 							<template v-slot:activator="{ on }">
 								<v-btn color="btnedit" v-on="on" fab small dark  @click="Actualizar(props.item)"><v-icon>edit</v-icon></v-btn>
 							</template>
-							<span>Modificar datos de devicestatuscolletionsresume</span>
+							<span>Ver Estado</span>
 						</v-tooltip>
-						<v-tooltip style="padding-left:10px" bottom>
-							<template v-slot:activator="{ on }" >
-								<v-btn color="btndelete" v-on="on" fab small dark  @click="Eliminar(props.item)"><v-icon>delete</v-icon></v-btn>
-							</template>
-							<span>Eliminar devicestatuscolletionsresume </span>
-						</v-tooltip>
-					</td>
+					</td> -->
 				</tr>
 			</template>
 			<template v-slot:top>
-				<v-tooltip bottom>
-					<template v-slot:activator="{ on }">
-						<v-btn class="btn-small-color" color="buttonadd" v-on="on" @click="Insertar()">REGISTRAR devicestatuscolletionsresume</v-btn>
-					</template>
-					<span>Adicionar nuevo registro de devicestatuscolletionsresume</span>
-				</v-tooltip>
+				<v-card dark color="blue-grey darken-3">
+					<v-form ref="form" >
+						<h2 style="text-align:center; ">Filtros</h2>
+						<v-card-text>
+						<v-layout wrap>
+							<v-flex sm3 style="padding: 0px">
+								<v-autocomplete class="input-small" 
+											v-model="devicestatuscolletionsresume.locationidentification"
+											label="Sucursal"
+											clearable
+											persistent-hint
+											required
+											outlined>
+								</v-autocomplete>
+							</v-flex>
+							<v-flex sm3 style="padding: 0px">
+								<v-autocomplete class="input-small" 
+											v-model="devicestatuscolletionsresume.deviceidentification"
+											label="Terminal"
+											clearable
+											persistent-hint
+											required
+											outlined>
+								</v-autocomplete>
+							</v-flex>
+							<v-flex sm3 style="padding: 0px">
+								<v-autocomplete class="input-small" 
+											v-model="devicestatuscolletionsresume.status"
+											label="Estado"
+											clearable
+											persistent-hint
+											required
+											outlined>
+								</v-autocomplete>
+							</v-flex>
+							<v-spacer></v-spacer>
+							<v-flex sm1.5 style="padding: 0px">
+								<v-btn large color="green" dark>
+									<v-icon>mdi-selection-search</v-icon> 
+									 Buscar
+							    </v-btn>
+							</v-flex>
+							<v-flex sm1.5 style="padding: 0px">
+								<v-btn large color="grey" dark>
+									<v-icon>mdi-monitor-clean</v-icon> 
+									 Limpiar
+							    </v-btn>
+							</v-flex>
+						</v-layout>
+						</v-card-text>
+					</v-form>
+				</v-card>
 			</template>
 			<template v-slot:no-data>
 				<v-alert :value="true" color="warning" icon="warning">
@@ -726,6 +778,6 @@
 			font-size: 1.5em; /* tamaño de letra */ 
 } 
 .datatable-items-small{ 
-			font-size: 1.3em; /* tamaño de letra */ 
+			font-size: 1em; /* tamaño de letra */ 
 } 
 </style> 
