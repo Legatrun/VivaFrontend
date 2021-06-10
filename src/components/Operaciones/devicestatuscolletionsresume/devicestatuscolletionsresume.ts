@@ -67,6 +67,11 @@ export default class AdmdevicestatuscolletionsresumeComponent extends Vue {
 		{ text: 'Estado', align: 'left', sortable: true, value: 'operatingname', width: '7%' },
 		// { text: 'Operaciones', align: 'left', sortable: false, value: 'operaciones', width: '7%' },
 	];
+	EstadosDisponibles=[
+		{ estadoID:'0', estadoDetalle:'Inform'},
+		{ estadoID:'1', estadoDetalle:'Open'},
+		{ estadoID:'2', estadoDetalle:'Close'},
+	]
 	// tslint:disable-next-line: variable-name
 	private menu_createtimestamp: boolean = false;
 	// tslint:disable-next-line: variable-name
@@ -78,6 +83,7 @@ export default class AdmdevicestatuscolletionsresumeComponent extends Vue {
 	private devicestatuscolletionsresume = new services.clase_devicestatuscolletionsresume();
 	private lstdevicestatuscolletionsresumeprovider: services.clase_devicestatuscolletionsresumeprovider[] = [];
 	private lstsucursales: services.clase_locations[] = [];
+	private lstdevices: services.clase_devices[] = [];
 	private buscardevicestatuscolletionsresume = '';
 	private dialog = false;
 	private operacion = '';
@@ -130,9 +136,12 @@ export default class AdmdevicestatuscolletionsresumeComponent extends Vue {
 			return Value;
 		}
 	}
+	
 	private mounted() {
 		this.cargar_data();
 		this.CargarSucursales();
+		this.CargarTerminales();
+		
 	}
 	private cargar_data() {
 		if (this.$store.state.auth !== true) {​​​​
@@ -263,6 +272,18 @@ export default class AdmdevicestatuscolletionsresumeComponent extends Vue {
 			}).catch((error) => {
 					this.popup.error('Consultar', 'Error Inesperado: ' + error);
 			});
+	}
+	private CargarTerminales(){
+		new services.Operaciones().Consultar(this.WebApi.ws_devices_Consultar)
+		.then((resdevices) => {
+			if (resdevices.data._error.error === 0) {
+				this.lstdevices = resdevices.data._data;
+			} else {
+				this.popup.error('Consultar', resdevices.data._error.descripcion);
+			}
+		}).catch((error) => {
+				this.popup.error('Consultar', 'Error Inesperado: ' + error);
+		});
 	}
 
 	private FormatSucursal(locationidentification: any):string {

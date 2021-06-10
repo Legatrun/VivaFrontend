@@ -29,7 +29,6 @@
 				<tr>
 					<!--<td class="datatable-items-small">{{ helper.showDataDescription(props.item.id,lstdevicestatuscolletionsresume, id, descripcion)  }}</td>// Ejemplo de Uso de Helper Para obtener la Descripcion de una Tabla por medio de su Id-->
 					<!-- <td class="datatable-items-small">{{ props.item.id }}</td>
-					<td class="datatable-items-small">{{ FormatDate(props.item.createtimestamp) }}</td>
 					<td class="datatable-items-small">{{ FormatDate(props.item.updatetimestamp) }}</td>
 					<td class="datatable-items-small">{{ props.item.deviceidentification }}</td>
 					<td class="datatable-items-small">{{ props.item.locationidentification }}</td>
@@ -102,33 +101,43 @@
 						<v-card-text>
 						<v-layout wrap>
 							<v-flex sm3 style="padding: 0px">
+											<!-- v-model="devicestatuscolletionsresume.locationidentification" -->
 								<v-autocomplete class="input-small" 
-											v-model="devicestatuscolletionsresume.locationidentification"
+											v-model="buscardevicestatuscolletionsresume"
 											label="Sucursal"
 											clearable
 											persistent-hint
 											required
-											outlined>
+											outlined
+											:items="lstsucursales"
+											item-text="description"
+											item-value="identification">
 								</v-autocomplete>
 							</v-flex>
 							<v-flex sm3 style="padding: 0px">
 								<v-autocomplete class="input-small" 
-											v-model="devicestatuscolletionsresume.deviceidentification"
+											v-model="buscardevicestatuscolletionsresume"
 											label="Terminal"
 											clearable
 											persistent-hint
 											required
-											outlined>
+											outlined
+											:items="lstdevices"
+											item-text="identification"
+											item-value="identification">
 								</v-autocomplete>
 							</v-flex>
 							<v-flex sm3 style="padding: 0px">
 								<v-autocomplete class="input-small" 
-											v-model="devicestatuscolletionsresume.status"
+											v-model="buscardevicestatuscolletionsresume"
 											label="Estado"
 											clearable
 											persistent-hint
 											required
-											outlined>
+											outlined
+											:items="EstadosDisponibles"
+											item-text="estadoDetalle"
+											item-value="estadoDetalle">
 								</v-autocomplete>
 							</v-flex>
 							<v-spacer></v-spacer>

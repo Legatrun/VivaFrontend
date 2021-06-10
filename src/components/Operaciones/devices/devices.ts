@@ -128,7 +128,6 @@ export default class AdmdevicesComponent extends Vue {
 		new services.Operaciones().Consultar(this.WebApi.ws_devices_Consultar)
 			.then((resdevices) => {
 				if (resdevices.data._error.error === 0) {
-					
 					this.lstdevices = resdevices.data._data;
 					this.dialog = false;
 				} else {
