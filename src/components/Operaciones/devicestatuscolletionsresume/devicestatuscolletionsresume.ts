@@ -77,6 +77,7 @@ export default class AdmdevicestatuscolletionsresumeComponent extends Vue {
 
 	private devicestatuscolletionsresume = new services.clase_devicestatuscolletionsresume();
 	private lstdevicestatuscolletionsresume: services.clase_devicestatuscolletionsresume[] = [];
+	private lstsucursales: services.clase_locations[] = [];
 	private buscardevicestatuscolletionsresume = '';
 	private dialog = false;
 	private operacion = '';
@@ -131,6 +132,7 @@ export default class AdmdevicestatuscolletionsresumeComponent extends Vue {
 	}
 	private mounted() {
 		this.cargar_data();
+		this.CargarSucursales();
 	}
 	private cargar_data() {
 		if (this.$store.state.auth !== true) {​​​​
@@ -250,5 +252,28 @@ export default class AdmdevicestatuscolletionsresumeComponent extends Vue {
 		});
 	}
 
+	private CargarSucursales(){
+		new services.Operaciones().Consultar(this.WebApi.ws_locations_Consultar)
+			.then((reslocations) => {
+				if (reslocations.data._error.error === 0) {
+					this.lstsucursales = reslocations.data._data;
+				} else {
+					this.popup.error('Consultar', reslocations.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+	}
+
+	private FormatSucursal(locationidentification: any):string {
+		var nombreSucursal = "";
+		// debugger
+		this.lstsucursales.forEach(function(value) {
+		  if (value.identification === locationidentification) {
+			nombreSucursal = value.description;
+		  }
+		});
+		return nombreSucursal;
+	}
 
 }

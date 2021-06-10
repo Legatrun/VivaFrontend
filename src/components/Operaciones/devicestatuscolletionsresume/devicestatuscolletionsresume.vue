@@ -75,7 +75,7 @@
 					<td class="datatable-items-small">{{ props.item.coinchangerstatus }}</td>
 					<td class="datatable-items-small">{{ props.item.devicestatusdetail }}</td>
 					<td class="datatable-items-small">{{ props.item.processid }}</td> -->
-					<td class="datatable-items-small">{{ props.item.locationidentification }}</td>
+					<td class="datatable-items-small">{{ FormatSucursal(props.item.locationidentification) }}</td>
 					<td class="datatable-items-small">{{ props.item.deviceidentification }}</td>
 					<td class="datatable-items-small">{{ FormatDateTime(props.item.createtimestamp) }}</td>
 					<td class="datatable-items-small">{{ props.item.alarm }}</td>
