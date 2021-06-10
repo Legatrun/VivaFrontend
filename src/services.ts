@@ -55,6 +55,7 @@ export class Endpoints {
 	public ws_deviceinstalationprovider_Actualizar: string = $store.state.server + 'Api/deviceinstalationprovider/Actualizar';
 	public ws_deviceinstalationprovider_Eliminar: string = $store.state.server + 'Api/deviceinstalationprovider/Eliminar';
 	public ws_devicestatuscolletionsresume_Consultar: string = $store.state.server + 'Api/devicestatuscolletionsresume/Consultar';
+	public ws_devicestatuscolletionsresumeprovider_Consultar: string = $store.state.server + 'Api/devicestatuscolletionsresume/ConsultarPorProvider';
 	public ws_devicestatuscolletionsresume_Buscar: string = $store.state.server + 'Api/devicestatuscolletionsresume/Buscar';
 	public ws_devicestatuscolletionsresume_Insertar: string = $store.state.server + 'Api/devicestatuscolletionsresume/Insertar';
 	public ws_devicestatuscolletionsresume_Actualizar: string = $store.state.server + 'Api/devicestatuscolletionsresume/Actualizar';
@@ -574,6 +575,16 @@ export class clase_devicestatuscolletionsresume {
 	public coinchangerstatus!: string;
 	public devicestatusdetail!: string;
 	public processid!: number;
+}
+// tslint:disable-next-line: max-classes-per-file class-name
+export class clase_devicestatuscolletionsresumeprovider {
+	public locationidentification!: string;
+	public deviceidentification!: string;
+	public alarm!: string;
+	public devicestatus!: number;
+	public devicestatusdetail!: string;
+	public operatingmode!: string;
+	public operativename!: string;
 }
 // tslint:disable-next-line: max-classes-per-file class-name
 export class clase_devicetypes {

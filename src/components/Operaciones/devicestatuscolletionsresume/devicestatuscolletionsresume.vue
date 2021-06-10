@@ -13,7 +13,7 @@
 		</v-toolbar>
 		<v-data-table 	style="padding: 5px"
 						:headers="headers" 
-						:items="lstdevicestatuscolletionsresume" 
+						:items="lstdevicestatuscolletionsresumeprovider" 
 						:items-per-page="30"
 						:search = "buscardevicestatuscolletionsresume" 
 						:loading="loadingTable"
@@ -78,7 +78,7 @@
 					<td class="datatable-items-small">{{ FormatSucursal(props.item.locationidentification) }}</td>
 					<td class="datatable-items-small">{{ props.item.deviceidentification }}</td>
 					<td class="datatable-items-small">{{ FormatDateTime(props.item.createtimestamp) }}</td>
-					<td class="datatable-items-small">{{ props.item.alarm }}</td>
+					<td class="datatable-items-small">{{ FormatAlarma(props.item.alarm) }}</td>
 					<td class="datatable-items-small">{{ FormatBloqueo(props.item.devicestatus) }}</td>
 					<td class="datatable-items-small">{{ props.item.devicestatusdetail }}</td>
 					<td class="datatable-items-small">{{ props.item.operatingmode }}</td>

@@ -76,7 +76,7 @@ export default class AdmdevicestatuscolletionsresumeComponent extends Vue {
 	private WebApi = new services.Endpoints();
 
 	private devicestatuscolletionsresume = new services.clase_devicestatuscolletionsresume();
-	private lstdevicestatuscolletionsresume: services.clase_devicestatuscolletionsresume[] = [];
+	private lstdevicestatuscolletionsresumeprovider: services.clase_devicestatuscolletionsresumeprovider[] = [];
 	private lstsucursales: services.clase_locations[] = [];
 	private buscardevicestatuscolletionsresume = '';
 	private dialog = false;
@@ -139,15 +139,15 @@ export default class AdmdevicestatuscolletionsresumeComponent extends Vue {
 			this.$router.push({​​​​ path: '/Login' }​​​​);​​​​
 		}
 		this.loadingTable = true; 
-		new services.Operaciones().Consultar(this.WebApi.ws_devicestatuscolletionsresume_Consultar)
-			.then((resdevicestatuscolletionsresume) => {
-				if (resdevicestatuscolletionsresume.data._error.error === 0) {
-					this.lstdevicestatuscolletionsresume = resdevicestatuscolletionsresume.data._data;
+		new services.Operaciones().Consultar(this.WebApi.ws_devicestatuscolletionsresumeprovider_Consultar)
+			.then((resdevicestatuscolletionsresumeprovider) => {
+				if (resdevicestatuscolletionsresumeprovider.data._error.error === 0) {
+					this.lstdevicestatuscolletionsresumeprovider = resdevicestatuscolletionsresumeprovider.data._data;
 					// this.FormatEstado(this.devicestatuscolletionsresume)
 					this.loadingTable = false;
 					this.dialog = false;
 				} else {
-					this.popup.error('Consultar', resdevicestatuscolletionsresume.data._error.descripcion);
+					this.popup.error('Consultar', resdevicestatuscolletionsresumeprovider.data._error.descripcion);
 				}
 			}).catch((error) => {
 					this.popup.error('Consultar', 'Error Inesperado: ' + error);
@@ -267,13 +267,20 @@ export default class AdmdevicestatuscolletionsresumeComponent extends Vue {
 
 	private FormatSucursal(locationidentification: any):string {
 		var nombreSucursal = "";
-		// debugger
 		this.lstsucursales.forEach(function(value) {
 		  if (value.identification === locationidentification) {
 			nombreSucursal = value.description;
 		  }
 		});
 		return nombreSucursal;
+	}
+	private FormatAlarma(locationidentification: any) {
+		if(locationidentification == undefined || locationidentification == "" ){
+			return "Ninguna"
+		}
+		else{
+			return locationidentification;
+		}
 	}
 
 }
