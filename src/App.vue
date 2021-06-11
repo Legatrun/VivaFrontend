@@ -26,10 +26,10 @@
             </v-toolbar-title>
             <v-spacer></v-spacer>
             <v-toolbar-items class="hidden-sm-and-down">
-                <v-btn text>
+                <!-- <v-btn text>
                     <v-icon style="padding-left:20px; padding-bottom:10px">mdi-pencil</v-icon>
                     <h3>Contraseña</h3>
-                </v-btn>
+                </v-btn> -->
                 <v-btn text @click="Logout()">
                     <v-icon style="padding-left:20px; padding-bottom:10px">mdi-location-exit</v-icon>
                     <h3>Salir</h3>
