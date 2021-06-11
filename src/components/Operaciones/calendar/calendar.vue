@@ -497,7 +497,49 @@
 												<v-form>
 												<v-container>
 													<v-row>
-										
+														<v-menu
+														ref="menu_validfrom"
+															v-model="menu_validfrom"
+															:close-on-content-click="false"
+															transition="scale-transition"
+															offset-y
+															full-width
+															max-width="200px"
+															min-width="200px">
+														<template v-slot:activator="{ on }">
+															<v-text-field class="date-small" 
+																v-model="calendarversion.validfrom"
+																hint="Ingrese una fecha"
+																placeholder="Vigencia Desde"
+																persistent-hint
+																prepend-icon="event"
+																v-on="on">
+															</v-text-field>
+														</template>
+														<v-date-picker v-model="calendarversion.validfrom" no-title @input="menu_validfrom = false"></v-date-picker>
+													</v-menu>
+													<v-menu
+														ref="menu_validfrom"
+															v-model="menu_validfrom"
+															:close-on-content-click="false"
+															transition="scale-transition"
+															offset-y
+															full-width
+															max-width="200px"
+															min-width="200px">
+														<template v-slot:activator="{ on }">
+															<v-text-field class="date-small" 
+																v-model="calendarversion.validfrom"
+																hint="Ingrese una fecha"
+																placeholder="Vigencia Desde"
+																persistent-hint
+																prepend-icon="event"
+																v-on="on">
+															</v-text-field>
+														</template>
+														<v-date-picker v-model="calendarversion.validfrom" no-title @input="menu_validfrom = false"></v-date-picker>
+													</v-menu>
+													<v-btn class="btn-small-color" color="cyan" v-on="on" @click="Insertar()"><v-icon left>mdi-plus</v-icon>Agregar</v-btn>
 													</v-row>
 												</v-container>
 												</v-form>
@@ -508,7 +550,49 @@
 												<v-form>
 												<v-container>
 													<v-row>
-													
+														<v-menu
+														ref="menu_validfrom"
+															v-model="menu_validfrom"
+															:close-on-content-click="false"
+															transition="scale-transition"
+															offset-y
+															full-width
+															max-width="200px"
+															min-width="200px">
+														<template v-slot:activator="{ on }">
+															<v-text-field class="date-small" 
+																v-model="calendarversion.validfrom"
+																hint="Ingrese una fecha"
+																placeholder="Vigencia Desde"
+																persistent-hint
+																prepend-icon="event"
+																v-on="on">
+															</v-text-field>
+														</template>
+														<v-date-picker v-model="calendarversion.validfrom" no-title @input="menu_validfrom = false"></v-date-picker>
+													</v-menu>
+													<v-menu
+														ref="menu_validfrom"
+															v-model="menu_validfrom"
+															:close-on-content-click="false"
+															transition="scale-transition"
+															offset-y
+															full-width
+															max-width="200px"
+															min-width="200px">
+														<template v-slot:activator="{ on }">
+															<v-text-field class="date-small" 
+																v-model="calendarversion.validfrom"
+																hint="Ingrese una fecha"
+																placeholder="Vigencia Desde"
+																persistent-hint
+																prepend-icon="event"
+																v-on="on">
+															</v-text-field>
+														</template>
+														<v-date-picker v-model="calendarversion.validfrom" no-title @input="menu_validfrom = false"></v-date-picker>
+													</v-menu>
+													<v-btn class="btn-small-color" color="cyan" v-on="on" @click="Insertar()"><v-icon left>mdi-plus</v-icon>Agregar</v-btn>
 													</v-row>
 												</v-container>
 												</v-form>
@@ -519,7 +603,49 @@
 												<v-form>
 												<v-container>
 													<v-row>
-													
+														<v-menu
+														ref="menu_validfrom"
+															v-model="menu_validfrom"
+															:close-on-content-click="false"
+															transition="scale-transition"
+															offset-y
+															full-width
+															max-width="200px"
+															min-width="200px">
+														<template v-slot:activator="{ on }">
+															<v-text-field class="date-small" 
+																v-model="calendarversion.validfrom"
+																hint="Ingrese una fecha"
+																placeholder="Vigencia Desde"
+																persistent-hint
+																prepend-icon="event"
+																v-on="on">
+															</v-text-field>
+														</template>
+														<v-date-picker v-model="calendarversion.validfrom" no-title @input="menu_validfrom = false"></v-date-picker>
+													</v-menu>
+													<v-menu
+														ref="menu_validfrom"
+															v-model="menu_validfrom"
+															:close-on-content-click="false"
+															transition="scale-transition"
+															offset-y
+															full-width
+															max-width="200px"
+															min-width="200px">
+														<template v-slot:activator="{ on }">
+															<v-text-field class="date-small" 
+																v-model="calendarversion.validfrom"
+																hint="Ingrese una fecha"
+																placeholder="Vigencia Desde"
+																persistent-hint
+																prepend-icon="event"
+																v-on="on">
+															</v-text-field>
+														</template>
+														<v-date-picker v-model="calendarversion.validfrom" no-title @input="menu_validfrom = false"></v-date-picker>
+													</v-menu>
+													<v-btn class="btn-small-color" color="cyan" v-on="on" @click="Insertar()"><v-icon left>mdi-plus</v-icon>Agregar</v-btn>
 													</v-row>
 												</v-container>
 												</v-form>
@@ -530,7 +656,49 @@
 												<v-form>
 												<v-container>
 													<v-row>
-													
+														<v-menu
+														ref="menu_validfrom"
+															v-model="menu_validfrom"
+															:close-on-content-click="false"
+															transition="scale-transition"
+															offset-y
+															full-width
+															max-width="200px"
+															min-width="200px">
+														<template v-slot:activator="{ on }">
+															<v-text-field class="date-small" 
+																v-model="calendarversion.validfrom"
+																hint="Ingrese una fecha"
+																placeholder="Vigencia Desde"
+																persistent-hint
+																prepend-icon="event"
+																v-on="on">
+															</v-text-field>
+														</template>
+														<v-date-picker v-model="calendarversion.validfrom" no-title @input="menu_validfrom = false"></v-date-picker>
+													</v-menu>
+													<v-menu
+														ref="menu_validfrom"
+															v-model="menu_validfrom"
+															:close-on-content-click="false"
+															transition="scale-transition"
+															offset-y
+															full-width
+															max-width="200px"
+															min-width="200px">
+														<template v-slot:activator="{ on }">
+															<v-text-field class="date-small" 
+																v-model="calendarversion.validfrom"
+																hint="Ingrese una fecha"
+																placeholder="Vigencia Desde"
+																persistent-hint
+																prepend-icon="event"
+																v-on="on">
+															</v-text-field>
+														</template>
+														<v-date-picker v-model="calendarversion.validfrom" no-title @input="menu_validfrom = false"></v-date-picker>
+													</v-menu>
+													<v-btn class="btn-small-color" color="cyan" v-on="on" @click="Insertar()"><v-icon left>mdi-plus</v-icon>Agregar</v-btn>
 													</v-row>
 												</v-container>
 												</v-form>
@@ -541,7 +709,49 @@
 												<v-form>
 												<v-container>
 													<v-row>
-													
+														<v-menu
+														ref="menu_validfrom"
+															v-model="menu_validfrom"
+															:close-on-content-click="false"
+															transition="scale-transition"
+															offset-y
+															full-width
+															max-width="200px"
+															min-width="200px">
+														<template v-slot:activator="{ on }">
+															<v-text-field class="date-small" 
+																v-model="calendarversion.validfrom"
+																hint="Ingrese una fecha"
+																placeholder="Vigencia Desde"
+																persistent-hint
+																prepend-icon="event"
+																v-on="on">
+															</v-text-field>
+														</template>
+														<v-date-picker v-model="calendarversion.validfrom" no-title @input="menu_validfrom = false"></v-date-picker>
+													</v-menu>
+													<v-menu
+														ref="menu_validfrom"
+															v-model="menu_validfrom"
+															:close-on-content-click="false"
+															transition="scale-transition"
+															offset-y
+															full-width
+															max-width="200px"
+															min-width="200px">
+														<template v-slot:activator="{ on }">
+															<v-text-field class="date-small" 
+																v-model="calendarversion.validfrom"
+																hint="Ingrese una fecha"
+																placeholder="Vigencia Desde"
+																persistent-hint
+																prepend-icon="event"
+																v-on="on">
+															</v-text-field>
+														</template>
+														<v-date-picker v-model="calendarversion.validfrom" no-title @input="menu_validfrom = false"></v-date-picker>
+													</v-menu>
+													<v-btn class="btn-small-color" color="cyan" v-on="on" @click="Insertar()"><v-icon left>mdi-plus</v-icon>Agregar</v-btn>
 													</v-row>
 												</v-container>
 												</v-form>
