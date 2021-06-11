@@ -319,4 +319,11 @@ export default class AdmbatchesComponent extends Vue {
 	private prev(){
 		alert('Atras')
 	}
+
+	LimpiarFiltros(){
+		this.buscarbatches = ""
+		this.batches.createtimestamp = ""
+		this.batches.closetimestamp = ""
+	}
+
 }

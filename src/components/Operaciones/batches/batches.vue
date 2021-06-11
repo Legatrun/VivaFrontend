@@ -3,13 +3,13 @@
 		<v-toolbar color="primary" style="color:white">
 			<v-toolbar-title class="font-large-color">Lotes</v-toolbar-title>
 			<v-divider></v-divider>
-			<v-text-field class="input-small"
+			<!-- <v-text-field class="input-small"
 					v-model="buscarbatches"
 					append-icon="search"
 					label="Buscar Registro"
 					single-line
 					solo
-					hide-details></v-text-field>
+					hide-details></v-text-field> -->
 		</v-toolbar>
     <!-- <v-data-table v-bind:items="lstagencia"
 							v-bind:headers="headers"
@@ -79,10 +79,10 @@
 									clearable
 									outlined
 									parsisten-hint								
-                  no-data-text="No se encontro ningun datos"
+                  no-data-text="No se encontro ningun dato"
                   :items="lstbatches"
-                  :item-text="locationidentification"
-                  :item-value="buscarbatches"
+                  item-text="locationidentification"
+                  item-value="locationidentification"
 									>
 									</v-autocomplete>
 								</v-flex>
@@ -93,10 +93,10 @@
 									clearable
 									outlined
 									parsisten-hint
-                  no-data-text="No se encontro ningun datos"
+                  no-data-text="No se encontro ningun dato"
                   :items="lstbatches"
-                  :item-text="deviceidentification"
-                  :item-value="deviceidentification"
+                  item-text="deviceidentification"
+                  item-value="deviceidentification"
 									>
 									</v-autocomplete>
 								</v-flex>
@@ -159,7 +159,7 @@
 							    </v-btn>
 							</v-flex>
 							<v-flex sm1.5 style="padding: 0px">
-								<v-btn large color="grey" dark>
+								<v-btn large color="grey" dark @click="LimpiarFiltros()">
 									<v-icon>mdi-monitor-clean</v-icon> 
 									 Limpiar
 							    </v-btn>
