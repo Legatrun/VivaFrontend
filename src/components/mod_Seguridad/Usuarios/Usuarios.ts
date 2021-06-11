@@ -463,8 +463,7 @@ export default class AdmUsuariosComponent extends Vue {
     await this.helper.setPromesas(
       "Api/Usuarios",
       this.usuarios,
-      "Insertar",
-      "idusuario"
+      "Insertar"
     );
 
     await Promise.all(this.$store.state.lstPromises)
@@ -535,8 +534,7 @@ export default class AdmUsuariosComponent extends Vue {
     await this.helper.setPromesas(
       "Api/Autenticacion",
       this.autenticacion,
-      "Insertar",
-      "idautenticacion"
+      "Insertar"
     );
 
     await Promise.all(this.$store.state.lstPromises)

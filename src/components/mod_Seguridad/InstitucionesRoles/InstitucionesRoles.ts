@@ -496,8 +496,7 @@ export default class AdmInstitucionesRolesComponent extends Vue {
             this.helper.setPromesas(
               "Api/RolesAplicaciones",
               appAcambiar[0],
-              "Eliminar",
-              "idrolesaplicaciones"
+              "Eliminar"
             );
 
             Promise.all(this.$store.state.lstPromises)
@@ -524,8 +523,7 @@ export default class AdmInstitucionesRolesComponent extends Vue {
       this.helper.setPromesas(
         "Api/RolesAplicaciones",
         this.aplicacionRolAsignar,
-        "Insertar",
-        "idrolesaplicaciones"
+        "Insertar"
       );
 
       Promise.all(this.$store.state.lstPromises)
@@ -574,8 +572,7 @@ export default class AdmInstitucionesRolesComponent extends Vue {
               await this.helper.setPromesas(
                 "Api/AplicacionesOpModulos",
                 element,
-                "Actualizar",
-                "idaplicacionesopmodulos"
+                "Actualizar"
               );
 
               await Promise.all(this.$store.state.lstPromises)
@@ -609,8 +606,7 @@ export default class AdmInstitucionesRolesComponent extends Vue {
         await this.helper.setPromesas(
           "Api/AplicacionesOpModulos",
           modAsignar,
-          "Insertar",
-          "idaplicacionesopmodulos"
+          "Insertar"
         );
 
         await Promise.all(this.$store.state.lstPromises)

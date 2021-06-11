@@ -486,7 +486,7 @@ export default class AdmGrpUsuarioComponent extends Vue {
             //   });
 
             grpUserAeliminar[0].id_agencia = this.$store.state.agenciaSelected;
-            this.helper.setPromesas('Api/GrpUsuario', grpUserAeliminar[0], 'Eliminar', 'idgrpusuario');
+            this.helper.setPromesas('Api/GrpUsuario', grpUserAeliminar[0], 'Eliminar');
 
             Promise.all(this.$store.state.lstPromises).then((result) => {
               this.popup.success('Baja', 'La baja se efectuó en Central y Agencia');
@@ -536,7 +536,7 @@ export default class AdmGrpUsuarioComponent extends Vue {
       //     });
       //   });
 
-      this.helper.setPromesas('Api/GrpUsuario', this.grpusuario, 'Insertar', 'idgrpusuario');
+      this.helper.setPromesas('Api/GrpUsuario', this.grpusuario, 'Insertar');
 
       Promise.all(this.$store.state.lstPromises).then((result) => {
         this.popup.success('Insertar', 'La Inserción se efectuó en Central y Agencia');

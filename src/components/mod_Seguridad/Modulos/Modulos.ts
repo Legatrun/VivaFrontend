@@ -265,8 +265,7 @@ export default class AdmModulosComponent extends Vue {
     await this.helper.setPromesas(
       "Api/Modulos",
       this.modulos,
-      tipo,
-      "idmodulo"
+      tipo
     );
 
     let successPromise: boolean = false;
@@ -334,8 +333,7 @@ export default class AdmModulosComponent extends Vue {
       await this.helper.setPromesas(
         "Api/AplicacionesOpModulos",
         this.AppOpModulo,
-        tipo,
-        "idaplicacionesopmodulos"
+        tipo
       );
 
       await Promise.all(this.$store.state.lstPromises)

@@ -387,7 +387,7 @@ export default class AdmGrpUsrRolesInstitucionesComponent extends Vue {
       })
       .then(async (result) => {
         if (result.value) {
-          await this.helper.setPromesas('Api/GrpUsrRolesInstituciones', data, 'Eliminar', 'idgrpusuariorolinstitucion');
+          await this.helper.setPromesas('Api/GrpUsrRolesInstituciones', data, 'Eliminar');
 
           await Promise.all(this.$store.state.lstPromises).then((result) => {
             this.popup.success('Baja', 'La baja se efectuó en Central y Agencia');
@@ -491,7 +491,7 @@ export default class AdmGrpUsrRolesInstitucionesComponent extends Vue {
         for(let i = 0; i <= this.lstGruposSelected.length; i++){
         this.grpusrrolesinstituciones.idgrpusuario = this.lstGruposSelected[i].idgrpusuario;
 
-        await this.helper.setPromesas('Api/GrpUsrRolesInstituciones', this.grpusrrolesinstituciones, 'Insertar', 'idgrpusuariorolinstitucion');
+        await this.helper.setPromesas('Api/GrpUsrRolesInstituciones', this.grpusrrolesinstituciones, 'Insertar');
     
         await Promise.all(this.$store.state.lstPromises).then((result) => {
           this.popup.success('Insertar', 'La inserción se efectuó en Central y Agencia');

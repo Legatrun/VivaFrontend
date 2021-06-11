@@ -201,7 +201,7 @@ export default class AdmRolesComponent extends Vue {
   private async Grabar() {
     if (this.operacion === 'Update') {
       
-      await this.helper.setPromesas('Api/Roles', this.roles, 'Actualizar', 'idrol');
+      await this.helper.setPromesas('Api/Roles', this.roles, 'Actualizar');
 
       await Promise.all(this.$store.state.lstPromises).then((result) => {
         this.popup.success('Actualizar', 'La actualización se efectuó en Central y Agencia');
@@ -215,7 +215,7 @@ export default class AdmRolesComponent extends Vue {
 
       this.roles.id_agencia = this.$store.state.agenciaSelected;
 
-      await this.helper.setPromesas('Api/Roles', this.roles, 'Insertar', 'idrol');
+      await this.helper.setPromesas('Api/Roles', this.roles, 'Insertar');
 
       await Promise.all(this.$store.state.lstPromises).then((result) => {
         this.popup.success('Insertar', 'La inserción se efectuó en Central y Agencia');
@@ -253,7 +253,7 @@ export default class AdmRolesComponent extends Vue {
       })
       .then(async (result) => {
         if (result.value) {
-          await this.helper.setPromesas('Api/Roles', data, 'Eliminar', 'idrol');
+          await this.helper.setPromesas('Api/Roles', data, 'Eliminar');
 
           await Promise.all(this.$store.state.lstPromises).then((result) => {
             this.popup.success('Baja', 'La baja se efectuó en Central y Agencia');

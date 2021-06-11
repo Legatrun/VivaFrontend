@@ -220,7 +220,7 @@ export default class AdmGrupoComponent extends Vue {
     if (this.operacion === 'Update') {
 
       this.grupo.id_agencia = this.$store.state.agenciaSelected;
-      await this.helper.setPromesas('Api/Grupo', this.grupo, 'Actualizar', 'idgrupo');
+      await this.helper.setPromesas('Api/Grupo', this.grupo, 'Actualizar');
 
       await Promise.all(this.$store.state.lstPromises).then((result) => {
         this.popup.success('Modificación', 'La modificación se efectuó en Central y Agencia');
@@ -234,7 +234,7 @@ export default class AdmGrupoComponent extends Vue {
       //?? Get IDusuario from Promise 1 and use it in 2nd promise
 
       this.grupo.id_agencia = this.$store.state.agenciaSelected;
-      await this.helper.setPromesas('Api/Grupo', this.grupo, 'Insertar', 'idgrupo');
+      await this.helper.setPromesas('Api/Grupo', this.grupo, 'Insertar');
 
       await Promise.all(this.$store.state.lstPromises).then((result) => {
         console.log('La inserción de Grupo se efectuó en Central y Agencia');
@@ -247,7 +247,7 @@ export default class AdmGrupoComponent extends Vue {
       this.grupoUser.id_agencia = this.$store.state.agenciaSelected;
       this.grupoUser.idgrupo = this.$store.state.centralIDresponse;
 
-      await this.helper.setPromesas('Api/GrpUsuario', this.grupoUser, 'Insertar', 'idgrpusuario');
+      await this.helper.setPromesas('Api/GrpUsuario', this.grupoUser, 'Insertar');
 
       await Promise.all(this.$store.state.lstPromises).then((result) => {
         this.popup.success('Insertar', 'La inserción se efectuó en Central y Agencia');
