@@ -106,7 +106,7 @@
 											item-value="idrol"
 											persistent-hint
 											:rules="validacion"
-											 no-data-text="No se encontro ningun datos"
+											 no-data-text="No se encontro ningun dato"
 											@input="rolesaplicaciones.idrol = updateText(rolesaplicaciones.idrol)">
 								</v-autocomplete>
 							</v-flex>
@@ -120,7 +120,7 @@
 											item-text="nombre"
 											item-value="idaplicacion"
 											:rules="validacion"
-											 no-data-text="No se encontro ningun datos"
+											 no-data-text="No se encontro ningun dato"
 											@input="rolesaplicaciones.idaplicacion = updateText(rolesaplicaciones.idaplicacion)">
 								</v-autocomplete>
 							</v-flex>
