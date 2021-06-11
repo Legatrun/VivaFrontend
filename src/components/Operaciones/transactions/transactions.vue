@@ -3,7 +3,7 @@
     <v-toolbar color="primary" style="color:white">
       <v-toolbar-title class="font-large-color">Transacciones</v-toolbar-title>
       <v-divider></v-divider>
-      <v-text-field
+      <!-- <v-text-field
         class="input-small"
         v-model="buscartransactions"
         append-icon="search"
@@ -11,7 +11,7 @@
         single-line
         solo
         hide-details
-      ></v-text-field>
+      ></v-text-field> -->
     </v-toolbar>
     <v-data-table
     	:headers="headers" 
@@ -104,54 +104,94 @@
 							</v-flex>
 							<v-flex sm4 style="padding: 0px">
 								<v-autocomplete class="input-small" 
-											v-model="transactions.locationidentification"
+											v-model="buscartransactions"
 											label="Sucursal"
 											clearable
 											persistent-hint
 											required
-                      outlined>
+                      outlined
+                      :items="lsttransactions"
+                      item-text="locationidentification"
+                      item-value="locationidentification">
 								</v-autocomplete>
 							</v-flex>
 							<v-flex sm4 style="padding: 0px">
 								<v-autocomplete class="input-small" 
-											v-model="transactions.deviceidentification"
+											v-model="buscartransactions"
 											label="Terminal"
 											clearable
 											persistent-hint
 											required
-                      outlined>
+                      outlined
+                      :items="lsttransactions"
+                      item-text="deviceidentification"
+                      item-value="deviceidentification">
 								</v-autocomplete>
 							</v-flex>
               <v-flex sm4 style="padding: 0px">
 								<v-autocomplete class="input-small" 
-											v-model="transactions.deviceidentification"
+											v-model="buscartransactions"
 											label="Tipo de Transacción"
 											clearable
 											persistent-hint
 											required
-                      outlined>
+                      outlined
+                      :items="lsttransactions"
+                      item-text="operationname"
+                      item-value="operationname">
 								</v-autocomplete>
 							</v-flex>
 							<v-spacer></v-spacer>
               <v-flex sm4 style="padding: 0px">
-								<v-autocomplete class="input-small" 
-											v-model="transactions.deviceidentification"
-											label="Tipo de Transacción"
-											clearable
+								<v-menu
+									ref="menu"
+										v-model="menu"
+										:close-on-content-click="false"
+										transition="scale-transition"
+										offset-y
+										full-width
+										max-width="290px"
+										min-width="290px">
+									<template v-slot:activator="{ on }">
+
+										<v-text-field class="date-small" 
+											v-model="transactions.opentimestamp"
+											label="Fecha Desde"
+											outlined
+                      readonly
 											persistent-hint
-											required
-                      outlined>
-								</v-autocomplete>
+											prepend-icon="event"
+											v-on="on">
+										</v-text-field>
+									</template>
+									<v-date-picker v-model="transactions.opentimestamp" no-title @input="menu = false"></v-date-picker>
+								</v-menu>
 							</v-flex>
               <v-flex sm4 style="padding: 0px">
-								<v-autocomplete class="input-small" 
-											v-model="transactions.deviceidentification"
-											label="Tipo de Transacción"
-											clearable
+								<v-menu
+									ref="menu_closetimestamp"
+										v-model="menu_closetimestamp"
+										:close-on-content-click="false"
+										transition="scale-transition"
+										offset-y
+										full-width
+										max-width="290px"
+										min-width="290px">
+									<template v-slot:activator="{ on }">
+										<v-text-field class="date-small" 
+											v-model="transactions.closetimestamp"
+											label="Fecha Hasta"
+											outlined
+                      readonly
 											persistent-hint
-											required
-                      outlined>
-								</v-autocomplete>
+											prepend-icon="event"
+                      :error-messages="message"
+                      :rules="validacion"
+											v-on="on">
+										</v-text-field>
+									</template>
+									<v-date-picker v-model="transactions.closetimestamp" :min="transactions.opentimestamp" no-title @input="menu_closetimestamp = false"></v-date-picker>
+								</v-menu>
 							</v-flex>
               <v-spacer></v-spacer>
 							<v-flex sm2 >
@@ -161,7 +201,7 @@
 							    </v-btn>
 							</v-flex>
 							<v-flex sm2 >
-								<v-btn large color="grey" dark>
+								<v-btn large color="grey" dark @click="LimpiarFiltros()">
 									<v-icon>mdi-monitor-clean</v-icon> 
 									 Limpiar
 							    </v-btn>

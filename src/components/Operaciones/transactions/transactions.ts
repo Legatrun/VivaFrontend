@@ -223,4 +223,9 @@ export default class AdmtransactionsComponent extends Vue {
 		}
 	}
 
+	LimpiarFiltros(){
+		this.buscartransactions = ""
+		this.transactions.createtimestamp = ""
+	}
+
 }
