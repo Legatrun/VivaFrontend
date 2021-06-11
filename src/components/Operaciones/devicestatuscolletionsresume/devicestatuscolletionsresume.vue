@@ -3,13 +3,13 @@
 		<v-toolbar color="primary" style="color:white">
 			<v-toolbar-title class="font-large-color">Estados</v-toolbar-title>
 			<v-divider></v-divider>
-			<v-text-field class="input-small"
+			<!-- <v-text-field class="input-small"
 					v-model="buscardevicestatuscolletionsresume"
 					append-icon="search"
 					label="Buscar Registro"
 					single-line
 					solo
-					hide-details></v-text-field>
+					hide-details></v-text-field> -->
 		</v-toolbar>
 		<v-data-table 	style="padding: 5px"
 						:headers="headers" 
