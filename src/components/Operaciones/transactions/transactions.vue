@@ -14,74 +14,36 @@
       ></v-text-field>
     </v-toolbar>
     <v-data-table
-      style="padding: 5px"
-      :headers="headers"
-      :items="lsttransactions"
-      :items-per-page="30"
-      :search="buscartransactions"
+    	:headers="headers" 
+      :items="lsttransactions" 
+      :items-per-page="itemsPerPage"
+      :search = "buscartransactions" 
       :footer-props="{
+        disablepagination:true,
         showFirstLastPage: true,
         'items-per-page-options': [10, 20, 30, 40, 50, -1],
         'items-per-page-text': 'Registros por Pagina:',
       }"
+      :loading="loadingDataTable"
+      loading-text="Cargando Lotes"
+      disable-pagination=true
       dense
       class="elevation-1"
     >
       <template slot="item" slot-scope="props">
         <tr>
-          <!--<td class="datatable-items-small">{{ helper.showDataDescription(props.item.id,lsttransactions, id, descripcion)  }}</td>// Ejemplo de Uso de Helper Para obtener la Descripcion de una Tabla por medio de su Id-->
-          <!-- <td class="datatable-items-small">{{ props.item.id }}</td> -->
-          <!-- <td class="datatable-items-small">{{ FormatDate(props.item.updatetimestamp) }}</td> -->
-          <td class="datatable-items-small">
-            {{ FormatDate(props.item.createtimestamp) }}
-          </td>
-          <td class="datatable-items-small">
-            {{ props.item.locationidentification }}
-          </td>
-          <td class="datatable-items-small">
-            {{ props.item.deviceidentification }}
-          </td>
-          <!-- <td class="datatable-items-small">{{ props.item.servicename }}</td> -->
+          <td class="datatable-items-small">{{ FormatDate(props.item.createtimestamp) }}</td>
+          <td class="datatable-items-small">{{ props.item.locationidentification }}</td>
+          <td class="datatable-items-small">{{ props.item.deviceidentification }}</td>
           <td class="datatable-items-small">{{ props.item.operationname }}</td>
-          <!-- <td class="datatable-items-small">{{ FormatDate(props.item.transporttimestamp) }}</td> -->
           <td class="datatable-items-small">{{ props.item.customernumber }}</td>
-          <!-- <td class="datatable-items-small">{{ props.item.sequencenumber }}</td> -->
-          <td class="datatable-items-small">
-            {{ props.item.transactionidentification }}
-          </td>
+          <td class="datatable-items-small">{{ props.item.transactionidentification }}</td>
           <td class="datatable-items-small">{{ props.item.amount }}</td>
           <td class="datatable-items-small">{{ props.item.resultcode }}</td>
           <td class="datatable-items-small">{{ props.item.amountreturned }}</td>
-          <td class="datatable-items-small">
-            {{ props.item.amountticketundelivered }}
-          </td>
-          <td class="datatable-items-small">
-            {{ props.item.amountentereddetail }}
-          </td>
-          <td class="datatable-items-small">
-            {{ props.item.amountticketundelivereddetail }}
-          </td>
-          <!-- <td class="datatable-items-small">{{ props.item.amountreturneddetail }}</td> -->
-          <!-- <td class="datatable-items-small">{{ props.item.payloadrequest }}</td> -->
-          <!-- <td class="datatable-items-small">{{ props.item.payloadanswer }}</td> -->
-          <!-- <td class="datatable-items-small">{{ props.item.resultmessage }}</td> -->
-          <!-- <td class="datatable-items-small">{{ props.item.provideridentification }}</td> -->
-          <!-- <td class="datatable-items-small">{{ props.item.providertransactionid }}</td> -->
-          <!-- <td class="datatable-items-small">{{ props.item.devicetransactionid }}</td> -->
-          <!-- <td class="datatable-items-small">{{ props.item.providerresultcode }}</td> -->
-          <!-- <td class="datatable-items-small">{{ props.item.providerresultmessage }}</td> -->
-          <!-- <td class="datatable-items-small">{{ props.item.batchnumber }}</td> -->
-          <!-- <td class="datatable-items-small">{{ props.item.syncstatus }}</td> -->
-          <!-- <td class="datatable-items-small">{{ FormatDate(props.item.synctimestamp) }}</td> -->
-          <!-- <td class="datatable-items-small">{{ props.item.deviceidentificationprovider }}</td> -->
-          <!-- <td class="datatable-items-small">{{ props.item.locationidentificationprovider }}</td> -->
-          <!-- <td class="datatable-items-small">{{ props.item.amountentered }}</td> -->
-          <!-- <td class="datatable-items-small">{{ props.item.operationstatus }}</td> -->
-          <!-- <td class="datatable-items-small">{{ props.item.customercode }}</td> -->
-          <!-- <td class="datatable-items-small">{{ props.item.canceled }}</td> -->
-          <!-- <td class="datatable-items-small">{{ FormatDate(props.item.canceledtimestamp) }}</td> -->
-          <!-- <td class="datatable-items-small">{{ props.item.providersequencenumber }}</td> -->
-          <!-- <td class="datatable-items-small">{{ props.item.cardsdispensed }}</td> -->
+          <td class="datatable-items-small">{{ props.item.amountticketundelivered }}</td>
+          <td class="datatable-items-small">{{ props.item.amountentereddetail }}</td>
+          <td class="datatable-items-small">{{ props.item.amountticketundelivereddetail }}</td>
           <td>
             <v-tooltip bottom>
               <template v-slot:activator="{ on }">
@@ -132,7 +94,7 @@
 							</v-flex>
 							<v-flex sm6 style="padding: 0px">
 								<v-text-field class="input-small" 
-											v-model="transactions.customercode"
+											v-model="buscartransactions"
 											label="Cliente"
 											clearable
 											persistent-hint
@@ -215,6 +177,18 @@
         </v-alert>
       </template>
     </v-data-table>
+     <v-pagination
+          v-model="currentPageSelected"
+          :length="totalPages"
+          dark
+          color="cyan"
+          @input="elementosPorPagina"
+          :total-visible="maxPagesVisible"
+          :value="currentPageSelected"
+          @previous="prev"
+          :disabled="disabledPagination"
+        >
+     </v-pagination>
     <v-dialog v-model="dialog" persistent max-width="60%">
       <v-card>
         <v-toolbar style="padding:10px" dark class="primary">

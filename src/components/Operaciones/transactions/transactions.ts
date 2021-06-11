@@ -9,19 +9,19 @@ import helpers from '@/helper';
 @Component
 export default class AdmtransactionsComponent extends Vue {
 	private headers: any[] = [
-		{ text: 'Fecha de Transacción', align: 'left', sortable: true, value: 'createtimestamp', width: '7%' },
-		{ text: 'Sucursal', align: 'left', sortable: true, value: 'locationidentification', width: '7%' },
-		{ text: 'Terminal', align: 'left', sortable: true, value: 'deviceidentification', width: '7%' },
-		{ text: 'Transacción', align: 'left', sortable: true, value: 'operationname', width: '7%' },
-		{ text: 'Cliente', align: 'left', sortable: true, value: 'customernumber', width: '7%' },
-		{ text: 'Recibo', align: 'left', sortable: true, value: 'transactionidentification', width: '7%' },
-		{ text: 'Monto', align: 'left', sortable: true, value: 'amount', width: '7%' },
-		{ text: 'Resultado', align: 'left', sortable: true, value: 'resultcode', width: '7%' },
-		{ text: 'Vuelto', align: 'left', sortable: true, value: 'amountreturned', width: '7%' },
-		{ text: 'Vuelto no Entregado', align: 'left', sortable: true, value: 'amountticketundelivered', width: '7%' },
-		{ text: 'Detalle Recibo', align: 'left', sortable: true, value: 'amountentereddetail', width: '7%' },
-		{ text: 'Detalle Vuelto', align: 'left', sortable: true, value: 'amountticketundelivereddetail', width: '7%' },
-		{ text: 'Opciones', align: 'left', sortable: true, value: 'opciones', width: '5%' },
+		{ text: 'Fecha de Transacción', align: 'center', sortable: true, value: 'createtimestamp', width: '7%' },
+		{ text: 'Sucursal', align: 'center', sortable: true, value: 'locationidentification', width: '7%' },
+		{ text: 'Terminal', align: 'center', sortable: true, value: 'deviceidentification', width: '7%' },
+		{ text: 'Transacción', align: 'center', sortable: true, value: 'operationname', width: '7%' },
+		{ text: 'Cliente', align: 'center', sortable: true, value: 'customernumber', width: '7%' },
+		{ text: 'Recibo', align: 'center', sortable: true, value: 'transactionidentification', width: '7%' },
+		{ text: 'Monto', align: 'center', sortable: true, value: 'amount', width: '5%' },
+		{ text: 'Resultado', align: 'center', sortable: true, value: 'resultcode', width: '5%' },
+		{ text: 'Vuelto', align: 'center', sortable: true, value: 'amountreturned', width: '5%' },
+		{ text: 'Vuelto No Entregado', align: 'center', sortable: true, value: 'amountticketundelivered', width: '5%' },
+		{ text: 'Detalle Recibo', align: 'center', sortable: true, value: 'amountentereddetail', width: '7%' },
+		{ text: 'Detalle Vuelto', align: 'center', sortable: true, value: 'amountticketundelivereddetail', width: '7%' },
+		{ text: 'Opciones', align: 'center', sortable: true, value: 'opciones', width: '3%' },
 	];
 	// tslint:disable-next-line: variable-name
 	private menu_createtimestamp: boolean = false;
@@ -34,7 +34,7 @@ export default class AdmtransactionsComponent extends Vue {
 	// tslint:disable-next-line: variable-name
 	private menu_canceledtimestamp: boolean = false;
 	private WebApi = new services.Endpoints();
-
+	private pagination = new services.clase_pagination();
 	private transactions = new services.clase_transactions();
 	private lsttransactions: services.clase_transactions[] = [];
 	private buscartransactions = '';
@@ -42,6 +42,14 @@ export default class AdmtransactionsComponent extends Vue {
 	private operacion = '';
 	private helper: helpers = new helpers();
 	private popup = new popup.Swal();
+	itemsPerPage: number = 10;
+	totalItems: number = 0;
+	totalPages: number = 0;
+	maxPagesVisible: number = 10;
+	currentPageSelected: number = 1;
+	pagePreviousSelected: number = 0;
+	loadingDataTable: boolean = false;
+	disabledPagination: boolean = false;
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');
 	}
@@ -61,22 +69,22 @@ export default class AdmtransactionsComponent extends Vue {
 	}
 	private mounted() {
 		this.cargar_data();
+		this.itemsPerPage = 10;
+		this.totalItems = 0;
+		this.totalPages = 0;
+		this.maxPagesVisible = 10;
+		this.currentPageSelected = 1;
+		this.pagePreviousSelected = 0;
+		this.loadingDataTable = false;
+		this.disabledPagination = false;
 	}
 	private cargar_data() {
 		if (this.$store.state.auth !== true) {​​​​
 			this.$router.push({​​​​ path: '/Login' }​​​​);​​​​
 		}
-		new services.Operaciones().Consultar(this.WebApi.ws_transactions_Consultar)
-			.then((restransactions) => {
-				if (restransactions.data._error.error === 0) {
-					this.lsttransactions = restransactions.data._data;
-					this.dialog = false;
-				} else {
-					this.popup.error('Consultar', restransactions.data._error.descripcion);
-				}
-			}).catch((error) => {
-					this.popup.error('Consultar', 'Error Inesperado: ' + error);
-			});
+		let desde = 0;
+		let hasta = 10;
+		this.CargarPorPaginacion(desde,hasta);
 	}
 	private Insertar(): void {
 		this.transactions = new services.clase_transactions();
@@ -170,4 +178,49 @@ export default class AdmtransactionsComponent extends Vue {
 		}
 		});
 	}
+
+	private CargarPorPaginacion(init:number,until: number){
+		this.transactions.initItemPagination = init;
+		this.transactions.untilItemPagination = until;
+		this.loadingDataTable = true;
+		this.disabledPagination = true;
+		this.lsttransactions = [];
+
+
+		new services.Operaciones().ConsultarPorPaginacion(this.WebApi.ws_transactions_ConsultarPorPaginacion,this.transactions)
+		.then((resbatches) => {
+			if (resbatches.data._error.error === 0) {
+				this.lsttransactions = resbatches.data._data;
+				this.pagination = resbatches.data._pagination;
+				// Config Pagination
+				// this.itemsPerPage = this.pagination.itemsPerPagePagination;
+				this.totalPages = Math.ceil(this.pagination.itemsLengthPagination/this.itemsPerPage)
+				
+				this.loadingDataTable = false;
+				this.disabledPagination = false;
+				this.dialog = false;
+				} else {
+					this.popup.error('Consultar', resbatches.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+	}
+	
+	private elementosPorPagina(){
+		// this.pagePreviousSelected = this.currentPageSelected;
+		let desde = this.pagination.untilItemPagination;
+		let hasta = this.pagination.untilItemPagination + this.itemsPerPage;
+		// alert("Pagina actual: "+this.currentPageSelected + " Pagina Anterior: "+this.pagePreviousSelected)
+		if(this.currentPageSelected > this.pagePreviousSelected)
+		{
+			this.CargarPorPaginacion(desde, hasta);
+		}
+		else{
+			var residuo = desde - hasta;
+			// alert("else: desde: "+ desde + " hasta: " +hasta)
+			this.CargarPorPaginacion(hasta-hasta, desde);
+		}
+	}
+
 }
