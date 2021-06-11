@@ -28,7 +28,7 @@ export default class MenuComponent extends Vue {
     ];
 
     public menuParametros: MenuItem[] = [
-        new MenuItem ('Otros', 'mdi-more', ''),
+        // new MenuItem ('Otros', 'mdi-more', ''),
     ];
     public menuListaParametros: MenuItem[] = [
         new MenuItem('applicationdefinition', 'exit_to_app', '/applicationdefinition'), 
@@ -67,17 +67,16 @@ export default class MenuComponent extends Vue {
         new MenuItem('Usuarios', 'mdi-human-capacity-increase', '/usuarios'),
     ];
     public menuListaUsuarios: MenuItem[] = [
-        new MenuItem('Aplicaciones', 'mdi-shield', '/aplicaciones'), 
-        new MenuItem('GrpUsrRolesInstituciones', 'mdi-shield', '/grpUsrRolesInstituciones'), 
-        new MenuItem('GrpUsuario', 'mdi-shield', '/grpUsuario'), 
-        new MenuItem('Grupo', 'mdi-shield', '/grupo'), 
-        new MenuItem('InstitucionesRoles', 'mdi-shield', '/institucionesRoles'), 
         new MenuItem('Instituciones', 'mdi-shield', '/instituciones'), 
+        new MenuItem('Aplicaciones', 'mdi-shield', '/aplicaciones'), 
+        new MenuItem('Grupos', 'mdi-shield', '/grupo'), 
         new MenuItem('Modulos', 'mdi-shield', '/modulos'), 
         new MenuItem('Roles', 'mdi-shield', '/roles'), 
-        new MenuItem('RolesAplicaciones', 'mdi-shield', '/rolesAplicaciones'), 
-        new MenuItem('Usuarios', 'mdi-shield', '/usuarios'), 
-        
+        // new MenuItem('GrpUsrRolesInstituciones', 'mdi-shield', '/grpUsrRolesInstituciones'), 
+        // new MenuItem('GrpUsuario', 'mdi-shield', '/grpUsuario'), 
+        // new MenuItem('InstitucionesRoles', 'mdi-shield', '/institucionesRoles'), 
+        // new MenuItem('RolesAplicaciones', 'mdi-shield', '/rolesAplicaciones'), 
+        // new MenuItem('Usuarios', 'mdi-shield', '/usuarios'), 
     ];
 
     public menuSalir: MenuItem[] = [
