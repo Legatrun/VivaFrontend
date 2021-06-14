@@ -22,6 +22,7 @@
 							'items-per-page-text': 'Registros por Pagina:',
 						}"
 						dense
+						:loading="loadingTable"
 						class="elevation-1">
 			<template slot="item" slot-scope="props">
 				<tr>
@@ -101,9 +102,14 @@
 			<template v-slot:top>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn class="btn-small-color" color="cyan" v-on="on" @click="Insertar()"><v-icon left>mdi-plus</v-icon>Agregar</v-btn>
+						<v-flex sm6>
+							<v-btn class="btn-small-color" color="cyan" v-on="on" @click="Insertar()"><v-icon left>mdi-plus</v-icon>Agregar</v-btn>
+						</v-flex>	
+						<v-flex sm4>
+							<v-btn dark color="orange" fab small v-on="on" @click="cargar_data()"><v-icon>mdi-update</v-icon></v-btn>
+						</v-flex>	
 					</template>
-					<span>Adicionar nuevo registro de Terminal</span>
+					<span>Actualizar Tabla</span>
 				</v-tooltip>
 			</template>
 			<template v-slot:no-data>
@@ -729,6 +735,11 @@
 .btn-small-color{ 
 			font-size: 1.4em; /* tamaño de letra */ 
 			color: white; /* color de letra */ 
+}
+.btn-small-color-rigth{ 
+			font-size: 1.4em; /* tamaño de letra */ 
+			color: white;
+			margin-left: 20%; /* color de letra */ 
 } 
 .input-small{ 
 			font-size: 1.6em; /* tamaño de letra */ 

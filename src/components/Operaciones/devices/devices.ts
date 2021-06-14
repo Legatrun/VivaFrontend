@@ -86,6 +86,7 @@ export default class AdmdevicesComponent extends Vue {
 	private helper: helpers = new helpers();
 	private popup = new popup.Swal();
 	private activa = false;
+	private loadingTable = false;
 	private listahbil: any[] = [
 		{habilitado: 'SI',value:1},{habilitado:'NO',value:0}
 	];
@@ -125,10 +126,12 @@ export default class AdmdevicesComponent extends Vue {
 		if (this.$store.state.auth !== true) {​​​​
 			this.$router.push({​​​​ path: '/Login' }​​​​);​​​​
 		}
+		this.loadingTable = true;
 		new services.Operaciones().Consultar(this.WebApi.ws_devices_Consultar)
 			.then((resdevices) => {
 				if (resdevices.data._error.error === 0) {
 					this.lstdevices = resdevices.data._data;
+					this.loadingTable = false;
 					this.dialog = false;
 				} else {
 					this.popup.error('Consultar', resdevices.data._error.descripcion);
