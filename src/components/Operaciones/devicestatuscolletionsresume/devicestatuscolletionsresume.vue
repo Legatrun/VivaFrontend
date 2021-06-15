@@ -157,6 +157,17 @@
 						</v-card-text>
 					</v-form>
 				</v-card>
+				   <v-flex sm12>
+					<v-card-actions>
+						<v-spacer></v-spacer>
+						<v-tooltip bottom>
+							<template v-slot:activator="{ on }">
+								<v-btn dark left color="orange" fab small v-on="on" @click="cargar_data()"><v-icon>mdi-update</v-icon></v-btn>
+							</template>
+							<span>Actualizar</span>
+						</v-tooltip>
+					</v-card-actions>						
+				</v-flex>
 			</template>
 			<template v-slot:no-data>
 				<v-alert :value="true" color="warning" icon="warning">
