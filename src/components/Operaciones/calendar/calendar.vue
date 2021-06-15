@@ -22,6 +22,7 @@
 							'items-per-page-text': 'Registros por Pagina:',
 						}"
 						dense
+						:loading="loadingTable"
 						class="elevation-1">
 			<template slot="item" slot-scope="props">
 				<tr>
@@ -46,12 +47,23 @@
 				</tr>
 			</template>
 			<template v-slot:top>
-				<v-tooltip bottom>
-					<template v-slot:activator="{ on }">
-						<v-btn class="btn-small-color" color="cyan" v-on="on" @click="Insertar()"><v-icon left>mdi-plus</v-icon>Agregar</v-btn>
-					</template>
-					<span>Adicionar calendario</span>
-				</v-tooltip>
+				<v-flex sm12>
+					<v-card-actions>
+						<v-tooltip bottom>
+							<template  v-slot:activator="{ on }">
+								<v-btn class="btn-small-color" color="cyan" v-on="on" @click="Insertar()"><v-icon left>mdi-plus</v-icon>Agregar</v-btn>
+							</template>
+							<span>Adicionar calendario</span>
+						</v-tooltip>
+						<v-spacer></v-spacer>
+						<v-tooltip bottom>
+							<template  v-slot:activator="{ on }">
+								<v-btn dark left color="orange" fab small v-on="on" @click="cargar_data()"><v-icon>mdi-update</v-icon></v-btn>
+							</template>
+							<span>Actualizar</span>
+						</v-tooltip>
+					</v-card-actions>						
+				</v-flex>				
 			</template>
 			<template v-slot:no-data>
 				<v-alert :value="true" color="warning" icon="warning">

@@ -27,6 +27,7 @@ export default class AdmreportsComponent extends Vue {
 	private popup = new popup.Swal();
 	private fechareporte:any;
 	private activa = false;
+	private loadingTable = false;
 	validacion = [
 		(v: any) => !!v || 'El campo es requerido',
 	];
@@ -55,10 +56,12 @@ export default class AdmreportsComponent extends Vue {
 		if (this.$store.state.auth !== true) {​​​​
 			this.$router.push({​​​​ path: '/Login' }​​​​);​​​​
 		}
+		this.loadingTable = true;
 		new services.Operaciones().Consultar(this.WebApi.ws_reports_Consultar)
 			.then((resreports) => {
 				if (resreports.data._error.error === 0) {
 					this.lstreports = resreports.data._data;
+					this.loadingTable=false;
 					this.dialog = false;
 				} else {
 					this.popup.error('Consultar', resreports.data._error.descripcion);

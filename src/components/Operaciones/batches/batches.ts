@@ -137,6 +137,7 @@ export default class AdmbatchesComponent extends Vue {
 		this.disabledPagination = false;
 	}
 	private cargar_data() {
+		
 		if (this.$store.state.auth !== true) {​​​​
 			this.$router.push({​​​​ path: '/Login' }​​​​);​​​​
 		}

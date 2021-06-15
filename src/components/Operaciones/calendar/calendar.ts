@@ -39,6 +39,7 @@ export default class AdmcalendarComponent extends Vue {
 	private operacion = '';
 	private helper: helpers = new helpers();
 	private popup = new popup.Swal();
+	private loadingTable = false;
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');
 	}
@@ -63,10 +64,12 @@ export default class AdmcalendarComponent extends Vue {
 		if (this.$store.state.auth !== true) {​​​​
 			this.$router.push({​​​​ path: '/Login' }​​​​);​​​​
 		}
+		this.loadingTable =  true;
 		new services.Operaciones().Consultar(this.WebApi.ws_calendar_Consultar)
 			.then((rescalendar) => {
 				if (rescalendar.data._error.error === 0) {
 					this.lstcalendar = rescalendar.data._data;
+					this.loadingTable = false;
 					this.dialog = false;
 				} else {
 					this.popup.error('Consultar', rescalendar.data._error.descripcion);
