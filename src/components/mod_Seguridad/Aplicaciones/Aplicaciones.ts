@@ -2,7 +2,7 @@ import Vue from 'vue';
 import { Component, Watch } from 'vue-property-decorator';
 import * as services from '@/services';
 import swal from 'sweetalert2';
-import moment from 'moment';
+import moment, { isDuration } from 'moment';
 import helpers from '@/helper';
 import * as popup from '@/popup';
 
@@ -95,14 +95,13 @@ export default class AdmAplicacionesComponent extends Vue {
     // if (this.$store.state.auth !== true) {
     // this.$router.push({ path: '/Login' });
     // }
-    debugger
     new services.Operaciones()
       .Buscar(this.helper.getWebServiceDinamico('Api/Aplicaciones/Consultar'), null)
       .then((resaplicaciones) => {
         if (resaplicaciones.data._error.error === 0) {
-          alert(JSON.stringify(''))
           let responseAplicaciones = resaplicaciones.data._data;
-          this.lstaplicaciones = this.helper.filterDataXAgencia(responseAplicaciones);
+          this.lstaplicaciones = responseAplicaciones;
+          // this.lstaplicaciones = this.helper.filterDataXAgencia(responseAplicaciones);
           this.dialog = false;
         } else {
           swal.fire({
