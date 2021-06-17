@@ -53,6 +53,9 @@ export default class AdmtransactionsComponent extends Vue {
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');
 	}
+	private FormatDateTime(data: any) {
+		return moment(data).format('YYYY-MM-DD h:mm:ss');
+	}
 	private FormatBoolean(data: any) {
 		if (data) {
 			return 'SI';
@@ -127,7 +130,9 @@ export default class AdmtransactionsComponent extends Vue {
 		this.dialog = false;
 	}
 	private Actualizar(data: services.clase_transactions): void {
-		this.transactions = data;
+		// this.transactions = data;
+		// this.transactions.deviceidentification = this.FormatNull(data.deviceidentification)
+		this.transactions.createtimestamp =this.FormatDateTime(data.createtimestamp); 
 		this.operacion = 'Update';
 		this.dialog = true;
 	}

@@ -32,7 +32,7 @@
     >
       <template slot="item" slot-scope="props">
         <tr>
-          <td class="datatable-items-small">{{ FormatDate(props.item.createtimestamp) }}</td>
+          <td class="datatable-items-small">{{ FormatDateTime(props.item.createtimestamp) }}</td>
           <td class="datatable-items-small">{{ props.item.locationidentification }}</td>
           <td class="datatable-items-small">{{ props.item.deviceidentification }}</td>
           <td class="datatable-items-small">{{ props.item.operationname }}</td>
