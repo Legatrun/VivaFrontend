@@ -121,6 +121,8 @@ export default class AdmdevicesComponent extends Vue {
 	}
 	private mounted() {
 		this.cargar_data();
+		this.cargarLocation();
+		this.cargarDivType();
 	}
 	private cargar_data() {
 		if (this.$store.state.auth !== true) {​​​​
@@ -139,8 +141,7 @@ export default class AdmdevicesComponent extends Vue {
 			}).catch((error) => {
 					this.popup.error('Consultar', 'Error Inesperado: ' + error);
 			});
-			this.cargarLocation();
-			this.cargarDivType();
+			
 	}
 	private cargarLocation(){
 		new services.Operaciones().Consultar(this.WebApi.ws_locations_Consultar)
@@ -167,7 +168,7 @@ export default class AdmdevicesComponent extends Vue {
 					this.lstdivtype = resditype.data._data;
 					this.dialog = false;
 				} else {
-					this.popup.error('Consultar', resditype.data._error.identification);
+					this.popup.error('Consultar', resditype.data._error.descripcion);
 				}
 			}).catch((error) => {
 			this.popup.error('Consultar', 'Error Inesperado: ' + error);
