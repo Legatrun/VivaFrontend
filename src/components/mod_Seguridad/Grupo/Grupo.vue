@@ -21,7 +21,7 @@
     <v-data-table
       style="padding: 5px"
       :headers="headers"
-      :items="lstgrupoXInsti"
+      :items="lstgrupo"
       :items-per-page="30"
       :search="buscargrupo"
       :footer-props="{

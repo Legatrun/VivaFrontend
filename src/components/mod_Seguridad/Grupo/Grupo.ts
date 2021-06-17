@@ -85,8 +85,9 @@ export default class AdmGrupoComponent extends Vue {
       .Buscar(this.helper.getWebServiceDinamico('Api/Grupo/Consultar'), null)
       .then((resgrupo) => {
         if (resgrupo.data._error.error === 0) {
-          let responsegrupo = resgrupo.data._data;
-          this.lstgrupo = this.helper.filterDataXAgencia(responsegrupo);
+          // let responsegrupo = resgrupo.data._data;
+          this.lstgrupo = resgrupo.data._data;
+          // this.helper.filterDataXAgencia(responsegrupo);
           this.dialog = false;
         } else {
           swal.fire({
@@ -111,32 +112,32 @@ export default class AdmGrupoComponent extends Vue {
     // let auxinstitucion:services.clase_instituciones = new services.clase_instituciones();
     // auxinstitucion.idinstitucion = this.$store.state.institucionSelected;
 
-    new services.Operaciones()
-      .Buscar(this.helper.getWebServiceDinamico('Api/Grupo/BuscarGrupoXInstitucion?idinstitucion=' + this.$store.state.institucionSelected), null)
-      .then((resgrupo) => {
-        if (resgrupo.data._error.error === 0) {
-          let responsegrupo = resgrupo.data._data;
-          this.lstgrupoXInsti = this.helper.filterDataXAgencia(responsegrupo);
-          this.dialog = false;
-        } else {
-          swal.fire({
-            type: 'error',
-            title: 'Consultar',
-            text: resgrupo.data._error.descripcion,
-            showConfirmButton: false,
-            timer: 2000,
-          });
-        }
-      })
-      .catch((error) => {
-        swal.fire({
-          type: 'error',
-          title: 'Consultar',
-          text: 'Error Inesperado',
-          showConfirmButton: false,
-          timer: 2000,
-        });
-      });
+    // new services.Operaciones()
+    //   .Buscar(this.helper.getWebServiceDinamico('Api/Grupo/BuscarGrupoXInstitucion?idinstitucion=' + this.$store.state.institucionSelected), null)
+    //   .then((resgrupo) => {
+    //     if (resgrupo.data._error.error === 0) {
+    //       let responsegrupo = resgrupo.data._data;
+    //       this.lstgrupoXInsti = this.helper.filterDataXAgencia(responsegrupo);
+    //       this.dialog = false;
+    //     } else {
+    //       swal.fire({
+    //         type: 'error',
+    //         title: 'Consultar',
+    //         text: resgrupo.data._error.descripcion,
+    //         showConfirmButton: false,
+    //         timer: 2000,
+    //       });
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     swal.fire({
+    //       type: 'error',
+    //       title: 'Consultar',
+    //       text: 'Error Inesperado',
+    //       showConfirmButton: false,
+    //       timer: 2000,
+    //     });
+    //   });
   }
   private getUsersByInstitucion() {
     //const params = new URLSearchParams();
