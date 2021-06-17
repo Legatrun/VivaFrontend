@@ -45,8 +45,7 @@ export default class AdmModulosComponent extends Vue {
     estado: boolean;
   }[] = [];
   private WebApi: string = this.$store.state.server + "Api/Modulos";
-  private WebApiConsultar: string =
-    this.$store.state.server + "Api/Modulos/Consultar";
+  private WebApiConsultar: string = this.$store.state.server + "Api/Modulos/Consultar";
   private WebApiBuscar: string =
     this.$store.state.server + "Api/Modulos/Buscar";
   private WebApiAplicacionesOpModulos: string =
@@ -164,8 +163,11 @@ export default class AdmModulosComponent extends Vue {
         });
       });
 
-    this.filterModulosXAplicacion();
-    this.cargarRolAplicacion();
+    // this.filterModulosXAplicacion();
+    // this.cargarRolAplicacion();
+
+
+
     // this.lstRoles = await this.cargarRoles();
   }
   private Insertar(): void {

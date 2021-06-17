@@ -21,7 +21,7 @@
     <v-data-table
       style="padding: 5px"
       :headers="headers"
-      :items="ModulosFormat"
+      :items="lstModulos" 
       :items-per-page="30"
       :search="buscarmodulos"
       :footer-props="{
