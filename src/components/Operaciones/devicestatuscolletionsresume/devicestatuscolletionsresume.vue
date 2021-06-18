@@ -148,7 +148,7 @@
 							    </v-btn>
 							</v-flex>
 							<v-flex sm1.5 style="padding: 0px">
-								<v-btn large color="grey" dark>
+								<v-btn large color="grey" dark  @click="LimpiarFiltros()">
 									<v-icon>mdi-monitor-clean</v-icon> 
 									 Limpiar
 							    </v-btn>

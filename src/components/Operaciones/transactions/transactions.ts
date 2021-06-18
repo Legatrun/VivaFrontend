@@ -31,6 +31,7 @@ export default class AdmtransactionsComponent extends Vue {
 	private menu_transporttimestamp: boolean = false;
 	// tslint:disable-next-line: variable-name
 	private menu_synctimestamp: boolean = false;
+
 	// tslint:disable-next-line: variable-name
 	private menu_canceledtimestamp: boolean = false;
 	private WebApi = new services.Endpoints();
@@ -63,6 +64,13 @@ export default class AdmtransactionsComponent extends Vue {
 			return 'NO';
 		}
 	}
+	private FormatNull(data: any) {
+		if (data=="") {
+			return '-';
+		
+		}
+	}
+
 	private updateText(Value: string) {
 		if (Value !== null) {
 			return Value.toUpperCase();
@@ -131,7 +139,11 @@ export default class AdmtransactionsComponent extends Vue {
 	}
 	private Actualizar(data: services.clase_transactions): void {
 		// this.transactions = data;
-		// this.transactions.deviceidentification = this.FormatNull(data.deviceidentification)
+		//this.transactions.deviceidentification = this.FormatNull(data.deviceidentification)
+		//this.transactions.resultmessage = this.FormatNull(data.resultmessage);
+		//this.transactions.transactionidentification = this.FormatNull(data.transactionidentification);
+		//this.transactions.customernumber = this.FormatNull(data.customernumber);
+		//this.transactions.customercode = this.FormatNull(data.customercode);
 		this.transactions.createtimestamp =this.FormatDateTime(data.createtimestamp); 
 		this.operacion = 'Update';
 		this.dialog = true;
@@ -232,5 +244,6 @@ export default class AdmtransactionsComponent extends Vue {
 		this.buscartransactions = ""
 		this.transactions.createtimestamp = ""
 	}
+
 
 }

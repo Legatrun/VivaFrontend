@@ -303,5 +303,9 @@ export default class AdmdevicestatuscolletionsresumeComponent extends Vue {
 			return locationidentification;
 		}
 	}
+	LimpiarFiltros(){
+		this.buscardevicestatuscolletionsresume = ""
+		this.buscardevicestatuscolletionsresume = ""
+	}
 
 }
