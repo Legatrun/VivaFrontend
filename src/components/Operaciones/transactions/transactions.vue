@@ -233,7 +233,7 @@
           :length="totalPages"
           dark
           color="cyan"
-          @input="elementosPorPagina"
+          @input="elementosPorPagina()"
           :total-visible="maxPagesVisible"
           :value="currentPageSelected"
           @previous="prev"

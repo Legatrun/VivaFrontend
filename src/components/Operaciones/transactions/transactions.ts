@@ -227,17 +227,16 @@ export default class AdmtransactionsComponent extends Vue {
 	}
 	
 	private elementosPorPagina(){
-		// this.pagePreviousSelected = this.currentPageSelected;
 		let desde = this.pagination.untilItemPagination;
 		let hasta = this.pagination.untilItemPagination + this.itemsPerPage;
-		// alert("Pagina actual: "+this.currentPageSelected + " Pagina Anterior: "+this.pagePreviousSelected)
 		if(this.currentPageSelected > this.pagePreviousSelected)
 		{
+			// pag siguiente
 			this.CargarPorPaginacion(desde, hasta);
 		}
 		else{
+			// pag Anterior
 			var residuo = desde - hasta;
-			// alert("else: desde: "+ desde + " hasta: " +hasta)
 			this.CargarPorPaginacion(hasta-hasta, desde);
 		}
 	}
