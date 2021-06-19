@@ -141,11 +141,30 @@ export default class AdmtransactionsComponent extends Vue {
 	}
 	private Actualizar(data: services.clase_transactions): void {
 		this.transactions = data;
-		this.transactions.deviceidentification = this.FormatNull(data.deviceidentification)
+		this.transactions.deviceidentification = this.FormatNull(data.deviceidentification);
+		this.transactions.locationidentification = this.FormatNull(data.deviceidentification);
+		this.transactions.createtimestamp = this.FormatNull(data.createtimestamp);
+		this.transactions.resultcode = this.FormatNull(data.resultcode);
 		this.transactions.resultmessage = this.FormatNull(data.resultmessage);
 		this.transactions.transactionidentification = this.FormatNull(data.transactionidentification);
+		this.transactions.providerresultcode = this.FormatNull(data.providerresultcode);
+		this.transactions.providerresultmessage =  this.FormatNull(data.providerresultmessage);
 		this.transactions.customernumber = this.FormatNull(data.customernumber);
 		this.transactions.customercode = this.FormatNull(data.customercode);
+		this.transactions.amount = this.FormatNull(data.amount);
+		this.transactions.amountentered = this.FormatNull(data.amountentered);
+		this.transactions.amountentereddetail = this.FormatNull(data.amountentereddetail);
+		this.transactions.amountreturned = this.FormatNull(data.amountreturned);
+		this.transactions.amountticketundelivereddetail = this.FormatNull(data.amountticketundelivereddetail);
+		this.transactions.amountreturneddetail = this.FormatNull(data.amountreturneddetail);
+		this.transactions.cardsdispensed = this.FormatNull(data.cardsdispensed);
+		this.transactions.batchnumber = this.FormatNull(data.batchnumber);
+		this.transactions.servicename = this.FormatNull(data.servicename);
+		this.transactions.operationname = this.FormatNull(data.operationname);
+		this.transactions.sequencenumber = this.FormatNull(data.sequencenumber);
+		this.transactions.providertransactionid = this.FormatNull(data.providertransactionid);
+		this.transactions.devicetransactionid = this.FormatNull(data.devicetransactionid);
+		
 		this.transactions.createtimestamp =this.FormatDateTime(data.createtimestamp); 
 		this.operacion = 'Update';
 		this.dialog = true;
