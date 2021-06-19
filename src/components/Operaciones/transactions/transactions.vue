@@ -36,7 +36,7 @@
           <td class="datatable-items-small">{{ props.item.locationidentification }}</td>
           <td class="datatable-items-small">{{ props.item.deviceidentification }}</td>
           <td class="datatable-items-small">{{ props.item.operationname }}</td>
-          <td class="datatable-items-small">{{ props.item.customernumber }}</td>
+          <td class="datatable-items-small">{{FormatNull(props.item.customernumber)}}</td>
           <td class="datatable-items-small">{{ props.item.transactionidentification }}</td>
           <td class="datatable-items-small">{{ props.item.amount }}</td>
           <td class="datatable-items-small">{{ props.item.resultcode }}</td>
@@ -256,7 +256,7 @@
               <template v-if="operacion == 'Insert'"> </template>
               <template v-else> </template>
               <v-flex sm4 style="padding: 5px">
-                <v-autocomplete
+                <v-text-field
                   class="input-small"
                   v-model="transactions.deviceidentification"
                   label="Terminal"
@@ -267,10 +267,10 @@
                   required
                   readonly
                 >
-                </v-autocomplete>
+                </v-text-field>
               </v-flex>
               <v-flex sm4 style="padding: 5px">
-                <v-autocomplete
+                <v-text-field
                   class="input-small"
                   v-model="transactions.locationidentification"
                   label="Sucursal"
@@ -281,7 +281,7 @@
                   required
                   readonly
                 >
-                </v-autocomplete>
+                </v-text-field>
               </v-flex>
 
               <v-flex sm4 class="hidden-xs-only" style="padding: 5px">

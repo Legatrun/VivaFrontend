@@ -68,6 +68,8 @@ export default class AdmtransactionsComponent extends Vue {
 		if (data=="") {
 			return '-';
 		
+		}else{
+			return data;
 		}
 	}
 
@@ -138,12 +140,12 @@ export default class AdmtransactionsComponent extends Vue {
 		this.dialog = false;
 	}
 	private Actualizar(data: services.clase_transactions): void {
-		// this.transactions = data;
-		//this.transactions.deviceidentification = this.FormatNull(data.deviceidentification)
-		//this.transactions.resultmessage = this.FormatNull(data.resultmessage);
-		//this.transactions.transactionidentification = this.FormatNull(data.transactionidentification);
-		//this.transactions.customernumber = this.FormatNull(data.customernumber);
-		//this.transactions.customercode = this.FormatNull(data.customercode);
+		this.transactions = data;
+		this.transactions.deviceidentification = this.FormatNull(data.deviceidentification)
+		this.transactions.resultmessage = this.FormatNull(data.resultmessage);
+		this.transactions.transactionidentification = this.FormatNull(data.transactionidentification);
+		this.transactions.customernumber = this.FormatNull(data.customernumber);
+		this.transactions.customercode = this.FormatNull(data.customercode);
 		this.transactions.createtimestamp =this.FormatDateTime(data.createtimestamp); 
 		this.operacion = 'Update';
 		this.dialog = true;
