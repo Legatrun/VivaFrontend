@@ -19,7 +19,7 @@
 						:footer-props="{
 							showFirstLastPage: true,
 							'items-per-page-options': [10, 20, 30, 40, 50, -1],
-							'items-per-page-text': 'Registros por Pagina:',
+							'items-per-page-text': 'Registros por Página:',
 						}"
 						dense
 						:loading="loadingTable"
@@ -165,7 +165,7 @@
 									:footer-props="{
 										showFirstLastPage: true,
 										'items-per-page-options': [10, 20, 30, 40, 50, -1],
-										'items-per-page-text': 'Registros por Pagina:',
+										'items-per-page-text': 'Registros por Página:',
 									}"
 									dense
 									class="elevation-1">
