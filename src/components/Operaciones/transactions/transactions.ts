@@ -82,14 +82,6 @@ export default class AdmtransactionsComponent extends Vue {
 	}
 	private mounted() {
 		this.cargar_data();
-		this.itemsPerPage = 10;
-		this.totalItems = 0;
-		this.totalPages = 0;
-		this.maxPagesVisible = 10;
-		this.currentPageSelected = 1;
-		this.pagePreviousSelected = 0;
-		this.loadingDataTable = false;
-		this.disabledPagination = false;
 	}
 	private cargar_data() {
 		if (this.$store.state.auth !== true) {​​​​
@@ -98,6 +90,14 @@ export default class AdmtransactionsComponent extends Vue {
 		let desde = 0;
 		let hasta = 10;
 		this.CargarPorPaginacion(desde,hasta);
+		this.itemsPerPage = 10;
+		this.totalItems = 0;
+		this.totalPages = 0;
+		this.maxPagesVisible = 10;
+		this.currentPageSelected = 1;
+		this.pagePreviousSelected = 0;
+		this.loadingDataTable = false;
+		this.disabledPagination = false;
 	}
 	private Insertar(): void {
 		this.transactions = new services.clase_transactions();
@@ -255,8 +255,8 @@ export default class AdmtransactionsComponent extends Vue {
 		}
 		else{
 			// pag Anterior
-			var residuo = desde - hasta;
-			this.CargarPorPaginacion(hasta-hasta, desde);
+			var residuo = hasta - this.itemsPerPage;
+			this.CargarPorPaginacion(residuo, desde);
 		}
 	}
 

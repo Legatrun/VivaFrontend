@@ -126,15 +126,6 @@ export default class AdmbatchesComponent extends Vue {
 		this.CargarSucursales();
 		this.batches.opentimestamp = this.FormatDate(Date.now());
 		this.batches.closetimestamp = this.FormatDate(Date.now());
-
-		this.itemsPerPage = 10;
-		this.totalItems = 0;
-		this.totalPages = 0;
-		this.maxPagesVisible = 10;
-		this.currentPageSelected = 1;
-		this.pagePreviousSelected = 0;
-		this.loadingDataTable = false;
-		this.disabledPagination = false;
 	}
 	private cargar_data() {
 		
@@ -144,6 +135,14 @@ export default class AdmbatchesComponent extends Vue {
 		let desde = 0;
 		let hasta = 10;
 		this.CargarPorPaginacion(desde,hasta);
+		this.itemsPerPage = 10;
+		this.totalItems = 0;
+		this.totalPages = 0;
+		this.maxPagesVisible = 10;
+		this.currentPageSelected = 1;
+		this.pagePreviousSelected = 0;
+		this.loadingDataTable = false;
+		this.disabledPagination = false;
 		
 	}
 	private Insertar(): void {
