@@ -29,14 +29,12 @@
 						:items-per-page="itemsPerPage"
 						:search = "buscarbatches" 
 						:footer-props="{
-              disablepagination:true,
 							showFirstLastPage: true,
-							'items-per-page-options': [10, 20, 30, 40, 50, -1],
-							'items-per-page-text': 'Registros por Pagina:',
+							'items-per-page-options': itemsPerPageList,
+							'items-per-page-text': 'Página: '+currentPageSelected+' || Registros desplegados: ',
 						}"
             :loading="loadingDataTable"
             loading-text="Cargando Lotes"
-            disable-pagination=true
 						dense
 						class="elevation-1">
 			<template slot="item" slot-scope="props">

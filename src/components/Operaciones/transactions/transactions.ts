@@ -53,6 +53,7 @@ export default class AdmtransactionsComponent extends Vue {
 	disabledPagination: boolean = false;
 	desdePaginacionPrevia: number = 0;
 	hastaPaginacionPrevia: number = 0;
+	itemsPerPageList = [2, 5, 10, 15, -1]
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');
 	}
@@ -98,7 +99,8 @@ export default class AdmtransactionsComponent extends Vue {
 		this.hastaPaginacionPrevia = hasta;
 		this.CargarPorPaginacion(desde,hasta);
 		this.itemsPerPage = 10;
-		this.totalItems = 0;
+		this.totalItems = this.pagination.itemsLengthPagination;
+		alert("Pag total: " + this.pagination.itemsLengthPagination.toString())
 		this.totalPages = 0;
 		this.maxPagesVisible = 10;
 		this.currentPageSelected = 1;

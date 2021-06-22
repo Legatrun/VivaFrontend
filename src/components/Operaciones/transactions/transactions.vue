@@ -13,6 +13,7 @@
         hide-details
       ></v-text-field> -->
     </v-toolbar>
+      <!-- hide-default-footer -->
     <v-data-table
     	:headers="headers" 
       :items="lsttransactions" 
@@ -21,12 +22,11 @@
       :footer-props="{
         disablepagination:true,
         showFirstLastPage: true,
-        'items-per-page-options': [10, 20, 30, 40, 50, -1],
-        'items-per-page-text': 'Registros por Pagina:',
+        'items-per-page-options': itemsPerPageList,
+        'items-per-page-text': 'Página: '+currentPageSelected+' || Registros desplegados:',
       }"
       :loading="loadingDataTable"
       loading-text="Cargando Transacciones"
-      disable-pagination=true
       dense
       class="elevation-1"
     >
@@ -223,11 +223,28 @@
 				</v-flex>
 			</template>
       <template v-slot:no-data>
-        <v-alert :value="true" color="warning" icon="warning">
+        <v-alert :value="true" color="warning"  icon="warning">
           Lo sentimos, no exiten datos a desplegar: (
         </v-alert>
       </template>
     </v-data-table>
+      <!-- <v-flex sm4>
+					<v-card-actions>
+						<v-spacer></v-spacer>
+						<v-tooltip bottom>
+							<template v-slot:activator="{ on }">
+                <v-autocomplete style="margin-left: 50px"
+                      v-model="itemsPerPage"
+                      v-on="on"
+                      :items="itemsPerPageList"
+                      label="Regitros por página:" ></v-autocomplete>
+
+               <h4> {{itemsPerPage}} items de {{pagination.itemsLengthPagination}}</h4>
+							</template>
+							<span>Actualizar</span>
+						</v-tooltip>
+					</v-card-actions>						
+			</v-flex> -->
      <v-pagination
           v-model="currentPageSelected"
           :length="totalPages"

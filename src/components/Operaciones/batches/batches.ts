@@ -45,6 +45,7 @@ export default class AdmbatchesComponent extends Vue {
 	maxPagesVisible: number = 10;
 	currentPageSelected: number = 1;
 	pagePreviousSelected: number = 0;
+	itemsPerPageList = [2, 5, 10, 15, -1]
 	loadingDataTable: boolean = false;
 	disabledPagination: boolean = false;
 	private helper: helpers = new helpers();
@@ -52,7 +53,7 @@ export default class AdmbatchesComponent extends Vue {
 	// pag
 	// public buscaragencia = '';
 	// public noDataMessage = "Cargando...";
-	// public rowsPerPageText = 'Registros por Pagina:';
+	// public rowsPerPageText = 'Página: '+currentPageSelected+' || Registros desplegados:';
 	// public rowsPerPage = 20;
     // public totalItems = 0;
     // public desactivado = new Boolean;
