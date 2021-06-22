@@ -236,7 +236,8 @@
           @input="elementosPorPagina()"
           :total-visible="maxPagesVisible"
           :value="currentPageSelected"
-          @previous="prev"
+          @previous="prev()"
+          @next="next()"
           :disabled="disabledPagination"
         >
      </v-pagination>
