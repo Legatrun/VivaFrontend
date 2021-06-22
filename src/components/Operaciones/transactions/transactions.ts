@@ -84,7 +84,6 @@ export default class AdmtransactionsComponent extends Vue {
 	}
 	private beforeUpdate(){
 		this.pagePreviousSelected = this.currentPageSelected;
-		// alert("Actualizado previo: " +this.pagePreviousSelected)
 	}
 	private mounted() {
 		this.cargar_data();

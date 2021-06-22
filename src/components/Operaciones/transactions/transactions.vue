@@ -25,7 +25,7 @@
         'items-per-page-text': 'Registros por Pagina:',
       }"
       :loading="loadingDataTable"
-      loading-text="Cargando Lotes"
+      loading-text="Cargando Transacciones"
       disable-pagination=true
       dense
       class="elevation-1"
