@@ -51,6 +51,8 @@ export default class AdmtransactionsComponent extends Vue {
 	pagePreviousSelected: number = 0;
 	loadingDataTable: boolean = false;
 	disabledPagination: boolean = false;
+	desdePaginacionPrevia: number = 0;
+	hastaPaginacionPrevia: number = 0;
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');
 	}
@@ -80,6 +82,10 @@ export default class AdmtransactionsComponent extends Vue {
 			return Value;
 		}
 	}
+	private beforeUpdate(){
+		this.pagePreviousSelected = this.currentPageSelected;
+		// alert("Actualizado previo: " +this.pagePreviousSelected)
+	}
 	private mounted() {
 		this.cargar_data();
 	}
@@ -89,6 +95,8 @@ export default class AdmtransactionsComponent extends Vue {
 		}
 		let desde = 0;
 		let hasta = 10;
+		this.desdePaginacionPrevia = desde;
+		this.hastaPaginacionPrevia = hasta;
 		this.CargarPorPaginacion(desde,hasta);
 		this.itemsPerPage = 10;
 		this.totalItems = 0;
@@ -246,6 +254,12 @@ export default class AdmtransactionsComponent extends Vue {
 	}
 	
 	private elementosPorPagina(){
+		if(this.currentPageSelected!=1)
+		{
+			this.desdePaginacionPrevia = this.pagination.initItemPagination;
+			this.hastaPaginacionPrevia = this.pagination.untilItemPagination;
+		}
+		// calcula paginacion siguiente
 		let desde = this.pagination.untilItemPagination;
 		let hasta = this.pagination.untilItemPagination + this.itemsPerPage;
 		if(this.currentPageSelected > this.pagePreviousSelected)
@@ -255,8 +269,7 @@ export default class AdmtransactionsComponent extends Vue {
 		}
 		else{
 			// pag Anterior
-			var residuo = hasta - this.itemsPerPage;
-			this.CargarPorPaginacion(residuo, desde);
+			this.CargarPorPaginacion(this.desdePaginacionPrevia, this.hastaPaginacionPrevia);
 		}
 	}
 
@@ -265,5 +278,10 @@ export default class AdmtransactionsComponent extends Vue {
 		this.transactions.createtimestamp = ""
 	}
 
-
+	private next(){
+		console.log('pag. siguiente')
+	}
+	private prev(){
+		console.log('pag. anterior')
+	}
 }
