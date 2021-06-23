@@ -31,7 +31,7 @@
 						:footer-props="{
 							showFirstLastPage: true,
 							'items-per-page-options': itemsPerPageList,
-							'items-per-page-text': 'Página: '+currentPageSelected+' || Registros desplegados: ',
+							'items-per-page-text': 'Página: '+currentPageSelected+' || Registros desplegados:',
 						}"
             :loading="loadingDataTable"
             loading-text="Cargando Lotes"
