@@ -158,6 +158,7 @@
 												label="Terminal"
 												outlined
 												readonly
+												hint="No se puede modificar (Solo Lectura)"
 												persistent-hint>
 									</v-text-field>
 									<!-- por parte de billpaymente ncr   -->

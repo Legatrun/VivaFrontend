@@ -164,7 +164,6 @@ export default class AdmdevicesComponent extends Vue {
 		new services.Operaciones().Consultar(this.WebApi.ws_devicetypes_Consultar)
 			.then((resditype) => {
 				if (resditype.data._error.error === 0) {
-					
 					this.lstdivtype = resditype.data._data;
 					this.dialog = false;
 				} else {
