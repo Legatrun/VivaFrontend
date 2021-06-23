@@ -86,6 +86,11 @@ export default class AdmcalendarComponent extends Vue {
 		this.dialog = true;
 	}
 	private Grabar() {
+		var esRepetido = this.ValidaRepetido(this.calendar)
+		if(esRepetido)
+		{
+			return;
+		}
 		if (this.operacion === 'Update') {
 			new services.Operaciones().Actualizar(this.WebApi.ws_calendar_Actualizar, this.calendar)
 			.then((result) => {
@@ -274,5 +279,23 @@ export default class AdmcalendarComponent extends Vue {
 			}).catch((error) => {
 					this.popup.error('Consultar', 'Error Inesperado: ' + error);
 			});
+	}
+
+	private ValidaRepetido(data: services.clase_calendar):boolean{
+		var repetido:boolean = false;
+		this.lstcalendar.forEach((elem: any) => {
+              if (elem.identification === data.identification){
+					repetido = true
+					swal.fire({
+						type: 'error',
+						title: 'No se puede registrar',
+						text: 'Ya existe un Calendario con el mismo identificador',
+						showConfirmButton: false,
+						timer: 3000,
+					});
+					return repetido;
+              }
+        });
+		return repetido;
 	}
 }
