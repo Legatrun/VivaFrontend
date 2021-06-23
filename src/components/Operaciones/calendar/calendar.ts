@@ -78,6 +78,25 @@ export default class AdmcalendarComponent extends Vue {
 					this.popup.error('Consultar', 'Error Inesperado: ' + error);
 			});
 	}
+	private cargar_data_calendarversion() {
+		if (this.$store.state.auth !== true) {​​​​
+			this.$router.push({​​​​ path: '/Login' }​​​​);​​​​
+		}
+		this.loadingTable =  true;
+		this.calendarversion.calendarid = this.calendar.id 
+		new services.Operaciones().Buscar(this.WebApi.ws_calendarversion_Buscar, this.calendarversion)
+			.then((rescalendar) => {
+				if (rescalendar.data._error.error === 0) {
+					this.lstcalendarversion = rescalendar.data._data;
+					this.loadingTable = false;
+					this.dialog = false;
+				} else {
+					this.popup.error('Consultar', rescalendar.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+	}
 	private Insertar(): void {
 		this.calendar = new services.clase_calendar();
 		this.calendar.createtimestamp = this.FormatDate(Date.now());
@@ -86,12 +105,13 @@ export default class AdmcalendarComponent extends Vue {
 		this.dialog = true;
 	}
 	private Grabar() {
-		var esRepetido = this.ValidaRepetido(this.calendar)
-		if(esRepetido)
-		{
-			return;
-		}
+		
 		if (this.operacion === 'Update') {
+			var esRepetido = this.ValidaRepetidoCalendario(this.calendar)
+			if(esRepetido)
+			{
+				return;
+			}
 			new services.Operaciones().Actualizar(this.WebApi.ws_calendar_Actualizar, this.calendar)
 			.then((result) => {
 				if (result.data.error === 0) {
@@ -106,6 +126,11 @@ export default class AdmcalendarComponent extends Vue {
 			this.popup.error('Actualizar', 'Error Inesperado: ' + error);
 			});
 		} else if(this.operacion === 'Insert'){
+			var esRepetido = this.ValidaRepetidoCalendario(this.calendar)
+			if(esRepetido)
+			{
+				return;
+			}
 			new services.Operaciones().Insertar(this.WebApi.ws_calendar_Insertar, this.calendar)
 			.then((result) => {
 				if (result.data.error === 0) {
@@ -121,12 +146,17 @@ export default class AdmcalendarComponent extends Vue {
 				});
 		}
 		else{
+			var esRepetido = this.ValidaRepetidoCalendarVersion(this.calendarversion)
+			if(esRepetido)
+			{
+				return;
+			}
 			this.calendarversion.calendarid = this.calendar.id;
 			new services.Operaciones().Insertar(this.WebApi.ws_calendarversion_Insertar, this.calendarversion)
 			.then((result) => {
 				if (result.data.error === 0) {
 				this.popup.success('Insertar', result.data.descripcion);
-				this.CargarCalendariosVersion();
+				this.cargar_data_calendarversion();
 				this.dialogAddCalendarVersion = false;
 				} else {
 				this.popup.error('Insertar', result.data.descripcion);
@@ -158,7 +188,7 @@ export default class AdmcalendarComponent extends Vue {
 		this.calendar.createtimestamp = this.FormatDate(Date.now());
 		this.calendar.updatetimestamp = this.FormatDate(Date.now());
 		this.operacion = 'Update';
-		this.CargarCalendariosVersion();
+		this.cargar_data_calendarversion();
 		this.dialogVisualizar = true;
 	}
 	private AddCalendarVersion(){
@@ -234,7 +264,7 @@ export default class AdmcalendarComponent extends Vue {
 			confirmButtonText: 'Eliminar!',
 		}).then((resultOfQuestion) => {
 			if (resultOfQuestion.value) {
-			new services.Operaciones().Eliminar(this.WebApi.ws_calendar_Eliminar, data)
+			new services.Operaciones().Eliminar(this.WebApi.ws_calendarversion_Eliminar, data)
 				.then((result) => {
 				if (result.data.error === 0) {
 					swal.fire({
@@ -244,7 +274,7 @@ export default class AdmcalendarComponent extends Vue {
 					showConfirmButton: false,
 					timer: 2000,
 				});
-				this.cargar_data();
+				this.cargar_data_calendarversion();
 				} else {
 					swal.fire({
 						type: 'error',
@@ -267,21 +297,7 @@ export default class AdmcalendarComponent extends Vue {
 		});
 	}
 
-
-	CargarCalendariosVersion(){
-		new services.Operaciones().Consultar(this.WebApi.ws_calendarversion_Consultar)
-			.then((rescalendarversion) => {
-				if (rescalendarversion.data._error.error === 0) {
-					this.lstcalendarversion = rescalendarversion.data._data;
-				} else {
-					this.popup.error('Consultar', rescalendarversion.data._error.descripcion);
-				}
-			}).catch((error) => {
-					this.popup.error('Consultar', 'Error Inesperado: ' + error);
-			});
-	}
-
-	private ValidaRepetido(data: services.clase_calendar):boolean{
+	private ValidaRepetidoCalendario(data: services.clase_calendar):boolean{
 		var repetido:boolean = false;
 		this.lstcalendar.forEach((elem: any) => {
               if (elem.identification === data.identification){
@@ -290,6 +306,24 @@ export default class AdmcalendarComponent extends Vue {
 						type: 'error',
 						title: 'No se puede registrar',
 						text: 'Ya existe un Calendario con el mismo identificador',
+						showConfirmButton: false,
+						timer: 3000,
+					});
+					return repetido;
+              }
+        });
+		return repetido;
+	}
+
+	private ValidaRepetidoCalendarVersion(data: services.clase_calendarversion):boolean{
+		var repetido:boolean = false;
+		this.lstcalendarversion.forEach((elem: any) => {
+              if (elem.description === data.description){
+					repetido = true
+					swal.fire({
+						type: 'error',
+						title: 'No se puede registrar',
+						text: 'Ya existe una Versión de Calendario con el mismo nombre',
 						showConfirmButton: false,
 						timer: 3000,
 					});
