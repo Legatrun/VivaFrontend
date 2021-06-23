@@ -33,17 +33,17 @@
       <template slot="item" slot-scope="props">
         <tr>
           <td class="datatable-items-small">{{ FormatDateTime(props.item.createtimestamp) }}</td>
-          <td class="datatable-items-small">{{ props.item.locationidentification }}</td>
-          <td class="datatable-items-small">{{ props.item.deviceidentification }}</td>
-          <td class="datatable-items-small">{{ props.item.operationname }}</td>
-          <td class="datatable-items-small">{{FormatNull(props.item.customernumber)}}</td>
-          <td class="datatable-items-small">{{ props.item.transactionidentification }}</td>
-          <td class="datatable-items-small">{{ props.item.amount }}</td>
-          <td class="datatable-items-small">{{ props.item.resultcode }}</td>
-          <td class="datatable-items-small">{{ props.item.amountreturned }}</td>
-          <td class="datatable-items-small">{{ props.item.amountticketundelivered }}</td>
-          <td class="datatable-items-small">{{ props.item.amountentereddetail }}</td>
-          <td class="datatable-items-small">{{ props.item.amountticketundelivereddetail }}</td>
+          <td class="datatable-items-small">{{ FormatNull(props.item.locationidentification) }}</td>
+          <td class="datatable-items-small">{{ FormatNull(props.item.deviceidentification) }}</td>
+          <td class="datatable-items-small">{{ FormatNull(props.item.operationname) }}</td>
+          <td class="datatable-items-small">{{ FormatNull(props.item.customernumber)}}</td>
+          <td class="datatable-items-small">{{ FormatNull(props.item.transactionidentification) }}</td>
+          <td class="datatable-items-small">{{ FormatNull(props.item.amount) }}</td>
+          <td class="datatable-items-small">{{ FormatNull(props.item.resultcode) }}</td>
+          <td class="datatable-items-small">{{ FormatNull(props.item.amountreturned) }}</td>
+          <td class="datatable-items-small">{{ FormatNull(props.item.amountticketundelivered) }}</td>
+          <td class="datatable-items-small">{{ FormatNull(props.item.amountentereddetail) }}</td>
+          <td class="datatable-items-small">{{ FormatNull(props.item.amountticketundelivereddetail) }}</td>
           <td>
             <v-tooltip bottom>
               <template v-slot:activator="{ on }">

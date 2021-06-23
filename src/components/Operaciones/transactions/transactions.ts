@@ -71,7 +71,8 @@ export default class AdmtransactionsComponent extends Vue {
 		if (data=="") {
 			return '-';
 		
-		}else{
+		}
+		else{
 			return data;
 		}
 	}
@@ -100,7 +101,6 @@ export default class AdmtransactionsComponent extends Vue {
 		this.CargarPorPaginacion(desde,hasta);
 		this.itemsPerPage = 10;
 		this.totalItems = this.pagination.itemsLengthPagination;
-		alert("Pag total: " + this.pagination.itemsLengthPagination.toString())
 		this.totalPages = 0;
 		this.maxPagesVisible = 10;
 		this.currentPageSelected = 1;
