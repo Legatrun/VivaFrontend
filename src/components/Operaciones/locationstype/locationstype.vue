@@ -101,6 +101,8 @@
 					            clearable
 								required
 								:rules="RulLetras"
+								counter
+								maxlength="48"
 					            @input="locationstype.identification = updateText(locationstype.identification)">
 								</v-text-field>
 							</v-flex>
@@ -113,6 +115,8 @@
 								clearable
 								required
 								:rules="RulLetras"
+								counter
+								maxlength="96"
 								@input="locationstype.description = updateText(locationstype.description)">
 								</v-textarea>
 							</v-flex>
