@@ -805,8 +805,9 @@ export class clase_transactions {
 	public canceledtimestamp!: any;
 	public providersequencenumber!: number;
 	public cardsdispensed!: number;
-	public initItemPagination!: number;
-	public untilItemPagination!: number;
+	public numberOfItemPagination!: number;
+	public initPagination!: number;
+	public quantityPagination!: number;
 }
 
 // tslint:disable-next-line: max-classes-per-file class-name
