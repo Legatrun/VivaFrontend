@@ -110,6 +110,7 @@ export default class AdmcalendarComponent extends Vue {
 			var esRepetido = this.ValidaRepetidoCalendario(this.calendar)
 			if(esRepetido)
 			{
+
 				return;
 			}
 			new services.Operaciones().Actualizar(this.WebApi.ws_calendar_Actualizar, this.calendar)
@@ -129,6 +130,7 @@ export default class AdmcalendarComponent extends Vue {
 			var esRepetido = this.ValidaRepetidoCalendario(this.calendar)
 			if(esRepetido)
 			{
+				this.popup.error('Validación', 'Ya existe un Calendario con el mismo identificador');
 				return;
 			}
 			new services.Operaciones().Insertar(this.WebApi.ws_calendar_Insertar, this.calendar)
@@ -149,6 +151,7 @@ export default class AdmcalendarComponent extends Vue {
 			var esRepetido = this.ValidaRepetidoCalendarVersion(this.calendarversion)
 			if(esRepetido)
 			{
+				this.popup.error('Validación', 'Ya existe una Versión de Calendario con el mismo nombre');
 				return;
 			}
 			this.calendarversion.calendarid = this.calendar.id;
@@ -302,13 +305,6 @@ export default class AdmcalendarComponent extends Vue {
 		this.lstcalendar.forEach((elem: any) => {
               if (elem.identification === data.identification){
 					repetido = true
-					swal.fire({
-						type: 'error',
-						title: 'No se puede registrar',
-						text: 'Ya existe un Calendario con el mismo identificador',
-						showConfirmButton: false,
-						timer: 3000,
-					});
 					return repetido;
               }
         });
@@ -320,13 +316,6 @@ export default class AdmcalendarComponent extends Vue {
 		this.lstcalendarversion.forEach((elem: any) => {
               if (elem.description === data.description){
 					repetido = true
-					swal.fire({
-						type: 'error',
-						title: 'No se puede registrar',
-						text: 'Ya existe una Versión de Calendario con el mismo nombre',
-						showConfirmButton: false,
-						timer: 3000,
-					});
 					return repetido;
               }
         });
