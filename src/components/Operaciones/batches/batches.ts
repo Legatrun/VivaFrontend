@@ -129,6 +129,7 @@ export default class AdmbatchesComponent extends Vue {
 		this.totalPages = 0;
 		this.maxPagesVisible = 10;
 		this.disabledPagination = true;
+		this.loadingDataTable = true;
 		new services.Operaciones().ConsultarPorPaginacion(this.WebApi.ws_batches_ConsultarPorPaginacion,this.batches)
 		.then((resbatches) => {
 			if (resbatches.data._error.error === 0) {
@@ -160,15 +161,15 @@ export default class AdmbatchesComponent extends Vue {
 			new services.Operaciones().Actualizar(this.WebApi.ws_batches_Actualizar, this.batches)
 			.then((result) => {
 				if (result.data.error === 0) {
-					this.popup.success('Actualizar', result.data.descripcion);
+					this.popup.success('Revisar', result.data.descripcion);
 					this.cargar_data(this.desdeInicial,this.cantidadInicial);
 				this.dialog = false;
 			} else {
-			this.popup.error('Actualizar', result.data.descripcion);
+			this.popup.error('Revisar', result.data.descripcion);
 			}
 		})
 		.catch((error) => {
-			this.popup.error('Actualizar', 'Error Inesperado: ' + error);
+			this.popup.error('Revisar', 'Error Inesperado: ' + error);
 			});
 	} else {
 		new services.Operaciones().Insertar(this.WebApi.ws_batches_Insertar, this.batches)
@@ -190,7 +191,7 @@ export default class AdmbatchesComponent extends Vue {
 		this.dialog = false;
 		this.cargar_data(this.desdeInicial,this.cantidadInicial);
 	}
-	private Actualizar(data: services.clase_batches): void {
+	private Revisar(data: services.clase_batches): void {
 		this.batches = data;
 		this.batches.createtimestamp = this.FormatDate(Date.now());
 		this.batches.updatetimestamp = this.FormatDate(Date.now());
@@ -289,7 +290,7 @@ export default class AdmbatchesComponent extends Vue {
 	}
 	
 	private actualizarTabla(){
-		this.cargar_data(this.desdeInicial,this.cantidadInicial);
+		this.cargarNuevosElementos();
 	}
 
 }

@@ -37,7 +37,8 @@
             loading-text="Cargando Lotes"
 						dense
 						class="elevation-1"
-            :hide-default-footer="true">
+            :hide-default-footer="true"
+            disable-pagination>
 			<template slot="item" slot-scope="props">
 				<tr>
           <td class="datatable-items-small">
@@ -61,7 +62,7 @@
           <td>
 						<v-tooltip bottom>
 							<template v-slot:activator="{ on }">
-								<v-btn color="btnedit" v-on="on" small dark  @click="Actualizar(props.item)"><v-icon>mdi-comment-eye</v-icon>Revisar</v-btn>
+								<v-btn color="btnedit" v-on="on" small dark  @click="Revisar(props.item)"><v-icon>mdi-comment-eye</v-icon>Revisar</v-btn>
 							</template>
 							<span>Ver datos del lote</span>
 						</v-tooltip>
@@ -177,7 +178,7 @@
 							<template v-slot:activator="{ on }">
 								<v-btn dark left color="orange" fab small v-on="on" @click="actualizarTabla()"><v-icon>mdi-update</v-icon></v-btn>
 							</template>
-							<span>Actualizar</span>
+							<span>Actualizar Tabla</span>
 						</v-tooltip>
 					</v-card-actions>						
 				</v-flex>	
