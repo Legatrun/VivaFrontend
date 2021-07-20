@@ -9,6 +9,7 @@ import helpers from '@/helper';
 @Component
 export default class AdmbatchesComponent extends Vue {
 	private headers: any[] = [
+		{ text: 'Nro', align: 'left', sortable: true, value: 'operations', width: '5%' },
 		{ text: 'Sucursal', align: 'left', sortable: true, value: 'locationidentification', width: '15%' },
 		{ text: 'Terminal', align: 'left', sortable: true, value: 'deviceidentification', width: '15%' },
 		{ text: 'Estado', align: 'left', sortable: true, value: 'status', width: '15%' },
@@ -39,31 +40,19 @@ export default class AdmbatchesComponent extends Vue {
 	private dialog = false;
 	private operacion = '';
 	private statusDetail = '';
+	//paginacion
+	desdeInicial=1;
+	cantidadInicial=50;
 	itemsPerPage: number = 10;
 	totalItems: number = 0;
 	totalPages: number = 0;
 	maxPagesVisible: number = 10;
 	currentPageSelected: number = 1;
-	pagePreviousSelected: number = 0;
 	itemsPerPageList = [2, 5, 10, 15, -1]
 	loadingDataTable: boolean = false;
 	disabledPagination: boolean = false;
 	private helper: helpers = new helpers();
 	private popup = new popup.Swal();
-	// pag
-	// public buscaragencia = '';
-	// public noDataMessage = "Cargando...";
-	// public rowsPerPageText = 'Página: '+currentPageSelected+' || Registros desplegados:';
-	// public rowsPerPage = 20;
-    // public totalItems = 0;
-    // public desactivado = new Boolean;
-	// pages()
-	// {
-	// 	if (this.rowsPerPage == null ||
-	// 		this.totalItems == null
-	// 	) return 0
-	// 	return Math.ceil(this.totalItems / this.rowsPerPage)
-	// }
 	validacion = [
 		(v: any) => !!v || "El campo es requerido"
 	];
@@ -82,7 +71,6 @@ export default class AdmbatchesComponent extends Vue {
 	  */
 	beforeUpdate(){
 		this.validarFecha()
-		this.pagePreviousSelected = this.currentPageSelected;
 	}
 	private validarFecha(){
 		var fecha_inicio = this.batches.opentimestamp;
@@ -123,28 +111,39 @@ export default class AdmbatchesComponent extends Vue {
 		}
 	}
 	private mounted() {
-		this.cargar_data();
+		this.cargar_data(this.desdeInicial,this.cantidadInicial);
 		this.CargarSucursales();
 		this.batches.opentimestamp = this.FormatDate(Date.now());
 		this.batches.closetimestamp = this.FormatDate(Date.now());
 	}
-	private cargar_data() {
-		
+
+	private cargar_data(initPag: number,quantityPag: number) {
 		if (this.$store.state.auth !== true) {​​​​
 			this.$router.push({​​​​ path: '/Login' }​​​​);​​​​
 		}
-		let desde = 0;
-		let hasta = 10;
-		this.CargarPorPaginacion(desde,hasta);
-		this.itemsPerPage = 10;
+		this.lstbatches = [];
+		this.batches.initPagination = initPag;
+		this.batches.quantityPagination = quantityPag;
+		this.itemsPerPage = 50;
 		this.totalItems = 0;
 		this.totalPages = 0;
 		this.maxPagesVisible = 10;
-		this.currentPageSelected = 1;
-		this.pagePreviousSelected = 0;
-		this.loadingDataTable = false;
-		this.disabledPagination = false;
-		
+		this.disabledPagination = true;
+		new services.Operaciones().ConsultarPorPaginacion(this.WebApi.ws_batches_ConsultarPorPaginacion,this.batches)
+		.then((resbatches) => {
+			if (resbatches.data._error.error === 0) {
+				this.lstbatches = resbatches.data._data;
+				this.pagination = resbatches.data._pagination;
+				this.totalPages = Math.ceil(this.pagination.itemsLengthPagination/this.itemsPerPage)
+				this.loadingDataTable = false;
+				this.disabledPagination = false;
+				this.dialog = false;
+				} else {
+					this.popup.error('Consultar', resbatches.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
 	}
 	private Insertar(): void {
 		this.batches = new services.clase_batches();
@@ -162,7 +161,7 @@ export default class AdmbatchesComponent extends Vue {
 			.then((result) => {
 				if (result.data.error === 0) {
 					this.popup.success('Actualizar', result.data.descripcion);
-				this.cargar_data();
+					this.cargar_data(this.desdeInicial,this.cantidadInicial);
 				this.dialog = false;
 			} else {
 			this.popup.error('Actualizar', result.data.descripcion);
@@ -176,7 +175,7 @@ export default class AdmbatchesComponent extends Vue {
 		.then((result) => {
 			if (result.data.error === 0) {
 			this.popup.success('Insertar', result.data.descripcion);
-			this.cargar_data();
+			this.cargar_data(this.desdeInicial,this.cantidadInicial);
 			this.dialog = false;
 			} else {
 			this.popup.error('Insertar', result.data.descripcion);
@@ -189,7 +188,7 @@ export default class AdmbatchesComponent extends Vue {
 	}
 	private Cancelar() {
 		this.dialog = false;
-		this.cargar_data();
+		this.cargar_data(this.desdeInicial,this.cantidadInicial);
 	}
 	private Actualizar(data: services.clase_batches): void {
 		this.batches = data;
@@ -228,7 +227,7 @@ export default class AdmbatchesComponent extends Vue {
 					showConfirmButton: false,
 					timer: 2000,
 				});
-				this.cargar_data();
+				this.cargar_data(this.desdeInicial,this.cantidadInicial);
 				} else {
 					swal.fire({
 						type: 'error',
@@ -273,58 +272,24 @@ export default class AdmbatchesComponent extends Vue {
 		return nombreSucursal;
 	}
 
-	private CargarPorPaginacion(init:number,until: number){
-		this.batches.initItemPagination = init;
-		this.batches.untilItemPagination = until;
-		this.loadingDataTable = true;
-		this.disabledPagination = true;
-		this.lstbatches = [];
-
-
-		new services.Operaciones().ConsultarPorPaginacion(this.WebApi.ws_batches_ConsultarPorPaginacion,this.batches)
-		.then((resbatches) => {
-			if (resbatches.data._error.error === 0) {
-				this.lstbatches = resbatches.data._data;
-				this.pagination = resbatches.data._pagination;
-				// Config Pagination
-				// this.itemsPerPage = this.pagination.itemsPerPagePagination;
-				this.totalPages = Math.ceil(this.pagination.itemsLengthPagination/this.itemsPerPage)
-				
-				this.loadingDataTable = false;
-				this.disabledPagination = false;
-				this.dialog = false;
-				} else {
-					this.popup.error('Consultar', resbatches.data._error.descripcion);
-				}
-			}).catch((error) => {
-					this.popup.error('Consultar', 'Error Inesperado: ' + error);
-			});
-	}
-	
-	private elementosPorPagina(){
-		// this.pagePreviousSelected = this.currentPageSelected;
-		let desde = this.pagination.untilItemPagination;
-		let hasta = this.pagination.untilItemPagination + this.itemsPerPage;
-		// alert("Pagina actual: "+this.currentPageSelected + " Pagina Anterior: "+this.pagePreviousSelected)
-		if(this.currentPageSelected > this.pagePreviousSelected)
-		{
-			this.CargarPorPaginacion(desde, hasta);
+	private cargarNuevosElementos(){
+		//1(1-51) 2(52-102) 3(103-1523) 4(154-204) 5(205-255)
+		let desde = (this.currentPageSelected*this.pagination.itemsPerPagePagination)+(this.currentPageSelected-1)-(this.pagination.itemsPerPagePagination);
+		if(desde <= 0){
+			desde = 1;
 		}
-		else{
-			var residuo = desde - hasta;
-			// alert("else: desde: "+ desde + " hasta: " +hasta)
-			this.CargarPorPaginacion(hasta-hasta, desde);
-		}
+		let cantidad = this.pagination.itemsPerPagePagination;
+		this.cargar_data(desde, cantidad);
 	}
 
-	private prev(){
-		alert('Atras')
-	}
-
-	LimpiarFiltros(){
+	private limpiarFiltros(){
 		this.buscarbatches = ""
 		this.batches.createtimestamp = ""
 		this.batches.closetimestamp = ""
+	}
+	
+	private actualizarTabla(){
+		this.cargar_data(this.desdeInicial,this.cantidadInicial);
 	}
 
 }

@@ -284,8 +284,9 @@ export class clase_batches {
 	public aceptordetail!: string;
 	public changerdetail!: string;
 	public returndetail!: string;
-	public initItemPagination!: number;
-	public untilItemPagination!: number;
+	public numberOfItemPagination!: number;
+	public initPagination!: number;
+	public quantityPagination!: number;
 }
 
 // tslint:disable-next-line: max-classes-per-file class-name

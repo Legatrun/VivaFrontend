@@ -36,9 +36,13 @@
             :loading="loadingDataTable"
             loading-text="Cargando Lotes"
 						dense
-						class="elevation-1">
+						class="elevation-1"
+            :hide-default-footer="true">
 			<template slot="item" slot-scope="props">
 				<tr>
+          <td class="datatable-items-small">
+            {{props.item.numberOfItemPagination}}
+          </td>
           <td class="datatable-items-small">
             {{ FormatSucursal(props.item.locationidentification) }}
           </td>
@@ -157,7 +161,7 @@
 							    </v-btn>
 							</v-flex>
 							<v-flex sm1.5 style="padding: 0px">
-								<v-btn large color="grey" dark @click="LimpiarFiltros()">
+								<v-btn large color="grey" dark @click="limpiarFiltros()">
 									<v-icon>mdi-monitor-clean</v-icon> 
 									 Limpiar
 							    </v-btn>
@@ -171,7 +175,7 @@
 						<v-spacer></v-spacer>
 						<v-tooltip bottom>
 							<template v-slot:activator="{ on }">
-								<v-btn dark left color="orange" fab small v-on="on" @click="cargar_data()"><v-icon>mdi-update</v-icon></v-btn>
+								<v-btn dark left color="orange" fab small v-on="on" @click="actualizarTabla()"><v-icon>mdi-update</v-icon></v-btn>
 							</template>
 							<span>Actualizar</span>
 						</v-tooltip>
@@ -190,13 +194,12 @@
           :length="totalPages"
           dark
           color="cyan"
-          @input="elementosPorPagina"
+          @input="cargarNuevosElementos"
           :total-visible="maxPagesVisible"
           :value="currentPageSelected"
-          @previous="prev"
           :disabled="disabledPagination"
         >
-     </v-pagination>
+    </v-pagination>
 		<v-dialog v-model="dialog" max-width="70%">
 			<v-card>
 				<v-toolbar style="padding:10px" dark class="primary">
