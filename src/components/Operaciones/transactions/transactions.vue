@@ -28,10 +28,13 @@
       :loading="loadingDataTable"
       loading-text="Cargando Transacciones"
       dense
+      :hide-default-footer="true"
+      disable-pagination
       class="elevation-1"
     >
       <template slot="item" slot-scope="props">
         <tr>
+          <td class="datatable-items-small">{{ props.item.numberOfItemPagination }}</td>
           <td class="datatable-items-small">{{ FormatDateTime(props.item.createtimestamp) }}</td>
           <td class="datatable-items-small">{{ FormatNull(props.item.locationidentification) }}</td>
           <td class="datatable-items-small">{{ FormatNull(props.item.deviceidentification) }}</td>
@@ -245,19 +248,17 @@
 						</v-tooltip>
 					</v-card-actions>						
 			</v-flex> -->
-     <v-pagination
+      <v-pagination
           v-model="currentPageSelected"
           :length="totalPages"
           dark
           color="cyan"
-          @input="elementosPorPagina()"
+          @input="cargarNuevosElementos"
           :total-visible="maxPagesVisible"
           :value="currentPageSelected"
-          @previous="prev()"
-          @next="next()"
           :disabled="disabledPagination"
         >
-     </v-pagination>
+      </v-pagination>
     <v-dialog v-model="dialog" persistent max-width="60%">
       <v-card>
         <v-toolbar style="padding:10px" dark class="primary">

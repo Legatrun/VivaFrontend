@@ -9,6 +9,7 @@ import helpers from '@/helper';
 @Component
 export default class AdmtransactionsComponent extends Vue {
 	private headers: any[] = [
+		{ text: 'Nro', align: 'center', sortable: true, value: 'nro', width: '5%' },
 		{ text: 'Fecha de Transacción', align: 'center', sortable: true, value: 'createtimestamp', width: '7%' },
 		{ text: 'Sucursal', align: 'center', sortable: true, value: 'locationidentification', width: '7%' },
 		{ text: 'Terminal', align: 'center', sortable: true, value: 'deviceidentification', width: '7%' },
@@ -43,17 +44,17 @@ export default class AdmtransactionsComponent extends Vue {
 	private operacion = '';
 	private helper: helpers = new helpers();
 	private popup = new popup.Swal();
-	itemsPerPage: number = 10;
+	//paginacion
+	desdeInicial=1;
+	cantidadInicial=100;
+	itemsPerPage: number = 100;
 	totalItems: number = 0;
 	totalPages: number = 0;
-	maxPagesVisible: number = 10;
+	maxPagesVisible: number = 15;
 	currentPageSelected: number = 1;
-	pagePreviousSelected: number = 0;
+	itemsPerPageList = [2, 5, 10, 15, -1]
 	loadingDataTable: boolean = false;
 	disabledPagination: boolean = false;
-	desdePaginacionPrevia: number = 0;
-	hastaPaginacionPrevia: number = 0;
-	itemsPerPageList = [2, 5, 10, 15, -1]
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');
 	}
@@ -84,30 +85,38 @@ export default class AdmtransactionsComponent extends Vue {
 			return Value;
 		}
 	}
-	private beforeUpdate(){
-		this.pagePreviousSelected = this.currentPageSelected;
-	}
 	private mounted() {
-		this.cargar_data();
+		this.cargar_data(this.desdeInicial,this.cantidadInicial);
 	}
-	private cargar_data() {
+	private cargar_data(initPag: number,quantityPag: number) {
 		if (this.$store.state.auth !== true) {​​​​
 			this.$router.push({​​​​ path: '/Login' }​​​​);​​​​
 		}
-		let desde = 0;
-		let hasta = 10;
-		this.desdePaginacionPrevia = desde;
-		this.hastaPaginacionPrevia = hasta;
-		this.CargarPorPaginacion(desde,hasta);
-		this.itemsPerPage = 10;
-		this.totalItems = this.pagination.itemsLengthPagination;
+		this.lsttransactions = [];
+		this.transactions.initPagination = initPag;
+		this.transactions.quantityPagination = quantityPag;
+		this.totalItems = 0;
 		this.totalPages = 0;
-		this.maxPagesVisible = 10;
-		this.currentPageSelected = 1;
-		this.pagePreviousSelected = 0;
-		this.loadingDataTable = false;
-		this.disabledPagination = false;
+		this.disabledPagination = true;
+		this.loadingDataTable = true;
+		new services.Operaciones().ConsultarPorPaginacion(this.WebApi.ws_transactions_ConsultarPorPaginacion,this.transactions)
+		.then((restrans) => {
+			if (restrans.data._error.error === 0) {
+				this.lsttransactions = restrans.data._data;
+				this.pagination = restrans.data._pagination;
+				debugger
+				this.totalPages = Math.ceil(this.pagination.itemsLengthPagination/this.itemsPerPage)
+				this.loadingDataTable = false;
+				this.disabledPagination = false;
+				this.dialog = false;
+				} else {
+					this.popup.error('Consultar', restrans.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
 	}
+
 	private Insertar(): void {
 		this.transactions = new services.clase_transactions();
 		this.operacion = 'Insert';
@@ -119,7 +128,7 @@ export default class AdmtransactionsComponent extends Vue {
 			.then((result) => {
 				if (result.data.error === 0) {
 					this.popup.success('Actualizar', result.data.descripcion);
-				this.cargar_data();
+				this.cargar_data(this.desdeInicial,this.cantidadInicial);
 				this.dialog = false;
 			} else {
 			this.popup.error('Actualizar', result.data.descripcion);
@@ -133,7 +142,7 @@ export default class AdmtransactionsComponent extends Vue {
 		.then((result) => {
 			if (result.data.error === 0) {
 			this.popup.success('Insertar', result.data.descripcion);
-			this.cargar_data();
+			this.cargar_data(this.desdeInicial,this.cantidadInicial);
 			this.dialog = false;
 			} else {
 			this.popup.error('Insertar', result.data.descripcion);
@@ -145,7 +154,7 @@ export default class AdmtransactionsComponent extends Vue {
 		}
 	}
 	private Cancelar() {
-		this.cargar_data();
+		this.cargar_data(this.desdeInicial,this.cantidadInicial);
 		this.dialog = false;
 	}
 	private Actualizar(data: services.clase_transactions): void {
@@ -203,7 +212,7 @@ export default class AdmtransactionsComponent extends Vue {
 					showConfirmButton: false,
 					timer: 2000,
 				});
-				this.cargar_data();
+				this.cargar_data(this.desdeInicial,this.cantidadInicial);
 				} else {
 					swal.fire({
 						type: 'error',
@@ -226,63 +235,19 @@ export default class AdmtransactionsComponent extends Vue {
 		});
 	}
 
-	private CargarPorPaginacion(init:number,until: number){
-		this.transactions.initItemPagination = init;
-		this.transactions.untilItemPagination = until;
-		this.loadingDataTable = true;
-		this.disabledPagination = true;
-		this.lsttransactions = [];
-
-
-		new services.Operaciones().ConsultarPorPaginacion(this.WebApi.ws_transactions_ConsultarPorPaginacion,this.transactions)
-		.then((resbatches) => {
-			if (resbatches.data._error.error === 0) {
-				this.lsttransactions = resbatches.data._data;
-				this.pagination = resbatches.data._pagination;
-				// Config Pagination
-				// this.itemsPerPage = this.pagination.itemsPerPagePagination;
-				this.totalPages = Math.ceil(this.pagination.itemsLengthPagination/this.itemsPerPage)
-				
-				this.loadingDataTable = false;
-				this.disabledPagination = false;
-				this.dialog = false;
-				} else {
-					this.popup.error('Consultar', resbatches.data._error.descripcion);
-				}
-			}).catch((error) => {
-					this.popup.error('Consultar', 'Error Inesperado: ' + error);
-			});
-	}
-	
-	private elementosPorPagina(){
-		if(this.currentPageSelected!=1)
-		{
-			this.desdePaginacionPrevia = this.pagination.initItemPagination;
-			this.hastaPaginacionPrevia = this.pagination.untilItemPagination;
+	private cargarNuevosElementos(){
+		//1(1-51) 2(52-102) 3(103-1523) 4(154-204) 5(205-255)...9820(981151-981251)
+		alert("currentPageSelected: "+this.currentPageSelected + "  this.pagination.itemsPerPagePagination:"+ this.pagination.itemsPerPagePagination)
+		let desde = (this.currentPageSelected*this.pagination.itemsPerPagePagination)+(this.currentPageSelected-1)-(this.pagination.itemsPerPagePagination);
+		if(desde <= 0){
+			desde = 1;
 		}
-		// calcula paginacion siguiente
-		let desde = this.pagination.untilItemPagination;
-		let hasta = this.pagination.untilItemPagination + this.itemsPerPage;
-		if(this.currentPageSelected > this.pagePreviousSelected)
-		{
-			// pag siguiente
-			this.CargarPorPaginacion(desde, hasta);
-		}
-		else{
-			// pag Anterior
-			this.CargarPorPaginacion(this.desdePaginacionPrevia, this.hastaPaginacionPrevia);
-		}
+		let cantidad = this.pagination.itemsPerPagePagination;
+		this.cargar_data(desde, cantidad);
 	}
 
 	LimpiarFiltros(){
 		this.buscartransactions = ""
 		this.transactions.createtimestamp = ""
-	}
-
-	private next(){
-		console.log('pag. siguiente')
-	}
-	private prev(){
-		console.log('pag. anterior')
 	}
 }
