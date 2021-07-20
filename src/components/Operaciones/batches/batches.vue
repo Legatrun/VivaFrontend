@@ -304,27 +304,27 @@
                             <v-row>
                               <v-flex sm4 style="padding: 5px">
                                <v-text-field class="input-small" v-model="batches.aceptor_001000" 
-                                  hint="10" readonly persistent-hint required>
+                                  hint="Billetes de 10 Bs." readonly persistent-hint required>
                                 </v-text-field>
                               </v-flex>
                               <v-flex sm4 style="padding: 5px">
                                 <v-text-field class="input-small" v-model="batches.aceptor_002000" 
-                                  hint="20" readonly persistent-hint required>
+                                  hint="Billetes de 20 Bs." readonly persistent-hint required>
                                 </v-text-field>
                               </v-flex>
                               <v-flex sm4 style="padding: 5px">
                                   <v-text-field class="input-small" v-model="batches.aceptor_005000" 
-                                  hint="50" readonly persistent-hint required>
+                                  hint="Billetes de 50 Bs." readonly persistent-hint required>
                                 </v-text-field>
                               </v-flex>
                               <v-flex sm4 style="padding: 5px">
                                   <v-text-field class="input-small" v-model="batches.aceptor_010000" 
-                                  hint="100" readonly persistent-hint required>
+                                  hint="Billetes de 100 Bs." readonly persistent-hint required>
                                 </v-text-field>
                               </v-flex>
                               <v-flex sm4 style="padding: 5px">
                                   <v-text-field class="input-small" v-model="batches.aceptor_020000" 
-                                  hint="200" readonly persistent-hint required>
+                                  hint="Billetes de 200 Bs." readonly persistent-hint required>
                                 </v-text-field>
                               </v-flex>
                             </v-row>
@@ -339,22 +339,22 @@
                             <v-row>
                               <v-flex sm4 style="padding: 5px">
                                <v-text-field class="input-small" v-model="batches.changer_001000" 
-                                  hint="10" readonly persistent-hint required>
+                                  hint="Billetes de 10 Bs." readonly persistent-hint required>
                                 </v-text-field>
                               </v-flex>
                               <v-flex sm4 style="padding: 5px">
                                 <v-text-field class="input-small" v-model="batches.changer_002000" 
-                                  hint="20" readonly persistent-hint required>
+                                  hint="Billetes de 20 Bs." readonly persistent-hint required>
                                 </v-text-field>
                               </v-flex>
                               <v-flex sm4 style="padding: 5px">
                                   <v-text-field class="input-small" v-model="batches.changer_005000" 
-                                  hint="50" readonly persistent-hint required>
+                                  hint="Billetes de 50 Bs." readonly persistent-hint required>
                                 </v-text-field>
                               </v-flex>
                               <v-flex sm4 style="padding: 5px">
                                   <v-text-field class="input-small" v-model="batches.totalcardsdelivered" 
-                                  hint="Tarjetas" readonly persistent-hint required>
+                                  hint="Tarjetas Chip" readonly persistent-hint required>
                                 </v-text-field>
                               </v-flex>
                             </v-row>
@@ -369,17 +369,17 @@
                             <v-row>
                               <v-flex sm4 style="padding: 5px">
                                <v-text-field class="input-small" v-model="batches.return_001000" 
-                                  hint="10" readonly persistent-hint required>
+                                  hint="Billetes de 10 Bs." readonly persistent-hint required>
                                 </v-text-field>
                               </v-flex>
                               <v-flex sm4 style="padding: 5px">
                                 <v-text-field class="input-small" v-model="batches.return_002000" 
-                                  hint="20" readonly persistent-hint required>
+                                  hint="Billetes de 20 Bs." readonly persistent-hint required>
                                 </v-text-field>
                               </v-flex>
                               <v-flex sm4 style="padding: 5px">
                                   <v-text-field class="input-small" v-model="batches.return_005000" 
-                                  hint="50" readonly persistent-hint required>
+                                  hint="Billetes de 50 Bs." readonly persistent-hint required>
                                 </v-text-field>
                               </v-flex>
                             </v-row>
