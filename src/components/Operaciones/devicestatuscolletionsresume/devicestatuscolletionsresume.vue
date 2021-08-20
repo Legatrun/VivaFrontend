@@ -142,7 +142,7 @@
 							</v-flex>
 							<v-spacer></v-spacer>
 							<v-flex sm1.5 style="padding: 0px">
-								<v-btn large color="green" dark>
+								<v-btn large color="green" dark @click="mounted()">
 									<v-icon>mdi-selection-search</v-icon> 
 									 Buscar
 							    </v-btn>
@@ -157,7 +157,7 @@
 						</v-card-text>
 					</v-form>
 				</v-card>
-				   <v-flex sm12>
+				<v-flex sm12>
 					<v-card-actions>
 						<v-spacer></v-spacer>
 						<v-tooltip bottom>

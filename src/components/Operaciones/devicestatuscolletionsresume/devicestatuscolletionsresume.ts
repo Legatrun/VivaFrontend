@@ -305,7 +305,6 @@ export default class AdmdevicestatuscolletionsresumeComponent extends Vue {
 	}
 	LimpiarFiltros(){
 		this.buscardevicestatuscolletionsresume = ""
-		this.buscardevicestatuscolletionsresume = ""
 	}
 
 }
