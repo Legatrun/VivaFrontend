@@ -142,10 +142,7 @@
 							</v-flex>
 							<v-spacer></v-spacer>
 							<v-flex sm1.5 style="padding: 0px">
-<<<<<<< HEAD
-=======
 								<v-btn large color="green" dark @click="cargar_data_filtrado()">
->>>>>>> 13abd1288f66b9a90a8e0610efb5222efb17a4b2
 									<v-icon>mdi-selection-search</v-icon> 
 									 Buscar
 							    </v-btn>
