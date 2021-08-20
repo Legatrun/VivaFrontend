@@ -56,6 +56,7 @@ export class Endpoints {
 	public ws_deviceinstalationprovider_Eliminar: string = $store.state.server + 'Api/deviceinstalationprovider/Eliminar';
 	public ws_devicestatuscolletionsresume_Consultar: string = $store.state.server + 'Api/devicestatuscolletionsresume/Consultar';
 	public ws_devicestatuscolletionsresumeprovider_Consultar: string = $store.state.server + 'Api/devicestatuscolletionsresume/ConsultarPorProvider';
+	public ws_devicestatuscolletionsresumeprovider_Consultar_Filtro: string = $store.state.server + 'Api/devicestatuscolletionsresume/ConsultarPorFiltro';
 	public ws_devicestatuscolletionsresume_Buscar: string = $store.state.server + 'Api/devicestatuscolletionsresume/Buscar';
 	public ws_devicestatuscolletionsresume_Insertar: string = $store.state.server + 'Api/devicestatuscolletionsresume/Insertar';
 	public ws_devicestatuscolletionsresume_Actualizar: string = $store.state.server + 'Api/devicestatuscolletionsresume/Actualizar';

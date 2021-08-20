@@ -103,7 +103,7 @@
 							<v-flex sm3 style="padding: 0px">
 											<!-- v-model="devicestatuscolletionsresume.locationidentification" -->
 								<v-autocomplete class="input-small" 
-											v-model="buscardevicestatuscolletionsresume"
+											v-model="devicestatuscolletionsresume.locationidentification"
 											label="Sucursal"
 											clearable
 											persistent-hint
@@ -116,7 +116,7 @@
 							</v-flex>
 							<v-flex sm3 style="padding: 0px">
 								<v-autocomplete class="input-small" 
-											v-model="buscardevicestatuscolletionsresume"
+											v-model="devicestatuscolletionsresume.deviceidentification"
 											label="Terminal"
 											clearable
 											persistent-hint
@@ -142,7 +142,7 @@
 							</v-flex>
 							<v-spacer></v-spacer>
 							<v-flex sm1.5 style="padding: 0px">
-								<v-btn large color="green" dark>
+								<v-btn large color="green" dark @click="cargar_data_filtrado()">
 									<v-icon>mdi-selection-search</v-icon> 
 									 Buscar
 							    </v-btn>
