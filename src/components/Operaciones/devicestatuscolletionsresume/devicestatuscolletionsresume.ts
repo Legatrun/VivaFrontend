@@ -162,6 +162,21 @@ export default class AdmdevicestatuscolletionsresumeComponent extends Vue {
 					this.popup.error('Consultar', 'Error Inesperado: ' + error);
 			});
 	}
+	private cargar_data_filtrado() {
+		this.loadingTable = true; 
+		new services.Operaciones().Buscar(this.WebApi.ws_devicestatuscolletionsresumeprovider_Consultar_Filtro,this.devicestatuscolletionsresume)
+			.then((resdevicestatuscolletionsresumeprovider) => {
+				if (resdevicestatuscolletionsresumeprovider.data._error.error === 0) {
+					this.lstdevicestatuscolletionsresumeprovider = resdevicestatuscolletionsresumeprovider.data._data;
+					this.loadingTable = false;
+					this.dialog = false;
+				} else {
+					this.popup.error('Consultar', resdevicestatuscolletionsresumeprovider.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+	}
 	private Insertar(): void {
 		this.devicestatuscolletionsresume = new services.clase_devicestatuscolletionsresume();
 		this.devicestatuscolletionsresume.createtimestamp = this.FormatDate(Date.now());
