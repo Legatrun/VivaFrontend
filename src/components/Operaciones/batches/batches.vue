@@ -77,29 +77,29 @@
 						    <v-layout wrap>
 								<v-flex sm6 style="padding:0px" class="input-small">
 									<v-autocomplete
-                   v-model="buscarbatches"
+                   v-model="batches.locationidentification"
 									label="Sucursal"
 									clearable
 									outlined
 									parsisten-hint								
                   no-data-text="No se encontro ningun dato"
-                  :items="lstbatches"
-                  item-text="locationidentification"
-                  item-value="locationidentification"
+                  :items="lstsucursal"
+                  item-text="description"
+                  item-value="identification"
 									>
 									</v-autocomplete>
 								</v-flex>
 								<v-flex sm6 style="padding:0px" class="input-small">
 									<v-autocomplete
-                  v-model="buscarbatches"
+                  v-model="batches.deviceidentification"
 									label="Terminal"
 									clearable
 									outlined
 									parsisten-hint
                   no-data-text="No se encontro ningun dato"
-                  :items="lstbatches"
-                  item-text="deviceidentification"
-                  item-value="deviceidentification"
+                  :items="lstdevices"
+                  item-text="identification"
+                  item-value="identification"
 									>
 									</v-autocomplete>
 								</v-flex>
@@ -156,7 +156,7 @@
 							</v-flex>
 							<v-spacer></v-spacer>
 							<v-flex sm1.5 style="padding: 0px">
-								<v-btn large color="green" dark>
+								<v-btn large color="green" dark @click="cargar_data_fitro()">
 									<v-icon>mdi-selection-search</v-icon> 
 									 Buscar
 							    </v-btn>

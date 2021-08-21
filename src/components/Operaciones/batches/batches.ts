@@ -33,6 +33,7 @@ export default class AdmbatchesComponent extends Vue {
 	private sucursal = new services.clase_locations();
 	private pagination = new services.clase_pagination();
 	private lstsucursal: services.clase_locations[] = [];
+	private lstdevices: services.clase_devices[] = [];
 	private message="";
 	private activa = false;
 	private locationdescription = "";
@@ -113,8 +114,21 @@ export default class AdmbatchesComponent extends Vue {
 	private mounted() {
 		this.cargar_data(this.desdeInicial,this.cantidadInicial);
 		this.CargarSucursales();
+		this.CargarTerminales()
 		this.batches.opentimestamp = this.FormatDate(Date.now());
 		this.batches.closetimestamp = this.FormatDate(Date.now());
+	}
+	private CargarTerminales(){
+		new services.Operaciones().Consultar(this.WebApi.ws_devices_Consultar)
+		.then((resdevices) => {
+			if (resdevices.data._error.error === 0) {
+				this.lstdevices = resdevices.data._data;
+			} else {
+				this.popup.error('Consultar', resdevices.data._error.descripcion);
+			}
+		}).catch((error) => {
+				this.popup.error('Consultar', 'Error Inesperado: ' + error);
+		});
 	}
 
 	private cargar_data(initPag: number,quantityPag: number) {
@@ -131,6 +145,30 @@ export default class AdmbatchesComponent extends Vue {
 		this.disabledPagination = true;
 		this.loadingDataTable = true;
 		new services.Operaciones().ConsultarPorPaginacion(this.WebApi.ws_batches_ConsultarPorPaginacion,this.batches)
+		.then((resbatches) => {
+			if (resbatches.data._error.error === 0) {
+				this.lstbatches = resbatches.data._data;
+				this.pagination = resbatches.data._pagination;
+				this.totalPages = Math.ceil(this.pagination.itemsLengthPagination/this.itemsPerPage)
+				this.loadingDataTable = false;
+				this.disabledPagination = false;
+				this.dialog = false;
+				} else {
+					this.popup.error('Consultar', resbatches.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+	}
+	private cargar_data_fitro() {
+		this.lstbatches = [];
+		this.itemsPerPage = 50;
+		this.totalItems = 0;
+		this.totalPages = 0;
+		this.maxPagesVisible = 10;
+		this.disabledPagination = true;
+		this.loadingDataTable = true;
+		new services.Operaciones().Buscar(this.WebApi.ws_batches_ConsultarPorPaginacion_filtro,this.batches)
 		.then((resbatches) => {
 			if (resbatches.data._error.error === 0) {
 				this.lstbatches = resbatches.data._data;

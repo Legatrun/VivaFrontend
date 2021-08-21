@@ -10,6 +10,7 @@ export class Endpoints {
 	public ws_applicationdefinition_Eliminar: string = $store.state.server + 'Api/applicationdefinition/Eliminar';
 	public ws_batches_Consultar: string = $store.state.server + 'Api/batches/Consultar';
 	public ws_batches_ConsultarPorPaginacion: string = $store.state.server + 'Api/batches/ConsultarPorPaginacion';
+	public ws_batches_ConsultarPorPaginacion_filtro: string = $store.state.server + 'Api/batches/ConsultarPorFiltro';
 	public ws_batches_Buscar: string = $store.state.server + 'Api/batches/Buscar';
 	public ws_batches_Insertar: string = $store.state.server + 'Api/batches/Insertar';
 	public ws_batches_Actualizar: string = $store.state.server + 'Api/batches/Actualizar';
