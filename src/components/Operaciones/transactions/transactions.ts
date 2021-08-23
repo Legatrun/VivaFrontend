@@ -38,6 +38,8 @@ export default class AdmtransactionsComponent extends Vue {
 	private WebApi = new services.Endpoints();
 	private pagination = new services.clase_pagination();
 	private transactions = new services.clase_transactions();
+	private lstsucursal: services.clase_locations[] = [];
+	private lstdevices: services.clase_devices[] = [];
 	private lsttransactions: services.clase_transactions[] = [];
 	private buscartransactions = '';
 	private dialog = false;
@@ -87,6 +89,8 @@ export default class AdmtransactionsComponent extends Vue {
 	}
 	private mounted() {
 		this.cargar_data(this.desdeInicial,this.cantidadInicial);
+		this.CargarSucursales();
+		this.CargarTerminales();
 	}
 	private cargar_data(initPag: number,quantityPag: number) {
 		if (this.$store.state.auth !== true) {​​​​
@@ -115,6 +119,64 @@ export default class AdmtransactionsComponent extends Vue {
 			}).catch((error) => {
 					this.popup.error('Consultar', 'Error Inesperado: ' + error);
 			});
+	}
+	private cargar_data_filtrada() {
+		this.lsttransactions = [];
+		this.totalItems = 0;
+		this.totalPages = 0;
+		this.disabledPagination = true;
+		this.loadingDataTable = true;
+		new services.Operaciones().Buscar(this.WebApi.ws_transactions_ConsultarPorFiltro,this.transactions)
+		.then((restrans) => {
+			if (restrans.data._error.error === 0) {
+				this.lsttransactions = restrans.data._data;
+				this.pagination = restrans.data._pagination;
+				debugger
+				this.totalPages = Math.ceil(this.pagination.itemsLengthPagination/this.itemsPerPage)
+				this.loadingDataTable = false;
+				this.disabledPagination = false;
+				this.dialog = false;
+				} else {
+					this.popup.error('Consultar', restrans.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+	}
+
+	private CargarSucursales(){
+		new services.Operaciones().Consultar(this.WebApi.ws_locations_Consultar)
+			.then((reslocations) => {
+				if (reslocations.data._error.error === 0) {
+					this.lstsucursal = reslocations.data._data;
+				} else {
+					this.popup.error('Consultar', reslocations.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+	}
+	private CargarTerminales(){
+		new services.Operaciones().Consultar(this.WebApi.ws_devices_Consultar)
+		.then((resdevices) => {
+			if (resdevices.data._error.error === 0) {
+				this.lstdevices = resdevices.data._data;
+			} else {
+				this.popup.error('Consultar', resdevices.data._error.descripcion);
+			}
+		}).catch((error) => {
+				this.popup.error('Consultar', 'Error Inesperado: ' + error);
+		});
+	}
+
+	private FormatSucursal(locationidentification: any):string {
+		var nombreSucursal = "";
+		this.lstsucursal.forEach(function(value) {
+		  if (value.identification == locationidentification) {
+			nombreSucursal = value.description;
+		  }
+		});
+		return nombreSucursal;
 	}
 
 	private Insertar(): void {
@@ -160,7 +222,7 @@ export default class AdmtransactionsComponent extends Vue {
 	private Actualizar(data: services.clase_transactions): void {
 		this.transactions = data;
 		this.transactions.deviceidentification = this.FormatNull(data.deviceidentification);
-		this.transactions.locationidentification = this.FormatNull(data.deviceidentification);
+		this.transactions.locationidentification = this.FormatNull(data.locationidentification);
 		this.transactions.createtimestamp = this.FormatNull(data.createtimestamp);
 		this.transactions.resultcode = this.FormatNull(data.resultcode);
 		this.transactions.resultmessage = this.FormatNull(data.resultmessage);

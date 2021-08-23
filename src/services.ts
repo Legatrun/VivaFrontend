@@ -134,6 +134,7 @@ export class Endpoints {
 	public ws_transactiondefinition_Eliminar: string = $store.state.server + 'Api/transactiondefinition/Eliminar';
 	public ws_transactions_Consultar: string = $store.state.server + 'Api/transactions/Consultar';
 	public ws_transactions_ConsultarPorPaginacion: string = $store.state.server + 'Api/transactions/ConsultarPorPaginacion';
+	public ws_transactions_ConsultarPorFiltro: string = $store.state.server + 'Api/transactions/ConsultarPorFiltro';
 	public ws_transactions_Buscar: string = $store.state.server + 'Api/transactions/Buscar';
 	public ws_transactions_Insertar: string = $store.state.server + 'Api/transactions/Insertar';
 	public ws_transactions_Actualizar: string = $store.state.server + 'Api/transactions/Actualizar';

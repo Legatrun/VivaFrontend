@@ -107,28 +107,28 @@
 							</v-flex>
 							<v-flex sm4 style="padding: 0px">
 								<v-autocomplete class="input-small" 
-											v-model="buscartransactions"
+											v-model="transactions.locationidentification"
 											label="Sucursal"
 											clearable
 											persistent-hint
 											required
                       outlined
-                      :items="lsttransactions"
-                      item-text="locationidentification"
-                      item-value="locationidentification">
+                      :items="lstsucursal"
+                      item-text="description"
+                      item-value="identification">
 								</v-autocomplete>
 							</v-flex>
 							<v-flex sm4 style="padding: 0px">
 								<v-autocomplete class="input-small" 
-											v-model="buscartransactions"
+											v-model="transactions.deviceidentification"
 											label="Terminal"
 											clearable
 											persistent-hint
 											required
                       outlined
-                      :items="lsttransactions"
-                      item-text="deviceidentification"
-                      item-value="deviceidentification">
+                      :items="lstdevices"
+                      item-text="identification"
+                      item-value="identification">
 								</v-autocomplete>
 							</v-flex>
               <v-flex sm4 style="padding: 0px">
@@ -198,7 +198,8 @@
 							</v-flex>
               <v-spacer></v-spacer>
 							<v-flex sm2 >
-								<v-btn large color="green" dark>
+                
+								<v-btn large color="green" dark @click="cargar_data_filtrada()">
 									<v-icon>mdi-selection-search</v-icon> 
 									 Buscar
 							    </v-btn>
@@ -290,8 +291,8 @@
               </v-flex>
               <v-flex sm4 style="padding: 5px">
                 <v-text-field
-                  class="input-small"
                   v-model="transactions.locationidentification"
+                  class="input-small"
                   label="Sucursal"
                   hint="Solo lectura"
                   outlined
