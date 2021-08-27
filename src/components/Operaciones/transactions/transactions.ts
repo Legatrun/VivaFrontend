@@ -48,8 +48,8 @@ export default class AdmtransactionsComponent extends Vue {
 	private popup = new popup.Swal();
 	//paginacion
 	desdeInicial=1;
-	cantidadInicial=100;
-	itemsPerPage: number = 100;
+	cantidadInicial=50;
+	itemsPerPage: number = 50;
 	totalItems: number = 0;
 	totalPages: number = 0;
 	maxPagesVisible: number = 15;
@@ -122,10 +122,14 @@ export default class AdmtransactionsComponent extends Vue {
 	}
 	private cargar_data_filtrada() {
 		this.lsttransactions = [];
+		this.transactions.quantityPagination = 50;
 		this.totalItems = 0;
 		this.totalPages = 0;
 		this.disabledPagination = true;
 		this.loadingDataTable = true;
+		console.log("inicio")
+		console.log(this.transactions)
+		console.log("fin")
 		new services.Operaciones().Buscar(this.WebApi.ws_transactions_ConsultarPorFiltro,this.transactions)
 		.then((restrans) => {
 			if (restrans.data._error.error === 0) {

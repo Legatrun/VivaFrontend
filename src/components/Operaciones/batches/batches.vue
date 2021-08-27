@@ -131,7 +131,6 @@
 							<v-flex sm3 class="hidden-xs-only" style="padding: 0px">
 								<v-menu
 									ref="menu_closetimestamp"
-										v-model="menu_closetimestamp"
 										:close-on-content-click="false"
 										transition="scale-transition"
 										offset-y
