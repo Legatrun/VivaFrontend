@@ -47,6 +47,7 @@ export default class AdmtransactionsComponent extends Vue {
 	private operacion = '';
 	private helper: helpers = new helpers();
 	private popup = new popup.Swal();
+	private message="";
 	//paginacion
 	desdeInicial=1;
 	cantidadInicial=50;
@@ -90,6 +91,7 @@ export default class AdmtransactionsComponent extends Vue {
 	}
 
 	private beforeUpdate(){
+		this.validarFecha()
 		if(this.transactions.locationidentification != undefined){
 			this.CargarTerminales()
 		}
@@ -99,6 +101,8 @@ export default class AdmtransactionsComponent extends Vue {
 		this.cargar_data(this.desdeInicial,this.cantidadInicial);
 		this.CargarSucursales();
 		this.CargarTerminales();
+		this.transactions.opentimestamp = this.FormatDate(Date.now());
+		this.transactions.closetimestamp = this.FormatDate(Date.now());
 	}
 	private cargar_data(initPag: number,quantityPag: number) {
 		if (this.$store.state.auth !== true) {​​​​
@@ -313,6 +317,17 @@ export default class AdmtransactionsComponent extends Vue {
 			});
 		}
 		});
+	}
+	private validarFecha(){
+		var fecha_inicio = this.transactions.opentimestamp;
+		var fecha_fin = this.transactions.closetimestamp;
+		//fecha_inicio.setHours(0,0,0,0);
+		if(fecha_inicio <= fecha_fin){
+			this.message = "";
+		}else{
+			this.message = "Fecha de Hasta no tiene que ser menor de fecha desde";
+		}
+
 	}
 
 	private cargarNuevosElementos(){

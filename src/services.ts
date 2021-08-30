@@ -811,6 +811,8 @@ export class clase_transactions {
 	public numberOfItemPagination!: number;
 	public initPagination!: number;
 	public quantityPagination!: number;
+	public opentimestamp!:any;
+	public closetimestamp!:any;
 }
 
 // tslint:disable-next-line: max-classes-per-file class-name
