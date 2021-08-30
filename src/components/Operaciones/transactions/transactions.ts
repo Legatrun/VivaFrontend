@@ -39,6 +39,7 @@ export default class AdmtransactionsComponent extends Vue {
 	private pagination = new services.clase_pagination();
 	private transactions = new services.clase_transactions();
 	private lstsucursal: services.clase_locations[] = [];
+	private devices = new services.clase_devices();
 	private lstdevices: services.clase_devices[] = [];
 	private lsttransactions: services.clase_transactions[] = [];
 	private buscartransactions = '';
@@ -87,6 +88,13 @@ export default class AdmtransactionsComponent extends Vue {
 			return Value;
 		}
 	}
+
+	private beforeUpdate(){
+		if(this.transactions.locationidentification != undefined){
+			this.CargarTerminales()
+		}
+	}
+
 	private mounted() {
 		this.cargar_data(this.desdeInicial,this.cantidadInicial);
 		this.CargarSucursales();
@@ -161,7 +169,13 @@ export default class AdmtransactionsComponent extends Vue {
 			});
 	}
 	private CargarTerminales(){
-		new services.Operaciones().Consultar(this.WebApi.ws_devices_Consultar)
+		// console.log("device" ,JSON.stringify(this.transactions.locationidentification))
+		if (this.transactions.locationidentification === undefined){
+			this.devices.locationidentification = ""
+		}else{
+			this.devices.locationidentification = this.transactions.locationidentification
+		}
+		new services.Operaciones().Buscar(this.WebApi.ws_devices_Consultar, this.devices)
 		.then((resdevices) => {
 			if (resdevices.data._error.error === 0) {
 				this.lstdevices = resdevices.data._data;

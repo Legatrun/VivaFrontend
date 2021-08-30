@@ -72,7 +72,7 @@ export default class AdmbatchesComponent extends Vue {
 		});
 	  }
 	  */
-	beforeUpdate(){
+	private beforeUpdate(){
 		this.validarFecha()
 		if(this.batches.locationidentification != undefined){
 			this.CargarTerminales()
@@ -130,7 +130,7 @@ export default class AdmbatchesComponent extends Vue {
 		}else{
 			this.devices.locationidentification = this.batches.locationidentification
 		}
-		console.log("device" ,JSON.stringify(this.batches.locationidentification))
+		// console.log("devices" ,JSON.stringify(this.batches.locationidentification))
 		new services.Operaciones().Buscar(this.WebApi.ws_devices_Consultar, this.devices)
 		.then((resdevices) => {
 			if (resdevices.data._error.error === 0) {
