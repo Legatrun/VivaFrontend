@@ -33,6 +33,7 @@ export default class AdmbatchesComponent extends Vue {
 	private sucursal = new services.clase_locations();
 	private pagination = new services.clase_pagination();
 	private lstsucursal: services.clase_locations[] = [];
+	private devices = new services.clase_devices();
 	private lstdevices: services.clase_devices[] = [];
 	private message="";
 	private activa = false;
@@ -54,6 +55,7 @@ export default class AdmbatchesComponent extends Vue {
 	disabledPagination: boolean = false;
 	private helper: helpers = new helpers();
 	private popup = new popup.Swal();
+	description: string = "";
 	validacion = [
 		(v: any) => !!v || "El campo es requerido"
 	];
@@ -72,6 +74,9 @@ export default class AdmbatchesComponent extends Vue {
 	  */
 	beforeUpdate(){
 		this.validarFecha()
+		if(this.batches.locationidentification != undefined){
+			this.CargarTerminales()
+		}
 	}
 	private validarFecha(){
 		var fecha_inicio = this.batches.opentimestamp;
@@ -114,12 +119,19 @@ export default class AdmbatchesComponent extends Vue {
 	private mounted() {
 		this.cargar_data(this.desdeInicial,this.cantidadInicial);
 		this.CargarSucursales();
-		this.CargarTerminales()
+		this.CargarTerminales();
+		
 		this.batches.opentimestamp = this.FormatDate(Date.now());
 		this.batches.closetimestamp = this.FormatDate(Date.now());
 	}
 	private CargarTerminales(){
-		new services.Operaciones().Consultar(this.WebApi.ws_devices_Consultar)
+		if (this.batches.locationidentification === undefined){
+			this.devices.locationidentification = ""
+		}else{
+			this.devices.locationidentification = this.batches.locationidentification
+		}
+		console.log("device" ,JSON.stringify(this.batches.locationidentification))
+		new services.Operaciones().Buscar(this.WebApi.ws_devices_Consultar, this.devices)
 		.then((resdevices) => {
 			if (resdevices.data._error.error === 0) {
 				this.lstdevices = resdevices.data._data;
@@ -144,21 +156,40 @@ export default class AdmbatchesComponent extends Vue {
 		this.maxPagesVisible = 10;
 		this.disabledPagination = true;
 		this.loadingDataTable = true;
-		new services.Operaciones().ConsultarPorPaginacion(this.WebApi.ws_batches_ConsultarPorPaginacion,this.batches)
-		.then((resbatches) => {
-			if (resbatches.data._error.error === 0) {
-				this.lstbatches = resbatches.data._data;
-				this.pagination = resbatches.data._pagination;
-				this.totalPages = Math.ceil(this.pagination.itemsLengthPagination/this.itemsPerPage)
-				this.loadingDataTable = false;
-				this.disabledPagination = false;
-				this.dialog = false;
-				} else {
-					this.popup.error('Consultar', resbatches.data._error.descripcion);
-				}
-			}).catch((error) => {
-					this.popup.error('Consultar', 'Error Inesperado: ' + error);
-			});
+		if( this.batches.locationidentification === undefined || this.batches.deviceidentification === undefined ){
+			new services.Operaciones().ConsultarPorPaginacion(this.WebApi.ws_batches_ConsultarPorPaginacion,this.batches)
+			.then((resbatches) => {
+				if (resbatches.data._error.error === 0) {
+					this.lstbatches = resbatches.data._data;
+					this.pagination = resbatches.data._pagination;
+					this.totalPages = Math.ceil(this.pagination.itemsLengthPagination/this.itemsPerPage)
+					this.loadingDataTable = false;
+					this.disabledPagination = false;
+					this.dialog = false;
+					} else {
+						this.popup.error('Consultar', resbatches.data._error.descripcion);
+					}
+				}).catch((error) => {
+						this.popup.error('Consultar', 'Error Inesperado: ' + error);
+				});
+		} else{
+			new services.Operaciones().Buscar(this.WebApi.ws_batches_ConsultarPorPaginacion_filtro,this.batches)
+			.then((resbatches) => {
+				if (resbatches.data._error.error === 0) {
+					this.lstbatches = resbatches.data._data;
+					this.pagination = resbatches.data._pagination;
+					this.totalPages = Math.ceil(this.pagination.itemsLengthPagination/this.itemsPerPage)
+					this.loadingDataTable = false;
+					this.disabledPagination = false;
+					this.dialog = false;
+					} else {
+						this.popup.error('Consultar', resbatches.data._error.descripcion);
+					}
+				}).catch((error) => {
+						this.popup.error('Consultar', 'Error Inesperado: ' + error);
+				});
+		}
+		
 	}
 	private cargar_data_fitro() {
 		this.lstbatches = [];
@@ -168,6 +199,7 @@ export default class AdmbatchesComponent extends Vue {
 		this.maxPagesVisible = 10;
 		this.disabledPagination = true;
 		this.loadingDataTable = true;
+		console.log("con filtro" ,JSON.stringify(this.batches))
 		new services.Operaciones().Buscar(this.WebApi.ws_batches_ConsultarPorPaginacion_filtro,this.batches)
 		.then((resbatches) => {
 			if (resbatches.data._error.error === 0) {
