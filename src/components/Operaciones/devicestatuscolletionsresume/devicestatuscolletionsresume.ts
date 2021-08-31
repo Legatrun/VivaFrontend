@@ -83,6 +83,7 @@ export default class AdmdevicestatuscolletionsresumeComponent extends Vue {
 	private devicestatuscolletionsresume = new services.clase_devicestatuscolletionsresume();
 	private lstdevicestatuscolletionsresumeprovider: services.clase_devicestatuscolletionsresumeprovider[] = [];
 	private lstsucursales: services.clase_locations[] = [];
+	private devices = new services.clase_devices();
 	private lstdevices: services.clase_devices[] = [];
 	private buscardevicestatuscolletionsresume = '';
 	private dialog = false;
@@ -134,6 +135,12 @@ export default class AdmdevicestatuscolletionsresumeComponent extends Vue {
 			return Value.toUpperCase();
 		} else {
 			return Value;
+		}
+	}
+
+	private beforeUpdate(){
+		if(this.devicestatuscolletionsresume.locationidentification != undefined){
+			this.CargarTerminales()
 		}
 	}
 	
@@ -289,7 +296,12 @@ export default class AdmdevicestatuscolletionsresumeComponent extends Vue {
 			});
 	}
 	private CargarTerminales(){
-		new services.Operaciones().Consultar(this.WebApi.ws_devices_Consultar)
+		if (this.devicestatuscolletionsresume.locationidentification === undefined){
+			this.devices.locationidentification = ""
+		}else{
+			this.devices.locationidentification = this.devicestatuscolletionsresume.locationidentification
+		}
+		new services.Operaciones().Buscar(this.WebApi.ws_devices_Consultar, this.devices)
 		.then((resdevices) => {
 			if (resdevices.data._error.error === 0) {
 				this.lstdevices = resdevices.data._data;
