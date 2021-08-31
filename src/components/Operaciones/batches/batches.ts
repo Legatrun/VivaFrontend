@@ -163,6 +163,7 @@ export default class AdmbatchesComponent extends Vue {
 					this.lstbatches = resbatches.data._data;
 					this.pagination = resbatches.data._pagination;
 					this.totalPages = Math.ceil(this.pagination.itemsLengthPagination/this.itemsPerPage)
+					//console.log("device1" ,JSON.stringify(this.totalPages))
 					this.loadingDataTable = false;
 					this.disabledPagination = false;
 					this.dialog = false;
@@ -172,13 +173,16 @@ export default class AdmbatchesComponent extends Vue {
 				}).catch((error) => {
 						this.popup.error('Consultar', 'Error Inesperado: ' + error);
 				});
-		} else{
+		} 
+		//este "else" se cumple cuando pasamos a la siguiente pagina
+		else{
 			new services.Operaciones().Buscar(this.WebApi.ws_batches_ConsultarPorPaginacion_filtro,this.batches)
 			.then((resbatches) => {
 				if (resbatches.data._error.error === 0) {
 					this.lstbatches = resbatches.data._data;
 					this.pagination = resbatches.data._pagination;
 					this.totalPages = Math.ceil(this.pagination.itemsLengthPagination/this.itemsPerPage)
+
 					this.loadingDataTable = false;
 					this.disabledPagination = false;
 					this.dialog = false;
@@ -191,21 +195,23 @@ export default class AdmbatchesComponent extends Vue {
 		}
 		
 	}
-	private cargar_data_fitro() {
+	private cargar_data_fitro(initPag: number,quantityPag: number) {
 		this.lstbatches = [];
+		this.batches.initPagination = initPag;
+		this.batches.quantityPagination = quantityPag;
 		this.itemsPerPage = 50;
 		this.totalItems = 0;
 		this.totalPages = 0;
 		this.maxPagesVisible = 10;
 		this.disabledPagination = true;
 		this.loadingDataTable = true;
-		console.log("con filtro" ,JSON.stringify(this.batches))
 		new services.Operaciones().Buscar(this.WebApi.ws_batches_ConsultarPorPaginacion_filtro,this.batches)
 		.then((resbatches) => {
 			if (resbatches.data._error.error === 0) {
 				this.lstbatches = resbatches.data._data;
 				this.pagination = resbatches.data._pagination;
 				this.totalPages = Math.ceil(this.pagination.itemsLengthPagination/this.itemsPerPage)
+				console.log("total pages:" ,JSON.stringify(this.pagination.itemsLengthPagination))
 				this.loadingDataTable = false;
 				this.disabledPagination = false;
 				this.dialog = false;
@@ -344,6 +350,17 @@ export default class AdmbatchesComponent extends Vue {
 	}
 
 	private cargarNuevosElementos(){
+		//1(1-51) 2(52-102) 3(103-1523) 4(154-204) 5(205-255)
+		let desde = (this.currentPageSelected*this.pagination.itemsPerPagePagination)+(this.currentPageSelected-1)-(this.pagination.itemsPerPagePagination);
+		if(desde <= 0){
+			desde = 1;
+		}
+		//console.log("device" ,JSON.stringify(this.disabledPagination))
+		let cantidad = this.pagination.itemsPerPagePagination;
+		this.cargar_data_fitro(desde, cantidad);
+	}
+
+	private cargarNuevosElementos_filter(){
 		//1(1-51) 2(52-102) 3(103-1523) 4(154-204) 5(205-255)
 		let desde = (this.currentPageSelected*this.pagination.itemsPerPagePagination)+(this.currentPageSelected-1)-(this.pagination.itemsPerPagePagination);
 		if(desde <= 0){

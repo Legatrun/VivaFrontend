@@ -36,7 +36,7 @@
         <tr>
           <td class="datatable-items-small">{{ props.item.numberOfItemPagination }}</td>
           <td class="datatable-items-small">{{ FormatDateTime(props.item.createtimestamp) }}</td>
-          <td class="datatable-items-small">{{ FormatNull(props.item.locationidentification) }}</td>
+          <td class="datatable-items-small">{{ FormatSucursal(props.item.locationidentification) }}</td>
           <td class="datatable-items-small">{{ FormatNull(props.item.deviceidentification) }}</td>
           <td class="datatable-items-small">{{ FormatNull(props.item.operationname) }}</td>
           <td class="datatable-items-small">{{ FormatNull(props.item.customernumber)}}</td>

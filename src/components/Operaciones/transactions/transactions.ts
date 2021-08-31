@@ -139,9 +139,6 @@ export default class AdmtransactionsComponent extends Vue {
 		this.totalPages = 0;
 		this.disabledPagination = true;
 		this.loadingDataTable = true;
-		console.log("inicio")
-		console.log(this.transactions)
-		console.log("fin")
 		new services.Operaciones().Buscar(this.WebApi.ws_transactions_ConsultarPorFiltro,this.transactions)
 		.then((restrans) => {
 			if (restrans.data._error.error === 0) {

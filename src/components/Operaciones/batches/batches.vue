@@ -155,7 +155,7 @@
 							</v-flex>
 							<v-spacer></v-spacer>
 							<v-flex sm1.5 style="padding: 0px">
-								<v-btn large color="green" dark @click="cargar_data_fitro()">
+								<v-btn large color="green" dark @click="cargar_data_fitro(1,50)">
 									<v-icon>mdi-selection-search</v-icon> 
 									 Buscar
 							    </v-btn>
