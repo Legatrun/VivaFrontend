@@ -73,7 +73,9 @@ export default class AdmbatchesComponent extends Vue {
 	  }
 	  */
 	private beforeUpdate(){
-		this.validarFecha()
+		if(this.batches.createtimestamp != this.FormatDate(Date.now()) && this.batches.closetimestamp != this.FormatDate(Date.now()) ){
+			this.validarFecha()
+		}
 		if(this.batches.locationidentification != undefined){
 			this.CargarTerminales()
 		}
@@ -121,8 +123,8 @@ export default class AdmbatchesComponent extends Vue {
 		this.CargarSucursales();
 		this.CargarTerminales();
 		
-		this.batches.opentimestamp = this.FormatDate(Date.now());
-		this.batches.closetimestamp = this.FormatDate(Date.now());
+		// this.batches.opentimestamp = this.FormatDate(Date.now());
+		// this.batches.closetimestamp = this.FormatDate(Date.now());
 	}
 	private CargarTerminales(){
 		if (this.batches.locationidentification === undefined){
