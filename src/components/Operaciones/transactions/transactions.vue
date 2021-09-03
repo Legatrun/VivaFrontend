@@ -97,7 +97,7 @@
 							</v-flex>
 							<v-flex sm6 style="padding: 0px">
 								<v-text-field class="input-small" 
-											v-model="buscartransactions"
+											v-model="transactions.customernumber"
 											label="Cliente"
 											clearable
 											persistent-hint
