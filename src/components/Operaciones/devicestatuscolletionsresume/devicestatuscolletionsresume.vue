@@ -25,6 +25,7 @@
 						}"
 						dense
 						class="elevation-1">
+			<!-- tabla de contenido			 -->
 			<template slot="item" slot-scope="props">
 				<tr>
 					<!--<td class="datatable-items-small">{{ helper.showDataDescription(props.item.id,lstdevicestatuscolletionsresume, id, descripcion)  }}</td>// Ejemplo de Uso de Helper Para obtener la Descripcion de una Tabla por medio de su Id-->
@@ -94,6 +95,7 @@
 					</td> -->
 				</tr>
 			</template>
+			<!-- filtros -->
 			<template v-slot:top>
 				<v-card dark color="blue-grey darken-3">
 					<v-form ref="form" >

@@ -91,7 +91,9 @@ export default class AdmtransactionsComponent extends Vue {
 	}
 
 	private beforeUpdate(){
-		this.validarFecha()
+		if(this.transactions.opentimestamp != undefined && this.transactions.closetimestamp != undefined){
+			this.validarFecha()	
+		}
 		if(this.transactions.locationidentification != undefined){
 			this.CargarTerminales()
 		}
@@ -101,8 +103,9 @@ export default class AdmtransactionsComponent extends Vue {
 		this.cargar_data(this.desdeInicial,this.cantidadInicial);
 		this.CargarSucursales();
 		this.CargarTerminales();
-		this.transactions.opentimestamp = this.FormatDate(Date.now());
-		this.transactions.closetimestamp = this.FormatDate(Date.now());
+		// console.log("opentimestamp",JSON.stringify(this.transactions.opentimestamp))
+		// this.transactions.opentimestamp = this.FormatDate(Date.now());
+		// this.transactions.closetimestamp = this.FormatDate(Date.now());
 	}
 	private cargar_data(initPag: number,quantityPag: number) {
 		if (this.$store.state.auth !== true) {​​​​
@@ -139,22 +142,40 @@ export default class AdmtransactionsComponent extends Vue {
 		this.totalPages = 0;
 		this.disabledPagination = true;
 		this.loadingDataTable = true;
-		new services.Operaciones().Buscar(this.WebApi.ws_transactions_ConsultarPorFiltro,this.transactions)
-		.then((restrans) => {
-			if (restrans.data._error.error === 0) {
-				this.lsttransactions = restrans.data._data;
-				this.pagination = restrans.data._pagination;
-				debugger
-				this.totalPages = Math.ceil(this.pagination.itemsLengthPagination/this.itemsPerPage)
-				this.loadingDataTable = false;
-				this.disabledPagination = false;
-				this.dialog = false;
-				} else {
-					this.popup.error('Consultar', restrans.data._error.descripcion);
-				}
-			}).catch((error) => {
-					this.popup.error('Consultar', 'Error Inesperado: ' + error);
-			});
+
+		if(this.transactions.locationidentification === undefined){
+			this.popup.error('Sucursal', 'El campo se encuentra vacio');
+			this.cargar_data(this.desdeInicial, this.cantidadInicial)
+		} else if(this.transactions.deviceidentification === undefined){
+			this.popup.error('Terminal', 'El campo se encuentra vacio');
+			this.cargar_data(this.desdeInicial, this.cantidadInicial)
+		} else if(this.transactions.operationname === undefined){
+			this.popup.error('Tipo de transaccion', 'El campo se encuentra vacio');
+			this.cargar_data(this.desdeInicial, this.cantidadInicial)
+		} else if(this.transactions.opentimestamp === undefined){
+			this.popup.error('Fecha desde', 'El campo se encuentra vacio');
+			this.cargar_data(this.desdeInicial, this.cantidadInicial)
+		} else if(this.transactions.closetimestamp === undefined){
+			this.popup.error('Fecha hasta', 'El campo se encuentra vacio');
+			this.cargar_data(this.desdeInicial, this.cantidadInicial)
+		} 
+		else{
+			new services.Operaciones().Buscar(this.WebApi.ws_transactions_ConsultarPorFiltro,this.transactions)
+			.then((restrans) => {
+				if (restrans.data._error.error === 0) {
+					this.lsttransactions = restrans.data._data;
+					this.pagination = restrans.data._pagination;
+					this.totalPages = Math.ceil(this.pagination.itemsLengthPagination/this.itemsPerPage)
+					this.loadingDataTable = false;
+					this.disabledPagination = false;
+					this.dialog = false;
+					} else {
+						this.popup.error('Consultar', restrans.data._error.descripcion);
+					}
+				}).catch((error) => {
+						this.popup.error('Consultar', 'Error Inesperado: ' + error);
+				});
+		}	
 	}
 
 	private CargarSucursales(){
@@ -170,7 +191,6 @@ export default class AdmtransactionsComponent extends Vue {
 			});
 	}
 	private CargarTerminales(){
-		// console.log("device" ,JSON.stringify(this.transactions.locationidentification))
 		if (this.transactions.locationidentification === undefined){
 			this.devices.locationidentification = ""
 		}else{
@@ -316,14 +336,36 @@ export default class AdmtransactionsComponent extends Vue {
 		});
 	}
 	private validarFecha(){
-		var fecha_inicio = this.transactions.opentimestamp;
-		var fecha_fin = this.transactions.closetimestamp;
-		//fecha_inicio.setHours(0,0,0,0);
-		if(fecha_inicio <= fecha_fin){
-			this.message = "";
-		}else{
-			this.message = "Fecha de Hasta no tiene que ser menor de fecha desde";
+
+		const yearInicio = parseInt(this.transactions.opentimestamp.slice(0,4));
+		const yearFin = parseInt(this.transactions.closetimestamp.slice(0,4));
+		const mesInicio = parseInt(this.transactions.opentimestamp.slice(5,7));
+		const mesFin = parseInt(this.transactions.closetimestamp.slice(5,7));
+		const diaInicio = parseInt(this.transactions.opentimestamp.slice(8,10));
+		const diaFin = parseInt(this.transactions.closetimestamp.slice(8,10));
+
+		if(yearInicio != yearFin){
+			this.popup.error("Fecha","El intervalo de tiempo maximo es de 15 dias")
+			this.transactions.closetimestamp = ""
+		} else if(mesInicio != mesFin){
+			if((mesFin - mesInicio) > 1){
+				this.popup.error("Fecha","El intervalo de tiempo maximo es de 15 dias")
+				this.transactions.closetimestamp = ""
+			}
+			else if(diaInicio < 16 || diaFin > 15){
+				this.popup.error("Fecha","El intervalo de tiempo maximo es de 15 dias")
+				this.transactions.closetimestamp = ""
+			}
+		} else if((diaFin - diaInicio) > 15){
+			this.popup.error("Fecha","El intervalo de tiempo maximo es de 15 dias")
+			this.transactions.closetimestamp = ""
 		}
+		//fecha_inicio.setHours(0,0,0,0);
+		// if(fecha_inicio <= fecha_fin){
+		// 	this.message = "";
+		// }else{
+		// 	this.message = "Fecha de Hasta no tiene que ser menor de fecha desde";
+		// }
 
 	}
 
@@ -339,7 +381,12 @@ export default class AdmtransactionsComponent extends Vue {
 	}
 
 	LimpiarFiltros(){
-		this.buscartransactions = ""
-		this.transactions.createtimestamp = ""
+		this.transactions.locationidentification = ""
+		this.transactions.deviceidentification = ""
+		this.transactions.opentimestamp = "";
+		this.transactions.closetimestamp = "";
+		this.cargar_data(this.desdeInicial,this.cantidadInicial)
+		this.transactions.opentimestamp = this.FormatDate(Date.now());
+		this.transactions.closetimestamp = this.FormatDate(Date.now());
 	}
 }

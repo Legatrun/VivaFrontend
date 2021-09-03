@@ -129,7 +129,8 @@ export default class AdmdevicesComponent extends Vue {
 			this.$router.push({​​​​ path: '/Login' }​​​​);​​​​
 		}
 		this.loadingTable = true;
-		new services.Operaciones().Consultar(this.WebApi.ws_devices_Consultar)
+		this.devices.locationidentification = ""
+		new services.Operaciones().Buscar(this.WebApi.ws_devices_Consultar, this.devices)
 			.then((resdevices) => {
 				if (resdevices.data._error.error === 0) {
 					this.lstdevices = resdevices.data._data;

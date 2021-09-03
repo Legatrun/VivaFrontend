@@ -133,7 +133,7 @@
 							</v-flex>
               <v-flex sm4 style="padding: 0px">
 								<v-autocomplete class="input-small" 
-											v-model="buscartransactions"
+											v-model="transactions.operationname"
 											label="Tipo de Transacción"
 											clearable
 											persistent-hint
@@ -156,7 +156,6 @@
 										max-width="290px"
 										min-width="290px">
 									<template v-slot:activator="{ on }">
-
 										<v-text-field class="date-small" 
 											v-model="transactions.opentimestamp"
 											label="Fecha Desde"
