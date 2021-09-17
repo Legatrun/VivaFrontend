@@ -158,7 +158,8 @@ export default class AdmbatchesComponent extends Vue {
 		this.maxPagesVisible = 10;
 		this.disabledPagination = true;
 		this.loadingDataTable = true;
-		if( this.batches.locationidentification === undefined || this.batches.deviceidentification === undefined ){
+		console.log("Cargar Data: "+this.batches.locationidentification);
+		if( this.batches.locationidentification === undefined && this.batches.deviceidentification === undefined ){
 			new services.Operaciones().ConsultarPorPaginacion(this.WebApi.ws_batches_ConsultarPorPaginacion,this.batches)
 			.then((resbatches) => {
 				if (resbatches.data._error.error === 0) {
@@ -201,12 +202,32 @@ export default class AdmbatchesComponent extends Vue {
 		this.lstbatches = [];
 		this.batches.initPagination = initPag;
 		this.batches.quantityPagination = quantityPag;
-		this.itemsPerPage = 50;
+		this.itemsPerPage = quantityPag;
 		this.totalItems = 0;
 		this.totalPages = 0;
 		this.maxPagesVisible = 10;
 		this.disabledPagination = true;
 		this.loadingDataTable = true;
+
+		if( this.batches.locationidentification === undefined && this.batches.deviceidentification === undefined ){
+			new services.Operaciones().Buscar(this.WebApi.ws_batches_ConsultarPorPaginacion,this.batches)
+		.then((resbatches) => {
+			if (resbatches.data._error.error === 0) {
+				this.lstbatches = resbatches.data._data;
+				this.pagination = resbatches.data._pagination;
+				this.totalPages = Math.ceil(this.pagination.itemsLengthPagination/this.itemsPerPage)
+				console.log("total pages:" ,JSON.stringify(this.pagination.itemsLengthPagination))
+				this.loadingDataTable = false;
+				this.disabledPagination = false;
+				this.dialog = false;
+				} else {
+					this.popup.error('Consultar', resbatches.data._error.descripcion);
+				}
+		}).catch((error) => {
+				this.popup.error('Consultar', 'Error Inesperado: ' + error);
+		});
+		}
+		else{
 		new services.Operaciones().Buscar(this.WebApi.ws_batches_ConsultarPorPaginacion_filtro,this.batches)
 		.then((resbatches) => {
 			if (resbatches.data._error.error === 0) {
@@ -220,9 +241,10 @@ export default class AdmbatchesComponent extends Vue {
 				} else {
 					this.popup.error('Consultar', resbatches.data._error.descripcion);
 				}
-			}).catch((error) => {
-					this.popup.error('Consultar', 'Error Inesperado: ' + error);
-			});
+		}).catch((error) => {
+				this.popup.error('Consultar', 'Error Inesperado: ' + error);
+		});
+	}
 	}
 	private Insertar(): void {
 		this.batches = new services.clase_batches();
