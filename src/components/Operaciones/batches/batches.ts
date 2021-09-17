@@ -56,6 +56,7 @@ export default class AdmbatchesComponent extends Vue {
 	private helper: helpers = new helpers();
 	private popup = new popup.Swal();
 	description: string = "";
+	autoselectTerminal:boolean = false;
 	validacion = [
 		(v: any) => !!v || "El campo es requerido"
 	];
@@ -127,6 +128,7 @@ export default class AdmbatchesComponent extends Vue {
 		// this.batches.closetimestamp = this.FormatDate(Date.now());
 	}
 	private CargarTerminales(){
+		this.autoselectTerminal = false;
 		if (this.batches.locationidentification === undefined){
 			this.devices.locationidentification = ""
 		}else{
@@ -137,6 +139,7 @@ export default class AdmbatchesComponent extends Vue {
 		.then((resdevices) => {
 			if (resdevices.data._error.error === 0) {
 				this.lstdevices = resdevices.data._data;
+				this.autoselectTerminal = true;
 			} else {
 				this.popup.error('Consultar', resdevices.data._error.descripcion);
 			}
@@ -216,7 +219,6 @@ export default class AdmbatchesComponent extends Vue {
 				this.lstbatches = resbatches.data._data;
 				this.pagination = resbatches.data._pagination;
 				this.totalPages = Math.ceil(this.pagination.itemsLengthPagination/this.itemsPerPage)
-				console.log("total pages sin filtro:" ,JSON.stringify(this.pagination.itemsLengthPagination))
 				this.loadingDataTable = false;
 				this.disabledPagination = false;
 				this.dialog = false;
@@ -230,12 +232,10 @@ export default class AdmbatchesComponent extends Vue {
 		else{
 		new services.Operaciones().Buscar(this.WebApi.ws_batches_ConsultarPorPaginacion_filtro,this.batches)
 		.then((resbatchesconfiltro) => {
-			console.log("Confiltro: "+JSON.stringify(resbatchesconfiltro));
 			if (resbatchesconfiltro.data._error.error === 0) {
 				this.lstbatches = resbatchesconfiltro.data._data;
 				this.pagination = resbatchesconfiltro.data._pagination;
 				this.totalPages = Math.ceil(this.pagination.itemsLengthPagination/this.itemsPerPage)
-				console.log("total pages con filtro:" ,JSON.stringify(this.pagination.itemsLengthPagination))
 				this.loadingDataTable = false;
 				this.disabledPagination = false;
 				this.dialog = false;

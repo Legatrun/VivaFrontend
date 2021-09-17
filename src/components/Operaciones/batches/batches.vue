@@ -93,6 +93,7 @@
 								<v-flex sm6 style="padding:0px" class="input-small">
 									<v-autocomplete
                   v-model="batches.deviceidentification"
+                  auto-select-first
 									label="Terminal"
 									clearable
 									outlined
