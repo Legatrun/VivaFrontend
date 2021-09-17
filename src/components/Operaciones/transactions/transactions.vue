@@ -79,7 +79,7 @@
 				</v-tooltip>
 			</template> -->
       	<template v-slot:top>
-				<v-card dark color="blue-grey darken-3">
+				<v-card dark color="backgroundFilterOptions">
 					<v-form ref="form" >
 				  	<h2 style="text-align:center; ">Filtros</h2>
 						<v-card-text>
@@ -213,6 +213,17 @@
 						</v-card-text>
 					</v-form>
 				</v-card>
+             <v-pagination
+                v-model="currentPageSelected"
+                :length="totalPages"
+                dark
+                color="cyan"
+                @input="cargarNuevosElementos"
+                :total-visible="maxPagesVisible"
+                :value="currentPageSelected"
+                :disabled="disabledPagination"
+              >
+            </v-pagination>
            <v-flex sm12>
 					<v-card-actions>
 						<v-spacer></v-spacer>
@@ -220,7 +231,7 @@
 							<template v-slot:activator="{ on }">
 								<v-btn dark left color="orange" fab small v-on="on" @click="cargar_data()"><v-icon>mdi-update</v-icon></v-btn>
 							</template>
-							<span>Actualizar</span>
+							<span>Actualizar Tabla</span>
 						</v-tooltip>
 					</v-card-actions>						
 				</v-flex>
@@ -248,17 +259,6 @@
 						</v-tooltip>
 					</v-card-actions>						
 			</v-flex> -->
-      <v-pagination
-          v-model="currentPageSelected"
-          :length="totalPages"
-          dark
-          color="cyan"
-          @input="cargarNuevosElementos"
-          :total-visible="maxPagesVisible"
-          :value="currentPageSelected"
-          :disabled="disabledPagination"
-        >
-      </v-pagination>
     <v-dialog v-model="dialog" persistent max-width="60%">
       <v-card>
         <v-toolbar style="padding:10px" dark class="primary">

@@ -23,6 +23,7 @@
                             prev-icon="<"
                               > -->
             <!-- :hide-default-footer="true" -->
+  
 		<v-data-table 	style="padding: 5px"
 						:headers="headers" 
 						:items="lstbatches" 
@@ -70,7 +71,7 @@
 				</tr>
 			</template>
 			<template v-slot:top >
-				<v-card dark color="blue-grey darken-3">
+				<v-card dark color="backgroundFilterOptions">
 					<v-form ref="form" v-model="activa">
             <h2 style="text-align:center; ">Filtros</h2>
 							<v-card-text>
@@ -170,6 +171,17 @@
 						</v-card-text>
 					</v-form>
 				</v-card>
+        <v-pagination
+          v-model="currentPageSelected"
+          :length="totalPages"
+          dark
+          color="cyan"
+          @input="cargarNuevosElementos"
+          :total-visible="maxPagesVisible"
+          :value="currentPageSelected"
+          :disabled="disabledPagination"
+        >
+        </v-pagination>	
         <v-flex sm12>
 					<v-card-actions>
 						<v-spacer></v-spacer>
@@ -182,24 +194,14 @@
 					</v-card-actions>						
 				</v-flex>	
 			</template>
-					
+				  
 			<template v-slot:no-data>
 				<v-alert :value="true" color="warning" icon="warning">
 					Lo sentimos, no exiten datos a desplegar: (
 				</v-alert>
 			</template>
 		</v-data-table>
-    <v-pagination
-          v-model="currentPageSelected"
-          :length="totalPages"
-          dark
-          color="cyan"
-          @input="cargarNuevosElementos"
-          :total-visible="maxPagesVisible"
-          :value="currentPageSelected"
-          :disabled="disabledPagination"
-        >
-    </v-pagination>
+    
 		<v-dialog v-model="dialog" max-width="70%">
 			<v-card>
 				<v-toolbar style="padding:10px" dark class="primary">

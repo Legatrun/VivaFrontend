@@ -97,7 +97,7 @@
 			</template>
 			<!-- filtros -->
 			<template v-slot:top>
-				<v-card dark color="blue-grey darken-3">
+				<v-card dark color="backgroundFilterOptions">
 					<v-form ref="form" >
 						<h2 style="text-align:center; ">Filtros</h2>
 						<v-card-text>

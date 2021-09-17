@@ -31,6 +31,7 @@ export default new Vuetify({
         btndelete: '#f58634',
         // Switch
         switch: '#de8971',
+        backgroundFilterOptions:'#2d6a4f',
       },
       dark: {
         primary: colors.green.lighten3,
