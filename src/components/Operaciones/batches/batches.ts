@@ -56,6 +56,7 @@ export default class AdmbatchesComponent extends Vue {
 	private helper: helpers = new helpers();
 	private popup = new popup.Swal();
 	description: string = "";
+	autoselectTerminal:boolean = false;
 	validacion = [
 		(v: any) => !!v || "El campo es requerido"
 	];
@@ -127,6 +128,7 @@ export default class AdmbatchesComponent extends Vue {
 		// this.batches.closetimestamp = this.FormatDate(Date.now());
 	}
 	private CargarTerminales(){
+		this.autoselectTerminal = false;
 		if (this.batches.locationidentification === undefined){
 			this.devices.locationidentification = ""
 		}else{
@@ -137,6 +139,7 @@ export default class AdmbatchesComponent extends Vue {
 		.then((resdevices) => {
 			if (resdevices.data._error.error === 0) {
 				this.lstdevices = resdevices.data._data;
+				this.autoselectTerminal = true;
 			} else {
 				this.popup.error('Consultar', resdevices.data._error.descripcion);
 			}
@@ -159,7 +162,6 @@ export default class AdmbatchesComponent extends Vue {
 		this.maxPagesVisible = 10;
 		this.disabledPagination = true;
 		this.loadingDataTable = true;
-		console.log("Cargar Data: "+this.batches.locationidentification);
 		if( this.batches.locationidentification === undefined && this.batches.deviceidentification === undefined ){
 			new services.Operaciones().ConsultarPorPaginacion(this.WebApi.ws_batches_ConsultarPorPaginacion,this.batches)
 			.then((resbatches) => {
@@ -181,17 +183,18 @@ export default class AdmbatchesComponent extends Vue {
 		//este "else" se cumple cuando pasamos a la siguiente pagina
 		else{
 			new services.Operaciones().Buscar(this.WebApi.ws_batches_ConsultarPorPaginacion_filtro,this.batches)
-			.then((resbatches) => {
-				if (resbatches.data._error.error === 0) {
-					this.lstbatches = resbatches.data._data;
-					this.pagination = resbatches.data._pagination;
+			.then((resbatchesconfiiltro) => {
+				console.log("Filtro: "+JSON.stringify(resbatchesconfiiltro))
+				if (resbatchesconfiiltro.data._error.error === 0) {
+					this.lstbatches = resbatchesconfiiltro.data._data;
+					this.pagination = resbatchesconfiiltro.data._pagination;
 					this.totalPages = Math.ceil(this.pagination.itemsLengthPagination/this.itemsPerPage)
 
 					this.loadingDataTable = false;
 					this.disabledPagination = false;
 					this.dialog = false;
 					} else {
-						this.popup.error('Consultar', resbatches.data._error.descripcion);
+						this.popup.error('Consultar', resbatchesconfiiltro.data._error.descripcion);
 					}
 				}).catch((error) => {
 						this.popup.error('Consultar', 'Error Inesperado: ' + error);
