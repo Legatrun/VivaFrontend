@@ -113,7 +113,9 @@
 											outlined
 											:items="lstsucursales"
 											item-text="description"
-											item-value="identification">
+											item-value="identification"
+											@change="CargarTerminales()"
+											>
 								</v-autocomplete>
 							</v-flex>
 							<v-flex sm3 style="padding: 0px">

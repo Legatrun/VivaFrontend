@@ -115,7 +115,9 @@
                       outlined
                       :items="lstsucursal"
                       item-text="description"
-                      item-value="identification">
+                      item-value="identification"
+                      @change="CargarTerminales()"
+                      >
 								</v-autocomplete>
 							</v-flex>
 							<v-flex sm4 style="padding: 0px">
@@ -163,7 +165,9 @@
                       readonly
 											persistent-hint
 											prepend-icon="event"
-											v-on="on">
+											v-on="on"
+                      @change="validarFecha()"
+                      >
 										</v-text-field>
 									</template>
 									<v-date-picker v-model="transactions.opentimestamp" no-title @input="menu = false"></v-date-picker>
@@ -189,7 +193,9 @@
 											prepend-icon="event"
                       :error-messages="message"
                       :rules="validacion"
-											v-on="on">
+											v-on="on"
+                      @change="validarFecha()"
+                      >
 										</v-text-field>
 									</template>
 									<v-date-picker v-model="transactions.closetimestamp" :min="transactions.opentimestamp" no-title @input="menu_closetimestamp = false"></v-date-picker>

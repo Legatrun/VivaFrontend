@@ -91,12 +91,12 @@ export default class AdmtransactionsComponent extends Vue {
 	}
 
 	private beforeUpdate(){
-		if(this.transactions.opentimestamp != undefined && this.transactions.closetimestamp != undefined){
-			this.validarFecha()	
-		}
-		if(this.transactions.locationidentification != undefined){
-			this.CargarTerminales()
-		}
+		// if(this.transactions.opentimestamp != undefined && this.transactions.closetimestamp != undefined){
+		// 	this.validarFecha()	
+		// }
+		// if(this.transactions.locationidentification != undefined){
+		// 	this.CargarTerminales()
+		// }
 	}
 
 	private mounted() {

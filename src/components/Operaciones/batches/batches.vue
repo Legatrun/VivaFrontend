@@ -87,6 +87,7 @@
                   :items="lstsucursal"
                   item-text="description"
                   item-value="identification"
+                  @change="CargarTerminales()"
 									>
 									</v-autocomplete>
 								</v-flex>
@@ -123,7 +124,9 @@
                       readonly
 											persistent-hint
 											prepend-icon="event"
-											v-on="on">
+											v-on="on"
+                      @change="validarFecha()"
+                      >
 										</v-text-field>
 									</template>
 									<v-date-picker v-model="batches.opentimestamp" no-title @input="menu = false"></v-date-picker>
@@ -148,7 +151,9 @@
 											prepend-icon="event"
                       :error-messages="message"
                       :rules="validacion"
-											v-on="on">
+											v-on="on"
+                      @change="validarFecha()"
+                      >
 										</v-text-field>
 									</template>
 									<v-date-picker v-model="batches.closetimestamp" :min="batches.opentimestamp" no-title @input="menu_closetimestamp = false"></v-date-picker>
@@ -156,7 +161,7 @@
 							</v-flex>
 							<v-spacer></v-spacer>
 							<v-flex sm1.5 style="padding: 0px">
-								<v-btn large color="green" dark @click="cargar_data_fitro(1,50)">
+								<v-btn large color="green" dark @click="cargar_data_fitro()">
 									<v-icon>mdi-selection-search</v-icon> 
 									 Buscar
 							    </v-btn>
