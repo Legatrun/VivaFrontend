@@ -118,6 +118,7 @@ export default class AdmtransactionsComponent extends Vue {
 		this.totalPages = 0;
 		this.disabledPagination = true;
 		this.loadingDataTable = true;
+		if( this.transactions.locationidentification === undefined && this.transactions.deviceidentification === undefined ){
 		new services.Operaciones().ConsultarPorPaginacion(this.WebApi.ws_transactions_ConsultarPorPaginacion,this.transactions)
 		.then((restrans) => {
 			if (restrans.data._error.error === 0) {
@@ -134,6 +135,27 @@ export default class AdmtransactionsComponent extends Vue {
 			}).catch((error) => {
 					this.popup.error('Consultar', 'Error Inesperado: ' + error);
 			});
+		}
+		//este "else" se cumple cuando pasamos a la siguiente pagina
+		else{
+			new services.Operaciones().Buscar(this.WebApi.ws_transactions_ConsultarPorFiltro,this.transactions)
+			.then((resbatchesconfiiltro) => {
+				console.log("Filtro: "+JSON.stringify(resbatchesconfiiltro))
+				if (resbatchesconfiiltro.data._error.error === 0) {
+					this.lsttransactions = resbatchesconfiiltro.data._data;
+					this.pagination = resbatchesconfiiltro.data._pagination;
+					this.totalPages = Math.ceil(this.pagination.itemsLengthPagination/this.itemsPerPage)
+
+					this.loadingDataTable = false;
+					this.disabledPagination = false;
+					this.dialog = false;
+					} else {
+						this.popup.error('Consultar', resbatchesconfiiltro.data._error.descripcion);
+					}
+				}).catch((error) => {
+						this.popup.error('Consultar', 'Error Inesperado: ' + error);
+				});
+		}
 	}
 	private cargar_data_filtrada() {
 		this.lsttransactions = [];
@@ -371,7 +393,7 @@ export default class AdmtransactionsComponent extends Vue {
 
 	private cargarNuevosElementos(){
 		//1(1-51) 2(52-102) 3(103-1523) 4(154-204) 5(205-255)...9820(981151-981251)
-		alert("currentPageSelected: "+this.currentPageSelected + "  this.pagination.itemsPerPagePagination:"+ this.pagination.itemsPerPagePagination)
+		// alert("currentPageSelected: "+this.currentPageSelected + "  this.pagination.itemsPerPagePagination:"+ this.pagination.itemsPerPagePagination)
 		let desde = (this.currentPageSelected*this.pagination.itemsPerPagePagination)+(this.currentPageSelected-1)-(this.pagination.itemsPerPagePagination);
 		if(desde <= 0){
 			desde = 1;
@@ -379,6 +401,17 @@ export default class AdmtransactionsComponent extends Vue {
 		let cantidad = this.pagination.itemsPerPagePagination;
 		this.cargar_data(desde, cantidad);
 	}
+
+	private cargarNuevosElementos_filter(){
+		//1(1-51) 2(52-102) 3(103-1523) 4(154-204) 5(205-255)
+		let desde = (this.currentPageSelected*this.pagination.itemsPerPagePagination)+(this.currentPageSelected-1)-(this.pagination.itemsPerPagePagination);
+		if(desde <= 0){
+			desde = 1;
+		}
+		let cantidad = this.pagination.itemsPerPagePagination;
+		this.cargar_data(desde, cantidad);
+	}
+
 
 	LimpiarFiltros(){
 		this.transactions.locationidentification = ""
