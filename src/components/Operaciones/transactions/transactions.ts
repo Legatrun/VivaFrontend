@@ -144,19 +144,19 @@ export default class AdmtransactionsComponent extends Vue {
 		this.loadingDataTable = true;
 
 		if(this.transactions.locationidentification === undefined){
-			this.popup.error('Sucursal', 'El campo se encuentra vacio');
+			this.popup.error('Campo Requerido', 'Campo Sucursal vacío');
 			this.cargar_data(this.desdeInicial, this.cantidadInicial)
 		} else if(this.transactions.deviceidentification === undefined){
-			this.popup.error('Terminal', 'El campo se encuentra vacio');
+			this.popup.error('Campo Requerido', 'Campo Terminal vacío');
 			this.cargar_data(this.desdeInicial, this.cantidadInicial)
 		} else if(this.transactions.operationname === undefined){
-			this.popup.error('Tipo de transaccion', 'El campo se encuentra vacio');
+			this.popup.error('Campo Requerido', 'Campo Tipo de transacción vacío');
 			this.cargar_data(this.desdeInicial, this.cantidadInicial)
 		} else if(this.transactions.opentimestamp === undefined){
-			this.popup.error('Fecha desde', 'El campo se encuentra vacio');
+			this.popup.error('Campo Requerido', 'Campo Fecha desde vacío');
 			this.cargar_data(this.desdeInicial, this.cantidadInicial)
 		} else if(this.transactions.closetimestamp === undefined){
-			this.popup.error('Fecha hasta', 'El campo se encuentra vacio');
+			this.popup.error('Campo Requerido', 'Campo Fecha hasta vacío');
 			this.cargar_data(this.desdeInicial, this.cantidadInicial)
 		} 
 		else{

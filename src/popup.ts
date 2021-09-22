@@ -5,7 +5,7 @@ export class Swal {
     swal.fire({
       type: 'error',
       title: titulo,
-      text: 'Error: ' + descripcion,
+      text: descripcion,
       showConfirmButton: false,
       timer: 4000,
       backdrop: true,
