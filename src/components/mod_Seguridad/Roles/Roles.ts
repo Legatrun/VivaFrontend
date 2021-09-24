@@ -95,7 +95,7 @@ export default class AdmRolesComponent extends Vue {
         } else {
           swal.fire({
             type: 'error',
-            title: 'Consultar',
+            title: '1Consultar',
             text: resroles.data._error.descripcion,
             showConfirmButton: false,
             timer: 2000,
@@ -105,7 +105,7 @@ export default class AdmRolesComponent extends Vue {
       .catch((error) => {
         swal.fire({
           type: 'error',
-          title: 'Consultar',
+          title: '2Consultar',
           text: 'Error Inesperado',
           showConfirmButton: false,
           timer: 2000,
@@ -144,7 +144,7 @@ export default class AdmRolesComponent extends Vue {
         } else {
           swal.fire({
             type: 'error',
-            title: 'Consultar',
+            title: '3Consultar',
             text: resaplicacionesrol.data._error.descripcion,
             showConfirmButton: false,
             timer: 2000,
@@ -154,7 +154,7 @@ export default class AdmRolesComponent extends Vue {
       .catch((error) => {
         swal.fire({
           type: 'error',
-          title: 'Consultar',
+          title: '4Consultar',
           text: 'Error Inesperado',
           showConfirmButton: false,
           timer: 2000,
@@ -176,7 +176,7 @@ export default class AdmRolesComponent extends Vue {
         } else {
           swal.fire({
             type: 'error',
-            title: 'Consultar',
+            title: '5Consultar',
             text: resroles.data._error.descripcion,
             showConfirmButton: false,
             timer: 2000,
@@ -186,7 +186,7 @@ export default class AdmRolesComponent extends Vue {
       .catch((error) => {
         swal.fire({
           type: 'error',
-          title: 'Consultar',
+          title: '6Consultar',
           text: 'Error Inesperado',
           showConfirmButton: false,
           timer: 2000,
@@ -213,7 +213,7 @@ export default class AdmRolesComponent extends Vue {
 
     } else {
 
-      this.roles.id_agencia = this.$store.state.agenciaSelected;
+      // this.roles.id_agencia = this.$store.state.agenciaSelected;
 
       await this.helper.setPromesas('Api/Roles', this.roles, 'Insertar');
 

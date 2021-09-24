@@ -144,7 +144,7 @@ export default class AdmGrpUsrRolesInstitucionesComponent extends Vue {
         } else {
           swal.fire({
             type: 'error',
-            title: 'Consultar',
+            title: 'Consultar1',
             text: resGrupos.data._error.descripcion,
             showConfirmButton: false,
             timer: 2000,
@@ -154,7 +154,7 @@ export default class AdmGrpUsrRolesInstitucionesComponent extends Vue {
       .catch((error) => {
         swal.fire({
           type: 'error',
-          title: 'Consultar',
+          title: 'Consultar2',
           text: 'Error Inesperado',
           showConfirmButton: false,
           timer: 2000,
@@ -171,7 +171,7 @@ export default class AdmGrpUsrRolesInstitucionesComponent extends Vue {
       } else {
         swal.fire({
           type: 'error',
-          title: 'Consultar',
+          title: 'Consultar3',
           text: resgrpusrrolesinstituciones.data._error.descripcion,
           showConfirmButton: false,
           timer: 2000,
@@ -181,7 +181,7 @@ export default class AdmGrpUsrRolesInstitucionesComponent extends Vue {
     .catch((error) => {
       swal.fire({
         type: 'error',
-        title: 'Consultar',
+        title: 'Consultar4',
         text: 'Error Inesperado',
         showConfirmButton: false,
         timer: 2000,
@@ -198,7 +198,7 @@ export default class AdmGrpUsrRolesInstitucionesComponent extends Vue {
         } else {
           swal.fire({
             type: 'error',
-            title: 'Consultar',
+            title: 'Consultar5',
             text: resRoles.data._error.descripcion,
             showConfirmButton: false,
             timer: 2000,
@@ -208,7 +208,7 @@ export default class AdmGrpUsrRolesInstitucionesComponent extends Vue {
       .catch((error) => {
         swal.fire({
           type: 'error',
-          title: 'Consultar',
+          title: 'Consultar6',
           text: 'Error Inesperado',
           showConfirmButton: false,
           timer: 2000,
@@ -225,7 +225,7 @@ export default class AdmGrpUsrRolesInstitucionesComponent extends Vue {
         } else {
           swal.fire({
             type: 'error',
-            title: 'Consultar',
+            title: 'Consultar7',
             text: resGruposUsers.data._error.descripcion,
             showConfirmButton: false,
             timer: 2000,
@@ -236,7 +236,7 @@ export default class AdmGrpUsrRolesInstitucionesComponent extends Vue {
       .catch((error) => {
         swal.fire({
           type: 'error',
-          title: 'Consultar',
+          title: 'Consultar8',
           text: 'Error Inesperado ' + error,
           showConfirmButton: false,
           timer: 2000,
@@ -254,7 +254,7 @@ export default class AdmGrpUsrRolesInstitucionesComponent extends Vue {
         } else {
           swal.fire({
             type: 'error',
-            title: 'Consultar',
+            title: 'Consultar9',
             text: resUsuarios.data._error.descripcion,
             showConfirmButton: false,
             timer: 2000,
@@ -265,7 +265,7 @@ export default class AdmGrpUsrRolesInstitucionesComponent extends Vue {
       .catch((error) => {
         swal.fire({
           type: 'error',
-          title: 'Consultar',
+          title: 'Consultar10',
           text: 'Error Inesperado'+ error,
           showConfirmButton: false,
           timer: 2000,
@@ -443,7 +443,7 @@ export default class AdmGrpUsrRolesInstitucionesComponent extends Vue {
         } else {
           swal.fire({
             type: 'error',
-            title: 'Consultar',
+            title: 'Consultar11',
             text: resgrpusrrolesinstituciones.data._error.descripcion,
             showConfirmButton: false,
             timer: 2000,
@@ -453,7 +453,7 @@ export default class AdmGrpUsrRolesInstitucionesComponent extends Vue {
       .catch((error) => {
         swal.fire({
           type: 'error',
-          title: 'Consultar',
+          title: 'Consultar12',
           text: 'Error Inesperado',
           showConfirmButton: false,
           timer: 2000,
@@ -505,7 +505,7 @@ export default class AdmGrpUsrRolesInstitucionesComponent extends Vue {
     } else {
       swal.fire({
         type: 'warning',
-        title: 'Consultar',
+        title: 'Consultar13',
         text: 'Seleccione por lo menos un rol y un grupo a asignar',
         showConfirmButton: false,
         timer: 4000,

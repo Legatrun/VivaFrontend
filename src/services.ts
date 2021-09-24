@@ -861,7 +861,6 @@ export class clase_usuarios {
 	public usrdominio!: boolean;
 	public idinstitucion!: number;
 	public idautenticacion!: number;
-	public id_agencia!: number;
 	public estado!: boolean;
   }
 
@@ -898,7 +897,6 @@ export class clase_grpusuario {
 export class clase_operaciones {
 	public idoperacion!: number;
 	public descripcion!: string;
-	public id_agencia!: number;
 	public estado!: number;
   }
   
@@ -915,7 +913,6 @@ export class clase_operaciones {
 	public idrol!: number;
 	public descripcion!: string;
 	public estado!: number;
-	public id_agencia!: number;
   }
   
   // tslint:disable-next-line: max-classes-per-file class-name
@@ -932,7 +929,6 @@ export class clase_operaciones {
 	public idmodulo!: number;
 	public descripcion!: string;
 	public operaciones!: clase_operaciones;
-	public id_agencia!: number;
 	public estado!: boolean;
   }
   
@@ -941,7 +937,6 @@ export class clase_operaciones {
 	public idrolesaplicaciones!: number;
 	public idrol!: number;
 	public idaplicacion!: number;
-	public id_agencia!: number;
 	public estado!: boolean;
   }
   
@@ -961,7 +956,6 @@ export class clase_operaciones {
 	public idmodulo!: number;
 	public activo!: boolean;
 	public estado!: boolean;
-	public id_agencia!: number;
   
   }
 

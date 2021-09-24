@@ -261,7 +261,7 @@ export default class AdmModulosComponent extends Vue {
   }
 
   private async transaccionModulo(tipo: string) {
-    this.modulos.id_agencia = this.$store.state.agenciaSelected;
+    // this.modulos.id_agencia = this.$store.state.agenciaSelected;
     this.modulos.estado = true;
 
     await this.helper.setPromesas(
@@ -324,7 +324,7 @@ export default class AdmModulosComponent extends Vue {
   private async transaccionAplicacionOpModulo(tipo: string) {
     this.AppOpModulo.activo = true;
     this.AppOpModulo.estado = true;
-    this.AppOpModulo.id_agencia = this.$store.state.agenciaSelected;
+    // this.AppOpModulo.id_agencia = this.$store.state.agenciaSelected;
     let successPromise: boolean = false;
 
     let lstOperaciones = await this.cargarOperaciones();

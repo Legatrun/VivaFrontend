@@ -491,7 +491,7 @@ export default class AdmInstitucionesRolesComponent extends Vue {
                 appRol.idrol === this.rol.idrol
             );
 
-            appAcambiar[0].id_agencia = this.$store.state.agenciaSelected;
+            // appAcambiar[0].id_agencia = this.$store.state.agenciaSelected;
 
             this.helper.setPromesas(
               "Api/RolesAplicaciones",
@@ -518,7 +518,7 @@ export default class AdmInstitucionesRolesComponent extends Vue {
       // !! Pendiente modificacion en caso de existir registro dado de baja
 
       this.aplicacionRolAsignar.idrol = this.rol.idrol;
-      this.aplicacionRolAsignar.id_agencia = this.$store.state.agenciaSelected;
+      // this.aplicacionRolAsignar.id_agencia = this.$store.state.agenciaSelected;
 
       this.helper.setPromesas(
         "Api/RolesAplicaciones",
@@ -598,7 +598,7 @@ export default class AdmInstitucionesRolesComponent extends Vue {
       modAsignar.idrolesaplicaciones = Mod.idrolesaplicaciones;
       modAsignar.activo = true;
       modAsignar.estado = true;
-      modAsignar.id_agencia = this.$store.state.agenciaSelected;
+      // modAsignar.id_agencia = this.$store.state.agenciaSelected;
 
       for (let i = 0; i < this.lstOperaciones.length; i++) {
         modAsignar.idoperacion = this.lstOperaciones[i].idoperacion;

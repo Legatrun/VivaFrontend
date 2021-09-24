@@ -118,7 +118,7 @@ export default class AdmUsuariosComponent extends Vue {
         fechacreacionFormat: this.FormatDate(usuario.fechacreacion),
         usrdominioFormat: this.FormatBoolean(usuario.usrdominio),
         idinstitucionFormat: this.FormatInstitucion(usuario.idinstitucion),
-        id_agenciaFormat: this.FormatearNombreAgencia(usuario.id_agencia),
+        // id_agenciaFormat: this.FormatearNombreAgencia(usuario.id_agencia),
       };
     });
   }
@@ -169,7 +169,7 @@ export default class AdmUsuariosComponent extends Vue {
         } else {
           swal.fire({
             type: "error",
-            title: "Consultar",
+            title: "Consultar1",
             text: resusuarios.data._error.descripcion,
             showConfirmButton: false,
             timer: 2000,
@@ -179,7 +179,7 @@ export default class AdmUsuariosComponent extends Vue {
       .catch((error) => {
         swal.fire({
           type: "error",
-          title: "Consultar",
+          title: "Consultar2",
           text: "Error Inesperado",
           showConfirmButton: false,
           timer: 2000,
@@ -246,7 +246,7 @@ export default class AdmUsuariosComponent extends Vue {
     let idAuth = this.getIDAutenticacion();
     //** Data Usuario */
     this.usuarios.idautenticacion = ++idAuth;
-    this.usuarios.id_agencia = this.$store.state.agenciaSelected.toString();
+    // this.usuarios.id_agencia = this.$store.state.agenciaSelected.toString();
     //** Data Autenticacion */
     let objcrypt = new crypto();
     this.autenticacion.idautenticacion = this.usuarios.idautenticacion;
@@ -291,7 +291,7 @@ export default class AdmUsuariosComponent extends Vue {
         } else {
           swal.fire({
             type: "error",
-            title: "Consultar",
+            title: "Consultar3",
             text: resusuarios.data._error.descripcion,
             showConfirmButton: false,
             timer: 2000,
@@ -301,7 +301,7 @@ export default class AdmUsuariosComponent extends Vue {
       .catch((error) => {
         swal.fire({
           type: "error",
-          title: "Consultar",
+          title: "Consultar4",
           text: "Error Inesperado",
           showConfirmButton: false,
           timer: 2000,
@@ -370,7 +370,7 @@ export default class AdmUsuariosComponent extends Vue {
         } else {
           swal.fire({
             type: "error",
-            title: "Consultar",
+            title: "Consultar5",
             text: resAgencias.data._error.descripcion,
             showConfirmButton: false,
             timer: 2000,
@@ -380,7 +380,7 @@ export default class AdmUsuariosComponent extends Vue {
       .catch((error) => {
         swal.fire({
           type: "error",
-          title: "Consultar",
+          title: "Consultar6",
           text: "Error Inesperado",
           showConfirmButton: false,
           timer: 2000,
@@ -409,7 +409,7 @@ export default class AdmUsuariosComponent extends Vue {
         } else {
           swal.fire({
             type: "error",
-            title: "Consultar",
+            title: "Consultar7",
             text: resAutenticacion.data._error.descripcion,
             showConfirmButton: false,
             timer: 2000,
@@ -419,7 +419,7 @@ export default class AdmUsuariosComponent extends Vue {
       .catch((error) => {
         swal.fire({
           type: "error",
-          title: "Consultar",
+          title: "Consultar8",
           text: "Error Inesperado: " + error,
           showConfirmButton: false,
           timer: 2000,
